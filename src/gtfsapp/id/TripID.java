@@ -1,4 +1,4 @@
-package gtfs_application.id;
+package gtfsapp.id;
 
 /**
  * @author grant
@@ -7,11 +7,6 @@ package gtfs_application.id;
  */
 public class TripID extends GTFSID {
 
-
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	/**
 	 * 

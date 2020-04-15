@@ -1,8 +1,12 @@
-package gtfs_application.file;
+package gtfsapp.file;
 
-import gtfs_application.id.RouteID;
-import gtfs_application.id.StopTimeID;
-import gtfs_application.id.TripID;
+import gtfsapp.id.RouteID;
+import gtfsapp.id.StopTimeID;
+import gtfsapp.id.TripID;
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 /**
  * @author wilkg
@@ -12,15 +16,11 @@ import gtfs_application.id.TripID;
 public class Stop extends GTFSElement {
 
 	private Feed feed;
-	private Coordinate location;
+	private Point2D location;
 	public Feed m_Feed;
 
 	public Stop(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class Stop extends GTFSElement {
 		return null;
 	}
 
-	public Coordinate getLocation(){
+	public Point2D getLocation(){
 		return null;
 	}
 
@@ -113,7 +113,7 @@ public class Stop extends GTFSElement {
 	 * 
 	 * @param location
 	 */
-	public void setLocation(Coordinate location){
+	public void setLocation(Point2D location){
 
 	}
 

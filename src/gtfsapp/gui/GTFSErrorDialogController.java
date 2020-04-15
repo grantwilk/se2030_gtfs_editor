@@ -1,4 +1,4 @@
-package gtfs_application.gui;
+package gtfsapp.gui;
 
 /**
  * @author grant
@@ -13,16 +13,12 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	/**
 	 * 
 	 * @param msg
 	 */
-	public ErrorDialogController GTFSErrorDialogController(String msg){
-		return null;
+	public GTFSErrorDialogController(String msg){
+
 	}
 
 }

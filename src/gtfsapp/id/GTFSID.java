@@ -1,4 +1,6 @@
-package gtfs_application.id;
+package gtfsapp.id;
+
+import java.util.ArrayList;
 
 /**
  * @author grant
@@ -10,11 +12,6 @@ public abstract class GTFSID {
 	private static ArrayList<GTFSID> existingIDs;
 	private String id;
 
-
-
-	public void finalize() throws Throwable {
-
-	}
 
 	/**
 	 * 
@@ -32,6 +29,8 @@ public abstract class GTFSID {
 	 * 
 	 * @param id
 	 */
-	public abstract static boolean exists(String id);
+	public static boolean exists(String id) {
+		return false;
+	}
 
 }

@@ -1,4 +1,4 @@
-package gtfs_application.id;
+package gtfsapp.id;
 
 /**
  * @author wilkg
@@ -6,12 +6,6 @@ package gtfs_application.id;
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class StopTimeID extends GTFSID {
-
-
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	/**
 	 * 

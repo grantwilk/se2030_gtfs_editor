@@ -1,4 +1,4 @@
-package gtfs_application.gui;
+package gtfsapp.gui;
 
 /**
  * @author grant
@@ -11,10 +11,6 @@ public abstract class GTFSDialogController extends GTFSController {
 
 	public GTFSDialogController(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	public void closeDialog(){

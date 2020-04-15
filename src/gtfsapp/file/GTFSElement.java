@@ -1,4 +1,7 @@
-package gtfs_application.file;
+package gtfsapp.file;
+
+import gtfsapp.id.*;
+import javafx.scene.paint.Color;
 
 /**
  * @author grant
@@ -16,9 +19,6 @@ public abstract class GTFSElement {
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
 
 	/**
 	 * 

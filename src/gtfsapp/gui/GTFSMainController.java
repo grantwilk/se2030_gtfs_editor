@@ -1,4 +1,8 @@
-package gtfs_application.gui;
+package gtfsapp.gui;
+
+import gtfsapp.file.*;
+
+import java.util.ArrayList;
 
 /**
  * @author grant
@@ -20,10 +24,6 @@ public class GTFSMainController extends GTFSController {
 
 	public GTFSMainController(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	public ArrayList<Route> getAssociatedRoutes(){

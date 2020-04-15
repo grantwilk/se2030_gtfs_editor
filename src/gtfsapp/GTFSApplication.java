@@ -1,4 +1,6 @@
-package gtfs_application;
+package gtfsapp;
+
+import gtfsapp.gui.GTFSMainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,10 +15,6 @@ public class GTFSApplication extends Application {
 
 	public GTFSApplication(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/**

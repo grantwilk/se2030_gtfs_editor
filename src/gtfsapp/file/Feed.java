@@ -1,6 +1,10 @@
-package gtfs_application.file;
+package gtfsapp.file;
 
-import gtfs_application.id.*;
+import gtfsapp.id.*;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author grant
@@ -17,9 +21,6 @@ public class Feed extends GTFSElement {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	/**
 	 * 
@@ -98,14 +99,6 @@ public class Feed extends GTFSElement {
 	 */
 	public boolean containsTrip(TripID id){
 		return false;
-	}
-
-	public Color getColor(){
-		return null;
-	}
-
-	public FeedID getID(){
-		return null;
 	}
 
 	public String getName(){

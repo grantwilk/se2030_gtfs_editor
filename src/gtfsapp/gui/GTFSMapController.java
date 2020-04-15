@@ -1,4 +1,9 @@
-package gtfs_application.gui;
+package gtfsapp.gui;
+
+import gtfsapp.file.GTFSElement;
+import gtfsapp.file.Stop;
+
+import java.util.ArrayList;
 
 /**
  * @author grant
@@ -14,10 +19,6 @@ public class GTFSMapController extends GTFSController {
 
 	public GTFSMapController(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	public GTFSMainController getMainController(){

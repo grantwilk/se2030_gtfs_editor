@@ -1,9 +1,12 @@
-package gtfs_application.file;
+package gtfsapp.file;
 
-import gtfs_application.id.RouteID;
-import gtfs_application.id.StopID;
-import gtfs_application.id.StopTimeID;
+import gtfsapp.id.RouteID;
+import gtfsapp.id.StopID;
+import gtfsapp.id.StopTimeID;
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -22,10 +25,6 @@ public class Trip extends GTFSElement {
 
 	public Trip(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class Trip extends GTFSElement {
 		return 0;
 	}
 
-	public Coordinate getBusPosition(){
+	public Point2D getBusPosition(){
 		return null;
 	}
 

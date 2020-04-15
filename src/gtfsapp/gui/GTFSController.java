@@ -1,4 +1,7 @@
-package gtfs_application.gui;
+package gtfsapp.gui;
+
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * @author grant
@@ -11,10 +14,6 @@ public abstract class GTFSController {
 	private Stage stage;
 
 	public GTFSController(){
-
-	}
-
-	public void finalize() throws Throwable {
 
 	}
 

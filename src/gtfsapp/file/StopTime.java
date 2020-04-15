@@ -1,6 +1,10 @@
-package gtfs_application.file;
+package gtfsapp.file;
 
-import gtfs_application.id.RouteID;
+import gtfsapp.id.RouteID;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author wilkg
@@ -20,10 +24,6 @@ public class StopTime extends GTFSElement {
 
 	public StopTime(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/**
