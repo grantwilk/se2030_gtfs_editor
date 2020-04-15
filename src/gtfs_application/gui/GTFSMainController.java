@@ -1,4 +1,4 @@
-package GTFSApplication;
+package gtfs_application.gui;
 
 /**
  * @author grant

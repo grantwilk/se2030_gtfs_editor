@@ -1,4 +1,4 @@
-
+package gtfs_application.id;
 
 /**
  * @author grant

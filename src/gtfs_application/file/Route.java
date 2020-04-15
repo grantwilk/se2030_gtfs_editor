@@ -1,4 +1,8 @@
+package gtfs_application.file;
 
+import gtfs_application.id.StopID;
+import gtfs_application.id.StopTimeID;
+import gtfs_application.id.TripID;
 
 /**
  * @author wilkg
