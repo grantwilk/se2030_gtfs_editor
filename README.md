@@ -5,6 +5,8 @@ Josiah Yoder
 
 Michael Primeau
 
+Colton Rivard
+
 Grant Wilk
 
 # About this project
