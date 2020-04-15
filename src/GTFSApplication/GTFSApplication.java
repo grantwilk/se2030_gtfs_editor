@@ -2,6 +2,8 @@ package GTFSApplication;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+// colton smells like cheese
+
 /**
  * @author grant
  * @version 1.0
