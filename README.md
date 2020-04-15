@@ -5,6 +5,7 @@
 * Michael Primeau
 * Colton Rivard
 * Grant Wilk
+* Mason Schlax
 
 # About this project
 The goal of this project is to create a reproduction of a photograph with WinPlotterFX!
