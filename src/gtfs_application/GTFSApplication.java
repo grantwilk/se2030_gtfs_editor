@@ -9,8 +9,7 @@ import javafx.stage.Stage;
  */
 public class GTFSApplication extends Application {
 
-	private MainController mainController;
-	public GTFSMainController m_GTFSMainController;
+	private GTFSMainController mainController;
 
 	public GTFSApplication(){
 
