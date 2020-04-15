@@ -7,16 +7,18 @@ package gtfsapp.id;
  */
 public class StopTimeID extends GTFSID {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public StopTimeID StopTimeID(String id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public StopTimeID(String id) {
 
-	public StopTimeID StopTimeID(){
-		return null;
-	}
+    }
+
+    /**
+     *
+     */
+    public StopTimeID() {
+
+    }
 
 }

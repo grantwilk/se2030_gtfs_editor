@@ -7,16 +7,18 @@ package gtfsapp.id;
  */
 public class FeedID extends GTFSID {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public FeedID FeedID(String id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public FeedID(String id) {
 
-	public FeedID FeedID(){
-		return null;
-	}
+    }
+
+    /**
+     *
+     */
+    public FeedID() {
+
+    }
 
 }

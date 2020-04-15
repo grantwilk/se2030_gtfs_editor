@@ -7,14 +7,22 @@ package gtfsapp.gui;
  */
 public abstract class GTFSDialogController extends GTFSController {
 
-	private String windowTitle;
+    private String windowTitle;
 
-	public GTFSDialogController(){
+    public GTFSDialogController() {
 
-	}
+    }
 
-	public void closeDialog(){
+    public void closeDialog() {
 
-	}
+    }
+
+    public void getWindowTitle() {
+
+    }
+
+    public void setWindowTitle() {
+
+    }
 
 }

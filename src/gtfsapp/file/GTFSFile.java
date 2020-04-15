@@ -10,28 +10,26 @@ import java.nio.file.Path;
  */
 public class GTFSFile {
 
-	private Feed feed;
-	private File file;
-	public Feed m_Feed;
+    private Feed feed;
+    private File file;
 
-	/**
-	 * 
-	 * @param path
-	 */
-	public GTFSFile(Path path){
+    /**
+     * @param path
+     */
+    public GTFSFile(Path path) {
 
-	}
+    }
 
-	public Feed getFeed(){
-		return null;
-	}
+    public Feed getFeed() {
+        return null;
+    }
 
-	public void load(){
+    public void load() {
 
-	}
+    }
 
-	public void save(){
+    public void save() {
 
-	}
+    }
 
 }

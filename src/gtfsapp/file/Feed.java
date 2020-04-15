@@ -1,6 +1,7 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
+
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -13,188 +14,166 @@ import java.util.HashMap;
  */
 public class Feed extends GTFSElement {
 
-	private FeedID id;
-	private HashMap<RouteID, Route> routes;
-	public Route m_Route;
+    private FeedID id;
+    private HashMap<RouteID, Route> routes;
 
-	public Feed(){
+    /**
+     * @param id
+     */
+    public Feed(String id) {
 
-	}
+    }
 
+    /**
+     * @param id
+     * @param name
+     */
+    public Feed(String id, String name) {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Feed Feed(String id){
-		return null;
-	}
+    }
 
-	/**
-	 * 
-	 * @param id
-	 * @param name
-	 */
-	public Feed Feed(String id, String name){
-		return null;
-	}
+    /**
+     * @param id
+     * @param name
+     * @param color
+     */
+    public Feed(String id, String name, Color color) {
 
-	/**
-	 * 
-	 * @param id
-	 * @param name
-	 * @param color
-	 */
-	public Feed Feed(String id, String name, Color color){
-		return null;
-	}
+    }
 
-	/**
-	 * 
-	 * @param routes
-	 */
-	public void addAllRoutes(ArrayList<Route> routes){
+    /**
+     * @param routes
+     */
+    public void addAllRoutes(ArrayList<Route> routes) {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param route
-	 */
-	public void addRoute(Route route){
+    /**
+     * @param route
+     */
+    public void addRoute(Route route) {
 
-	}
+    }
 
-	public void clearRoutes(){
+    public void clearRoutes() {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsRoute(RouteID id){
-		return false;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsRoute(RouteID id) {
+        return false;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsStop(StopID id){
-		return false;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsStop(StopID id) {
+        return false;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsStopTime(StopTimeID id){
-		return false;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsStopTime(StopTimeID id) {
+        return false;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsTrip(TripID id){
-		return false;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsTrip(TripID id) {
+        return false;
+    }
 
-	public String getName(){
-		return "";
-	}
+    public String getName() {
+        return "";
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Route getRouteByID(RouteID id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public Route getRouteByID(RouteID id) {
+        return null;
+    }
 
-	public ArrayList<RouteID> getRouteIDs(){
-		return null;
-	}
+    public ArrayList<RouteID> getRouteIDs() {
+        return null;
+    }
 
-	public ArrayList<Route> getRoutes(){
-		return null;
-	}
+    public ArrayList<Route> getRoutes() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Stop getStopByID(StopID id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public Stop getStopByID(StopID id) {
+        return null;
+    }
 
-	public ArrayList<StopID> getStopIDs(){
-		return null;
-	}
+    public ArrayList<StopID> getStopIDs() {
+        return null;
+    }
 
-	public ArrayList<Stop> getStops(){
-		return null;
-	}
+    public ArrayList<Stop> getStops() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public StopTime getStopTimeByID(StopTimeID id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public StopTime getStopTimeByID(StopTimeID id) {
+        return null;
+    }
 
-	public ArrayList<StopTimeID> getStopTimeIDs(){
-		return null;
-	}
+    public ArrayList<StopTimeID> getStopTimeIDs() {
+        return null;
+    }
 
-	public ArrayList<StopTime> getStopTimes(){
-		return null;
-	}
+    public ArrayList<StopTime> getStopTimes() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Trip getTripByID(TripID id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public Trip getTripByID(TripID id) {
+        return null;
+    }
 
-	public ArrayList<TripID> getTripIDs(){
-		return null;
-	}
+    public ArrayList<TripID> getTripIDs() {
+        return null;
+    }
 
-	public ArrayList<Trip> getTrips(){
-		return null;
-	}
+    public ArrayList<Trip> getTrips() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param route
-	 */
-	public Route removeRoute(Route route){
-		return null;
-	}
+    /**
+     * @param route
+     */
+    public Route removeRoute(Route route) {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Route removeRouteByID(RouteID id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public Route removeRouteByID(RouteID id) {
+        return null;
+    }
 
-	public void setColor(){
+    public void setColor() {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param name
-	 */
-	public void setName(String name){
+    /**
+     * @param name
+     */
+    public void setName(String name) {
 
-	}
+    }
 
 }

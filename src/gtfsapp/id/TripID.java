@@ -8,16 +8,18 @@ package gtfsapp.id;
 public class TripID extends GTFSID {
 
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public TripID TripID(String id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public TripID(String id) {
 
-	public TripID TripID(){
-		return null;
-	}
+    }
+
+    /**
+     *
+     */
+    public TripID() {
+
+    }
 
 }

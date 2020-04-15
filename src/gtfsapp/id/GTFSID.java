@@ -9,28 +9,29 @@ import java.util.ArrayList;
  */
 public abstract class GTFSID {
 
-	private static ArrayList<GTFSID> existingIDs;
-	private String id;
+    private static ArrayList<GTFSID> existingIDs;
+    private String id;
 
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public GTFSID GTFSID(String id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public GTFSID(String id) {
 
-	public GTFSID GTFSID(){
-		return null;
-	}
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public static boolean exists(String id) {
-		return false;
-	}
+    /**
+     *
+     */
+    public GTFSID() {
+
+    }
+
+    /**
+     * @param id
+     */
+    public static boolean exists(String id) {
+        return false;
+    }
 
 }

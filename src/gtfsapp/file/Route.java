@@ -17,211 +17,192 @@ import java.util.HashMap;
  */
 public class Route extends GTFSElement {
 
-	private Feed feed;
-	private HashMap<TripID, Trip> trips;
-	public Trip m_Trip;
-	public Feed m_Feed;
+    private Feed feed;
+    private HashMap<TripID, Trip> trips;
 
-	public Route(){
+    /**
+     * @param id
+     * @param feed
+     * @param name
+     * @param color
+     */
+    public Route(String id, Feed feed, String name, Color color) {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param id
-	 * @param feed
-	 * @param name
-	 * @param color
-	 */
-	public Route Route(String id, Feed feed, String name, Color color){
-		return null;
-	}
+    /**
+     * @param id
+     * @param feed
+     */
+    public Route(String id, Feed feed) {
 
-	/**
-	 * 
-	 * @param id
-	 * @param feed
-	 */
-	public Route Route(String id, Feed feed){
-		return null;
-	}
+    }
 
-	/**
-	 * 
-	 * @param id
-	 * @param feed
-	 * @param name
-	 */
-	public Route Route(String id, Feed feed, String name){
-		return null;
-	}
+    /**
+     * @param id
+     * @param feed
+     * @param name
+     */
+    public Route(String id, Feed feed, String name) {
 
-	/**
-	 * 
-	 * @param trips
-	 */
-	public void addAllTrips(ArrayList<Trip> trips){
+    }
 
-	}
+    /**
+     * @param trips
+     */
+    public void addAllTrips(ArrayList<Trip> trips) {
 
-	/**
-	 * 
-	 * @param trip
-	 */
-	public void addTrip(Trip trip){
+    }
 
-	}
+    /**
+     * @param trip
+     */
+    public void addTrip(Trip trip) {
 
-	public void clearTrips(){
+    }
 
-	}
+    public void clearTrips() {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsStop(StopID id){
-		return false;
-	}
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsStopTime(StopTimeID id){
-		return false;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsStop(StopID id) {
+        return false;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public boolean containsTrip(TripID id){
-		return false;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsStopTime(StopTimeID id) {
+        return false;
+    }
 
-	public Stop getActiveStop(){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public boolean containsTrip(TripID id) {
+        return false;
+    }
 
-	public StopTime getActiveStopTime(){
-		return null;
-	}
+    public Stop getActiveStop() {
+        return null;
+    }
 
-	public Trip getActiveTrip(){
-		return null;
-	}
+    public StopTime getActiveStopTime() {
+        return null;
+    }
 
-	public double getAvgSpeed(){
-		return 0;
-	}
+    public Trip getActiveTrip() {
+        return null;
+    }
 
-	public Point2D getBusPosition(){
-		return null;
-	}
+    public double getAvgSpeed() {
+        return 0;
+    }
 
-	public double getDistance(){
-		return 0;
-	}
+    public Point2D getBusPosition() {
+        return null;
+    }
 
-	public double getDuration(){
-		return 0;
-	}
+    public double getDistance() {
+        return 0;
+    }
 
-	public Feed getFeed(){
-		return null;
-	}
+    public double getDuration() {
+        return 0;
+    }
 
-	public Stop getNextStop(){
-		return null;
-	}
+    public Feed getFeed() {
+        return null;
+    }
 
-	public StopTime getNextStopTime(){
-		return null;
-	}
+    public Stop getNextStop() {
+        return null;
+    }
 
-	public Trip getNextTrip(){
-		return null;
-	}
+    public StopTime getNextStopTime() {
+        return null;
+    }
 
-	public Stop getPreviousStop(){
-		return null;
-	}
+    public Trip getNextTrip() {
+        return null;
+    }
 
-	public StopTime getPreviousStopTime(){
-		return null;
-	}
+    public Stop getPreviousStop() {
+        return null;
+    }
 
-	public Trip getPreviousTrip(){
-		return null;
-	}
+    public StopTime getPreviousStopTime() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Stop getStopByID(StopID id){
-		return null;
-	}
+    public Trip getPreviousTrip() {
+        return null;
+    }
 
-	public ArrayList<StopID> getStopIDs(){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public Stop getStopByID(StopID id) {
+        return null;
+    }
 
-	public ArrayList<Stop> getStops(){
-		return null;
-	}
+    public ArrayList<StopID> getStopIDs() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public StopTime getStopTimeByID(StopTimeID id){
-		return null;
-	}
+    public ArrayList<Stop> getStops() {
+        return null;
+    }
 
-	public ArrayList<StopTimeID> getStopTimeIDs(){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public StopTime getStopTimeByID(StopTimeID id) {
+        return null;
+    }
 
-	public ArrayList<StopTime> getStopTimes(){
-		return null;
-	}
+    public ArrayList<StopTimeID> getStopTimeIDs() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Trip getTripByID(TripID id){
-		return null;
-	}
+    public ArrayList<StopTime> getStopTimes() {
+        return null;
+    }
 
-	public ArrayList<TripID> getTripIDs(){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public Trip getTripByID(TripID id) {
+        return null;
+    }
 
-	public ArrayList<Trip> getTrips(){
-		return null;
-	}
+    public ArrayList<TripID> getTripIDs() {
+        return null;
+    }
 
-	public boolean isActive(){
-		return false;
-	}
+    public ArrayList<Trip> getTrips() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param trip
-	 */
-	public Trip removeTrip(Trip trip){
-		return null;
-	}
+    public boolean isActive() {
+        return false;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Trip removeTripByID(TripID id){
-		return null;
-	}
+    /**
+     * @param trip
+     */
+    public Trip removeTrip(Trip trip) {
+        return null;
+    }
+
+    /**
+     * @param id
+     */
+    public Trip removeTripByID(TripID id) {
+        return null;
+    }
 
 }

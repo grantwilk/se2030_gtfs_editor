@@ -7,16 +7,18 @@ package gtfsapp.id;
  */
 public class RouteID extends GTFSID {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public RouteID RouteID(String id){
-		return null;
-	}
+    /**
+     * @param id
+     */
+    public RouteID(String id) {
 
-	public RouteID RouteID(){
-		return null;
-	}
+    }
+
+    /**
+     *
+     */
+    public RouteID() {
+
+    }
 
 }

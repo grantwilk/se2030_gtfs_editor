@@ -9,14 +9,21 @@ import gtfsapp.file.GTFSElement;
  */
 public class GTFSEditDialogController extends GTFSDialogController {
 
-	private GTFSElement selectedElement;
+    private GTFSElement selectedElement;
 
-	/**
-	 * 
-	 * @param selectedElement
-	 */
-	public GTFSEditDialogController(GTFSElement selectedElement){
+    /**
+     * @param selectedElement
+     */
+    public GTFSEditDialogController(GTFSElement selectedElement) {
 
-	}
+    }
+
+    /**
+     * @param selectedElement
+     * @param windowTitle
+     */
+    public GTFSEditDialogController(GTFSElement selectedElement, String windowTitle) {
+
+    }
 
 }

@@ -12,45 +12,43 @@ import java.util.ArrayList;
  */
 public class GTFSMapController extends GTFSController {
 
-	private ArrayList<Stop> associatedStops;
-	private GTFSMainController mainController;
-	private GTFSElement selectedElement;
-	public GTFSElement m_GTFSElement;
+    private ArrayList<Stop> associatedStops;
+    private GTFSMainController mainController;
+    private GTFSElement selectedElement;
+    public GTFSElement m_GTFSElement;
 
-	public GTFSMapController(){
+    public GTFSMapController() {
 
-	}
+    }
 
-	public GTFSMainController getMainController(){
-		return null;
-	}
+    public GTFSMainController getMainController() {
+        return null;
+    }
 
-	public GTFSElement getSelectedElement(){
-		return null;
-	}
+    public GTFSElement getSelectedElement() {
+        return null;
+    }
 
-	public void invokeEditDialog(){
+    public void invokeEditDialog() {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param msg
-	 */
-	public void invokeErrorDialog(String msg){
+    /**
+     * @param msg
+     */
+    public void invokeErrorDialog(String msg) {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param selectedElement
-	 */
-	public void setSelectedElement(GTFSElement selectedElement){
+    /**
+     * @param selectedElement
+     */
+    public void setSelectedElement(GTFSElement selectedElement) {
 
-	}
+    }
 
-	public void updateMap(){
+    public void updateMap() {
 
-	}
+    }
 
 }

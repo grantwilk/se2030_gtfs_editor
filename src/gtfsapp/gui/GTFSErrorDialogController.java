@@ -21,4 +21,13 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 
 	}
 
+	/**
+	 *
+	 * @param msg
+	 * @param windowTitle
+	 */
+	public GTFSErrorDialogController(String msg, String windowTitle){
+
+	}
+
 }

@@ -1,6 +1,7 @@
 package gtfsapp;
 
 import gtfsapp.gui.GTFSMainController;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,10 +13,6 @@ import javafx.stage.Stage;
 public class GTFSApplication extends Application {
 
 	private GTFSMainController mainController;
-
-	public GTFSApplication(){
-
-	}
 
 	/**
 	 * 

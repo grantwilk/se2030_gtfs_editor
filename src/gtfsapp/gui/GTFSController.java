@@ -10,35 +10,33 @@ import javafx.stage.Stage;
  */
 public abstract class GTFSController {
 
-	private Scene scene;
-	private Stage stage;
+    private Scene scene;
+    private Stage stage;
 
-	public GTFSController(){
+    public GTFSController() {
 
-	}
+    }
 
-	public Scene getScene(){
-		return null;
-	}
+    public Scene getScene() {
+        return null;
+    }
 
-	public Stage getStage(){
-		return null;
-	}
+    public Stage getStage() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * @param scene
-	 */
-	public void setScene(Scene scene){
+    /**
+     * @param scene
+     */
+    public void setScene(Scene scene) {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param stage
-	 */
-	public void setStage(Stage stage){
+    /**
+     * @param stage
+     */
+    public void setStage(Stage stage) {
 
-	}
+    }
 
 }
