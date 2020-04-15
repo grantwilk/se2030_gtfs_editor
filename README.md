@@ -2,7 +2,10 @@
 
 # Authors:
 Josiah Yoder
+
 Michael Primeau
+
+Grant Wilk
 
 # About this project
 The goal of this project is to create a reproduction of a photograph with WinPlotterFX!
