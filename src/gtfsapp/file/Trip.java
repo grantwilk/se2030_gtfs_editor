@@ -62,6 +62,9 @@ public class Trip extends GTFSElement {
 
     }
 
+    /**
+     *
+     */
     public void clearStopTimes() {
 
     }
@@ -80,54 +83,106 @@ public class Trip extends GTFSElement {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public Stop getActiveStop() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public StopTime getActiveStopTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getAvgSpeed() {
         return 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getBusPosition() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<RouteID> getContainingRouteIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Route> getContainingRoutes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getDistance() {
         return 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getDuration() {
         return 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public Feed getFeed() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Stop getNextStop() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public StopTime getNextStopTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Stop getPreviousStop() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public StopTime getPreviousStopTime() {
         return null;
     }
@@ -139,10 +194,18 @@ public class Trip extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopID> getStopIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Stop> getStops() {
         return null;
     }
@@ -154,14 +217,26 @@ public class Trip extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTimeID> getStopTimeIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTime> getStopTimes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isActive() {
         return false;
     }

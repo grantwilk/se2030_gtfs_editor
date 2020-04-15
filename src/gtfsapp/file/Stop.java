@@ -46,58 +46,114 @@ public class Stop extends GTFSElement {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public StopTime getActiveStopTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<RouteID> getContainingRouteIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Route> getContainingRoutes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTimeID> getContainingStopTimeIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTime> getContainingStopTimes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<TripID> getContainingTripIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Trip> getContainingTrips() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Feed getFeed() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getLocation() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public StopTime getNextStopTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Trip getNextTrip() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public StopTime getPreviousStopTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Trip getPreviousTrip() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isActive() {
         return false;
     }

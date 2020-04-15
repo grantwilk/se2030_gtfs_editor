@@ -13,14 +13,25 @@ public abstract class GTFSController {
     private Scene scene;
     private Stage stage;
 
+    /**
+     *
+     */
     public GTFSController() {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Scene getScene() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Stage getStage() {
         return null;
     }

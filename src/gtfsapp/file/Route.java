@@ -23,16 +23,6 @@ public class Route extends GTFSElement {
     /**
      * @param id
      * @param feed
-     * @param name
-     * @param color
-     */
-    public Route(String id, Feed feed, String name, Color color) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
      */
     public Route(String id, Feed feed) {
 
@@ -44,6 +34,16 @@ public class Route extends GTFSElement {
      * @param name
      */
     public Route(String id, Feed feed, String name) {
+
+    }
+
+    /**
+     * @param id
+     * @param feed
+     * @param name
+     * @param color
+     */
+    public Route(String id, Feed feed, String name, Color color) {
 
     }
 

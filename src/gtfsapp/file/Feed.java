@@ -55,6 +55,9 @@ public class Feed extends GTFSElement {
 
     }
 
+    /**
+     *
+     */
     public void clearRoutes() {
 
     }
@@ -87,6 +90,10 @@ public class Feed extends GTFSElement {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return "";
     }
@@ -98,10 +105,18 @@ public class Feed extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<RouteID> getRouteIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Route> getRoutes() {
         return null;
     }
@@ -113,10 +128,18 @@ public class Feed extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopID> getStopIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Stop> getStops() {
         return null;
     }
@@ -128,10 +151,18 @@ public class Feed extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTimeID> getStopTimeIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTime> getStopTimes() {
         return null;
     }
@@ -143,10 +174,18 @@ public class Feed extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<TripID> getTripIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Trip> getTrips() {
         return null;
     }
@@ -165,6 +204,9 @@ public class Feed extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     */
     public void setColor() {
 
     }

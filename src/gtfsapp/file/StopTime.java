@@ -79,34 +79,66 @@ public class StopTime extends GTFSElement {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getArrivalTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<RouteID> getContainingRouteIDs() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Route> getContainingRoutes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDepartureTime() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Feed getFeed() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Stop getStop() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Trip getTrip() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isActive() {
         return false;
     }

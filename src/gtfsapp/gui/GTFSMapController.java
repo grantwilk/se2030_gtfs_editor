@@ -15,20 +15,26 @@ public class GTFSMapController extends GTFSController {
     private ArrayList<Stop> associatedStops;
     private GTFSMainController mainController;
     private GTFSElement selectedElement;
-    public GTFSElement m_GTFSElement;
 
-    public GTFSMapController() {
-
-    }
-
+    /**
+     *
+     * @return
+     */
     public GTFSMainController getMainController() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public GTFSElement getSelectedElement() {
         return null;
     }
 
+    /**
+     *
+     */
     public void invokeEditDialog() {
 
     }
@@ -47,6 +53,9 @@ public class GTFSMapController extends GTFSController {
 
     }
 
+    /**
+     *
+     */
     public void updateMap() {
 
     }

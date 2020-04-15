@@ -20,14 +20,24 @@ public class GTFSFile {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Feed getFeed() {
         return null;
     }
 
+    /**
+     *
+     */
     public void load() {
 
     }
 
+    /**
+     *
+     */
     public void save() {
 
     }

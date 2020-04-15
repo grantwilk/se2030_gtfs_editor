@@ -18,42 +18,66 @@ public class GTFSMainController extends GTFSController {
     private GTFSFile file;
     private GTFSMapController mapController;
     private GTFSElement selectedElement;
-    public GTFSMapController m_GTFSMapController;
-    public GTFSElement m_GTFSElement;
-    public GTFSFile m_GTFSFile;
 
-    public GTFSMainController() {
-
-    }
-
+    /**
+     *
+     * @return
+     */
     public ArrayList<Route> getAssociatedRoutes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Stop> getAssociatedStops() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<StopTime> getAssociatedStopTimes() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Trip> getAssociatedTrips() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public GTFSFile getGTFSFile() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public GTFSMapController getMapController() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public GTFSElement getSelectedElement() {
         return null;
     }
 
+    /**
+     *
+     */
     public void invokeEditDialog() {
 
     }
@@ -65,18 +89,30 @@ public class GTFSMainController extends GTFSController {
 
     }
 
+    /**
+     *
+     */
     public void loadFile() {
 
     }
 
+    /**
+     *
+     */
     public void saveAsFile() {
 
     }
 
+    /**
+     *
+     */
     public void saveFile() {
 
     }
 
+    /**
+     *
+     */
     public void searchForElement() {
 
     }
@@ -88,14 +124,23 @@ public class GTFSMainController extends GTFSController {
 
     }
 
+    /**
+     *
+     */
     public void updateAssociationsPanel() {
 
     }
 
+    /**
+     *
+     */
     public void updateInfoPanel() {
 
     }
 
+    /**
+     *
+     */
     public void updateSelectedElementPanel() {
 
     }

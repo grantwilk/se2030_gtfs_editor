@@ -24,6 +24,14 @@ public abstract class GTFSElement {
 
     /**
      * @param id
+     * @param color
+     */
+    public GTFSElement(GTFSID id, Color color) {
+
+    }
+
+    /**
+     * @param id
      * @param name
      */
     public GTFSElement(GTFSID id, String name) {
@@ -40,21 +48,25 @@ public abstract class GTFSElement {
     }
 
     /**
-     * @param id
-     * @param color
+     *
+     * @return
      */
-    public GTFSElement(GTFSID id, Color color) {
-
-    }
-
     public Color getColor() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public GTFSID getID() {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return "";
     }
