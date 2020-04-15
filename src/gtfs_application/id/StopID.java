@@ -1,11 +1,11 @@
-
+package gtfs_application.id;
 
 /**
  * @author wilkg
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
-public class RouteID extends GTFSID {
+public class StopID extends GTFSID {
 
 
 
@@ -17,11 +17,11 @@ public class RouteID extends GTFSID {
 	 * 
 	 * @param id
 	 */
-	public RouteID RouteID(String id){
+	public StopID StopID(String id){
 		return null;
 	}
 
-	public RouteID RouteID(){
+	public StopID StopID(){
 		return null;
 	}
 

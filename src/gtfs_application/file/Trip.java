@@ -1,4 +1,10 @@
+package gtfs_application.file;
 
+import gtfs_application.id.RouteID;
+import gtfs_application.id.StopID;
+import gtfs_application.id.StopTimeID;
+
+import java.util.HashMap;
 
 /**
  * @author wilkg

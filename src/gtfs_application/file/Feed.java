@@ -1,4 +1,6 @@
+package gtfs_application.file;
 
+import gtfs_application.id.*;
 
 /**
  * @author grant
