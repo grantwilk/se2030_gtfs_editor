@@ -21,7 +21,7 @@ public class GTFSMapController extends GTFSController {
      * @return
      */
     public GTFSMainController getMainController() {
-        return null;
+        return mainController;
     }
 
     /**
@@ -50,7 +50,7 @@ public class GTFSMapController extends GTFSController {
      * @param selectedElement
      */
     public void setSelectedElement(GTFSElement selectedElement) {
-
+        this.selectedElement = selectedElement;
     }
 
     /**
