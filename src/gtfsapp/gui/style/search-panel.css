@@ -1,6 +1,9 @@
 /* Search Panel */
 .search-panel {
     -fx-padding: 20;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: solid;
+    -fx-border-color: #D0D0D0;
 }
 
 /* Search Field */

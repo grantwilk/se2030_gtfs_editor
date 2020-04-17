@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -19,8 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainController">
    <children>
       <VBox>
          <children>
@@ -73,21 +71,17 @@
                 <RowConstraints minHeight="200.0" prefHeight="420.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <VBox alignment="CENTER" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" stylesheets="@../style/search-panel.css" GridPane.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" styleClass="search-panel" stylesheets="@../style/search-panel.css" GridPane.hgrow="ALWAYS">
                      <children>
                         <TextField id="search-field" maxHeight="1.7976931348623157E308" prefHeight="40.0" promptText="Search GTFS Elements" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
-                     <styleClass>
-                        <String fx:value="sub-panel" />
-                        <String fx:value="search-panel" />
-                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" stylesheets="@../style/selected-element-panel.css" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                  <VBox alignment="CENTER" styleClass="selected-element-panel" stylesheets="@../style/selected-element-panel.css" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                      <children>
-                        <GridPane id="tile" styleClass="tile">
+                        <GridPane id="tile">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="7.0" minWidth="7.0" prefWidth="7.0" />
                               <ColumnConstraints hgrow="SOMETIMES" />
@@ -137,12 +131,8 @@
                            </children>
                         </GridPane>
                      </children>
-                     <styleClass>
-                        <String fx:value="sub-panel" />
-                        <String fx:value="selected-element-panel" />
-                     </styleClass>
                   </VBox>
-                  <VBox stylesheets="@../style/associations-panel.css" GridPane.rowIndex="2">
+                  <VBox styleClass="associations-panel" stylesheets="@../style/associations-panel.css" GridPane.rowIndex="2">
                      <children>
                         <TabPane id="tabs" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
@@ -263,10 +253,6 @@
                           </tabs>
                         </TabPane>
                      </children>
-                     <styleClass>
-                        <String fx:value="sub-panel" />
-                        <String fx:value="associations-panel" />
-                     </styleClass>
                   </VBox>
                </children>
             </GridPane>
@@ -277,7 +263,7 @@
    <stylesheets>
       <URL value="@../style/colors.css" />
       <URL value="@../style/font.css" />
-      <URL value="@../style/panels.css" />
+      <URL value="@../style/root.css" />
       <URL value="@../style/controls.css" />
    </stylesheets>
 </HBox>

@@ -1,11 +1,16 @@
 /* Selected Element Panel */
 .selected-element-panel {
     -fx-padding: 20;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: solid;
+    -fx-border-color: #D0D0D0;
 }
 
 /* Selected Element Tile */
 .selected-element-panel #tile {
-
+    -fx-background-color: white;
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
 }
 
 /* Element Color */

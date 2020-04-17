@@ -1,19 +1,7 @@
-/* Custom Panels */
+/* Panels */
 .info-panel {
     -fx-background-color: #F0F0F0;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2.5);
-}
-
-.sub-panel {
-    -fx-border-width: 0 0 1 0;
-    -fx-border-style: solid;
-    -fx-border-color: #D0D0D0;
-}
-
-.tile {
-    -fx-background-color: white;
-    -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
 }
 
 /* TabPane */
