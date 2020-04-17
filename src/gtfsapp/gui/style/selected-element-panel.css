@@ -1,0 +1,61 @@
+/* Selected Element Panel */
+.selected-element-panel {
+    -fx-padding: 20;
+}
+
+/* Selected Element Tile */
+.selected-element-panel #tile {
+
+}
+
+/* Element Color */
+.selected-element-panel #element-color {
+-fx-background-color: #4C8BF5;
+-fx-background-radius: 7 0 0 7;
+}
+
+/* Info Container */
+.selected-element-panel #element-info {
+-fx-padding: 15 20 15 20;
+}
+
+/* Title Container */
+.selected-element-panel #title-container {
+
+}
+
+/* Title Elements */
+.selected-element-panel #element-title {
+    -fx-text-fill: #404040;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 -4 0;
+}
+
+.selected-element-panel #element-name {
+    -fx-text-fill: #909090;
+}
+
+.selected-element-panel #title-separator {
+    -fx-stroke: #D0D0D0;
+    -fx-stroke-width: 1px;
+}
+
+/* Attribute Container */
+.selected-element-panel #attribute-container{
+    -fx-padding: 12 0 0 0;
+    -fx-spacing: 5;
+}
+
+.selected-element-panel #attribute {
+    -fx-spacing: -1;
+}
+
+/* Attribute Elements */
+.selected-element-panel #attribute-title {
+    -fx-text-fill: #404040;
+}
+
+.selected-element-panel #attribute-value {
+    -fx-text-fill: #909090;
+}

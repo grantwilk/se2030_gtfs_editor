@@ -1,0 +1,30 @@
+
+/* File Panel */
+.file-panel {
+    -fx-background-color: #4C8BF5;
+}
+
+.file-panel #title-container {
+    -fx-padding: 0 0 0 20;
+}
+
+.file-panel #app-title {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.file-panel #button-container {
+    -fx-padding: 0 10 0 0;
+}
+
+.file-panel #button {
+    -fx-background-radius: 20;
+    -fx-background-insets: 4;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.file-panel #button:hover {
+    -fx-background-color: #5d99fc;
+}

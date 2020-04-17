@@ -1,0 +1,11 @@
+.root {
+    -fx-font-family: Roboto;
+    -fx-font-size: 14px;
+    -fx-font-fill: red;
+    -fx-focus-traversable: false;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('/font/roboto-regular.ttf');
+}
