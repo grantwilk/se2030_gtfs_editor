@@ -1,24 +1,16 @@
 package gtfsapp.id;
 
 /**
- * @author grant
+ * @author grant, michael
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class FeedID extends GTFSID {
 
-    /**
-     * @param id
+    /** Constructor for FeedID
+     * @param id String id to be associated with this object
      */
     public FeedID(String id) {
-
+        super(id);
     }
-
-    /**
-     *
-     */
-    public FeedID() {
-
-    }
-
 }
