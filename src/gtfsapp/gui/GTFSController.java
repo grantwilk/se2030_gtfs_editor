@@ -14,40 +14,35 @@ public abstract class GTFSController {
     private Stage stage;
 
     /**
-     *
-     */
-    public GTFSController() {
-
-    }
-
-    /**
-     *
-     * @return
+     * Gets the controller's scene and returns it
+     * @return the controller's scene
      */
     public Scene getScene() {
-        return null;
+        return scene;
     }
 
     /**
-     *
-     * @return
+     * Gets the controller's stage and returns it
+     * @return the controller's stage
      */
     public Stage getStage() {
-        return null;
+        return stage;
     }
 
     /**
-     * @param scene
+     * Sets the controller's scene
+     * @param scene - the scene to set
      */
     public void setScene(Scene scene) {
-
+        this.scene = scene;
     }
 
     /**
-     * @param stage
+     * Sets the controllers stage
+     * @param stage - the stage to set
      */
     public void setStage(Stage stage) {
-
+        this.stage = stage;
     }
 
 }

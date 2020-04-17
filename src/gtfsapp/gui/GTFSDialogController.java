@@ -1,5 +1,7 @@
 package gtfsapp.gui;
 
+import javafx.stage.Stage;
+
 /**
  * @author grant
  * @version 1.0
@@ -7,35 +9,29 @@ package gtfsapp.gui;
  */
 public abstract class GTFSDialogController extends GTFSController {
 
-    private String windowTitle;
-
-    /**
-     *
-     */
-    public GTFSDialogController() {
-
-    }
-
     /**
      *
      */
     public void closeDialog() {
-
+        // TODO
     }
 
     /**
-     *
+     * Gets the title of the dialog controller's window and returns it
+     * @return the title of the window
      */
-    public void getWindowTitle() {
-
+    public String getWindowTitle() {
+        Stage stage = super.getStage();
+        return stage.getTitle();
     }
 
     /**
-     *
-     * @param windowTitle
+     * Sets the title of the dialog controller's window
+     * @param windowTitle the title
      */
     public void setWindowTitle(String windowTitle) {
-
+        Stage stage = super.getStage();
+        stage.setTitle(windowTitle);
     }
 
 }

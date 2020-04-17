@@ -17,47 +17,51 @@ public class GTFSMapController extends GTFSController {
     private GTFSElement selectedElement;
 
     /**
-     *
-     * @return
+     * Get's the map's main controller and returns it
+     * @return the map's main controller
      */
     public GTFSMainController getMainController() {
         return mainController;
     }
 
+    // TODO - do we need a setMainController()?
+
     /**
-     *
-     * @return
+     * Gets the map controller's selected element and returns it
+     * @return the map controller's selected element
      */
     public GTFSElement getSelectedElement() {
-        return null;
+        return selectedElement;
     }
 
     /**
      *
      */
     public void invokeEditDialog() {
-
+        throw new UnsupportedOperationException();
     }
 
     /**
+     *
      * @param msg
      */
     public void invokeErrorDialog(String msg) {
-
+        throw new UnsupportedOperationException();
     }
 
     /**
-     * @param selectedElement
+     * Sets the map controller's selected element
+     * @param selectedElement the element
      */
     public void setSelectedElement(GTFSElement selectedElement) {
         this.selectedElement = selectedElement;
     }
 
     /**
-     *
+     * Updates the map's GUI
      */
     public void updateMap() {
-
+        throw new UnsupportedOperationException();
     }
 
 }

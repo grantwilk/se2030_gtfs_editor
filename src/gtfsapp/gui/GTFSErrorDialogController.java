@@ -10,7 +10,7 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 	private String msg;
 
 	public GTFSErrorDialogController(){
-
+		// TODO
 	}
 
 	/**
@@ -18,7 +18,7 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 	 * @param msg
 	 */
 	public GTFSErrorDialogController(String msg){
-
+		// TODO
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 	 * @param windowTitle
 	 */
 	public GTFSErrorDialogController(String msg, String windowTitle){
-
+		// TODO
 	}
 
 }

@@ -15,7 +15,7 @@ public class GTFSEditDialogController extends GTFSDialogController {
      * @param selectedElement
      */
     public GTFSEditDialogController(GTFSElement selectedElement) {
-
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -23,7 +23,7 @@ public class GTFSEditDialogController extends GTFSDialogController {
      * @param windowTitle
      */
     public GTFSEditDialogController(GTFSElement selectedElement, String windowTitle) {
-
+        throw new UnsupportedOperationException();
     }
 
 }
