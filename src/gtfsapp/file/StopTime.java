@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * @author wilkg
+ * @author Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */

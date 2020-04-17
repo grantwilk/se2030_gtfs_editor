@@ -22,7 +22,7 @@
    <children>
       <VBox>
          <children>
-            <HBox alignment="CENTER_LEFT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" styleClass="file-panel" stylesheets="@../style/file-panel.css">
+            <HBox alignment="CENTER_LEFT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" styleClass="file-header" stylesheets="@../style/file-header.css">
                <children>
                   <GridPane>
                     <columnConstraints>

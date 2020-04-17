@@ -1,10 +1,17 @@
+/**
+  * file:       root.css
+  * author:     Grant Wilk
+  * created:    April 16, 2020
+  * brief:      contains styling for root JavaFX components
+ */
+
 /* Panels */
 .info-panel {
     -fx-background-color: #F0F0F0;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2.5);
 }
 
-/* TabPane */
+/* Tab Pane */
 .tab-down-button {
     -fx-padding: 0;
 }

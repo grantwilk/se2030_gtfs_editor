@@ -3,7 +3,7 @@ package gtfsapp.id;
 import java.util.ArrayList;
 
 /**
- * @author grant, michael
+ * @author Michael Primeau
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */

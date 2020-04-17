@@ -5,7 +5,7 @@ import gtfsapp.file.*;
 import java.util.ArrayList;
 
 /**
- * @author grant
+ * @author Grant Wilk
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */

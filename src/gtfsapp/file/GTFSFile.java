@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 
 /**
- * @author grant
+ * @author Michael Primeau and Grant Wilk
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */

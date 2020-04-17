@@ -1,3 +1,10 @@
+/**
+  * file:       selected-element-panel.css
+  * author:     Grant Wilk
+  * created:    April 16, 2020
+  * brief:      contains styling for the GUI's selected element panel and its subcomponents
+ */
+
 /* Selected Element Panel */
 .selected-element-panel {
     -fx-padding: 20;

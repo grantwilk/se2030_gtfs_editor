@@ -5,7 +5,7 @@ import gtfsapp.id.*;
 import javafx.scene.paint.Color;
 
 /**
- * @author grant
+ * @author Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
