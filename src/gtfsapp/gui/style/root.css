@@ -22,7 +22,7 @@
 
 .tab-pane .tab-header-area {
     -fx-pref-width: 100%;
-    -fx-padding: 0 0 20 40;
+    -fx-padding: 0 0 20 18;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
 }
 
@@ -51,7 +51,7 @@
 .tab-pane .tab-label {
     -fx-text-fill: #404040;
     -fx-text-align: center;
-    -fx-pref-width: 60;
+    -fx-pref-width: 52;
     -fx-pref-height: 40;
 }
 
