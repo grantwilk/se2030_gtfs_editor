@@ -9,3 +9,4 @@ Class Structure Changes:
 * Updated GTFSID.exists(String) to accept a GTFSID for the parameter instead
 * Removed mainController attribute from application (can be local)
 * Replaced GTFSID's ArrayList with a HashSet to avoid calling exists() in the constructor
+* Renamed GTFSMainController's "file" attribute to "gtfsFile" to avoid naming conflicts 
