@@ -112,18 +112,6 @@
                                                 <Label id="attribute-value" text="60.332°N, 37.534°W" />
                                              </children>
                                           </VBox>
-                                          <VBox id="attribute" layoutX="10.0" layoutY="155.0">
-                                             <children>
-                                                <Label id="attribute-title" text="Next Trip" />
-                                                <Label id="attribute-value" text="3:00 PM - Trip F12" />
-                                             </children>
-                                          </VBox>
-                                          <VBox id="attribute" layoutX="10.0" layoutY="20.0">
-                                             <children>
-                                                <Label id="attribute-title" text="Last Trip" />
-                                                <Label id="attribute-value" text="2:45 PM - Trip F11" />
-                                             </children>
-                                          </VBox>
                                        </children>
                                     </VBox>
                                  </children>
