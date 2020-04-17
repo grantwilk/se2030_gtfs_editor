@@ -14,7 +14,6 @@
 }
 
 .tab-pane .tab-header-area {
-    -fx-padding: 0;
     -fx-pref-width: 100%;
     -fx-padding: 0 0 20 40;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
