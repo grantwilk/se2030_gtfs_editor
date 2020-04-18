@@ -18,27 +18,8 @@ public abstract class GTFSID {
      * @param id String ID to be associated with this object
      */
     public GTFSID(String id) {
-        this.setID(id);
-
-        // TODO
-        // Not sure if this is allowed
-        existingIDs.add(this);
-    }
-
-    /**
-     * Checks if ID argument already exists and sets GTFSID id to the passed in argument
-     * @param id String ID to set this objects ID to
-     * @return True if the ID was successfully set
-     */
-    public boolean setID(String id) {
-        for(GTFSID s:existingIDs) {
-            if(s.id.equals(id)) {
-                // Temporary Exception
-                throw new IllegalArgumentException("ID already exists");
-            }
-        }
         this.id = id;
-        return true;
+        existingIDs.add(this);
     }
 
     /**
@@ -54,6 +35,6 @@ public abstract class GTFSID {
      * @param id
      */
     public boolean equals(GTFSID id) {
-        return (this.id.equals(id.id) && (this.getClass() == id.getClass()));
+        return (this.id.equals(id.id) && (this.getClass().equals(id.getClass())));
     }
 }
