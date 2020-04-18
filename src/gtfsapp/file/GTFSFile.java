@@ -11,7 +11,7 @@ import java.nio.file.Path;
 public class GTFSFile {
 
     private Feed feed;
-    private File file;
+    private File file; // TODO Maybe this should be a list of files instead of one single file
 
     /**
      * @param path
@@ -25,7 +25,7 @@ public class GTFSFile {
      * @return
      */
     public Feed getFeed() {
-        return null;
+        return feed;
     }
 
     /**
