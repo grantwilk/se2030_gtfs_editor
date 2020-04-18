@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Colton Rivard
@@ -15,6 +16,9 @@ import java.util.HashMap;
 public class Feed extends GTFSElement {
 
     private HashMap<RouteID, Route> routes;
+    private HashMap<TripID, Trip> trips;
+    private HashMap<StopTimeID, StopTime> stopTimes;
+    private HashMap<StopID, Stop> stops;
 
     /**
      * @param id
@@ -45,7 +49,7 @@ public class Feed extends GTFSElement {
     /**
      * @param routes
      */
-    public void addAllRoutes(ArrayList<Route> routes) {
+    public void addAllRoutes(List<Route> routes) {
 
     }
 
@@ -53,6 +57,54 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public void addRoute(Route route) {
+
+    }
+
+    /**
+     *
+     * @param trips
+     */
+    public void addAllTrips(List<Trip> trips){
+
+    }
+
+    /**
+     *
+     * @param trip
+     */
+    public void addTrip(Trip trip) {
+
+    }
+
+    /**
+     *
+     * @param stopTimes
+     */
+    public void addAllStopTimes(List<StopTime> stopTimes){
+
+    }
+
+    /**
+     *
+     * @param stopTime
+     */
+    public void addStopTime(StopTime stopTime) {
+
+    }
+
+    /**
+     *
+     * @param stops
+     */
+    public void addAllStops(List<Stop> stops){
+
+    }
+
+    /**
+     *
+     * @param stop
+     */
+    public void addStops(Stop stop) {
 
     }
 
