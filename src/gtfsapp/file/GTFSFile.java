@@ -65,58 +65,70 @@ public class GTFSFile {
     }
 
     /**
-     * Extract each of the four GTFS files from the user selected files
-     * @param files List of files to extract GTFS files from
+     * Extracts the four required GTFS files from a list of files and assigns them to the classes file attributes
+     * @param files - a list of files
      */
-    private void extractFiles(List<File> files) throws IOException{
-        for(File f:files) {
-            String name = f.getPath().substring(f.getPath().lastIndexOf('/'));
-            if(name.equals("stops.txt") && stopFile == null) {
-                stopFile = f;
-            } else if(name.equals("routes.txt") && routeFile == null) {
-                routeFile = f;
-            } else if(name.equals("stop_times.txt") && stopTimesFile == null) {
-                stopTimesFile = f;
-            } else if(name.equals("trips.txt") && tripFile == null) {
-                tripFile = f;
+    private void extractFiles(List<File> files) throws IOException {
+
+        // for each file in our list of files
+        for (File file : files) {
+
+            // get the files name
+            String fileName = file.getName();
+
+            // check file name and assign it to the proper file if it has not already been assigned
+            switch (fileName) {
+
+                // if the file name is routes.txt
+                case "routes.txt":
+                    if (routeFile != null) {
+                        throw new IOException("Found multiple \"" + fileName + "\" files.");
+                    }
+                    routeFile = file;
+                    break;
+
+                // if the file name is trips.txt
+                case "trips.txt":
+                    if (tripFile != null) {
+                        throw new IOException("Found multiple \"" + fileName + "\" files.");
+                    }
+                    tripFile = file;
+                    break;
+
+                // if the file name is stop_times.txt
+                case "stop_times.txt":
+                    if (stopTimesFile != null) {
+                        throw new IOException("Found multiple \"" + fileName + "\" files.");
+                    }
+                    stopTimesFile = file;
+                    break;
+
+                // if the file name is stops.txt
+                case "stops.txt":
+                    if (stopFile != null) {
+                        throw new IOException("Found multiple \"" + fileName + "\" files.");
+                    }
+                    stopFile = file;
+                    break;
+
+                // throw an exception if the file name is not recognized
+                default:
+                    throw new IOException("Unrecognized file name \"" + fileName + "\".");
             }
         }
 
-        if(stopFile == null) {
-            throw new IOException("No stops.txt file was found");
-        } else if(routeFile == null) {
-            throw new IOException("No routes.txt file was found");
-        }else if(stopTimesFile == null) {
-            throw new IOException("No stop_times.txt file was found");
-        } else if(tripFile == null) {
-            throw new IOException("No trips.txt file was found");
+        // throw an exception if any of our files are still unassigned
+        if (routeFile == null) {
+            throw new IOException("No file \"routes.txt\" was specified.");
+        } else if (tripFile == null) {
+            throw new IOException("No file \"trips.txt\" was specified.");
+        } else if (stopTimesFile == null) {
+            throw new IOException("No file \"stop_times.txt\" was specified.");
+        } else if (stopFile == null) {
+            throw new IOException("No file \"stops.txt\" was specified.");
         }
+
     }
 
-    private void loadStopsFile() {
-        File stopFile = null;
-        for(int i = 0; i < files.size(); i++) {
-            if(files.get(i).getPath().substring(files.get(i).getPath().lastIndexOf('/')).equals("stops.txt")) {
-                stopFile = files.get(i);
-            }
-        }
-
-        try {
-            Scanner fileScanner = new Scanner(stopFile);
-            Scanner lineScanner;
-            while(fileScanner.hasNextLine()) {
-                lineScanner = new Scanner(fileScanner.nextLine());
-                lineScanner.useDelimiter(",");
-                String stopId = lineScanner.next();
-                // Ignore level_id
-                lineScanner.next();
-                String stopName = lineScanner.next();
-                Double lat = Double.parseDouble(lineScanner.next());
-                Double lon = Double.parseDouble(lineScanner.next());
-                lineScanner.close();
-            }
-        } catch(FileNotFoundException e) { };
-
-    }
 
 }
