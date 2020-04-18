@@ -11,3 +11,4 @@ Class Structure Changes:
 * Replaced GTFSID's ArrayList with a HashSet to avoid calling exists() in the constructor
 * Renamed GTFSMainController's "file" attribute to "gtfsFile" to avoid naming conflicts 
 * Added setID(String id) method to the GTFSID class
+* Migrated setWindowTitle() and getWindowTitle() from GTFSDialogController to GTFSController

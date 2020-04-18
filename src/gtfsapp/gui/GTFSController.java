@@ -45,4 +45,20 @@ public abstract class GTFSController {
         this.stage = stage;
     }
 
+    /**
+     * Sets the title of the window
+     * @param windowTitle - the title of the window
+     */
+    public void setWindowTitle(String windowTitle) {
+        stage.setTitle(windowTitle);
+    }
+
+    /**
+     * Gets the title of the window
+     * @return the title of the window
+     */
+    public String getWindowTitle() {
+        return stage.getTitle();
+    }
+
 }
