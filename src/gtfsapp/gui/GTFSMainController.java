@@ -178,6 +178,9 @@ public class GTFSMainController extends GTFSController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open GTFS File");
 
+        //TODO Grant there is a fileChooser.showOpenMultipleDialog(Window ownerWindow) that allows for the selection of multiple files
+        // This will return a List<File> of the files selected by the user ;)
+
         // get file from the chooser
         File file = fileChooser.showOpenDialog(new Stage());
 
