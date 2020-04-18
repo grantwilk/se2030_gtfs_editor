@@ -39,13 +39,13 @@ public class GTFSFile {
 
         // throw an exception if any of our files are still unassigned
         if (routeFile == null) {
-            throw new IOException("Required file \"routes.txt\" was never specified.");
+            throw new IOException("Required GTFS file \"routes.txt\" was not found.");
         } else if (tripFile == null) {
-            throw new IOException("Required file \"trips.txt\" was never specified.");
+            throw new IOException("Required GTFS file \"trips.txt\" was not found.");
         } else if (stopTimesFile == null) {
-            throw new IOException("Required file \"stop_times.txt\" was never specified.");
+            throw new IOException("Required GTFS file \"stop_times.txt\" was not found.");
         } else if (stopFile == null) {
-            throw new IOException("Required file \"stops.txt\" was never specified.");
+            throw new IOException("Required GTFS file \"stops.txt\" was not found.");
         }
 
         // parse the files
@@ -119,7 +119,7 @@ public class GTFSFile {
 
                 // throw an exception if the file name is not recognized
                 default:
-                    throw new IOException("Unrecognized file name \"" + fileName + "\".");
+                    throw new IOException("Unrecognized GTFS file \"" + fileName + "\".");
             }
         }
     }
