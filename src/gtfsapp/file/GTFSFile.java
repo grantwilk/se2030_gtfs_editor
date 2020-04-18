@@ -1,8 +1,11 @@
 package gtfsapp.file;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,6 +45,34 @@ public class GTFSFile {
      *
      */
     public void save() {
+
+    }
+
+    private void isValid(List<File> files) throws IOException {
+        if(files.size() != 4) {
+            throw new IllegalArgumentException("Not all files have been loaded");
+        }
+
+        ArrayList<String> fileNames = new ArrayList<>();
+        for(int i = 0; i < 4; i++) {
+            fileNames.add(files.get(i).getPath().substring(files.get(i).getPath().lastIndexOf('/')));
+        }
+
+        if(Collections.frequency(fileNames,"stops.txt") != 1) {
+            throw new IOException("No stops.txt file was found");
+        }
+
+        if(Collections.frequency(fileNames,"trips.txt") != 1) {
+            throw new IOException("No trips.txt file was found");
+        }
+
+        if(Collections.frequency(fileNames,"stop_times.txt") != 1) {
+            throw new IOException("No stop_times.txt file was found");
+        }
+
+        if(Collections.frequency(fileNames,"routes.txt") != 1) {
+            throw new IOException("No routes.txt file was found");
+        }
 
     }
 
