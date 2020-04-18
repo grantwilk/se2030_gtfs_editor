@@ -5,7 +5,9 @@ import gtfsapp.gui.GTFSController;
 import gtfsapp.gui.map.GTFSMapController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -179,15 +181,14 @@ public class GTFSMainController extends GTFSController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open GTFS File");
 
-        //TODO Grant there is a fileChooser.showOpenMultipleDialog(Window ownerWindow) that allows for the selection of multiple files
-        // This will return a List<File> of the files selected by the user ;)
+        // TODO - do we select a .zip file containing the GTFS files or do we select multiple GTFS files?
 
         // get file from the chooser
         File file = fileChooser.showOpenDialog(new Stage());
 
         // throw an exception if no file is found
         if (file == null) {
-            throw new FileNotFoundException("File \"%s\" could not be found.");
+            throw new FileNotFoundException("File could not be found.");
         }
 
         // create the GTFS file and load its contents
