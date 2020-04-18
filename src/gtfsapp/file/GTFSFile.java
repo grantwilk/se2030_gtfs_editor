@@ -104,8 +104,6 @@ public class GTFSFile {
                 String stopName = lineScanner.next();
                 Double lat = Double.parseDouble(lineScanner.next());
                 Double lon = Double.parseDouble(lineScanner.next());
-                // Ignore location type
-                lineScanner.next();
                 lineScanner.close();
             }
         } catch(FileNotFoundException e) { };
