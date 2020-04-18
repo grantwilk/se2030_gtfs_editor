@@ -19,13 +19,15 @@ import java.util.HashMap;
 public class Route extends GTFSElement {
 
     private Feed feed;
+    private RouteType routeType;
     private HashMap<TripID, Trip> trips;
 
     /**
+     *
      * @param id
      * @param feed
      */
-    public Route(String id, Feed feed) {
+    public Route(Feed feed, String id, RouteType routeType) {
         // TODO - this constructor is not fully implemented!
         super(new RouteID(id));
     }
@@ -168,6 +170,14 @@ public class Route extends GTFSElement {
 
     public ArrayList<Trip> getTrips() {
         return null;
+    }
+
+    public RouteType getRouteType() {
+        return null;
+    }
+
+    public void setRouteType(RouteType routeType) {
+
     }
 
     public boolean isActive() {
