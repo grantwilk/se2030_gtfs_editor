@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,8 +191,11 @@ public class GTFSMainController extends GTFSController {
         }
 
         // create the GTFS file and load its contents
-        gtfsFile = new GTFSFile(files);
-        gtfsFile.load();
+        // TODO Handle IOExcetpion
+        try {
+            gtfsFile = new GTFSFile(files);
+            gtfsFile.load();
+        } catch(IOException e) { };
 
         // update associated elements
         updateAssociatedElements();
