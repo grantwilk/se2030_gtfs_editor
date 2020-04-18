@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,31 +182,41 @@ public class GTFSMainController extends GTFSController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open GTFS File");
 
-        // TODO - do we select a .zip file containing the GTFS files or do we select multiple GTFS files?
+        // set the initial directory as the project directory
+        // TODO - remove this before going live, this is just for convenience
+        fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
+
+        // configure extension filter
+        FileChooser.ExtensionFilter txtFilter =
+                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(txtFilter);
 
         // get file from the chooser
         List<File> files = fileChooser.showOpenMultipleDialog(new Stage());
 
-        // throw an exception if no file is found
-        if (files.isEmpty()) {
-            throw new FileNotFoundException("File could not be found.");
+        // if at least one file was selected
+        if (!(files == null || files.isEmpty())) {
+            try {
+                // create the GTFS file from the files
+                gtfsFile = new GTFSFile(files);
+
+                // attempt to parse the files
+                gtfsFile.load();
+
+                // update GUI's associated elements
+                updateAssociatedElements();
+
+                // update info panel GUI
+                updateInfoPanel();
+
+                // update the map GUI
+                // mapController.updateMap();
+
+            } catch (IOException e) {
+                // TODO - invoke error dialog with exception method here
+                System.out.println(e.getMessage());
+            }
         }
-
-        // create the GTFS file and load its contents
-        // TODO Handle IOExcetpion
-        try {
-            gtfsFile = new GTFSFile(files);
-            gtfsFile.load();
-        } catch(IOException e) { };
-
-        // update associated elements
-        updateAssociatedElements();
-
-        // update info panel GUI
-        updateInfoPanel();
-
-        // update the map GUI
-        // mapController.updateMap();
 
     }
 
