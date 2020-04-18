@@ -21,12 +21,12 @@ public class GTFSApplication extends Application {
 	/**
 	 * The maximum height of the main stage in pixels
 	 */
-	private static final double MAIN_STAGE_MINIMUM_WIDTH = 500;
+	private static final double MAIN_STAGE_MINIMUM_WIDTH = 1280;
 
 	/**
 	 * The minimum height of the main stage in pixels
 	 */
-	private static final double MAIN_STAGE_MINIMUM_HEIGHT = 500;
+	private static final double MAIN_STAGE_MINIMUM_HEIGHT = 720;
 
     /**
 	 * The entry point for the application
@@ -40,6 +40,8 @@ public class GTFSApplication extends Application {
 
         // configure basic stage attributes
 		mainStage.setTitle("GTFS Editor");
+		mainStage.setMinWidth(MAIN_STAGE_MINIMUM_WIDTH);
+		mainStage.setMinHeight(MAIN_STAGE_MINIMUM_HEIGHT);
 
 		// create and set stage scene
 		Scene mainScene = new Scene(root);
