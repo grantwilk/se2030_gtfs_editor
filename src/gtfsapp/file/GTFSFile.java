@@ -1,7 +1,12 @@
 package gtfsapp.file;
 
+import javafx.geometry.Point2D;
+
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -155,8 +160,66 @@ public class GTFSFile {
      * Parses stops from the GTFS stops file adn returns them as a list
      * @return the list of stops
      */
-    private List<Stop> parseStops() {
-        return null;
+    private List<Stop> parseStops() throws IOException {
+
+        // get all lines from the file
+        List<String> lines = Files.readAllLines(stopFile.toPath());
+
+        // remove the first line because it contains a template
+        lines.remove(0);
+
+        // create a new list of stops
+        List<Stop> stops = new ArrayList<>();
+
+        // for each line in the file
+        for (String line : lines) {
+
+            // split the line into comma separated tokens
+            List<String> tokens = tokenizeLine(line);
+
+            // extract the required values
+            String stop_id = tokens.get(0);
+            String stop_name = tokens.get(1);
+            String stop_lat = tokens.get(3);
+            String stop_lon = tokens.get(4);
+
+            // other values (can be implemented if we'd like)
+            // String stop_desc = tokens.get(2);
+            // String zone_id = tokens.get(5);
+            // String stop_url = tokens.get(6);
+
+            // create a new stop
+            Stop stop = new Stop(stop_id, feed);
+
+            // set stop name if not empty
+            if (!stop_name.isEmpty()) {
+                stop.setName(stop_name);
+            }
+
+            // set position if we have latitude and longitude
+            if (!stop_lat.isEmpty() && !stop_lon.isEmpty()) {
+                double lat = Double.parseDouble(stop_lat);
+                double lon = Double.parseDouble(stop_lon);
+                Point2D location = new Point2D(lon, lat);
+                stop.setLocation(location);
+            }
+
+            // add our stops to the stops list
+            stops.add(stop);
+
+        }
+
+        return stops;
+
+    }
+
+    /**
+     * Tokenizes a line from a CSV file using ',' as a delimiter
+     * @param line - the line to tokenize
+     * @return a list of string tokens
+     */
+    private List<String> tokenizeLine(String line)  {
+        return Arrays.asList(line.split(","));
     }
 
 }
