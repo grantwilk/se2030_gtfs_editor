@@ -14,14 +14,13 @@ import java.util.HashMap;
  */
 public class Feed extends GTFSElement {
 
-    private FeedID id;
     private HashMap<RouteID, Route> routes;
 
     /**
      * @param id
      */
     public Feed(String id) {
-
+        super(new FeedID(id));
     }
 
     /**
@@ -29,7 +28,8 @@ public class Feed extends GTFSElement {
      * @param name
      */
     public Feed(String id, String name) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id);
     }
 
     /**
@@ -38,7 +38,8 @@ public class Feed extends GTFSElement {
      * @param color
      */
     public Feed(String id, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id);
     }
 
     /**

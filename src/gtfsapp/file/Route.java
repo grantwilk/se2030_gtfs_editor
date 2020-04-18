@@ -1,5 +1,6 @@
 package gtfsapp.file;
 
+import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
@@ -25,7 +26,8 @@ public class Route extends GTFSElement {
      * @param feed
      */
     public Route(String id, Feed feed) {
-
+        // TODO - this constructor is not fully implemented!
+        super(new RouteID(id));
     }
 
     /**
@@ -34,7 +36,8 @@ public class Route extends GTFSElement {
      * @param name
      */
     public Route(String id, Feed feed, String name) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null);
     }
 
     /**
@@ -44,7 +47,8 @@ public class Route extends GTFSElement {
      * @param color
      */
     public Route(String id, Feed feed, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null);
     }
 
     /**
