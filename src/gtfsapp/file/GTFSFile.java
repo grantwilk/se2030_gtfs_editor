@@ -45,15 +45,15 @@ public class GTFSFile {
         // parse the files
         ArrayList<Stop> stops = parseStops();
         ArrayList<Route> routes = parseRoutes();
-        ArrayList<Route> trips = parseTrips(routes);
-        ArrayList<Route> stopTimes = parseStopTimes(trips, stops);
+        ArrayList<Trip> trips = parseTrips(routes);
+        ArrayList<StopTime> stopTimes = parseStopTimes(trips, stops);
 
         // create a new GTFS feed with all of our GTFS elements
         feed = new Feed("Feed1");
-        feed.setStops(stops);
-        feed.setRoutes(routes);
-        feed.setTrips(trips);
-        feed.setStopTimes(stopTimes);
+        feed.addAllStops(stops);
+        feed.addAllRoutes(routes);
+        feed.addAllTrips(trips);
+        feed.addAllStopTimes(stopTimes);
 
     }
 
