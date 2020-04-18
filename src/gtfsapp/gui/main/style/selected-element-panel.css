@@ -22,7 +22,7 @@
 
 /* Element Color */
 .selected-element-panel #element-color {
-    -fx-background-color: #4C8BF5;
+    -fx-background-color: #C0C0C0;
     -fx-background-radius: 7 0 0 7;
 }
 

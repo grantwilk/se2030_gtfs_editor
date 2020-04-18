@@ -17,7 +17,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 
-
 <HBox fx:id="mainPanel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.GTFSMainController">
    <children>
       <VBox fx:id="infoPanel" prefWidth="400.0" HBox.hgrow="NEVER">
@@ -74,8 +73,8 @@
                            <children>
                               <VBox id="title-container">
                                  <children>
-                                    <Label id="element-title" fx:id="selectedElementTitle" focusTraversable="false" text="STOP S12" />
-                                    <Label id="element-subtitle" fx:id="selectedElementSubtitle" focusTraversable="false" text="The Third Ward" />
+                                    <Label id="element-title" fx:id="selectedElementTitle" focusTraversable="false" text="NULL" />
+                                    <Label id="element-subtitle" fx:id="selectedElementSubtitle" focusTraversable="false" text="Nothing to see here!" />
                                     <Line id="title-separator" endX="150.0">
                                        <VBox.margin>
                                           <Insets top="6.0" />
