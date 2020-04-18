@@ -24,7 +24,7 @@ public class GTFSFile {
      */
     public GTFSFile(List<File> files) throws IOException {
         feed = new Feed("Feed1");
-        isValid(files);
+        hasCorrectFiles(files);
         this.files = (ArrayList<File>) files;
     }
 
@@ -54,7 +54,7 @@ public class GTFSFile {
      * Checks if the loaded set of files contains the correct files
      * @throws IOException Thrown if a required file is not found
      */
-    private void isValid(List<File> files) throws IOException {
+    private void hasCorrectFiles(List<File> files) throws IOException {
         if(files.size() != 4) {
             throw new IllegalArgumentException("Not all files have been loaded");
         }
