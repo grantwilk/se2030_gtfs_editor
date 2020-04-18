@@ -22,11 +22,12 @@ public class StopTime extends GTFSElement {
     private int sequence;
 
     /**
-     * @param id
      * @param feed
+     * @param id
+     * @param stop
      * @param sequence
      */
-    public StopTime(String id, Feed feed, int sequence) {
+    public StopTime(Feed feed, String id, Stop stop, int sequence) {
         // TODO - this constructor is not fully implemented!
         super(new StopTimeID(id));
     }

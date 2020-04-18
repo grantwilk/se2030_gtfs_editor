@@ -23,10 +23,10 @@ public class Trip extends GTFSElement {
     private HashMap<StopTimeID, StopTime> stopTimes;
 
     /**
-     * @param id
      * @param feed
+     * @param id
      */
-    public Trip(String id, Feed feed) {
+    public Trip(Feed feed, String id) {
         // TODO - this constructor is not fully implemented!
         super(new TripID(id));
     }
