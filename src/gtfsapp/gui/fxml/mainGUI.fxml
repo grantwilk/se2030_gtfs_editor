@@ -18,11 +18,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainController">
+<HBox fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainController">
    <children>
-      <VBox>
+      <VBox fx:id="infoPanel">
          <children>
-            <HBox alignment="CENTER_LEFT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" styleClass="file-header" stylesheets="@../style/file-header.css">
+            <HBox fx:id="fileHeaderPanel" alignment="CENTER_LEFT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" styleClass="file-header" stylesheets="@../style/file-header.css">
                <children>
                   <GridPane>
                     <columnConstraints>
@@ -61,7 +61,7 @@
                   </GridPane>
                </children>
             </HBox>
-            <GridPane styleClass="info-panel">
+            <GridPane fx:id="infoPanelBody" styleClass="info-panel">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="300.0" />
               </columnConstraints>
@@ -71,7 +71,7 @@
                 <RowConstraints minHeight="200.0" prefHeight="420.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <VBox alignment="CENTER" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" styleClass="search-panel" stylesheets="@../style/search-panel.css" GridPane.hgrow="ALWAYS">
+                  <VBox fx:id="serarchPanel" alignment="CENTER" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" styleClass="search-panel" stylesheets="@../style/search-panel.css" GridPane.hgrow="ALWAYS">
                      <children>
                         <TextField id="search-field" maxHeight="1.7976931348623157E308" prefHeight="40.0" promptText="Search GTFS Elements" />
                      </children>
@@ -79,7 +79,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="selected-element-panel" stylesheets="@../style/selected-element-panel.css" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                  <VBox fx:id="selectedElementPanel" alignment="CENTER" styleClass="selected-element-panel" stylesheets="@../style/selected-element-panel.css" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                      <children>
                         <GridPane id="tile">
                           <columnConstraints>
@@ -90,13 +90,13 @@
                             <RowConstraints />
                           </rowConstraints>
                            <children>
-                              <Pane id="element-color" />
+                              <Pane id="element-color" fx:id="selectedElementColor" />
                               <VBox id="element-info" prefWidth="386.0" GridPane.columnIndex="1">
                                  <children>
                                     <VBox id="title-container">
                                        <children>
-                                          <Label id="element-title" focusTraversable="false" text="STOP S12" />
-                                          <Label id="element-name" focusTraversable="false" text="The Third Ward" />
+                                          <Label id="element-title" fx:id="selectedElementTitle" focusTraversable="false" text="STOP S12" />
+                                          <Label id="element-subtitle" fx:id="selectedElementSubtitle" focusTraversable="false" text="The Third Ward" />
                                           <Line id="title-separator" endX="150.0">
                                              <VBox.margin>
                                                 <Insets top="6.0" />
@@ -104,24 +104,12 @@
                                           </Line>
                                        </children>
                                     </VBox>
-                                    <VBox id="attribute-container">
+                                    <VBox id="attribute-container" fx:id="selectedElementAttributesContainer">
                                        <children>
                                           <VBox id="attribute">
                                              <children>
                                                 <Label id="attribute-title" text="Location" />
                                                 <Label id="attribute-value" text="60.332°N, 37.534°W" />
-                                             </children>
-                                          </VBox>
-                                          <VBox id="attribute" layoutX="10.0" layoutY="155.0">
-                                             <children>
-                                                <Label id="attribute-title" text="Next Trip" />
-                                                <Label id="attribute-value" text="3:00 PM - Trip F12" />
-                                             </children>
-                                          </VBox>
-                                          <VBox id="attribute" layoutX="10.0" layoutY="20.0">
-                                             <children>
-                                                <Label id="attribute-title" text="Last Trip" />
-                                                <Label id="attribute-value" text="2:45 PM - Trip F11" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -132,15 +120,15 @@
                         </GridPane>
                      </children>
                   </VBox>
-                  <VBox styleClass="associations-panel" stylesheets="@../style/associations-panel.css" GridPane.rowIndex="2">
+                  <VBox fx:id="associationsPanel" styleClass="associations-panel" stylesheets="@../style/associations-panel.css" GridPane.rowIndex="2">
                      <children>
-                        <TabPane id="tabs" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane id="tabs" fx:id="associationsTabPane" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                               <Tab text="Routes">
                                  <content>
                                     <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
                                        <content>
-                                          <VBox id="associations-container">
+                                          <VBox id="associations-container" fx:id="associatedRoutesContainer">
                                              <children>
                                                 <VBox id="association" styleClass="tile">
                                                    <children>
@@ -150,12 +138,6 @@
                                                    <cursor>
                                                       <Cursor fx:constant="DEFAULT" />
                                                    </cursor>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Route R20" />
-                                                      <Label id="association-subtitle" text="Sebastian Town Loop" />
-                                                   </children>
                                                 </VBox>
                                              </children>
                                           </VBox>
@@ -167,29 +149,8 @@
                                  <content>
                                     <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
                                        <content>
-                                          <VBox id="associations-container">
+                                          <VBox id="associations-container" fx:id="associatedTripsContainer">
                                              <children>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Trip T6" />
-                                                      <Label id="association-subtitle" text="Intermodal Station to The Third Ward" />
-                                                   </children>
-                                                   <cursor>
-                                                      <Cursor fx:constant="DEFAULT" />
-                                                   </cursor>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Trip T1" />
-                                                      <Label id="association-subtitle" text="City Hall to Intermodal Station" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Trip T12" />
-                                                      <Label id="association-subtitle" text="Bradford Beach to Milwaukee School of Engineering" />
-                                                   </children>
-                                                </VBox>
                                                 <VBox id="association" styleClass="tile">
                                                    <children>
                                                       <Label id="association-title" text="Trip T4" />
@@ -202,46 +163,34 @@
                                     </ScrollPane>
                                  </content>
                               </Tab>
+                              <Tab text="Times">
+                                 <content>
+                                    <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
+                                       <content>
+                                          <VBox id="associations-container" fx:id="associatedStopTimesContainer">
+                                             <children>
+                                                <VBox id="association" styleClass="tile">
+                                                   <children>
+                                                      <Label id="association-title" text="Milwaukee School of Engineering" />
+                                                      <Label id="association-subtitle" text="Arrives at 4:05" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </Tab>
                               <Tab text="Stops">
                                  <content>
                                     <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
                                        <content>
-                                          <VBox id="associations-container">
+                                          <VBox id="associations-container" fx:id="associatedStopsContainer">
                                              <children>
                                                 <VBox id="association" styleClass="tile">
                                                    <children>
-                                                      <Label id="association-title" text="Stop S5" />
-                                                      <Label id="association-subtitle" text="Milwaukee School of Engineering" />
-                                                   </children>
-                                                   <cursor>
-                                                      <Cursor fx:constant="DEFAULT" />
-                                                   </cursor>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Stop S12" />
-                                                      <Label id="association-subtitle" text="The Third Ward" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Stop S14" />
-                                                      <Label id="association-subtitle" text="Bradford Beach" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Stop S15" />
-                                                      <Label id="association-subtitle" text="Intermodal Station" />
-                                                   </children>
-                                                   <cursor>
-                                                      <Cursor fx:constant="DEFAULT" />
-                                                   </cursor>
-                                                </VBox>
-                                                <VBox id="association" styleClass="tile">
-                                                   <children>
-                                                      <Label id="association-title" text="Stop S2" />
-                                                      <Label id="association-subtitle" text="City Hall" />
+                                                      <Label id="association-title" text="Trip T4" />
+                                                      <Label id="association-subtitle" text="The Third Ward to Bradford Beach" />
                                                    </children>
                                                 </VBox>
                                              </children>

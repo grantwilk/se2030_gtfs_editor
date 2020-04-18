@@ -22,13 +22,13 @@
 
 /* Element Color */
 .selected-element-panel #element-color {
--fx-background-color: #4C8BF5;
--fx-background-radius: 7 0 0 7;
+    -fx-background-color: #4C8BF5;
+    -fx-background-radius: 7 0 0 7;
 }
 
 /* Info Container */
 .selected-element-panel #element-info {
--fx-padding: 15 20 15 20;
+    -fx-padding: 15 20 15 20;
 }
 
 /* Title Container */
@@ -44,7 +44,7 @@
     -fx-padding: 0 0 -4 0;
 }
 
-.selected-element-panel #element-name {
+.selected-element-panel #element-subtitle {
     -fx-text-fill: #909090;
 }
 
