@@ -17,15 +17,16 @@ import java.util.Scanner;
 public class GTFSFile {
 
     private Feed feed;
-    private ArrayList<File> files;
+    private File tripFile;
+    private File routeFile;
+    private File stopFile;
+    private File stopTimesFile;
 
     /** Constructor for GTFSFile
      * @param files List of GTFS files to be loaded and parsed
      */
     public GTFSFile(List<File> files) throws IOException {
-        feed = new Feed("Feed1");
-        hasCorrectFiles(files);
-        this.files = (ArrayList<File>) files;
+        extractFiles(files);
     }
 
     /**
@@ -41,13 +42,26 @@ public class GTFSFile {
      */
     public void load() {
 
+        // parse the files
+        ArrayList<Stop> stops = parseStops();
+        ArrayList<Route> routes = parseRoutes();
+        ArrayList<Route> trips = parseTrips(routes);
+        ArrayList<Route> stopTimes = parseStopTimes(trips, stops);
+
+        // create a new GTFS feed with all of our GTFS elements
+        feed = new Feed("Feed1");
+        feed.setStops(stops);
+        feed.setRoutes(routes);
+        feed.setTrips(trips);
+        feed.setStopTimes(stopTimes);
+
     }
 
     /**
      *
      */
     public void save() {
-
+        throw new UnsupportedOperationException();
     }
 
     /**
