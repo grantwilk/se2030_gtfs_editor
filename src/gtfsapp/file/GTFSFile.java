@@ -25,6 +25,7 @@ public class GTFSFile {
         feed = new Feed("Feed1");
         isValid(files);
         this.files = (ArrayList<File>) files;
+        
     }
 
     /**
