@@ -29,26 +29,6 @@ public class Stop extends GTFSElement {
         super(new StopID(id));
     }
 
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     */
-    public Stop(String id, Feed feed, String name) {
-        // TODO - this constructor is not fully implemented!
-        this(id, null);
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     * @param color
-     */
-    public Stop(String id, Feed feed, String name, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id, null);
-    }
 
     /**
      *
