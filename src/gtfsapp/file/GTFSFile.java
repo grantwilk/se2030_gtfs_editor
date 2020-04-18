@@ -55,15 +55,18 @@ public class GTFSFile {
      * @throws IOException Thrown if a required file is not found
      */
     private void hasCorrectFiles(List<File> files) throws IOException {
+        // check to see if we have four files
         if(files.size() != 4) {
             throw new IllegalArgumentException("Not all files have been loaded");
         }
 
-        ArrayList<String> fileNames = new ArrayList<>();
+        // separates file names and group in an array list
+        List<String> fileNames = new ArrayList<>();
         for(int i = 0; i < 4; i++) {
             fileNames.add(files.get(i).getPath().substring(files.get(i).getPath().lastIndexOf('/')));
         }
 
+        // verify that there is one instance of each file name
         if(Collections.frequency(fileNames,"stops.txt") != 1) {
             throw new IOException("No stops.txt file was found");
         }
