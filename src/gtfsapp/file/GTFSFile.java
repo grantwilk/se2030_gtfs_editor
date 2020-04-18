@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author Michael Primeau and Grant Wilk
@@ -25,7 +26,6 @@ public class GTFSFile {
         feed = new Feed("Feed1");
         isValid(files);
         this.files = (ArrayList<File>) files;
-        
     }
 
     /**
@@ -79,6 +79,34 @@ public class GTFSFile {
         if(Collections.frequency(fileNames,"routes.txt") != 1) {
             throw new IOException("No routes.txt file was found");
         }
+    }
+
+    private void loadStopsFile() {
+        File stopFile = null;
+        for(int i = 0; i < files.size(); i++) {
+            if(files.get(i).getPath().substring(files.get(i).getPath().lastIndexOf('/')).equals("stops.txt")) {
+                stopFile = files.get(i);
+            }
+        }
+
+        try {
+            Scanner fileScanner = new Scanner(stopFile);
+            Scanner lineScanner;
+            while(fileScanner.hasNextLine()) {
+                lineScanner = new Scanner(fileScanner.nextLine());
+                lineScanner.useDelimiter(",");
+                String stopId = lineScanner.next();
+                // Ignore level_id
+                lineScanner.next();
+                String stopName = lineScanner.next();
+                Double lat = Double.parseDouble(lineScanner.next());
+                Double lon = Double.parseDouble(lineScanner.next());
+                // Ignore location type
+                lineScanner.next();
+                lineScanner.close();
+            }
+        } catch(FileNotFoundException e) { };
+
     }
 
 }
