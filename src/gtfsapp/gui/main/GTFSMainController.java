@@ -180,7 +180,7 @@ public class GTFSMainController extends GTFSController {
 
         // invoke a file chooser
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open GTFS File");
+        fileChooser.setTitle("Open GTFS File Set");
 
         // set the initial directory as the project directory
         // TODO - remove this before going live, this is just for convenience
@@ -192,6 +192,7 @@ public class GTFSMainController extends GTFSController {
         fileChooser.getExtensionFilters().add(txtFilter);
 
         // get file from the chooser
+        // TODO - implement opening a single .zip file of all GTFS files instead of selecting multiple
         List<File> files = fileChooser.showOpenMultipleDialog(new Stage());
 
         // if at least one file was selected
