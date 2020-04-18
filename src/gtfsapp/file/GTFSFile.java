@@ -2,6 +2,8 @@ package gtfsapp.file;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Michael Primeau and Grant Wilk
@@ -11,18 +13,19 @@ import java.nio.file.Path;
 public class GTFSFile {
 
     private Feed feed;
-    private File file; // TODO Maybe this should be a list of files instead of one single file
+    private ArrayList<File> files;
 
-    /**
-     * @param path
+    /** Constructor for GTFSFile
+     * @param files List of GTFS files to be loaded and parsed
      */
-    public GTFSFile(Path path) {
-
+    public GTFSFile(List<File> files) {
+        feed = new Feed("Feed1");
+        this.files = (ArrayList<File>) files;
     }
 
     /**
-     *
-     * @return
+     * Getter for Feed
+     * @return Returns Feed for GTFS Application
      */
     public Feed getFeed() {
         return feed;

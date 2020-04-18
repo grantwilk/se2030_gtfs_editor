@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Grant Wilk
@@ -184,15 +185,15 @@ public class GTFSMainController extends GTFSController {
         // TODO - do we select a .zip file containing the GTFS files or do we select multiple GTFS files?
 
         // get file from the chooser
-        File file = fileChooser.showOpenDialog(new Stage());
+        List<File> files = fileChooser.showOpenMultipleDialog(new Stage());
 
         // throw an exception if no file is found
-        if (file == null) {
+        if (files.isEmpty()) {
             throw new FileNotFoundException("File could not be found.");
         }
 
         // create the GTFS file and load its contents
-        gtfsFile = new GTFSFile(file.toPath());
+        gtfsFile = new GTFSFile(files);
         gtfsFile.load();
 
         // update associated elements
