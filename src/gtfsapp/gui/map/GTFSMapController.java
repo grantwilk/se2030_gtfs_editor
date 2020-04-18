@@ -1,7 +1,9 @@
-package gtfsapp.gui;
+package gtfsapp.gui.map;
 
 import gtfsapp.file.GTFSElement;
 import gtfsapp.file.Stop;
+import gtfsapp.gui.GTFSController;
+import gtfsapp.gui.main.GTFSMainController;
 
 import java.util.ArrayList;
 

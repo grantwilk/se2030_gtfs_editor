@@ -1,6 +1,7 @@
-package gtfsapp.gui;
+package gtfsapp.gui.dialog.edit;
 
 import gtfsapp.file.GTFSElement;
+import gtfsapp.gui.dialog.GTFSDialogController;
 
 /**
  * @author Grant Wilk

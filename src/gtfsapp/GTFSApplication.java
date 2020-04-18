@@ -1,6 +1,6 @@
 package gtfsapp;
 
-import gtfsapp.gui.GTFSMainController;
+import gtfsapp.gui.main.GTFSMainController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +34,7 @@ public class GTFSApplication extends Application {
     public void start(Stage mainStage) throws IOException {
 
         // load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/mainGUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/main/fxml/main.fxml"));
         Parent root = loader.load();
 
         // configure basic stage attributes

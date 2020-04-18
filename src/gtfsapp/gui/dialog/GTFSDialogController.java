@@ -1,5 +1,6 @@
-package gtfsapp.gui;
+package gtfsapp.gui.dialog;
 
+import gtfsapp.gui.GTFSController;
 import javafx.stage.Stage;
 
 /**

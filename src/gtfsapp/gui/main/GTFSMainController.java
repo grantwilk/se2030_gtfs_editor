@@ -1,10 +1,11 @@
-package gtfsapp.gui;
+package gtfsapp.gui.main;
 
 import gtfsapp.file.*;
+import gtfsapp.gui.GTFSController;
+import gtfsapp.gui.map.GTFSMapController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;

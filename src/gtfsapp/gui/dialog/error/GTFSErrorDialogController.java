@@ -1,4 +1,6 @@
-package gtfsapp.gui;
+package gtfsapp.gui.dialog.error;
+
+import gtfsapp.gui.dialog.GTFSDialogController;
 
 /**
  * @author Grant Wilk
