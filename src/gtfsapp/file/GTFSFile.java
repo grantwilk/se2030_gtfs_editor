@@ -65,36 +65,31 @@ public class GTFSFile {
     }
 
     /**
-     * Checks if the loaded set of files contains the correct files
-     * @throws IOException Thrown if a required file is not found
+     * Extract each of the four GTFS files from the user selected files
+     * @param files List of files to extract GTFS files from
      */
-    private void hasCorrectFiles(List<File> files) throws IOException {
-        // check to see if we have four files
-        if(files.size() != 4) {
-            throw new IllegalArgumentException("Not all files have been loaded");
+    private void extractFiles(List<File> files) throws IOException{
+        for(File f:files) {
+            String name = f.getPath().substring(f.getPath().lastIndexOf('/'));
+            if(name.equals("stops.txt") && stopFile == null) {
+                stopFile = f;
+            } else if(name.equals("routes.txt") && routeFile == null) {
+                routeFile = f;
+            } else if(name.equals("stop_times.txt") && stopTimesFile == null) {
+                stopTimesFile = f;
+            } else if(name.equals("trips.txt") && tripFile == null) {
+                tripFile = f;
+            }
         }
 
-        // separates file names and group in an array list
-        List<String> fileNames = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
-            fileNames.add(files.get(i).getPath().substring(files.get(i).getPath().lastIndexOf('/')));
-        }
-
-        // verify that there is one instance of each file name
-        if(Collections.frequency(fileNames,"stops.txt") != 1) {
+        if(stopFile == null) {
             throw new IOException("No stops.txt file was found");
-        }
-
-        if(Collections.frequency(fileNames,"trips.txt") != 1) {
-            throw new IOException("No trips.txt file was found");
-        }
-
-        if(Collections.frequency(fileNames,"stop_times.txt") != 1) {
-            throw new IOException("No stop_times.txt file was found");
-        }
-
-        if(Collections.frequency(fileNames,"routes.txt") != 1) {
+        } else if(routeFile == null) {
             throw new IOException("No routes.txt file was found");
+        }else if(stopTimesFile == null) {
+            throw new IOException("No stop_times.txt file was found");
+        } else if(tripFile == null) {
+            throw new IOException("No trips.txt file was found");
         }
     }
 
