@@ -4,6 +4,7 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 
+import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -26,7 +27,8 @@ public class Trip extends GTFSElement {
      * @param feed
      */
     public Trip(String id, Feed feed) {
-
+        // TODO - this constructor is not fully implemented!
+        super(new TripID(id));
     }
 
     /**
@@ -35,7 +37,8 @@ public class Trip extends GTFSElement {
      * @param name
      */
     public Trip(String id, Feed feed, String name) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null);
     }
 
     /**
@@ -45,7 +48,8 @@ public class Trip extends GTFSElement {
      * @param color
      */
     public Trip(String id, Feed feed, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null);
     }
 
     /**

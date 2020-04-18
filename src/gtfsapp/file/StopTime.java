@@ -2,6 +2,7 @@ package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
 
+import gtfsapp.id.StopTimeID;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class StopTime extends GTFSElement {
      * @param departureTime
      */
     public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime) {
-
+        // TODO - this constructor is not fully implemented!
+        super(new StopTimeID(id));
     }
 
     /**
@@ -42,7 +44,8 @@ public class StopTime extends GTFSElement {
      * @param name
      */
     public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, String name) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null, null, null, null, null);
     }
 
     /**
@@ -55,7 +58,8 @@ public class StopTime extends GTFSElement {
      * @param color
      */
     public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null, null, null, null, null);
     }
 
     /**
@@ -69,7 +73,8 @@ public class StopTime extends GTFSElement {
      * @param color
      */
     public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id, null, null, null, null, null);
     }
 
     /**
