@@ -21,8 +21,9 @@ public class GTFSFile {
     /** Constructor for GTFSFile
      * @param files List of GTFS files to be loaded and parsed
      */
-    public GTFSFile(List<File> files) {
+    public GTFSFile(List<File> files) throws IOException {
         feed = new Feed("Feed1");
+        isValid(files);
         this.files = (ArrayList<File>) files;
     }
 
@@ -48,6 +49,10 @@ public class GTFSFile {
 
     }
 
+    /**
+     * Checks if the loaded set of files contains the correct files
+     * @throws IOException Thrown if a required file is not found
+     */
     private void isValid(List<File> files) throws IOException {
         if(files.size() != 4) {
             throw new IllegalArgumentException("Not all files have been loaded");
@@ -73,7 +78,6 @@ public class GTFSFile {
         if(Collections.frequency(fileNames,"routes.txt") != 1) {
             throw new IOException("No routes.txt file was found");
         }
-
     }
 
 }
