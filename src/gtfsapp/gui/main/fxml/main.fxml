@@ -210,7 +210,7 @@
       <Pane style="-fx-background-color: #303030;" HBox.hgrow="ALWAYS" />
    </children>
    <stylesheets>
-      <URL value="@../style/font.css" />
-      <URL value="@../style/root.css" />
+      <URL value="@../../root/style/font.css" />
+      <URL value="@../../root/style/root.css" />
    </stylesheets>
 </HBox>
