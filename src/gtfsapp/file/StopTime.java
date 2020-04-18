@@ -19,69 +19,16 @@ public class StopTime extends GTFSElement {
     private Date departureTime;
     private Feed feed;
     private Stop stop;
-    private Trip trip;
+    private int sequence;
 
     /**
      * @param id
      * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
+     * @param sequence
      */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime) {
+    public StopTime(String id, Feed feed, int sequence) {
         // TODO - this constructor is not fully implemented!
         super(new StopTimeID(id));
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
-     * @param name
-     */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, String name) {
-        // TODO - this constructor is not fully implemented!
-        this(id, null, null, null, null, null);
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
-     * @param color
-     */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id, null, null, null, null, null);
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
-     * @param name
-     * @param color
-     */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, String name, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id, null, null, null, null, null);
-    }
-
-    /**
-     * @param stop
-     */
-    public boolean containsStop(Stop stop) {
-        return false;
     }
 
     /**

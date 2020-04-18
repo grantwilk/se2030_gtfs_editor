@@ -13,3 +13,4 @@ Class Structure Changes:
 * Migrated setWindowTitle() and getWindowTitle() from GTFSDialogController to GTFSController
 * Added multiple file support for GTFS File
 * Added HashMap of all types to feed
+* Removed unnecessary constructors from GTFS Elements
