@@ -1,13 +1,8 @@
 package gtfsapp.file;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * @author Michael Primeau and Grant Wilk
@@ -38,15 +33,26 @@ public class GTFSFile {
     }
 
     /**
-     *
+     * Parses GTFS elements from a set of GTFS files, creates a new feed, and adds the parsed elements to it
      */
-    public void load() {
+    public void load() throws IOException {
+
+        // throw an exception if any of our files are still unassigned
+        if (routeFile == null) {
+            throw new IOException("Required file \"routes.txt\" was never specified.");
+        } else if (tripFile == null) {
+            throw new IOException("Required file \"trips.txt\" was never specified.");
+        } else if (stopTimesFile == null) {
+            throw new IOException("Required file \"stop_times.txt\" was never specified.");
+        } else if (stopFile == null) {
+            throw new IOException("Required file \"stops.txt\" was never specified.");
+        }
 
         // parse the files
-        ArrayList<Stop> stops = parseStops();
-        ArrayList<Route> routes = parseRoutes();
-        ArrayList<Trip> trips = parseTrips(routes);
-        ArrayList<StopTime> stopTimes = parseStopTimes(trips, stops);
+        List<Stop> stops = parseStops();
+        List<Route> routes = parseRoutes();
+        List<Trip> trips = parseTrips(routes);
+        List<StopTime> stopTimes = parseStopTimes(trips, stops);
 
         // create a new GTFS feed with all of our GTFS elements
         feed = new Feed("Feed1");
@@ -65,7 +71,7 @@ public class GTFSFile {
     }
 
     /**
-     * Extracts the four required GTFS files from a list of files and assigns them to the classes file attributes
+     * Extracts the four required GTFS files from a list of files and assigns them to the GTFS File's file attributes
      * @param files - a list of files
      */
     private void extractFiles(List<File> files) throws IOException {
@@ -116,19 +122,41 @@ public class GTFSFile {
                     throw new IOException("Unrecognized file name \"" + fileName + "\".");
             }
         }
-
-        // throw an exception if any of our files are still unassigned
-        if (routeFile == null) {
-            throw new IOException("No file \"routes.txt\" was specified.");
-        } else if (tripFile == null) {
-            throw new IOException("No file \"trips.txt\" was specified.");
-        } else if (stopTimesFile == null) {
-            throw new IOException("No file \"stop_times.txt\" was specified.");
-        } else if (stopFile == null) {
-            throw new IOException("No file \"stops.txt\" was specified.");
-        }
-
     }
 
+    /**
+     * Parses routes from the GTFS routes file and returns them as a list
+     * @return the parsed routes as a list
+     */
+    private List<Route> parseRoutes() {
+        return null;
+    }
+
+    /**
+     * Parses trips from the GTFS trips file and returns them as a list
+     * @param routes - the list of routes that the trips should be linked to
+     * @return the list of trips
+     */
+    private List<Trip> parseTrips(List<Route> routes) {
+        return null;
+    }
+
+    /**
+     * Parses stop times from the GTFS stop times file and returns them as a list
+     * @param trips - the list of trips that the stop times should be linked to
+     * @param stops - the list of stops that the stop times should be linked to
+     * @return the list of stop times
+     */
+    private List<StopTime> parseStopTimes(List<Trip> trips, List<Stop> stops) {
+        return null;
+    }
+
+    /**
+     * Parses stops from the GTFS stops file adn returns them as a list
+     * @return the list of stops
+     */
+    private List<Stop> parseStops() {
+        return null;
+    }
 
 }
