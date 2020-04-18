@@ -23,34 +23,6 @@ public abstract class GTFSElement {
     }
 
     /**
-     * @param id
-     * @param color
-     */
-    public GTFSElement(GTFSID id, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id);
-    }
-
-    /**
-     * @param id
-     * @param name
-     */
-    public GTFSElement(GTFSID id, String name) {
-        // TODO - this constructor is not fully implemented!
-        this(id);
-    }
-
-    /**
-     * @param id
-     * @param name
-     * @param color
-     */
-    public GTFSElement(GTFSID id, String name, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id);
-    }
-
-    /**
      *
      * @return
      */
