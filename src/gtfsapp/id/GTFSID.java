@@ -37,6 +37,7 @@ public class GTFSID {
                 throw new IllegalArgumentException("ID already exists");
             }
         }
+        this.id = id;
         return true;
     }
 
