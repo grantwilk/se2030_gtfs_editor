@@ -1,5 +1,7 @@
 package gtfsapp.id;
 
+import java.util.Random;
+
 /**
  * @author Michael Primeau
  * @version 1.0
@@ -29,14 +31,10 @@ public class StopTimeID extends GTFSID {
      */
     public static String generateID(String prefix) {
 
-        int count = 0;
-        StopTimeID id;
+        // TODO - DONT RELY ON RANDOMS!!!
+        Random rand = new Random();
 
-        // increment count and test every ID until we are unique
-        do {
-            id = new StopTimeID(prefix + count++);
-        } while (exists(id));
+        return prefix + rand.nextInt(10000);
 
-        return id.toString();
     }
 }
