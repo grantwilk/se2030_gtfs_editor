@@ -307,8 +307,8 @@ public class GTFSMainController extends GTFSController {
     public void updateSelectedElementPanel() {
 
         // set the color
-        String colorHex = colorToHex(selectedElement.getColor());
-        selectedElementColor.setStyle("-fx-background-color: " + colorHex);
+        // String colorHex = colorToHex(selectedElement.getColor());
+        // selectedElementColor.setStyle("-fx-background-color: " + colorHex);
 
         // set the title
         if (selectedElement instanceof Route) {
@@ -322,7 +322,7 @@ public class GTFSMainController extends GTFSController {
         }
 
         // set the subtitle
-        selectedElementSubtitle.setText(selectedElement.getName());
+        // selectedElementSubtitle.setText(selectedElement.getName());
 
     }
 
