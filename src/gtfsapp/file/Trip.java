@@ -22,7 +22,6 @@ public class Trip extends GTFSElement {
     private HashMap<StopID, Stop> stops;
     private HashMap<StopTimeID, StopTime> stopTimes;
     private String headSign;
-    private String shortName;
 
     /**
      * Constructor for the trip object with an id and feed as parameters
@@ -283,19 +282,4 @@ public class Trip extends GTFSElement {
         return headSign;
     }
 
-    /**
-     *
-     * @param shortName
-     */
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getShortName() {
-        return shortName;
-    }
 }
