@@ -260,7 +260,58 @@ public class GTFSFile {
      * @return the list of stop times
      */
     private List<StopTime> parseStopTimes(List<Trip> trips, List<Stop> stops) throws IOException {
-        return null;
+
+        // get all lines from the file
+        List<String> lines = Files.readAllLines(stopTimesFile.toPath());
+
+        // remove the first line because it contains a template
+        lines.remove(0);
+
+        // create a new list of trips
+        List<StopTime> stopTimes = new ArrayList<>();
+
+        // for each line in the file
+        for (String line : lines) {
+
+            // split the line into comma separated tokens
+            List<String> tokens = tokenizeLine(line);
+
+            // extract all values
+            String trip_id = tokens.get(0);
+            String arrival_time = tokens.get(1);
+            String departure_time = tokens.get(2);
+            String stop_id = tokens.get(3);
+            String stop_sequence = tokens.get(4);
+            String stop_headsign = tokens.get(5);
+            String pickup_type = tokens.get(6);
+            String drop_off_time = tokens.get(7);
+            String shape_dist_traveled = tokens.get(8);
+
+            // get stop object
+            // TODO - get the stop object by its ID
+            Stop stop = stops.get(0);
+
+            // get stop sequence as int
+            int sequence = Integer.parseInt(stop_sequence);
+
+            // create a stop time
+            StopTime stopTime = new StopTime(feed, stop, sequence);
+
+            // set stop time headsign
+            if (!stop_headsign.isEmpty()) {
+                stopTime.setHeadSign(stop_headsign);
+            }
+
+            // add stop time to trip
+            // TODO - get route by ID and add trip to it
+
+            // add stop time to list of stop times
+            stopTimes.add(stopTime);
+
+        }
+
+        return stopTimes;
+
     }
 
     /**
