@@ -6,9 +6,8 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.Time;
+import java.util.*;
 
 /**
  * @author Michael Primeau and Grant Wilk
@@ -16,6 +15,21 @@ import java.util.List;
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class GTFSFile {
+
+    /**
+     * The number of milliseconds in a second
+     */
+    private static final int MILLIS_IN_SECOND = 1000;
+
+    /**
+     * The number of milliseconds in a minute
+     */
+    private static final int MILLIS_IN_MINUTE = 60 * MILLIS_IN_SECOND;
+
+    /**
+     * The number of milliseconds in an hour
+     */
+    private static final int MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
 
     private Feed feed;
     private File tripFile;
@@ -297,6 +311,16 @@ public class GTFSFile {
             // create a stop time
             StopTime stopTime = new StopTime(feed, stop, sequence);
 
+            // set arrival time
+            if (!arrival_time.isEmpty()) {
+                stopTime.setArrivalTime(timeStringToTime(arrival_time));
+            }
+
+            // set departure time
+            if (!departure_time.isEmpty()) {
+                stopTime.setDepartureTime(timeStringToTime(departure_time));
+            }
+
             // set stop time headsign
             if (!stop_headsign.isEmpty()) {
                 stopTime.setHeadSign(stop_headsign);
@@ -395,9 +419,9 @@ public class GTFSFile {
      */
     private Color hexToColor(String hex) {
 
-        // raise an exception if the hex color string is invalidly formatted
+        // throw an exception if the hex color string is improperly formatted
         if (!hex.matches("^[0-9a-fA-F]{6}")) {
-            throw new IllegalArgumentException("Route color is improperly formatted.");
+            throw new IllegalArgumentException("Color \"" + hex + "\" is improperly formatted.");
         }
 
         // parse colors and convert to doubles
@@ -405,6 +429,33 @@ public class GTFSFile {
         double green = Integer.parseInt(hex.substring(2, 4), 16) / 255.0;
         double blue = Integer.parseInt(hex.substring(4, 6), 16) / 255.0;
 
+        // return new color
         return new Color(red, green, blue, 1.0);
+    }
+
+    /**
+     * Converts a time string to a time object
+     * @param timeString - the time string
+     * @return a time object
+     */
+    private Time timeStringToTime(String timeString) {
+
+        // throw an exception if the time string is improperly formatted
+        if (!timeString.matches("^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}")) {
+            throw new IllegalArgumentException("Time \"" + timeString + "\" is improperly formatted.");
+        }
+
+        // parse hours, minutes, and seconds
+        Scanner timeScanner = new Scanner(timeString);
+        int hours = timeScanner.nextInt();
+        int minutes = timeScanner.nextInt();
+        int seconds = timeScanner.nextInt();
+
+        // calculate millis
+        long millis = hours * MILLIS_IN_HOUR + minutes * MILLIS_IN_MINUTE + seconds * MILLIS_IN_SECOND;
+
+        // return new time
+        return new Time(millis);
+
     }
 }
