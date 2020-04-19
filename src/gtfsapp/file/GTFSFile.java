@@ -1,6 +1,7 @@
 package gtfsapp.file;
 
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.io.IOException;
@@ -133,8 +134,61 @@ public class GTFSFile {
      * Parses routes from the GTFS routes file and returns them as a list
      * @return the parsed routes as a list
      */
-    private List<Route> parseRoutes() {
-        return null;
+    private List<Route> parseRoutes() throws IOException {
+
+        // get all lines from the file
+        List<String> lines = Files.readAllLines(routeFile.toPath());
+
+        // remove the first line because it contains a template
+        lines.remove(0);
+
+        // create a new list of routes
+        List<Route> routes = new ArrayList<>();
+
+        // for each line in the file
+        for (String line : lines) {
+
+            // split the line into comma separated tokens
+            List<String> tokens = tokenizeLine(line);
+
+            // extract all values
+            String route_id = tokens.get(0);
+            String agency_id = tokens.get(1);
+            String route_short_name = tokens.get(2);
+            String route_long_name = tokens.get(3);
+            String route_desc = tokens.get(4);
+            String route_type = tokens.get(5);
+            String route_url = tokens.get(6);
+            String route_color = tokens.get(7);
+            String route_text_color = tokens.get(8);
+
+            // get the route type from the enum
+            RouteType routeType = RouteType.values()[Integer.parseInt(route_type)];
+
+            // create a new stop
+            Route route = new Route(feed, route_id, routeType);
+
+            // set stop name to short name if not empty
+            if (!route_short_name.isEmpty()) {
+                route.setName(route_short_name);
+            }
+
+            // set stop name to long name if not empty (prioritizes long name)
+            if (!route_long_name.isEmpty()) {
+                route.setName(route_long_name);
+            }
+
+            // set the routes color if not empty
+            if (!route_color.isEmpty()) {
+                route.setColor(hexToColor(route_color));
+            }
+
+            // add our stops to the stops list
+            routes.add(route);
+
+        }
+
+        return routes;
     }
 
     /**
@@ -177,19 +231,17 @@ public class GTFSFile {
             // split the line into comma separated tokens
             List<String> tokens = tokenizeLine(line);
 
-            // extract the required values
+            // extract all values
             String stop_id = tokens.get(0);
             String stop_name = tokens.get(1);
+            String stop_desc = tokens.get(2);
             String stop_lat = tokens.get(3);
             String stop_lon = tokens.get(4);
-
-            // other values (can be implemented if we'd like)
-            // String stop_desc = tokens.get(2);
-            // String zone_id = tokens.get(5);
-            // String stop_url = tokens.get(6);
+            String zone_id = tokens.get(5);
+            String stop_url = tokens.get(6);
 
             // create a new stop
-            Stop stop = new Stop(stop_id, feed);
+            Stop stop = new Stop(feed, stop_id);
 
             // set stop name if not empty
             if (!stop_name.isEmpty()) {
@@ -219,7 +271,26 @@ public class GTFSFile {
      * @return a list of string tokens
      */
     private List<String> tokenizeLine(String line)  {
-        return Arrays.asList(line.split(","));
+        return Arrays.asList(line.split(",", -1));
     }
 
+    /**
+     * Converts a hex color string to a Java FX color
+     * @param hex - the hex color string to parse
+     * @return the converted color
+     */
+    private Color hexToColor(String hex) {
+
+        // raise an exception if the hex color string is invalidly formatted
+        if (!hex.matches("^[0-9a-fA-F]{6}")) {
+            throw new IllegalArgumentException("Route color is improperly formatted.");
+        }
+
+        // parse colors and convert to doubles
+        double red = Integer.parseInt(hex.substring(0, 2), 16) / 255.0;
+        double green = Integer.parseInt(hex.substring(2, 4), 16) / 255.0;
+        double blue = Integer.parseInt(hex.substring(4, 6), 16) / 255.0;
+
+        return new Color(red, green, blue, 1.0);
+    }
 }
