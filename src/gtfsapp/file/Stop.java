@@ -37,33 +37,42 @@ public class Stop extends GTFSElement {
 
 
     /**
-     *
+     * Gets the active stop time
+     * Currently unsupported
      * @return
      */
+    //TODO
     public StopTime getActiveStopTime() {
-        return null;
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
-     *
-     * @return
+     * **Not fully implemented**
+     * Uses the feed the stop belongs to to get the routeIDs
+     * @return a list of the RouteIDs
      */
+    //TODO
     public ArrayList<RouteID> getContainingRouteIDs() {
-        return null;
+
+         return feed.getRouteIDs();
     }
 
     /**
-     *
-     * @return
+     *Returns the routes
+     * @return all of the routes
      */
+    //TODO
     public ArrayList<Route> getContainingRoutes() {
-        return null;
+        return feed.getRoutes();
+
     }
 
     /**
      *
      * @return
      */
+    //TODO
     public ArrayList<StopTimeID> getContainingStopTimeIDs() {
         return null;
     }
@@ -72,6 +81,7 @@ public class Stop extends GTFSElement {
      *
      * @return
      */
+    //TODO
     public ArrayList<StopTime> getContainingStopTimes() {
         return null;
     }
@@ -80,6 +90,7 @@ public class Stop extends GTFSElement {
      *
      * @return
      */
+    //TODO
     public ArrayList<TripID> getContainingTripIDs() {
         return null;
     }
@@ -88,132 +99,145 @@ public class Stop extends GTFSElement {
      *
      * @return
      */
+    //TODO
     public ArrayList<Trip> getContainingTrips() {
         return null;
     }
 
     /**
-     *
-     * @return
+     * Getter for the feed the stop belongs to
+     * @return the feed
      */
     public Feed getFeed() {
-        return null;
+        return this.feed;
     }
 
     /**
-     *
-     * @return
+     * Getter for the location of the stop
+     * @return the location
      */
     public Point2D getLocation() {
-        return null;
+        return this.location;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
+    //TODO
     public StopTime getNextStopTime() {
-        return null;
+        throw new UnsupportedOperationException();
+       //return null;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
+    //TODO
     public Trip getNextTrip() {
-        return null;
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
+    //TODO
     public StopTime getPreviousStopTime() {
-        return null;
+
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
+    //TODO
     public Trip getPreviousTrip() {
-        return null;
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
+    //TODO
     public boolean isActive() {
-        return false;
+        throw new UnsupportedOperationException();
+        //return false;
     }
 
     /**
-     * @param location
+     * Sets the location of the stop
+     * @param location the map location for the stop
      */
     public void setLocation(Point2D location) {
-
+        this.location = location;
     }
 
     /**
-     *
-     * @return
+     * Getter for the code for the stop
+     * @return the code
      */
     public String getCode() {
         return code;
     }
 
     /**
-     *
-     * @return
+     * Sets the code for the stop
+     * @return void
      */
     public void setCode(String code) {
         this.code = code;
     }
 
     /**
-     *
-     * @return
+     * Getter for the name of the stop
+     * @return name of the stop
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @return
+     * Sets the name for the stop
+     * @return void
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *
-     * @return
+     * Gets the description for the stop
+     * @return the description
      */
     public String getDesc() {
         return desc;
     }
 
     /**
-     *
-     * @return
+     * Sets the description for the stop
+     * @return void
      */
     public void setDesc(String desc) {
         this.desc = desc;
     }
 
     /**
-     *
-     * @return
+     * Getter for the url
+     * @return the url
      */
     public String getURL() {
         return url;
     }
 
     /**
-     *
-     * @return
+     * Sets the url of the stop
+     * @return void
      */
     public void setURL(String url) {
         this.url = url;
