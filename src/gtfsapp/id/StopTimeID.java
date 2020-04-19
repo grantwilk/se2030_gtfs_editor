@@ -46,7 +46,7 @@ public class StopTimeID extends GTFSID {
      * @param id - the Stop Time ID object to test
      * @return true if the Stop Time ID exists, false otherwise
      */
-    public static boolean exists(StopTimeID id) {
+       public static boolean exists(StopTimeID id) {
         return existingIDStrings.contains(id.getIDString());
     }
 
