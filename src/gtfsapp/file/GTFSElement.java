@@ -16,48 +16,94 @@ public abstract class GTFSElement {
     private String name;
 
     /**
-     * @param id
+     * Constructor for a GTFSElement that takes an id as its only parameter
+     * @param id for the element
      */
     public GTFSElement(GTFSID id) {
-        // TODO - this constructor is not fully implemented!
+
+
+        this.id = id;
+
     }
 
     /**
-     *
-     * @return
+     * Constructor for a GTFSElement that takes an id and a color as its parameters
+     * @param id for the element
+     * @param color for the element
+     */
+    public GTFSElement(GTFSID id, Color color) {
+
+        this.id = id;
+        this.color = color;
+
+    }
+
+    /**
+     * Constructor for a GTFSElement that takes an id and a name as its parameters
+     * @param id for the element
+     * @param name for the element
+     */
+    public GTFSElement(GTFSID id, String name) {
+
+        this.id = id;
+        this.name = name;
+
+    }
+
+    /**
+     * Constructor for a GTFSElement that takes an id, a name, and a color as its parameters
+     * @param id for the element
+     * @param name for the element
+     * @param color for the element
+     */
+    public GTFSElement(GTFSID id, String name, Color color) {
+
+        this.id = id;
+        this.name = name;
+        this.color = color;
+
+
+    }
+
+    /**
+     *Getter for the color of a GTFSElement
+     * @return The color of the element
      */
     public Color getColor() {
-        return null;
+        return this.color;
     }
 
     /**
-     *
-     * @return
+     *Getter for the id of a GTFSElement
+     * @return The ID of the element
      */
     public GTFSID getID() {
-        return null;
+        return this.id;
     }
 
     /**
-     *
-     * @return
+     *Getter for the name of a GTFSElement
+     * @return The name of the element
      */
     public String getName() {
-        return "";
+
+        return this.name.toString();
     }
 
     /**
-     * @param color
+     * Setter for the color of a GTFSElement
+     * @param color of the element
      */
     public void setColor(Color color) {
-
+        this.color = color;
     }
 
     /**
-     * @param name
+     * Setter for the color of a GTFSElement
+     * @param name of the element
      */
     public void setName(String name) {
-
+        this.name = name;
     }
 
 }
