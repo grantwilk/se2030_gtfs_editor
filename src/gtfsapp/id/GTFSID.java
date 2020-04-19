@@ -1,5 +1,7 @@
 package gtfsapp.id;
 
+import java.util.List;
+
 /**
  * @author Michael Primeau
  * @version 1.0
@@ -23,6 +25,26 @@ public abstract class GTFSID {
      */
     public String getIDString() {
         return id;
+    }
+
+    /**
+     * Procedurally generates a unique ID string from a prefix
+     * @param prefix - a prefix for the ID
+     * @param existingIDStrings - a list of existing ID strings
+     * @return a unique procedurally generated ID string
+     */
+    public static String generateID(String prefix, List<String> existingIDStrings) {
+
+        int count = 0;
+        String id;
+
+        // create a new ID in the format "<prefix><count>" until it is unique
+        do {
+            id = prefix + count++;
+        } while (existingIDStrings.contains(id));
+
+        return id;
+
     }
 
     /**
