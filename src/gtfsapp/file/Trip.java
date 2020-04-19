@@ -46,6 +46,7 @@ public class Trip extends GTFSElement {
 
         for(int i = 0; i < stopTimes.size(); i++){
             this.stopTimes.putAll((Map<? extends StopTimeID, ? extends StopTime>) stopTimes);
+
         }
 
     }

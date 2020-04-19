@@ -22,21 +22,25 @@ public class StopTime extends GTFSElement {
     private String headSign;
 
     /**
-     * @param feed
-     * @param stop
-     * @param sequence
+     * Constructor for StopTime object, with three parameters
+     * @param feed for the stopTime
+     * @param stop for the StopTime
+     * @param sequence of the stopTimes
      */
     public StopTime(Feed feed, Stop stop, int sequence) {
         // TODO - this constructor is not fully implemented!
         super(new StopTimeID());
+        this.feed = feed;
+        this.stop = stop;
+        this.sequence = sequence;
     }
 
     /**
-     *
-     * @return
+     *Getter for the arrival times
+     * @return the arrival times
      */
     public Time getArrivalTime() {
-        return null;
+        return arrivalTime;
     }
 
     /**
@@ -56,35 +60,36 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     *
-     * @return
+     *Getter for the departure times for the stop
+     * @return the departure time
      */
     public Time getDepartureTime() {
-        return null;
+        return this.departureTime;
     }
 
     /**
-     *
-     * @return
+     * Getter for the feed the stop is in
+     * @return the Feed object
      */
     public Feed getFeed() {
-        return null;
+        return this.feed;
     }
 
     /**
-     *
-     * @return
+     * Getter for the stop the stop time belongs to
+     * @return the stop
      */
     public Stop getStop() {
-        return null;
+        return this.stop;
     }
 
     /**
-     *
-     * @return
+     * ??Not sure about this one, but its late and imma just put it there for now??
+     * Returns the trip this stop time belongs to
+     * @return The trip
      */
     public Trip getTrip() {
-        return null;
+        return this.getTrip();
     }
 
     /**
@@ -92,41 +97,44 @@ public class StopTime extends GTFSElement {
      * @return
      */
     public boolean isActive() {
-        return false;
+        return null;
     }
 
     /**
-     * @param arrivalTime
+     * Sets the arrival time for the stop
+     * @param arrivalTime the time for the next bus to arrive
      */
     public void setArrivalTime(Time arrivalTime) {
-
+        this.arrivalTime = arrivalTime;
     }
 
     /**
-     * @param departureTime
+     * Sets the departure time for the stop
+     * @param departureTime the time for the next bus to leave
      */
     public void setDepartureTime(Time departureTime) {
-
+        this.departureTime = departureTime;
     }
 
     /**
-     * @param stop
+     * Sets the stop the stopTime belongs to
+     * @param stop The stop
      */
     public void setStop(Stop stop) {
-
+        this.stop = stop;
     }
 
     /**
-     *
-     * @param headSign
+     * Sets the headSign for the stopTime
+     * @param headSign for the stopTime in question
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;
     }
 
     /**
-     *
-     * @return
+     * Getter for the headSign for the current stopTime
+     * @return the headSign as a string
      */
     public String getHeadSign() {
         return headSign;
