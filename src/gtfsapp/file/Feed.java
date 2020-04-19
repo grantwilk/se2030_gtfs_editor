@@ -73,6 +73,9 @@ public class Feed extends GTFSElement {
      * @param trips
      */
     public void addAllTrips(List<Trip> trips){
+        for (int num:trips){
+            this.trips.put(,trips(num));
+        }
 
     }
 
@@ -81,6 +84,7 @@ public class Feed extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
+        this.routes.put(,route);
 
     }
 
@@ -188,7 +192,6 @@ public class Feed extends GTFSElement {
      */
     public ArrayList<RouteID> getRouteIDs() {
         ArrayList<RouteID> routeIDArrayList = new ArrayList;
-
         return null;
     }
 
