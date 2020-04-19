@@ -23,6 +23,7 @@ public class Route extends GTFSElement {
     private HashMap<TripID, Trip> trips;
     private String shortName;
     private String longName;
+    private String desc;
     private String url;
     private Color color;
     private Color textColor;
@@ -282,5 +283,21 @@ public class Route extends GTFSElement {
      */
     public void setURL(String url) {
         this.url = url;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
+     *
+     * @param desc
+     */
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }
