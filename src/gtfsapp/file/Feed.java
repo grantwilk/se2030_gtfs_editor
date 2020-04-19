@@ -19,7 +19,7 @@ public class Feed extends GTFSElement {
     private HashMap<TripID, Trip> trips;
     private HashMap<StopTimeID, StopTime> stopTimes;
     private HashMap<StopID, Stop> stops;
-
+    private String id;
     /**
      * @param id
      */
