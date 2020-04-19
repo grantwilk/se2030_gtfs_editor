@@ -97,7 +97,7 @@ public class StopTime extends GTFSElement {
      * @return
      */
     public boolean isActive() {
-        return null;
+        return false;
     }
 
     /**
