@@ -162,28 +162,39 @@ public class GTFSFile {
             String route_color = tokens.get(7);
             String route_text_color = tokens.get(8);
 
-            // get the route type from the enum
+            // get the route type and route color
             RouteType routeType = RouteType.values()[Integer.parseInt(route_type)];
+            Color routeColor = hexToColor(route_color);
 
-            // create a new stop
-            Route route = new Route(feed, route_id, routeType);
+            // create a new route
+            Route route = new Route(feed, route_id, routeType, routeColor);
 
-            // set stop name to short name if not empty
+            // set route name to short name
             if (!route_short_name.isEmpty()) {
-                route.setName(route_short_name);
+                route.setShortName(route_short_name);
             }
 
-            // set stop name to long name if not empty (prioritizes long name)
+            // set route name to long name
             if (!route_long_name.isEmpty()) {
-                route.setName(route_long_name);
+                route.setLongName(route_long_name);
             }
 
-            // set the routes color if not empty
-            if (!route_color.isEmpty()) {
-                route.setColor(hexToColor(route_color));
+            // set route description
+            if (!route_desc.isEmpty()) {
+                route.setDesc(route_desc);
             }
 
-            // add our stops to the stops list
+            // set route URL
+            if(!route_url.isEmpty()) {
+                route.setURL(route_url);
+            }
+
+            // set route text color
+            if (!route_text_color.isEmpty()) {
+                route.setColor(hexToColor(route_text_color));
+            }
+
+            // add our routes to the routes list
             routes.add(route);
 
         }
@@ -196,8 +207,50 @@ public class GTFSFile {
      * @param routes - the list of routes that the trips should be linked to
      * @return the list of trips
      */
-    private List<Trip> parseTrips(List<Route> routes) {
-        return null;
+    private List<Trip> parseTrips(List<Route> routes) throws IOException {
+
+        // get all lines from the file
+        List<String> lines = Files.readAllLines(tripFile.toPath());
+
+        // remove the first line because it contains a template
+        lines.remove(0);
+
+        // create a new list of trips
+        List<Trip> trips = new ArrayList<>();
+
+        // for each line in the file
+        for (String line : lines) {
+
+            // split the line into comma separated tokens
+            List<String> tokens = tokenizeLine(line);
+
+            // extract all values
+            String route_id = tokens.get(0);
+            String service_id = tokens.get(1);
+            String trip_id = tokens.get(2);
+            String trip_headsign = tokens.get(3);
+            String direction_id = tokens.get(4);
+            String block_id = tokens.get(5);
+            String shape_id = tokens.get(6);
+
+            // create a trip
+            Trip trip = new Trip(feed, trip_id);
+
+            // set trip headsign
+            if (!trip_headsign.isEmpty()) {
+                trip.setHeadSign(trip_headsign);
+            }
+
+            // add trip to route
+            // TODO - get route by ID and add trip to it
+
+            // add trip to list of trips
+            trips.add(trip);
+
+        }
+
+        return trips;
+
     }
 
     /**
@@ -206,7 +259,7 @@ public class GTFSFile {
      * @param stops - the list of stops that the stop times should be linked to
      * @return the list of stop times
      */
-    private List<StopTime> parseStopTimes(List<Trip> trips, List<Stop> stops) {
+    private List<StopTime> parseStopTimes(List<Trip> trips, List<Stop> stops) throws IOException {
         return null;
     }
 
@@ -243,9 +296,14 @@ public class GTFSFile {
             // create a new stop
             Stop stop = new Stop(feed, stop_id);
 
-            // set stop name if not empty
+            // set stop name
             if (!stop_name.isEmpty()) {
                 stop.setName(stop_name);
+            }
+
+            // set stop description
+            if (!stop_desc.isEmpty()) {
+                stop.setDesc(stop_desc);
             }
 
             // set position if we have latitude and longitude
@@ -254,6 +312,11 @@ public class GTFSFile {
                 double lon = Double.parseDouble(stop_lon);
                 Point2D location = new Point2D(lon, lat);
                 stop.setLocation(location);
+            }
+
+            // set stop url
+            if (!stop_url.isEmpty()) {
+                stop.setURL(stop_url);
             }
 
             // add our stops to the stops list
