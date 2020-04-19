@@ -1,37 +1,40 @@
 package gtfsapp.id;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
- * @author grant
+ * @author Michael Primeau
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
 public abstract class GTFSID {
 
-    private static ArrayList<GTFSID> existingIDs;
+    private static HashSet<GTFSID> existingIDs = new HashSet<>();
     private String id;
 
 
     /**
-     * @param id
+     * Constructor for GTFSID
+     * @param id String ID to be associated with this object
      */
     public GTFSID(String id) {
-
+        this.id = id;
+        existingIDs.add(this);
     }
 
     /**
-     *
+     * Check if an ID already exists in the data structure
+     * @param id ID to check for existence
      */
-    public GTFSID() {
-
+    public static boolean exists(GTFSID id) {
+        return existingIDs.contains(id);
     }
 
     /**
+     * Checks if one GTFSID is equal to another
      * @param id
      */
-    public static boolean exists(String id) {
-        return false;
+    public boolean equals(GTFSID id) {
+        return (this.id.equals(id.id) && (this.getClass().equals(id.getClass())));
     }
-
 }

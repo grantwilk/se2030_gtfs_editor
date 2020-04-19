@@ -1,0 +1,18 @@
+/**
+  * file:       font.css
+  * author:     Grant Wilk
+  * created:    April 16, 2020
+  * brief:      contains css fonts for other css files
+ */
+
+.root {
+    -fx-font-family: Roboto;
+    -fx-font-size: 14px;
+    -fx-font-fill: red;
+    -fx-focus-traversable: false;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('/font/roboto-regular.ttf');
+}

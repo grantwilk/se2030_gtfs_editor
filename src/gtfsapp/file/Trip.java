@@ -4,6 +4,7 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 
+import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author wilkg
+ * @author Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -26,26 +27,8 @@ public class Trip extends GTFSElement {
      * @param feed
      */
     public Trip(String id, Feed feed) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     */
-    public Trip(String id, Feed feed, String name) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     * @param color
-     */
-    public Trip(String id, Feed feed, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        super(new TripID(id));
     }
 
     /**

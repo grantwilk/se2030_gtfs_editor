@@ -1,0 +1,24 @@
+.associations-tile {
+    -fx-background-color: white;
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
+    -fx-cursor: hand;
+}
+
+.associations-tile #color {
+    -fx-background-color: red;
+    -fx-background-radius: 7 0 0 7;
+}
+
+.associations-tile #info-container {
+    -fx-padding: 15;
+    -fx-spacing: -1;
+}
+
+.associations-tile #title {
+    -fx-text-fill: #404040;
+}
+
+.associations-tile #subtitle {
+    -fx-text-fill: #909090;
+}

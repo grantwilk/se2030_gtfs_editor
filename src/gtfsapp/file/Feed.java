@@ -6,22 +6,25 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
- * @author grant
+ * @author Colton Rivard
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class Feed extends GTFSElement {
 
-    private FeedID id;
     private HashMap<RouteID, Route> routes;
+    private HashMap<TripID, Trip> trips;
+    private HashMap<StopTimeID, StopTime> stopTimes;
+    private HashMap<StopID, Stop> stops;
 
     /**
      * @param id
      */
     public Feed(String id) {
-
+        super(new FeedID(id));
     }
 
     /**
@@ -29,7 +32,8 @@ public class Feed extends GTFSElement {
      * @param name
      */
     public Feed(String id, String name) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id);
     }
 
     /**
@@ -38,13 +42,14 @@ public class Feed extends GTFSElement {
      * @param color
      */
     public Feed(String id, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        this(id);
     }
 
     /**
      * @param routes
      */
-    public void addAllRoutes(ArrayList<Route> routes) {
+    public void addAllRoutes(List<Route> routes) {
 
     }
 
@@ -52,6 +57,54 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public void addRoute(Route route) {
+
+    }
+
+    /**
+     *
+     * @param trips
+     */
+    public void addAllTrips(List<Trip> trips){
+
+    }
+
+    /**
+     *
+     * @param trip
+     */
+    public void addTrip(Trip trip) {
+
+    }
+
+    /**
+     *
+     * @param stopTimes
+     */
+    public void addAllStopTimes(List<StopTime> stopTimes){
+
+    }
+
+    /**
+     *
+     * @param stopTime
+     */
+    public void addStopTime(StopTime stopTime) {
+
+    }
+
+    /**
+     *
+     * @param stops
+     */
+    public void addAllStops(List<Stop> stops){
+
+    }
+
+    /**
+     *
+     * @param stop
+     */
+    public void addStops(Stop stop) {
 
     }
 

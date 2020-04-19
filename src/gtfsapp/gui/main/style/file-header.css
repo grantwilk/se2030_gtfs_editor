@@ -1,0 +1,37 @@
+/**
+  * file:       file-header.css
+  * author:     Grant Wilk
+  * created:    April 16, 2020
+  * brief:      contains styling for the GUI's file header and its subcomponents
+ */
+
+/* File Panel */
+.file-header {
+    -fx-background-color: #4C8BF5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 3);
+}
+
+.file-header #title-container {
+    -fx-padding: 0 0 0 20;
+}
+
+.file-header #app-title {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.file-header #button-container {
+    -fx-padding: 0 10 0 0;
+}
+
+.file-header #button {
+    -fx-background-radius: 20;
+    -fx-background-insets: 4;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.file-header #button:hover {
+    -fx-background-color: #5d99fc;
+}

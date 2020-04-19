@@ -1,5 +1,6 @@
 package gtfsapp.file;
 
+import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author wilkg
+ * @author Colton Rivard
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -25,26 +26,8 @@ public class Route extends GTFSElement {
      * @param feed
      */
     public Route(String id, Feed feed) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     */
-    public Route(String id, Feed feed, String name) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     * @param color
-     */
-    public Route(String id, Feed feed, String name, Color color) {
-
+        // TODO - this constructor is not fully implemented!
+        super(new RouteID(id));
     }
 
     /**

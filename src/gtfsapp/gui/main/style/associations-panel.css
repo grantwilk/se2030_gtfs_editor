@@ -1,0 +1,56 @@
+/**
+  * file:       associations-panel.css
+  * author:     Grant Wilk
+  * created:    April 16, 2020
+  * brief:      contains styling for the GUI's associations panel and its subcomponents
+ */
+
+/* Associations Panel */
+.associations-panel {
+    -fx-padding: 20 0 0 0;
+}
+
+/* Scroll Container */
+.associations-panel #scroll-container {
+
+}
+
+.associations-panel #scroll-container .viewport {
+
+}
+
+/* Associations Container */
+.associations-panel #associations-container {
+    -fx-padding: 0 5 20 20;
+    -fx-spacing: 5;
+}
+
+/* Associations Tile */
+.associations-panel #association {
+    -fx-padding: 15 20 15 20;
+    -fx-background-color: white;
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
+    -fx-cursor: hand;
+}
+
+.associations-panel #association-title {
+    -fx-text-fill: #404040;
+}
+
+.associations-panel #association-subtitle {
+    -fx-text-fill: #909090;
+}
+
+.associations-panel #association:hover {
+    -fx-background-color: #FAFAFA;
+}
+
+.associations-panel #association:pressed {
+    -fx-background-color: #4C8BF5;
+}
+
+.associations-panel #association:pressed #association-title,
+.associations-panel #association:pressed #association-subtitle {
+    -fx-text-fill: white;
+}

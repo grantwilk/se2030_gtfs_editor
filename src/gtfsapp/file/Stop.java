@@ -1,6 +1,7 @@
 package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
+import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 /**
- * @author wilkg
+ * @author Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -24,27 +25,10 @@ public class Stop extends GTFSElement {
      * @param feed
      */
     public Stop(String id, Feed feed) {
-
+        // TODO - this constructor is not fully implemented!
+        super(new StopID(id));
     }
 
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     */
-    public Stop(String id, Feed feed, String name) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param name
-     * @param color
-     */
-    public Stop(String id, Feed feed, String name, Color color) {
-
-    }
 
     /**
      *

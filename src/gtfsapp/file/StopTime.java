@@ -2,13 +2,14 @@ package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
 
+import gtfsapp.id.StopTimeID;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * @author wilkg
+ * @author Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -18,65 +19,16 @@ public class StopTime extends GTFSElement {
     private Date departureTime;
     private Feed feed;
     private Stop stop;
-    private Trip trip;
+    private int sequence;
 
     /**
      * @param id
      * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
+     * @param sequence
      */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
-     * @param name
-     */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, String name) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
-     * @param color
-     */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, Color color) {
-
-    }
-
-    /**
-     * @param id
-     * @param feed
-     * @param trip
-     * @param stop
-     * @param arrivalTime
-     * @param departureTime
-     * @param name
-     * @param color
-     */
-    public StopTime(String id, Feed feed, Trip trip, Stop stop, Date arrivalTime, Date departureTime, String name, Color color) {
-
-    }
-
-    /**
-     * @param stop
-     */
-    public boolean containsStop(Stop stop) {
-        return false;
+    public StopTime(String id, Feed feed, int sequence) {
+        // TODO - this constructor is not fully implemented!
+        super(new StopTimeID(id));
     }
 
     /**

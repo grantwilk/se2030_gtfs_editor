@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * @author grant
+ * @author Grant Wilk
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -14,40 +14,51 @@ public abstract class GTFSController {
     private Stage stage;
 
     /**
-     *
-     */
-    public GTFSController() {
-
-    }
-
-    /**
-     *
-     * @return
+     * Gets the controller's scene and returns it
+     * @return the controller's scene
      */
     public Scene getScene() {
-        return null;
+        return scene;
     }
 
     /**
-     *
-     * @return
+     * Gets the controller's stage and returns it
+     * @return the controller's stage
      */
     public Stage getStage() {
-        return null;
+        return stage;
     }
 
     /**
-     * @param scene
+     * Sets the controller's scene
+     * @param scene - the scene to set
      */
     public void setScene(Scene scene) {
-
+        this.scene = scene;
     }
 
     /**
-     * @param stage
+     * Sets the controllers stage
+     * @param stage - the stage to set
      */
     public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
+    /**
+     * Sets the title of the window
+     * @param windowTitle - the title of the window
+     */
+    public void setWindowTitle(String windowTitle) {
+        stage.setTitle(windowTitle);
+    }
+
+    /**
+     * Gets the title of the window
+     * @return the title of the window
+     */
+    public String getWindowTitle() {
+        return stage.getTitle();
     }
 
 }
