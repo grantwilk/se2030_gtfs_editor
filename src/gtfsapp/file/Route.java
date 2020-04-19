@@ -171,6 +171,7 @@ public class Route extends GTFSElement {
         return null;
     }
 
+
     public ArrayList<TripID> getTripIDs() {
         return null;
     }
@@ -284,7 +285,6 @@ public class Route extends GTFSElement {
     public void setURL(String url) {
         this.url = url;
     }
-
     /**
      *
      * @return
