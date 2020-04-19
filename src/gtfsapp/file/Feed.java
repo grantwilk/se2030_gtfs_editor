@@ -138,21 +138,33 @@ public class Feed extends GTFSElement {
      * @param id
      */
     public boolean containsStop(StopID id) {
-        return false;
+        boolean contains = false;
+        if(routes.containskey(id)){
+            contains = true
+        }
+        return contains;
     }
 
     /**
      * @param id
      */
     public boolean containsStopTime(StopTimeID id) {
-        return false;
+        boolean contains = false;
+        if(routes.containskey(id)){
+            contains = true
+        }
+        return contains;
     }
 
     /**
      * @param id
      */
     public boolean containsTrip(TripID id) {
-        return false;
+        boolean contains = false;
+        if(routes.containskey(id)){
+            contains = true
+        }
+        return contains;
     }
 
     /**
@@ -160,14 +172,14 @@ public class Feed extends GTFSElement {
      * @return
      */
     public String getName() {
-        return "";
+        return name;
     }
 
     /**
      * @param id
      */
     public Route getRouteByID(RouteID id) {
-        return null;
+        return routes.get(id);
     }
 
     /**
@@ -175,6 +187,8 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<RouteID> getRouteIDs() {
+        ArrayList<RouteID> routeIDArrayList = new ArrayList;
+
         return null;
     }
 
@@ -190,7 +204,7 @@ public class Feed extends GTFSElement {
      * @param id
      */
     public Stop getStopByID(StopID id) {
-        return null;
+        return stops.get(id);
     }
 
     /**
@@ -213,7 +227,7 @@ public class Feed extends GTFSElement {
      * @param id
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        return null;
+        return stopTimes.get(id);
     }
 
     /**
@@ -236,7 +250,7 @@ public class Feed extends GTFSElement {
      * @param id
      */
     public Trip getTripByID(TripID id) {
-        return null;
+        return trips.get(id);
     }
 
     /**
@@ -259,14 +273,15 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public Route removeRoute(Route route) {
-        return null;
+
+        return routes.remove(route.getRouteID);
     }
 
     /**
      * @param id
      */
     public Route removeRouteByID(RouteID id) {
-        return null;
+        return ;
     }
 
     /**
