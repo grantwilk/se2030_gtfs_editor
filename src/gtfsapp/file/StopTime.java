@@ -3,10 +3,9 @@ package gtfsapp.file;
 import gtfsapp.id.RouteID;
 
 import gtfsapp.id.StopTimeID;
-import javafx.scene.paint.Color;
 
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * @author Mason Schlax
@@ -15,8 +14,8 @@ import java.util.Date;
  */
 public class StopTime extends GTFSElement {
 
-    private Date arrivalTime;
-    private Date departureTime;
+    private Time arrivalTime;
+    private Time departureTime;
     private Feed feed;
     private Stop stop;
     private int sequence;
@@ -36,7 +35,7 @@ public class StopTime extends GTFSElement {
      *
      * @return
      */
-    public Date getArrivalTime() {
+    public Time getArrivalTime() {
         return null;
     }
 
@@ -60,7 +59,7 @@ public class StopTime extends GTFSElement {
      *
      * @return
      */
-    public Date getDepartureTime() {
+    public Time getDepartureTime() {
         return null;
     }
 
@@ -99,14 +98,14 @@ public class StopTime extends GTFSElement {
     /**
      * @param arrivalTime
      */
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(Time arrivalTime) {
 
     }
 
     /**
      * @param departureTime
      */
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(Time departureTime) {
 
     }
 
