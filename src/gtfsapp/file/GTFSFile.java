@@ -179,10 +179,9 @@ public class GTFSFile {
 
             // get the route type and route color
             RouteType routeType = RouteType.values()[Integer.parseInt(route_type)];
-            Color routeColor = hexToColor(route_color);
 
             // create a new route
-            Route route = new Route(feed, route_id, routeType, routeColor);
+            Route route = new Route(feed, route_id, routeType);
 
             // set route name to short name
             if (!route_short_name.isEmpty()) {
@@ -202,6 +201,11 @@ public class GTFSFile {
             // set route URL
             if(!route_url.isEmpty()) {
                 route.setURL(route_url);
+            }
+
+            // set route color
+            if (!route_color.isEmpty()) {
+                route.setColor(hexToColor(route_color));
             }
 
             // set route text color
