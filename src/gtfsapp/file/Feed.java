@@ -273,21 +273,26 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public Route removeRoute(Route route) {
-
-        return routes.remove(route.getRouteID);
+        Route removedRoute = routes.get(route.getRouteID);
+        routes.remove(route.getRouteID);
+        return removedRoute;
     }
 
     /**
      * @param id
      */
     public Route removeRouteByID(RouteID id) {
-        return ;
+        Route removedRoute = routes.get(id);
+        routes.remove(id);
+        return removedRoute;
     }
 
     /**
      *
      */
-    public void setColor() {
+    public void setColor(Color color) {
+        this.color = color;
+
 
     }
 
@@ -295,6 +300,7 @@ public class Feed extends GTFSElement {
      * @param name
      */
     public void setName(String name) {
+        this.name = name;
 
     }
 
