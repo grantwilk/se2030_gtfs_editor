@@ -23,7 +23,7 @@ public class Trip extends GTFSElement {
     private HashMap<StopTimeID, StopTime> stopTimes;
 
     /**
-     *Constructor for the trip object with an id and feed as parameters
+     * Constructor for the trip object with an id and feed as parameters
      * @param id for the trip
      * @param feed for the trip
      */
@@ -41,7 +41,7 @@ public class Trip extends GTFSElement {
     public void addAllStopTimes(ArrayList<StopTime> stopTimes) {
 
         // TODO - Mason, a really easy way to do this is to use the HashMap's built in .addAll() method!
-        // TODO - With that, you shouldn't have to use more than one line of code in this method. -Grant
+        // TODO - With that, you shouldn't have to use more than one line of code. -Grant
 
         for(int i = 0; i < stopTimes.size(); i++){
             this.stopTimes.putAll((Map<? extends StopTimeID, ? extends StopTime>) stopTimes);
@@ -57,7 +57,7 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *Clears all of the stop times from the hash map
+     * Clears all of the stop times from the hash map
      */
     public void clearStopTimes() {
         stopTimes.clear();
@@ -99,7 +99,7 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *Unsupported
+     * Unsupported
      * @return
      */
     public double getAvgSpeed() {
@@ -108,7 +108,7 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *Unsupported
+     * Unsupported
      * @return
      */
     public Point2D getBusPosition() {
@@ -257,7 +257,7 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * removes the Stop time that was previously at the id passed
+     * Removes the Stop time that was previously at the id passed
      * @param id of the stop time to be removed
      * @return the StopTimeID removed
      */
