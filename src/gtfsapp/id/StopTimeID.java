@@ -1,6 +1,6 @@
 package gtfsapp.id;
 
-import java.util.Random;
+import java.util.HashMap;
 
 /**
  * @author Michael Primeau
@@ -9,32 +9,40 @@ import java.util.Random;
  */
 public class StopTimeID extends GTFSID {
 
+    private static HashMap<String, StopTimeID> existingIDs;
+
     /**
-     * Constructor for StopTimeID
-     * @param id String id to be associated with this object
+     * Creates a Stop Time ID with a specified ID string
+     * @param id - the ID string to be associated with this object
      */
     public StopTimeID(String id) {
         super(id);
+        existingIDs.put(this.getIDString(), this);
     }
 
     /**
-     * Generates a random stop time ID
+     * Creates a Stop Time ID with a unique procedurally generated ID string
      */
     public StopTimeID() {
-        super(generateID("ST"));
+        super(generateID("ST", existingIDs.keySet()));
+        existingIDs.put(this.getIDString(), this);
     }
 
     /**
-     * Procedurally generates a unique ID string
-     * @param prefix - a prefix for the ID
-     * @return a unique ID string
+     * Checks if a Stop Time ID with a specified ID string exists
+     * @param id - the ID string to test
+     * @return true if the ID string exists, false otherwise
      */
-    public static String generateID(String prefix) {
+    public static boolean exists(String id) {
+        return existingIDs.containsKey(id);
+    }
 
-        // TODO - DONT RELY ON RANDOMS!!!
-        Random rand = new Random();
-
-        return prefix + rand.nextInt(10000);
-
+    /**
+     * Checks if a Stop Time ID object already exists
+     * @param id - the Stop Time ID object to test
+     * @return true if the Stop Time ID exists, false otherwise
+     */
+    public static boolean exists(StopTimeID id) {
+        return existingIDs.containsValue(id);
     }
 }
