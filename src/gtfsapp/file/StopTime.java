@@ -6,6 +6,7 @@ import gtfsapp.id.StopTimeID;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Mason Schlax
@@ -14,8 +15,8 @@ import java.util.ArrayList;
  */
 public class StopTime extends GTFSElement {
 
-    private Time arrivalTime;
-    private Time departureTime;
+    private Date arrivalTime;
+    private Date departureTime;
     private Feed feed;
     private Stop stop;
     private int sequence;
@@ -39,7 +40,7 @@ public class StopTime extends GTFSElement {
      *Getter for the arrival times
      * @return the arrival times
      */
-    public Time getArrivalTime() {
+    public Date getArrivalTime() {
         return arrivalTime;
     }
 
@@ -63,7 +64,7 @@ public class StopTime extends GTFSElement {
      *Getter for the departure times for the stop
      * @return the departure time
      */
-    public Time getDepartureTime() {
+    public Date getDepartureTime() {
         return this.departureTime;
     }
 
@@ -104,7 +105,7 @@ public class StopTime extends GTFSElement {
      * Sets the arrival time for the stop
      * @param arrivalTime the time for the next bus to arrive
      */
-    public void setArrivalTime(Time arrivalTime) {
+    public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -112,7 +113,7 @@ public class StopTime extends GTFSElement {
      * Sets the departure time for the stop
      * @param departureTime the time for the next bus to leave
      */
-    public void setDepartureTime(Time departureTime) {
+    public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -125,7 +126,7 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     * Sets the headSign for the stopTime
+     * Sets the headsign for the stopTime
      * @param headSign for the stopTime in question
      */
     public void setHeadSign(String headSign) {
@@ -133,10 +134,26 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     * Getter for the headSign for the current stopTime
+     * Getter for the headsign for the current stopTime
      * @return the headSign as a string
      */
     public String getHeadSign() {
         return headSign;
+    }
+
+    /**
+     * Gets the sequence of the stop
+     * @return the sequence of the stop
+     */
+    public int getSequence() {
+        return sequence;
+    }
+
+    /**
+     * Sets the sequence of the stop
+     * @param sequence - the sequence of the stop
+     */
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
     }
 }
