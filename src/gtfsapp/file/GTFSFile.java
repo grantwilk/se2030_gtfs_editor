@@ -318,12 +318,14 @@ public class GTFSFile {
 
             // set arrival time
             if (!arrival_time.isEmpty()) {
-                stopTime.setArrivalTime(timeStringToTime(arrival_time));
+                Time arrivalTime = timeStringToTime(arrival_time);
+                stopTime.setArrivalTime(arrivalTime);
             }
 
             // set departure time
             if (!departure_time.isEmpty()) {
-                stopTime.setDepartureTime(timeStringToTime(departure_time));
+                Time departureTime = timeStringToTime(departure_time);
+                stopTime.setDepartureTime(departureTime);
             }
 
             // set stop time headsign
@@ -450,8 +452,11 @@ public class GTFSFile {
             throw new IllegalArgumentException("Time \"" + timeString + "\" is improperly formatted.");
         }
 
-        // parse hours, minutes, and seconds
+        // set up scanner
         Scanner timeScanner = new Scanner(timeString);
+        timeScanner.useDelimiter(":");
+
+        // parse hours, minutes, and seconds
         int hours = timeScanner.nextInt();
         int minutes = timeScanner.nextInt();
         int seconds = timeScanner.nextInt();
