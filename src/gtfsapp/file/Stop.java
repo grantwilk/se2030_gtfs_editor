@@ -219,5 +219,23 @@ public class Stop extends GTFSElement {
         this.url = url;
     }
 
+    /**
+     * Gets the stop's title to be displayed in the GUI
+     * @return the stop's title
+     */
+    @Override
+    public String getTitle() {
+        return "Stop " + getID().getIDString();
+    }
+
+    /**
+     * Gets the stop's subtitle to be displayed in the GUI
+     * @return the stop's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return name;
+    }
+
 }
 

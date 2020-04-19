@@ -156,4 +156,23 @@ public class StopTime extends GTFSElement {
     public void setSequence(int sequence) {
         this.sequence = sequence;
     }
+
+    /**
+     * Gets the stop time's title to be displayed in the GUI
+     * @return the stop time's title
+     */
+    @Override
+    public String getTitle() {
+        return "Stop Time " + getID().getIDString();
+    }
+
+    /**
+     * Gets the stop time's subtitle to be displayed in the GUI
+     * @return the stop time's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return "Arrives at " + arrivalTime.toString();
+    }
+
 }

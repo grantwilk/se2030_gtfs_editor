@@ -286,4 +286,22 @@ public class Trip extends GTFSElement {
         return headSign;
     }
 
+    /**
+     * Gets the trip's title to be displayed in the GUI
+     * @return the trip's title
+     */
+    @Override
+    public String getTitle() {
+        return "Trip " + getID().getIDString();
+    }
+
+    /**
+     * Gets the trip's subtitle to be displayed in the GUI
+     * @return the trip's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return "PLACEHOLDER!";
+    }
+
 }

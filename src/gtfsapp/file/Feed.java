@@ -279,4 +279,22 @@ public class Feed extends GTFSElement {
 
     }
 
+    /**
+     * Gets the feed's title to be displayed in the GUI
+     * @return the feed's title
+     */
+    @Override
+    public String getTitle() {
+        return "Feed " + getID().getIDString();
+    }
+
+    /**
+     * Gets the feed's subtitle to be displayed in the GUI
+     * @return the feed's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return "PLACEHOLDER!";
+    }
+
 }
