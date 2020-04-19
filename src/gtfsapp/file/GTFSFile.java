@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.Time;
 import java.util.*;
 
 /**
@@ -69,14 +68,17 @@ public class GTFSFile {
             throw new IOException("Required GTFS file \"stops.txt\" was not found.");
         }
 
+        // create a new GTFS feed
+        // TODO - replace feed constructor with procedurally generated constructor
+        feed = new Feed("Feed1");
+
         // parse the files
         List<Stop> stops = parseStops();
         List<Route> routes = parseRoutes();
         List<Trip> trips = parseTrips(routes);
         List<StopTime> stopTimes = parseStopTimes(trips, stops);
 
-        // create a new GTFS feed with all of our GTFS elements
-        feed = new Feed("Feed1");
+        // add our GTFS elements to our feed
         feed.addAllStops(stops);
         feed.addAllRoutes(routes);
         feed.addAllTrips(trips);
@@ -318,13 +320,13 @@ public class GTFSFile {
 
             // set arrival time
             if (!arrival_time.isEmpty()) {
-                Time arrivalTime = timeStringToTime(arrival_time);
+                Date arrivalTime = timeStringToTime(arrival_time);
                 stopTime.setArrivalTime(arrivalTime);
             }
 
             // set departure time
             if (!departure_time.isEmpty()) {
-                Time departureTime = timeStringToTime(departure_time);
+                Date departureTime = timeStringToTime(departure_time);
                 stopTime.setDepartureTime(departureTime);
             }
 
@@ -445,7 +447,7 @@ public class GTFSFile {
      * @param timeString - the time string
      * @return a time object
      */
-    private Time timeStringToTime(String timeString) {
+    private Date timeStringToTime(String timeString) {
 
         // throw an exception if the time string is improperly formatted
         if (!timeString.matches("^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}")) {
@@ -464,8 +466,12 @@ public class GTFSFile {
         // calculate millis
         long millis = hours * MILLIS_IN_HOUR + minutes * MILLIS_IN_MINUTE + seconds * MILLIS_IN_SECOND;
 
-        // return new time
-        return new Time(millis);
+        // time zone offset
+        // TODO - find a better way to accommodate time zone offsets that works for other time zones
+        long timeZoneOffset = 6 * MILLIS_IN_HOUR;
+
+        // return new date using millis and time zone offset
+        return new Date(millis + timeZoneOffset);
 
     }
 }
