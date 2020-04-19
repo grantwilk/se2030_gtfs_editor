@@ -69,8 +69,7 @@ public class GTFSFile {
         }
 
         // create a new GTFS feed
-        // TODO - replace feed constructor with procedurally generated constructor
-        feed = new Feed("Feed1");
+        feed = new Feed();
 
         // parse the files
         List<Stop> stops = parseStops();

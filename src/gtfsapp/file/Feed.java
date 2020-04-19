@@ -21,10 +21,18 @@ public class Feed extends GTFSElement {
     private HashMap<StopID, Stop> stops;
 
     /**
+     * Creates a new feed with a specified ID
      * @param id
      */
     public Feed(String id) {
         super(new FeedID(id));
+    }
+
+    /**
+     * Creates a new feed with a procedurally generated ID
+     */
+    public Feed() {
+        super(new FeedID());
     }
 
     /**
