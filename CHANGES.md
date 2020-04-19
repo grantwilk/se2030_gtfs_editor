@@ -14,3 +14,4 @@ Class Structure Changes:
 * Added multiple file support for GTFS File
 * Added HashMap of all types to feed
 * Removed unnecessary constructors from GTFS Elements
+* Added additional attributes to all GTFS Elements
