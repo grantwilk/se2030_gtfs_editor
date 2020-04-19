@@ -37,16 +37,17 @@ public class GTFSFile {
     private File stopFile;
     private File stopTimesFile;
 
-    /** Constructor for GTFSFile
-     * @param files List of GTFS files to be loaded and parsed
+    /**
+     * Creates a new GTFS File
+     * @param files - a list of GTFS files to be loaded and parsed
      */
     public GTFSFile(List<File> files) throws IOException {
         extractFiles(files);
     }
 
     /**
-     * Getter for Feed
-     * @return Returns Feed for GTFS Application
+     * Gets the GTFS feed and returns it
+     * @return the GTFS feed
      */
     public Feed getFeed() {
         return feed;
@@ -84,7 +85,7 @@ public class GTFSFile {
     }
 
     /**
-     *
+     * Saves a GTFS file back to its original directory
      */
     public void save() {
         throw new UnsupportedOperationException();
