@@ -30,11 +30,16 @@ public abstract class GTFSID {
         return existingIDs.contains(id);
     }
 
-    /**
-     * Checks if one GTFSID is equal to another
-     * @param id
-     */
-    public boolean equals(GTFSID id) {
-        return (this.id.equals(id.id) && (this.getClass().equals(id.getClass())));
+    @Override
+    public boolean equals(Object obj) {
+        boolean stringMatch = id.equals(obj.toString());
+        boolean classMatch = getClass().equals(obj.getClass());
+        return stringMatch && classMatch;
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
+
 }
