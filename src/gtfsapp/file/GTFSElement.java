@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 public abstract class GTFSElement {
 
     private final GTFSID id;
-    private String name;
 
     /**
      * Constructor for a GTFSElement that takes an id as its only parameter
@@ -28,22 +27,6 @@ public abstract class GTFSElement {
      */
     public GTFSID getID() {
         return id;
-    }
-
-    /**
-     * Getter for the name of a GTFSElement
-     * @return The name of the element
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Setter for the color of a GTFSElement
-     * @param name of the element
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
 }
