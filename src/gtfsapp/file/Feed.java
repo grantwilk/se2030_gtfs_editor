@@ -20,6 +20,8 @@ public class Feed extends GTFSElement {
     private HashMap<StopTimeID, StopTime> stopTimes;
     private HashMap<StopID, Stop> stops;
     private String id;
+    private String name;
+    private Color color;
     /**
      * @param id
      */
@@ -34,6 +36,7 @@ public class Feed extends GTFSElement {
     public Feed(String id, String name) {
         // TODO - this constructor is not fully implemented!
         this(id);
+        this(name);
     }
 
     /**
@@ -44,6 +47,8 @@ public class Feed extends GTFSElement {
     public Feed(String id, String name, Color color) {
         // TODO - this constructor is not fully implemented!
         this(id);
+        this(name);
+        this(color);
     }
 
     /**
@@ -115,14 +120,18 @@ public class Feed extends GTFSElement {
      *
      */
     public void clearRoutes() {
-    this.routes.clear();
+    routes.clear();
     }
 
     /**
      * @param id
      */
     public boolean containsRoute(RouteID id) {
-        return false;
+        boolean contains = false;
+        if(routes.containskey(id)){
+            contains = true
+        }
+        return contains;
     }
 
     /**
