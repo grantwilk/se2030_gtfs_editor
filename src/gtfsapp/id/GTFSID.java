@@ -1,6 +1,6 @@
 package gtfsapp.id;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Michael Primeau
@@ -30,10 +30,10 @@ public abstract class GTFSID {
     /**
      * Procedurally generates a unique ID string from a prefix
      * @param prefix - a prefix for the ID
-     * @param existingIDStrings - a list of existing ID strings
+     * @param existingIDStrings - a set of existing unique ID strings
      * @return a unique procedurally generated ID string
      */
-    public static String generateID(String prefix, List<String> existingIDStrings) {
+    public static String generateID(String prefix, Set<String> existingIDStrings) {
 
         int count = 0;
         String id;
