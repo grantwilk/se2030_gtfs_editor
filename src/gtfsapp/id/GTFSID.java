@@ -35,15 +35,16 @@ public abstract class GTFSID {
      */
     public static String generateID(String prefix, Set<String> existingIDStrings) {
 
+        // initialize count and idString
         int count = 0;
-        String id;
+        String idString;
 
         // create a new ID in the format "<prefix><count>" until it is unique
         do {
-            id = prefix + count++;
-        } while (existingIDStrings.contains(id));
+            idString = prefix + count++;
+        } while (existingIDStrings.contains(idString));
 
-        return id;
+        return idString;
 
     }
 
