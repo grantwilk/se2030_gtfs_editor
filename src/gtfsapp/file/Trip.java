@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Mason Schlax
@@ -23,18 +24,26 @@ public class Trip extends GTFSElement {
     private HashMap<StopTimeID, StopTime> stopTimes;
 
     /**
-     * @param id
-     * @param feed
+     *Constructor for the trip object with an id and feed as parameters
+     * @param id for the trip
+     * @param feed for the trip
      */
     public Trip(String id, Feed feed) {
         // TODO - this constructor is not fully implemented!
         super(new TripID(id));
+        this.feed = feed;
     }
 
     /**
-     * @param stopTimes
+     * ???Not sure If I did this right, I really struggled with maps in Data structures
+     * Puts all of the stopTimes passed in, into the hash map stopTimes
+     * @param stopTimes to be added to the stopTimes Hashmaps
      */
     public void addAllStopTimes(ArrayList<StopTime> stopTimes) {
+
+        for(int i = 0; i < stopTimes.size(); i++){
+            this.stopTimes.putAll((Map<? extends StopTimeID, ? extends StopTime>) stopTimes);
+        }
 
     }
 
@@ -46,24 +55,29 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
+     *Clears all of the stop times from the hash map
      */
     public void clearStopTimes() {
+        stopTimes.clear();
 
     }
 
     /**
-     * @param id
+     * Searches the hash map of stops, by using a stop ID, to see if that stop
+     * is on the trip
+     * @param id of the stop
      */
     public boolean containsStop(StopID id) {
-        return false;
+        return stops.containsValue(id);
     }
 
     /**
-     * @param id
+     * Searches the hash map of stop times, by using a stopTimeID to see if that stop time
+     * is on the trip
+     * @param id of the stop time
      */
     public boolean containsStopTime(StopTimeID id) {
-        return false;
+        return stopTimes.containsKey(id);
     }
 
     /**
@@ -71,7 +85,7 @@ public class Trip extends GTFSElement {
      * @return
      */
     public Stop getActiveStop() {
-        return null;
+
     }
 
     /**
@@ -83,19 +97,21 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
+     *Unsupported
      * @return
      */
     public double getAvgSpeed() {
-        return 0;
+        throw new UnsupportedOperationException();
+        //return 0;
     }
 
     /**
-     *
+     *Unsupported
      * @return
      */
     public Point2D getBusPosition() {
-        return null;
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
@@ -194,10 +210,11 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @param id
+     * Gets the stop time of the requested stop from the ID
+     * @param id of the stop time wanted
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        return null;
+        return stopTimes.get(id);
     }
 
     /**
@@ -205,6 +222,10 @@ public class Trip extends GTFSElement {
      * @return
      */
     public ArrayList<StopTimeID> getStopTimeIDs() {
+        ArrayList<StopTimeID> stopTimeIDS;
+        for(int i = 0; i < stopTimes.size(); i++){
+
+        }
         return null;
     }
 
@@ -225,17 +246,21 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @param stopTime
+     * Removes the stop time from the stopTimes hash map
+     * @param stopTime to be removed
+     * @return the stopTime removed
      */
     public StopTime removeStopTime(StopTime stopTime) {
-        return null;
+        return stopTimes.remove(stopTime);
     }
 
     /**
-     * @param id
+     * removes the Stop time that was previously at the id passed
+     * @param id of the stop time to be removed
+     * @return the StopTimeID removed
      */
     public StopTime removeStopTimeByID(StopTimeID id) {
-        return null;
+        return stopTimes.remove(id);
     }
 
 }

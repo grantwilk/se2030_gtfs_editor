@@ -21,12 +21,14 @@ public class Stop extends GTFSElement {
     private Point2D location;
 
     /**
-     * @param id
-     * @param feed
+     * Constructor for the stop object with an id and feed as parameters
+     * @param id for the stop
+     * @param feed for the stop
      */
     public Stop(String id, Feed feed) {
         // TODO - this constructor is not fully implemented!
         super(new StopID(id));
+        this.feed = feed;
     }
 
 
