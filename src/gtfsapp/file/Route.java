@@ -176,7 +176,7 @@ public class Route extends GTFSElement {
     }
 
     public ArrayList<Trip> getTrips() {
-        return null;
+        return new ArrayList<>(trips.values());
     }
 
     public RouteType getRouteType() {
