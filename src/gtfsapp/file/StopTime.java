@@ -45,11 +45,12 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     *
+     * Not yet supported
      * @return
      */
     public ArrayList<RouteID> getContainingRouteIDs() {
-        return null;
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
