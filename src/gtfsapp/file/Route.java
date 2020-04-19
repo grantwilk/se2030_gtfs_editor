@@ -21,13 +21,20 @@ public class Route extends GTFSElement {
     private Feed feed;
     private RouteType routeType;
     private HashMap<TripID, Trip> trips;
+    private String shortName;
+    private String longName;
+    private String url;
+    private Color color;
+    private Color textColor;
 
     /**
      *
      * @param id
      * @param feed
+     * @param routeType
+     * @param color
      */
-    public Route(Feed feed, String id, RouteType routeType) {
+    public Route(Feed feed, String id, RouteType routeType, Color color) {
         // TODO - this constructor is not fully implemented!
         super(new RouteID(id));
     }
@@ -198,4 +205,83 @@ public class Route extends GTFSElement {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getShortName() {
+        return shortName;
+    }
+
+    /**
+     *
+     * @param shortName
+     */
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getLongName() {
+        return longName;
+    }
+
+    /**
+     *
+     * @param longName
+     */
+    public void setLongName(String longName) {
+        this.longName = longName;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     *
+     * @param color
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    /**
+     *
+     * @param textColor
+     */
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     *
+     * @param url
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
