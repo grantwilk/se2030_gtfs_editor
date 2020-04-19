@@ -1,9 +1,5 @@
 package gtfsapp.file;
 
-import gtfsapp.id.RouteID;
-import gtfsapp.id.StopID;
-import gtfsapp.id.StopTimeID;
-import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
