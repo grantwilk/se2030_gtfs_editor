@@ -12,7 +12,7 @@ public class StopTimeID extends GTFSID {
     /**
      * A map of existing IDs that uses ID strings for keys and ID objects for values
      */
-    private static HashMap<String, StopTimeID> existingIDs;
+    private final static HashMap<String, StopTimeID> existingIDs = new HashMap<>();
 
     /**
      * Creates a Stop Time ID with a specified ID string
