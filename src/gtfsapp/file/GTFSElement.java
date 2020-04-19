@@ -5,11 +5,7 @@ import gtfsapp.id.*;
 import javafx.scene.paint.Color;
 
 /**
-<<<<<<< HEAD
- * @author grant, Mason Schlax
-=======
  * @author Mason Schlax
->>>>>>> 9b0a89800948a073bb29640361222f6538108ded
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
