@@ -23,7 +23,6 @@ public class Stop extends GTFSElement {
     private String name;
     private String desc;
     private String url;
-    private String platformCode;
 
     /**
      * Constructor for the stop object with an id and feed as parameters
@@ -220,20 +219,5 @@ public class Stop extends GTFSElement {
         this.url = url;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getPlatformCode() {
-        return platformCode;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public void setPlatformCode(String platformCode) {
-        this.platformCode = platformCode;
-    }
 }
 
