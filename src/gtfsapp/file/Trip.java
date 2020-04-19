@@ -6,7 +6,6 @@ import gtfsapp.id.StopTimeID;
 
 import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +84,7 @@ public class Trip extends GTFSElement {
      * @return
      */
     public Stop getActiveStop() {
-
+        throw new UnsupportedOperationException();
     }
 
     /**
