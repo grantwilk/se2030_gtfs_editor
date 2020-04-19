@@ -20,6 +20,7 @@ public class StopTime extends GTFSElement {
     private Feed feed;
     private Stop stop;
     private int sequence;
+    private String headSign;
 
     /**
      * @param feed
@@ -117,4 +118,19 @@ public class StopTime extends GTFSElement {
 
     }
 
+    /**
+     *
+     * @param headSign
+     */
+    public void setHeadSign(String headSign) {
+        this.headSign = headSign;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getHeadSign() {
+        return headSign;
+    }
 }
