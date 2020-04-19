@@ -8,6 +8,7 @@ import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,6 @@ public class Trip extends GTFSElement {
      * @param feed for the trip
      */
     public Trip(Feed feed, String id) {
-        // TODO - this constructor is not fully implemented!
         super(new TripID(id));
         this.feed = feed;
     }
@@ -63,7 +63,6 @@ public class Trip extends GTFSElement {
      */
     public void clearStopTimes() {
         stopTimes.clear();
-
     }
 
     /**
@@ -226,6 +225,10 @@ public class Trip extends GTFSElement {
      * @return
      */
     public ArrayList<StopTimeID> getStopTimeIDs() {
+
+        // TODO - try calling the HashMap's .keySet() value here and converting the Set to a List.
+        // TODO - you could probably do this in one line using that method! :) - Grant
+
         ArrayList<StopTimeID> stopTimeIDS;
         for(int i = 0; i < stopTimes.size(); i++){
 
@@ -255,7 +258,7 @@ public class Trip extends GTFSElement {
      * @return the stopTime removed
      */
     public StopTime removeStopTime(StopTime stopTime) {
-        return stopTimes.remove(stopTime);
+        return stopTimes.remove((StopTimeID) stopTime.getID());
     }
 
     /**
