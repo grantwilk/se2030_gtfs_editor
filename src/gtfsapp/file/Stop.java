@@ -19,6 +19,11 @@ public class Stop extends GTFSElement {
 
     private Feed feed;
     private Point2D location;
+    private String code;
+    private String name;
+    private String desc;
+    private String url;
+    private String platformCode;
 
     /**
      * Constructor for the stop object with an id and feed as parameters
@@ -151,4 +156,84 @@ public class Stop extends GTFSElement {
 
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getURL() {
+        return url;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void setURL(String url) {
+        this.url = url;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getPlatformCode() {
+        return platformCode;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void setPlatformCode(String platformCode) {
+        this.platformCode = platformCode;
+    }
 }
+
