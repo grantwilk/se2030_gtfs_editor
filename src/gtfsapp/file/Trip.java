@@ -40,6 +40,9 @@ public class Trip extends GTFSElement {
      */
     public void addAllStopTimes(ArrayList<StopTime> stopTimes) {
 
+        // TODO - Mason, a really easy way to do this is to use the HashMap's built in .addAll() method!
+        // TODO - With that, you shouldn't have to use more than one line of code in this method. -Grant
+
         for(int i = 0; i < stopTimes.size(); i++){
             this.stopTimes.putAll((Map<? extends StopTimeID, ? extends StopTime>) stopTimes);
         }
