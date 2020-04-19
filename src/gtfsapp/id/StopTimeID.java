@@ -1,6 +1,7 @@
 package gtfsapp.id;
 
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Michael Primeau
@@ -12,7 +13,7 @@ public class StopTimeID extends GTFSID {
     /**
      * A map of existing IDs that uses ID strings for keys and ID objects for values
      */
-    private final static HashMap<String, StopTimeID> existingIDs = new HashMap<>();
+    private final static Set<String> existingIDStrings = new HashSet<>();
 
     /**
      * Creates a Stop Time ID with a specified ID string
@@ -20,15 +21,15 @@ public class StopTimeID extends GTFSID {
      */
     public StopTimeID(String id) {
         super(id);
-        existingIDs.put(this.getIDString(), this);
+        existingIDStrings.add(this.getIDString());
     }
 
     /**
      * Creates a Stop Time ID with a unique procedurally generated ID string
      */
     public StopTimeID() {
-        super(generateID("ST", existingIDs.keySet()));
-        existingIDs.put(this.getIDString(), this);
+        super(generateID("ST", existingIDStrings));
+        existingIDStrings.add(this.getIDString());
     }
 
     /**
@@ -37,7 +38,7 @@ public class StopTimeID extends GTFSID {
      * @return true if the ID string exists, false otherwise
      */
     public static boolean exists(String id) {
-        return existingIDs.containsKey(id);
+        return existingIDStrings.contains(id);
     }
 
     /**
@@ -46,6 +47,6 @@ public class StopTimeID extends GTFSID {
      * @return true if the Stop Time ID exists, false otherwise
      */
     public static boolean exists(StopTimeID id) {
-        return existingIDs.containsValue(id);
+        return existingIDStrings.contains(id.getIDString());
     }
 }
