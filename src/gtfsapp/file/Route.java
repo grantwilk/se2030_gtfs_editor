@@ -21,6 +21,8 @@ public class Route extends GTFSElement {
     private Feed feed;
     private RouteType routeType;
     private HashMap<TripID, Trip> trips;
+    private HashMap<TripID, Stop> stops;
+    private HashMap<StopTimeID, StopTime> stopTimes;
     private String shortName;
     private String longName;
     private String desc;
@@ -43,6 +45,9 @@ public class Route extends GTFSElement {
      * @param trips
      */
     public void addAllTrips(ArrayList<Trip> trips) {
+        for (int num:trips){
+            this.trips.put(,trips(num));
+        }
 
     }
 
@@ -50,10 +55,12 @@ public class Route extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
+        trips.put(,trip);
 
     }
 
     public void clearTrips() {
+        trips.clear();
 
     }
 
@@ -61,21 +68,35 @@ public class Route extends GTFSElement {
      * @param id
      */
     public boolean containsStop(StopID id) {
-        return false;
+
+        boolean contains = false;
+        if (stops.containskey(id)) {
+            contains = true
+        }
+        return contains;
     }
 
     /**
      * @param id
      */
     public boolean containsStopTime(StopTimeID id) {
-        return false;
+        boolean contains = false;
+        if(stopTimes.containskey(id)){
+            contains = true
+        }
+        return contains;
     }
 
     /**
      * @param id
      */
     public boolean containsTrip(TripID id) {
-        return false;
+        boolean contains = false;
+        if(trips.containskey(id)){
+            contains = true
+        }
+        return contains;
+
     }
 
     public Stop getActiveStop() {
@@ -196,14 +217,18 @@ public class Route extends GTFSElement {
      * @param trip
      */
     public Trip removeTrip(Trip trip) {
-        return null;
+        Route removedTrip = routes.get(trip.getTripID);
+        trips.remove(trip.getTripID);
+        return removedTrip;
     }
 
     /**
      * @param id
      */
     public Trip removeTripByID(TripID id) {
-        return null;
+        Route removedTrip = trips.get(id);
+        routes.remove(id);
+        return removedTrip;
     }
 
     /**
