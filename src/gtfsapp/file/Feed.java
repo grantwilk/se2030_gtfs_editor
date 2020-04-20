@@ -19,6 +19,9 @@ public class Feed extends GTFSElement {
     private HashMap<TripID, Trip> trips;
     private HashMap<StopTimeID, StopTime> stopTimes;
     private HashMap<StopID, Stop> stops;
+    private String name;
+    private String id;
+    private Color color;
 
     /**
      * Creates a new feed with a specified ID
@@ -41,7 +44,9 @@ public class Feed extends GTFSElement {
      */
     public Feed(String id, String name) {
         // TODO - this constructor is not fully implemented!
-        this(id);
+        this.id = id;
+        this.name = name;
+
     }
 
     /**
@@ -51,7 +56,9 @@ public class Feed extends GTFSElement {
      */
     public Feed(String id, String name, Color color) {
         // TODO - this constructor is not fully implemented!
-        this(id);
+        this.id = id;
+        this.name = name;
+        this.color = color
     }
 
     /**

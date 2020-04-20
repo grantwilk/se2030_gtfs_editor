@@ -56,7 +56,7 @@ public class Route extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
-        trips.put(,trip);
+        trips.put(trip.getID(),trip);
 
     }
 
