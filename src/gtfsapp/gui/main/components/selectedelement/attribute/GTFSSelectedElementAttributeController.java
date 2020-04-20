@@ -41,7 +41,7 @@ public class GTFSSelectedElementAttributeController {
     /**
      * Sets the name of the attribute
      *
-     * @param name - the name of the attribute
+     * @param name the name of the attribute
      */
     public void setName(String name) {
         attributeName.setText(name);

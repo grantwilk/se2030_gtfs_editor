@@ -10,21 +10,9 @@ import gtfsapp.gui.dialog.GTFSDialogController;
  */
 public class GTFSEditDialogController extends GTFSDialogController {
 
+    /**
+     * The currently selected element
+     */
     private GTFSElement selectedElement;
-
-    /**
-     * @param selectedElement
-     */
-    public GTFSEditDialogController(GTFSElement selectedElement) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @param selectedElement
-     * @param windowTitle
-     */
-    public GTFSEditDialogController(GTFSElement selectedElement, String windowTitle) {
-        throw new UnsupportedOperationException();
-    }
 
 }

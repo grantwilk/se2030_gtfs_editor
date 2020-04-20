@@ -60,7 +60,7 @@ public class GTFSAssociationsTileController {
     /**
      * Sets the tile's GTFS element
      *
-     * @param element - the element
+     * @param element the element
      */
     public void setElement(GTFSElement element) {
         this.element = element;
@@ -78,7 +78,7 @@ public class GTFSAssociationsTileController {
     /**
      * Sets the title of the tile
      *
-     * @param title - the title of the tile
+     * @param title the title of the tile
      */
     public void setTitle(String title) {
         tileTitle.setText(title);
@@ -96,7 +96,7 @@ public class GTFSAssociationsTileController {
     /**
      * Sets the subtitle of the tile
      *
-     * @param subtitle - the of of the tile
+     * @param subtitle the of of the tile
      */
     public void setSubtitle(String subtitle) {
         tileSubtitle.setText(subtitle);
@@ -114,7 +114,7 @@ public class GTFSAssociationsTileController {
     /**
      * Sets the main controller for the associations tile
      *
-     * @param mainController - the main controller
+     * @param mainController the main controller
      */
     public void setMainController(GTFSMainController mainController) {
         this.mainController = mainController;

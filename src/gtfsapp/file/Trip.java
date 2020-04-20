@@ -36,8 +36,8 @@ public class Trip extends GTFSElement {
     /**
      * Constructor for the trip object with an id and feed as parameters
      *
-     * @param idString   for the trip
-     * @param feed for the trip
+     * @param idString for the trip
+     * @param feed     for the trip
      */
     public Trip(Feed feed, String idString) {
         super(new TripID(idString));
@@ -54,6 +54,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Adds a new stopTimeID and stopTime to the hash map containting both
+     *
      * @param stopTime the stop time to be added
      */
     public void addStopTime(StopTime stopTime) {
@@ -171,6 +172,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets all of the stop IDs contained within the trip
+     *
      * @return a list of stop IDs contained within the trip
      */
     public List<StopID> getStopIDs() {
@@ -180,6 +182,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets all of the stops contained within the trip
+     *
      * @return a list of stops contained within the trip
      */
     public List<Stop> getStops() {

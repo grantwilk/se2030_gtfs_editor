@@ -40,6 +40,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a route to the feed
+     *
      * @param route the route to add
      */
     public void addRoute(Route route) {
@@ -49,28 +50,31 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of routes to the feed
+     *
      * @param routes the list of routes to add
      */
     public void addAllRoutes(List<Route> routes) {
-        for(Route route : routes){
+        for (Route route : routes) {
             this.routes.put((RouteID) route.getID(), route);
         }
     }
 
     /**
      * Adds a trip to the feed
+     *
      * @param trip the trip to add
      */
     public void addTrip(Trip trip) {
-        trips.put((TripID) trip.getID(),trip);
+        trips.put((TripID) trip.getID(), trip);
     }
 
     /**
      * Adds a list of trips to the feed
+     *
      * @param trips the list of trips to add
      */
-    public void addAllTrips(List<Trip> trips){
-        for(Trip trip : trips){
+    public void addAllTrips(List<Trip> trips) {
+        for (Trip trip : trips) {
             this.trips.put((TripID) trip.getID(), trip);
         }
 
@@ -78,6 +82,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a stop time to the feed
+     *
      * @param stopTime the stop time to add
      */
     public void addStopTime(StopTime stopTime) {
@@ -86,16 +91,18 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of stop times to the feed
+     *
      * @param stopTimes the list of stop times to add
      */
-    public void addAllStopTimes(List<StopTime> stopTimes){
-        for(StopTime stopTime : stopTimes){
+    public void addAllStopTimes(List<StopTime> stopTimes) {
+        for (StopTime stopTime : stopTimes) {
             this.stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
         }
     }
 
     /**
      * Adds a stop to the feed
+     *
      * @param stop the stop to add
      */
     public void addStops(Stop stop) {
@@ -104,10 +111,11 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of stops to the feed
+     *
      * @param stops the list of stops to add
      */
-    public void addAllStops(List<Stop> stops){
-        for(Stop stop : stops){
+    public void addAllStops(List<Stop> stops) {
+        for (Stop stop : stops) {
             this.stops.put((StopID) stop.getID(), stop);
         }
     }
@@ -121,6 +129,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a route
+     *
      * @param id the ID of the route
      */
     public boolean containsRoute(RouteID id) {
@@ -129,6 +138,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a trip
+     *
      * @param id the ID of the trip
      */
     public boolean containsTrip(TripID id) {
@@ -137,6 +147,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a stop time
+     *
      * @param id the ID of the stop time
      */
     public boolean containsStopTime(StopTimeID id) {
@@ -145,6 +156,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a stop
+     *
      * @param id the ID of the stop
      */
     public boolean containsStop(StopID id) {
@@ -153,6 +165,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a route from the feed by its ID
+     *
      * @param id the ID of the route
      * @return the route if it exists, otherwise return null
      */
@@ -162,6 +175,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a list of the route IDs within the feed
+     *
      * @return a list of route IDs within the feed
      */
     public List<RouteID> getRouteIDs() {
@@ -170,6 +184,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a list of routes within the feed
+     *
      * @return a list of routes within the feed
      */
     public List<Route> getRoutes() {
@@ -178,6 +193,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a trip from the feed by its ID
+     *
      * @param id the ID of the trip
      * @return the trip if it exists, otherwise return null
      */
@@ -187,6 +203,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a list of trip IDs within the feed
+     *
      * @return a list of trip IDs within the feed
      */
     public List<TripID> getTripIDs() {
@@ -195,6 +212,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Get a list of trips within the feed
+     *
      * @return a list of trips within the feed
      */
     public List<Trip> getTrips() {
@@ -203,6 +221,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a stop time from the feed by its ID
+     *
      * @param id the ID of the stop time
      * @return the stop time if it exists, otherwise return null
      */
@@ -213,6 +232,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a list of stop time IDs within the feed
+     *
      * @return a list of stop time IDs within the feed
      */
     public List<StopTimeID> getStopTimeIDs() {
@@ -221,6 +241,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a list of stop times within the feed
+     *
      * @return a list of stop times within the feed
      */
     public List<StopTime> getStopTimes() {
@@ -229,6 +250,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a stop within the feed by its ID
+     *
      * @param id the ID of the stop
      * @return the stop if it exists, otherwise return null
      */
@@ -238,6 +260,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets all of the stop IDs within the feed
+     *
      * @return a list of stop IDs within the feed
      */
     public List<StopID> getStopIDs() {
@@ -246,6 +269,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets all of the stops within the feed
+     *
      * @return a list of stops within the feed
      */
     public List<Stop> getStops() {
@@ -254,6 +278,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Removes a route from the feed
+     *
      * @param route the route to remove
      */
     public Route removeRoute(Route route) {
@@ -262,6 +287,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Removes a route from the feed by its ID
+     *
      * @param id the ID of the route to remove
      */
     public Route removeRouteByID(RouteID id) {
@@ -270,6 +296,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets the feed's title to be displayed in the GUI
+     *
      * @return the feed's title
      */
     @Override
@@ -279,6 +306,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets the feed's subtitle to be displayed in the GUI
+     *
      * @return the feed's subtitle
      */
     @Override
@@ -289,6 +317,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets the feed's attributes to be displayed in the GUI
+     *
      * @return a HashMap<Attribute Title, Attribute Value> of the feed's attributes
      */
     @Override

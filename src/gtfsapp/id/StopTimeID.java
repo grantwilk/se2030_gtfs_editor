@@ -17,7 +17,8 @@ public class StopTimeID extends GTFSID {
 
     /**
      * Creates a Stop Time ID with a specified ID string
-     * @param id - the ID string to be associated with this object
+     *
+     * @param id the ID string to be associated with this object
      */
     public StopTimeID(String id) {
         super(id);
@@ -34,7 +35,8 @@ public class StopTimeID extends GTFSID {
 
     /**
      * Checks if a Stop Time ID with a specified ID string exists
-     * @param id - the ID string to test
+     *
+     * @param id the ID string to test
      * @return true if the ID string exists, false otherwise
      */
     public static boolean exists(String id) {
@@ -43,10 +45,11 @@ public class StopTimeID extends GTFSID {
 
     /**
      * Checks if a Stop Time ID object already exists
-     * @param id - the Stop Time ID object to test
+     *
+     * @param id the Stop Time ID object to test
      * @return true if the Stop Time ID exists, false otherwise
      */
-       public static boolean exists(StopTimeID id) {
+    public static boolean exists(StopTimeID id) {
         return existingIDStrings.contains(id.getIDString());
     }
 

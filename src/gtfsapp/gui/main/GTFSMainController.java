@@ -54,22 +54,22 @@ public class GTFSMainController extends GTFSController {
     /**
      * List of all routes associated with the selected element
      */
-    private ArrayList<Route> associatedRoutes = new ArrayList<>();
+    private List<Route> associatedRoutes = new ArrayList<>();
 
     /**
      * List of all trips associated with the selected element
      */
-    private ArrayList<Trip> associatedTrips = new ArrayList<>();
+    private List<Trip> associatedTrips = new ArrayList<>();
 
     /**
      * List of all stops associated with the selected element
      */
-    private ArrayList<Stop> associatedStops = new ArrayList<>();
+    private List<Stop> associatedStops = new ArrayList<>();
 
     /**
      * List of all stop times associated with the selected element
      */
-    private ArrayList<StopTime> associatedStopTimes = new ArrayList<>();
+    private List<StopTime> associatedStopTimes = new ArrayList<>();
 
     /**
      * The controller's GTFS file
@@ -192,14 +192,14 @@ public class GTFSMainController extends GTFSController {
      * FXML initialization function
      */
     @FXML
-    public void initialize () {
+    public void initialize() {
         updateInfoPanel();
     }
 
     /**
      * Invokes the system's file chooser and loads a GTFS file from the computer's file system
      */
-    public void loadFile() throws FileNotFoundException {
+    public void loadFile() {
 
         // invoke a file chooser
         FileChooser fileChooser = new FileChooser();
@@ -261,9 +261,10 @@ public class GTFSMainController extends GTFSController {
 
     /**
      * Invokes an error dialog with a type, title, and message
-     * @param errorType - the type of error
-     * @param errorTitle - the error title
-     * @param errorMessage - the error message
+     *
+     * @param errorType    the type of error
+     * @param errorTitle   the error title
+     * @param errorMessage the error message
      */
     public void invokeErrorDialog(GTFSErrorType errorType, String errorTitle, String errorMessage) {
 
@@ -490,8 +491,8 @@ public class GTFSMainController extends GTFSController {
     /**
      * Converts all elements into an associations tile and places them in an associations container
      *
-     * @param elements  - the elements to add
-     * @param container - the container to place the tiles in
+     * @param elements  the elements to add
+     * @param container the container to place the tiles in
      * @throws IOException if the GUI fails to load an FXML file
      */
     public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
@@ -530,10 +531,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of routes associated with the selected element
      */
-    private ArrayList<Route> findAssociatedRoutes() {
+    private List<Route> findAssociatedRoutes() {
 
         // our new list of associations
-        ArrayList<Route> associations;
+        List<Route> associations;
 
         // if the element is a trip
         if (selectedElement instanceof Trip) {
@@ -564,10 +565,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of trips associated with the selected element
      */
-    private ArrayList<Trip> findAssociatedTrips() {
+    private List<Trip> findAssociatedTrips() {
 
         // our new list of associations
-        ArrayList<Trip> associations;
+        List<Trip> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -599,10 +600,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of stop times associated with the selected element
      */
-    private ArrayList<StopTime> findAssociatedStopTimes() {
+    private List<StopTime> findAssociatedStopTimes() {
 
         // our new list of associations
-        ArrayList<StopTime> associations;
+        List<StopTime> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -633,10 +634,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of stops associated with the selected element
      */
-    private ArrayList<Stop> findAssociatedStops() {
+    private List<Stop> findAssociatedStops() {
 
         // our new list of associations
-        ArrayList<Stop> associations;
+        List<Stop> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -668,7 +669,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated routes
      */
-    public ArrayList<Route> getAssociatedRoutes() {
+    public List<Route> getAssociatedRoutes() {
         return associatedRoutes;
     }
 
@@ -677,7 +678,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated trips
      */
-    public ArrayList<Trip> getAssociatedTrips() {
+    public List<Trip> getAssociatedTrips() {
         return associatedTrips;
     }
 
@@ -686,7 +687,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated stop times
      */
-    public ArrayList<StopTime> getAssociatedStopTimes() {
+    public List<StopTime> getAssociatedStopTimes() {
         return associatedStopTimes;
     }
 
@@ -695,7 +696,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated stops
      */
-    public ArrayList<Stop> getAssociatedStops() {
+    public List<Stop> getAssociatedStops() {
         return associatedStops;
     }
 

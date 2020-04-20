@@ -17,6 +17,7 @@ public abstract class GTFSDialogController extends GTFSController {
 
     /**
      * Gets the dialog's main controller
+     *
      * @return the dialog's main controller
      */
     public GTFSMainController getMainController() {
@@ -25,7 +26,8 @@ public abstract class GTFSDialogController extends GTFSController {
 
     /**
      * Sets the dialog's main controller
-     * @param mainController - the dialog's main controller
+     *
+     * @param mainController the dialog's main controller
      */
     public void setMainController(GTFSMainController mainController) {
         this.mainController = mainController;

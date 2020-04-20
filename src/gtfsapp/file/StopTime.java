@@ -90,20 +90,22 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     *
-     * Returns the trip this stop time belongs to
-     * @return The trip
-     */
-    public Trip getTrip() {
-        return null;
-    }
-     /**
      * Sets the arrival time for the stop
+     *
      * @param arrivalTime the time the trip arrives at the stop
      */
     public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
 
+    }
+
+    /**
+     * Returns the trip this stop time belongs to
+     *
+     * @return The trip
+     */
+    public Trip getTrip() {
+        return null;
     }
 
     /**

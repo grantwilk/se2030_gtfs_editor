@@ -22,17 +22,14 @@ public class Route extends GTFSElement {
      * The feed that contains this route
      */
     private final Feed feed;
-
-    /**
-     * The type of transportation used on the route
-     */
-    private RouteType routeType;
-
     /**
      * The trips that occur within this route
      */
     private final HashMap<TripID, Trip> trips = new HashMap<>();
-
+    /**
+     * The type of transportation used on the route
+     */
+    private RouteType routeType;
     /**
      * The short name of the route
      */

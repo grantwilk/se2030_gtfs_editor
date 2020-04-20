@@ -59,7 +59,7 @@ public class GTFSFile {
     /**
      * Creates a new GTFS File
      *
-     * @param files - a list of GTFS files to be loaded and parsed
+     * @param files a list of GTFS files to be loaded and parsed
      */
     public GTFSFile(List<File> files) throws IOException {
         // TODO - make GTFS file accept a singular ZIP file instead of multiple TXT files
@@ -119,7 +119,7 @@ public class GTFSFile {
     /**
      * Extracts the four required GTFS files from a list of files and assigns them to the GTFS File's file attributes
      *
-     * @param files - a list of files
+     * @param files a list of files
      */
     private void extractFiles(List<File> files) throws IOException {
 
@@ -251,7 +251,7 @@ public class GTFSFile {
     /**
      * Parses trips from the GTFS trips file
      *
-     * @param routes - the list of routes that the trips should be linked to
+     * @param routes the list of routes that the trips should be linked to
      * @return the list of trips
      */
     private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
@@ -304,8 +304,8 @@ public class GTFSFile {
     /**
      * Parses stop times from the GTFS stop times file
      *
-     * @param trips - the list of trips that the stop times should be linked to
-     * @param stops - the list of stops that the stop times should be linked to
+     * @param trips the list of trips that the stop times should be linked to
+     * @param stops the list of stops that the stop times should be linked to
      * @return the list of stop times
      */
     private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops) throws IOException {
@@ -447,7 +447,7 @@ public class GTFSFile {
     /**
      * Converts a hex color string to a Java FX color
      *
-     * @param hex - the hex color string to parse
+     * @param hex the hex color string to parse
      * @return the converted color
      */
     private Color hexToColor(String hex) {
@@ -469,7 +469,7 @@ public class GTFSFile {
     /**
      * Converts a time string to a time object
      *
-     * @param timeString - the time string
+     * @param timeString the time string
      * @return a time object
      */
     private Date timeStringToTime(String timeString) {
@@ -503,7 +503,7 @@ public class GTFSFile {
     /**
      * Tokenizes a line from a CSV file using ',' as a delimiter
      *
-     * @param line - the line to tokenize
+     * @param line the line to tokenize
      * @return a list of string tokens
      */
     private List<String> tokenizeLine(String line) {

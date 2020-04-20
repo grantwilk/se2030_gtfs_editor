@@ -13,6 +13,7 @@ public abstract class GTFSID {
 
     /**
      * Constructor for GTFSID
+     *
      * @param id String ID to be associated with this object
      */
     public GTFSID(String id) {
@@ -20,17 +21,10 @@ public abstract class GTFSID {
     }
 
     /**
-     * Gets the ID's ID string and returns it
-     * @return the ID's ID string
-     */
-    public String getIDString() {
-        return id;
-    }
-
-    /**
      * Procedurally generates a unique ID string from a prefix
-     * @param prefix - a prefix for the ID
-     * @param existingIDStrings - a set of existing unique ID strings
+     *
+     * @param prefix            a prefix for the ID
+     * @param existingIDStrings a set of existing unique ID strings
      * @return a unique procedurally generated ID string
      */
     public static String generateID(String prefix, Set<String> existingIDStrings) {
@@ -49,8 +43,18 @@ public abstract class GTFSID {
     }
 
     /**
+     * Gets the ID's ID string and returns it
+     *
+     * @return the ID's ID string
+     */
+    public String getIDString() {
+        return id;
+    }
+
+    /**
      * Checks if one object is equal to this object
-     * @param obj - the object to test
+     *
+     * @param obj the object to test
      * @return true if the objects are equal, false otherwise
      */
     @Override
@@ -62,6 +66,7 @@ public abstract class GTFSID {
 
     /**
      * Converts the ID into a string
+     *
      * @return the ID as a string
      */
     @Override

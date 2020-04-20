@@ -1,7 +1,9 @@
 package gtfsapp.file;
 
 /**
- * The types of transportation used for a route
+ * @author Grant Wilk
+ * @version 1.0
+ * @created 20-Apr-2020 1:20:18 PM
  */
 public enum RouteType {
     STREETCAR,
