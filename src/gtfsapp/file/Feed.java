@@ -14,22 +14,22 @@ public class Feed extends GTFSElement {
     /**
      * A map of all routes in the feed
      */
-    private HashMap<RouteID, Route> routes;
+    private final HashMap<RouteID, Route> routes = new HashMap<>();
 
     /**
      * A map of all trips in the feed
      */
-    private HashMap<TripID, Trip> trips;
+    private final HashMap<TripID, Trip> trips = new HashMap<>();
 
     /**
      * A map of all stop times in the feed
      */
-    private HashMap<StopTimeID, StopTime> stopTimes;
+    private final HashMap<StopTimeID, StopTime> stopTimes = new HashMap<>();
 
     /**
      * A map of all stops in the feed
      */
-    private HashMap<StopID, Stop> stops;
+    private final HashMap<StopID, Stop> stops = new HashMap<>();
 
     /**
      * Creates a new feed with a procedurally generated ID
