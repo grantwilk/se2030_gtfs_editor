@@ -6,6 +6,7 @@ import gtfsapp.id.StopTimeID;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Mason Schlax
@@ -14,37 +15,41 @@ import java.util.ArrayList;
  */
 public class StopTime extends GTFSElement {
 
-    private Time arrivalTime;
-    private Time departureTime;
+    private Date arrivalTime;
+    private Date departureTime;
     private Feed feed;
     private Stop stop;
     private int sequence;
     private String headSign;
 
     /**
-     * @param feed
-     * @param stop
-     * @param sequence
+     * Constructor for StopTime object, with three parameters
+     * @param feed for the stopTime
+     * @param stop for the StopTime
+     * @param sequence of the stopTimes
      */
     public StopTime(Feed feed, Stop stop, int sequence) {
-        // TODO - this constructor is not fully implemented!
         super(new StopTimeID());
+        this.feed = feed;
+        this.stop = stop;
+        this.sequence = sequence;
     }
 
     /**
-     *
-     * @return
+     *Getter for the arrival times
+     * @return the arrival times
      */
-    public Time getArrivalTime() {
-        return null;
+    public Date getArrivalTime() {
+        return arrivalTime;
     }
 
     /**
-     *
+     * Not yet supported
      * @return
      */
     public ArrayList<RouteID> getContainingRouteIDs() {
-        return null;
+        throw new UnsupportedOperationException();
+        //return null;
     }
 
     /**
@@ -56,35 +61,36 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     *
-     * @return
+     *Getter for the departure times for the stop
+     * @return the departure time
      */
-    public Time getDepartureTime() {
-        return null;
+    public Date getDepartureTime() {
+        return this.departureTime;
     }
 
     /**
-     *
-     * @return
+     * Getter for the feed the stop is in
+     * @return the Feed object
      */
     public Feed getFeed() {
-        return null;
+        return this.feed;
     }
 
     /**
-     *
-     * @return
+     * Getter for the stop the stop time belongs to
+     * @return the stop
      */
     public Stop getStop() {
-        return null;
+        return this.stop;
     }
 
     /**
-     *
-     * @return
+     * ??Not sure about this one, but its late and imma just put it there for now??
+     * Returns the trip this stop time belongs to
+     * @return The trip
      */
     public Trip getTrip() {
-        return null;
+        return this.getTrip();
     }
 
     /**
@@ -96,39 +102,77 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     * @param arrivalTime
+     * Sets the arrival time for the stop
+     * @param arrivalTime the time for the next bus to arrive
      */
-    public void setArrivalTime(Time arrivalTime) {
-
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     /**
-     * @param departureTime
+     * Sets the departure time for the stop
+     * @param departureTime the time for the next bus to leave
      */
-    public void setDepartureTime(Time departureTime) {
-
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
     }
 
     /**
-     * @param stop
+     * Sets the stop the stopTime belongs to
+     * @param stop The stop
      */
     public void setStop(Stop stop) {
-
+        this.stop = stop;
     }
 
     /**
-     *
-     * @param headSign
+     * Sets the headsign for the stopTime
+     * @param headSign for the stopTime in question
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;
     }
 
     /**
-     *
-     * @return
+     * Getter for the headsign for the current stopTime
+     * @return the headSign as a string
      */
     public String getHeadSign() {
         return headSign;
     }
+
+    /**
+     * Gets the sequence of the stop
+     * @return the sequence of the stop
+     */
+    public int getSequence() {
+        return sequence;
+    }
+
+    /**
+     * Sets the sequence of the stop
+     * @param sequence - the sequence of the stop
+     */
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    /**
+     * Gets the stop time's title to be displayed in the GUI
+     * @return the stop time's title
+     */
+    @Override
+    public String getTitle() {
+        return "Stop Time " + getID().getIDString();
+    }
+
+    /**
+     * Gets the stop time's subtitle to be displayed in the GUI
+     * @return the stop time's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return "Arrives at " + arrivalTime.toString();
+    }
+
 }

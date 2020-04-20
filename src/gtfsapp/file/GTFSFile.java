@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.Time;
 import java.util.*;
 
 /**
@@ -69,18 +68,20 @@ public class GTFSFile {
             throw new IOException("Required GTFS file \"stops.txt\" was not found.");
         }
 
-        // parse the files
-        List<Stop> stops = parseStops();
-        List<Route> routes = parseRoutes();
-        List<Trip> trips = parseTrips(routes);
-        List<StopTime> stopTimes = parseStopTimes(trips, stops);
+        // create a new GTFS feed
+        feed = new Feed();
 
-        // create a new GTFS feed with all of our GTFS elements
-        feed = new Feed("Feed1");
-        feed.addAllStops(stops);
-        feed.addAllRoutes(routes);
-        feed.addAllTrips(trips);
-        feed.addAllStopTimes(stopTimes);
+        // parse the files (must be in this order!)
+        HashMap<String, Stop> stops = parseStops();
+        HashMap<String, Route> routes = parseRoutes();
+        HashMap<String, Trip> trips = parseTrips(routes);
+        HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops);
+
+        // add our GTFS elements to our feed
+        feed.addAllRoutes(new ArrayList<>(routes.values()));
+        feed.addAllTrips(new ArrayList<>(trips.values()));
+        feed.addAllStopTimes(new ArrayList<>(stopTimes.values()));
+        feed.addAllStops(new ArrayList<>(stops.values()));
 
     }
 
@@ -149,7 +150,7 @@ public class GTFSFile {
      * Parses routes from the GTFS routes file and returns them as a list
      * @return the parsed routes as a list
      */
-    private List<Route> parseRoutes() throws IOException {
+    private HashMap<String, Route> parseRoutes() throws IOException {
 
         // get all lines from the file
         List<String> lines = Files.readAllLines(routeFile.toPath());
@@ -158,7 +159,7 @@ public class GTFSFile {
         lines.remove(0);
 
         // create a new list of routes
-        List<Route> routes = new ArrayList<>();
+        HashMap<String, Route> routes = new HashMap<>();
 
         // for each line in the file
         for (String line : lines) {
@@ -179,10 +180,9 @@ public class GTFSFile {
 
             // get the route type and route color
             RouteType routeType = RouteType.values()[Integer.parseInt(route_type)];
-            Color routeColor = hexToColor(route_color);
 
             // create a new route
-            Route route = new Route(feed, route_id, routeType, routeColor);
+            Route route = new Route(feed, route_id, routeType);
 
             // set route name to short name
             if (!route_short_name.isEmpty()) {
@@ -204,13 +204,18 @@ public class GTFSFile {
                 route.setURL(route_url);
             }
 
+            // set route color
+            if (!route_color.isEmpty()) {
+                route.setColor(hexToColor(route_color));
+            }
+
             // set route text color
             if (!route_text_color.isEmpty()) {
                 route.setColor(hexToColor(route_text_color));
             }
 
             // add our routes to the routes list
-            routes.add(route);
+            routes.put(route_id, route);
 
         }
 
@@ -222,7 +227,7 @@ public class GTFSFile {
      * @param routes - the list of routes that the trips should be linked to
      * @return the list of trips
      */
-    private List<Trip> parseTrips(List<Route> routes) throws IOException {
+    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
 
         // get all lines from the file
         List<String> lines = Files.readAllLines(tripFile.toPath());
@@ -231,7 +236,7 @@ public class GTFSFile {
         lines.remove(0);
 
         // create a new list of trips
-        List<Trip> trips = new ArrayList<>();
+        HashMap<String, Trip> trips = new HashMap<>();
 
         // for each line in the file
         for (String line : lines) {
@@ -257,10 +262,11 @@ public class GTFSFile {
             }
 
             // add trip to route
-            // TODO - get route by ID and add trip to it
+            Route route = routes.get(route_id);
+            route.addTrip(trip);
 
             // add trip to list of trips
-            trips.add(trip);
+            trips.put(trip_id, trip);
 
         }
 
@@ -274,7 +280,7 @@ public class GTFSFile {
      * @param stops - the list of stops that the stop times should be linked to
      * @return the list of stop times
      */
-    private List<StopTime> parseStopTimes(List<Trip> trips, List<Stop> stops) throws IOException {
+    private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops) throws IOException {
 
         // get all lines from the file
         List<String> lines = Files.readAllLines(stopTimesFile.toPath());
@@ -283,7 +289,7 @@ public class GTFSFile {
         lines.remove(0);
 
         // create a new list of trips
-        List<StopTime> stopTimes = new ArrayList<>();
+        HashMap<String, StopTime> stopTimes = new HashMap<>();
 
         // for each line in the file
         for (String line : lines) {
@@ -303,8 +309,7 @@ public class GTFSFile {
             String shape_dist_traveled = tokens.get(8);
 
             // get stop object
-            // TODO - get the stop object by its ID
-            Stop stop = stops.get(0);
+            Stop stop = stops.get(stop_id);
 
             // get stop sequence as int
             int sequence = Integer.parseInt(stop_sequence);
@@ -314,12 +319,14 @@ public class GTFSFile {
 
             // set arrival time
             if (!arrival_time.isEmpty()) {
-                stopTime.setArrivalTime(timeStringToTime(arrival_time));
+                Date arrivalTime = timeStringToTime(arrival_time);
+                stopTime.setArrivalTime(arrivalTime);
             }
 
             // set departure time
             if (!departure_time.isEmpty()) {
-                stopTime.setDepartureTime(timeStringToTime(departure_time));
+                Date departureTime = timeStringToTime(departure_time);
+                stopTime.setDepartureTime(departureTime);
             }
 
             // set stop time headsign
@@ -328,10 +335,14 @@ public class GTFSFile {
             }
 
             // add stop time to trip
-            // TODO - get route by ID and add trip to it
+            Trip trip = trips.get(trip_id);
+            trip.addStopTime(stopTime);
+
+            // get stop time id string
+            String stopTimeIDString = stopTime.getID().getIDString();
 
             // add stop time to list of stop times
-            stopTimes.add(stopTime);
+            stopTimes.put(stopTimeIDString, stopTime);
 
         }
 
@@ -343,7 +354,7 @@ public class GTFSFile {
      * Parses stops from the GTFS stops file adn returns them as a list
      * @return the list of stops
      */
-    private List<Stop> parseStops() throws IOException {
+    private HashMap<String, Stop> parseStops() throws IOException {
 
         // get all lines from the file
         List<String> lines = Files.readAllLines(stopFile.toPath());
@@ -352,7 +363,7 @@ public class GTFSFile {
         lines.remove(0);
 
         // create a new list of stops
-        List<Stop> stops = new ArrayList<>();
+        HashMap<String, Stop> stops = new HashMap<>();
 
         // for each line in the file
         for (String line : lines) {
@@ -396,7 +407,7 @@ public class GTFSFile {
             }
 
             // add our stops to the stops list
-            stops.add(stop);
+            stops.put(stop_id, stop);
 
         }
 
@@ -439,15 +450,18 @@ public class GTFSFile {
      * @param timeString - the time string
      * @return a time object
      */
-    private Time timeStringToTime(String timeString) {
+    private Date timeStringToTime(String timeString) {
 
         // throw an exception if the time string is improperly formatted
         if (!timeString.matches("^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}")) {
             throw new IllegalArgumentException("Time \"" + timeString + "\" is improperly formatted.");
         }
 
-        // parse hours, minutes, and seconds
+        // set up scanner
         Scanner timeScanner = new Scanner(timeString);
+        timeScanner.useDelimiter(":");
+
+        // parse hours, minutes, and seconds
         int hours = timeScanner.nextInt();
         int minutes = timeScanner.nextInt();
         int seconds = timeScanner.nextInt();
@@ -455,8 +469,12 @@ public class GTFSFile {
         // calculate millis
         long millis = hours * MILLIS_IN_HOUR + minutes * MILLIS_IN_MINUTE + seconds * MILLIS_IN_SECOND;
 
-        // return new time
-        return new Time(millis);
+        // time zone offset
+        // TODO - find a better way to accommodate time zone offsets that works for other time zones
+        long timeZoneOffset = 6 * MILLIS_IN_HOUR;
+
+        // return new date using millis and time zone offset
+        return new Date(millis + timeZoneOffset);
 
     }
 }

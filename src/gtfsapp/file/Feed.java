@@ -23,10 +23,18 @@ public class Feed extends GTFSElement {
     private String name;
     private Color color;
     /**
+     * Creates a new feed with a specified ID
      * @param id
      */
     public Feed(String id) {
         super(new FeedID(id));
+    }
+
+    /**
+     * Creates a new feed with a procedurally generated ID
+     */
+    public Feed() {
+        super(new FeedID());
     }
 
     /**
@@ -305,6 +313,24 @@ public class Feed extends GTFSElement {
     public void setName(String name) {
         this.name = name;
 
+    }
+
+    /**
+     * Gets the feed's title to be displayed in the GUI
+     * @return the feed's title
+     */
+    @Override
+    public String getTitle() {
+        return "Feed " + getID().getIDString();
+    }
+
+    /**
+     * Gets the feed's subtitle to be displayed in the GUI
+     * @return the feed's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return "PLACEHOLDER!";
     }
 
 }

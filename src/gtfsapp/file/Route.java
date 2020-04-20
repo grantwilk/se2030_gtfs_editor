@@ -34,7 +34,7 @@ public class Route extends GTFSElement {
      * @param feed
      * @param routeType
      */
-    public Route(Feed feed, String id, RouteType routeType, Color color) {
+    public Route(Feed feed, String id, RouteType routeType) {
         // TODO - this constructor is not fully implemented!
         super(new RouteID(id));
     }
@@ -177,7 +177,7 @@ public class Route extends GTFSElement {
     }
 
     public ArrayList<Trip> getTrips() {
-        return null;
+        return new ArrayList<>(trips.values());
     }
 
     public RouteType getRouteType() {
@@ -299,5 +299,23 @@ public class Route extends GTFSElement {
      */
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    /**
+     * Gets the route's title to be displayed in the GUI
+     * @return the route's title
+     */
+    @Override
+    public String getTitle() {
+        return "Route " + getID().getIDString();
+    }
+
+    /**
+     * Gets the route's subtitle to be displayed in the GUI
+     * @return the route's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return longName;
     }
 }

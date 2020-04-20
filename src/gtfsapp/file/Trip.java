@@ -7,9 +7,8 @@ import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * @author Mason Schlax
@@ -29,7 +28,6 @@ public class Trip extends GTFSElement {
      * @param feed for the trip
      */
     public Trip(Feed feed, String id) {
-        // TODO - this constructor is not fully implemented!
         super(new TripID(id));
         this.feed = feed;
     }
@@ -46,6 +44,7 @@ public class Trip extends GTFSElement {
 
         for(int i = 0; i < stopTimes.size(); i++){
             this.stopTimes.putAll((Map<? extends StopTimeID, ? extends StopTime>) stopTimes);
+
         }
 
     }
@@ -59,10 +58,10 @@ public class Trip extends GTFSElement {
 
     /**
      * Clears all of the stop times from the hash map
+     * @reutrn void
      */
     public void clearStopTimes() {
         stopTimes.clear();
-
     }
 
     /**
@@ -84,7 +83,7 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
     public Stop getActiveStop() {
@@ -92,11 +91,11 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
     public StopTime getActiveStopTime() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -134,43 +133,43 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
-     * @return
+     * Not yet implemented
+     * @return disntace between stops
      */
     public double getDistance() {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     /**
-     *
-     * @return
+     * Not yet implemented
+     * @return time between the stops
      */
     public double getDuration() {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     /**
-     *
-     * @return
+     * Getter for the feed for the trip
+     * @return the feed the trip is in
      */
     public Feed getFeed() {
-        return null;
+        return this.feed;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
     public Stop getNextStop() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
-     *
+     * Not yet implemeted
      * @return
      */
     public StopTime getNextStopTime() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -178,7 +177,7 @@ public class Trip extends GTFSElement {
      * @return
      */
     public Stop getPreviousStop() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -186,14 +185,15 @@ public class Trip extends GTFSElement {
      * @return
      */
     public StopTime getPreviousStopTime() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
-     * @param stop
+     * Returns the stop for the given stopID on the trip
+     * @param stop StopID for the wanted stop
      */
     public Stop getStopByID(StopID stop) {
-        return null;
+        return feed.getStopByID(stop);
     }
 
     /**
@@ -201,7 +201,7 @@ public class Trip extends GTFSElement {
      * @return
      */
     public ArrayList<StopID> getStopIDs() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -221,31 +221,35 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
-     * @return
+     * Returns the StopTimeIDS for this trip
+     * @return an array list of the stopTimeIDs
      */
     public ArrayList<StopTimeID> getStopTimeIDs() {
-        ArrayList<StopTimeID> stopTimeIDS;
-        for(int i = 0; i < stopTimes.size(); i++){
 
-        }
-        return null;
+        Set<StopTimeID> stopTimeIDSet = stopTimes.keySet();
+        ArrayList<StopTimeID> stopTimeIDS = null;
+        stopTimeIDS.addAll(stopTimeIDSet);
+
+        return stopTimeIDS;
     }
 
     /**
-     *
-     * @return
+     * Gets an ArrayList of StopTimes for the trip
+     * @return the ArrayList of stopTimes
      */
     public ArrayList<StopTime> getStopTimes() {
-        return null;
+        Collection<StopTime> stopTimeSet =stopTimes.values();
+        ArrayList<StopTime> stopTimeArrayList = null;
+        stopTimeArrayList.addAll(stopTimeSet);
+        return stopTimeArrayList;
     }
 
     /**
-     *
+     * Not yet implemented
      * @return
      */
     public boolean isActive() {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -254,7 +258,7 @@ public class Trip extends GTFSElement {
      * @return the stopTime removed
      */
     public StopTime removeStopTime(StopTime stopTime) {
-        return stopTimes.remove(stopTime);
+        return stopTimes.remove((StopTimeID) stopTime.getID());
     }
 
     /**
@@ -267,19 +271,37 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     *
-     * @param headSign
+     * Setter for the headSign for the trip
+     * @param headSign the headSign to be assigned
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;
     }
 
     /**
-     *
-     * @return
+     * Getter for the headSign of the trip
+     * @return the headSign
      */
     public String getHeadSign() {
         return headSign;
+    }
+
+    /**
+     * Gets the trip's title to be displayed in the GUI
+     * @return the trip's title
+     */
+    @Override
+    public String getTitle() {
+        return "Trip " + getID().getIDString();
+    }
+
+    /**
+     * Gets the trip's subtitle to be displayed in the GUI
+     * @return the trip's subtitle
+     */
+    @Override
+    public String getSubtitle() {
+        return "PLACEHOLDER!";
     }
 
 }

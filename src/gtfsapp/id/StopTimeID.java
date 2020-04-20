@@ -1,5 +1,8 @@
 package gtfsapp.id;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author Michael Primeau
  * @version 1.0
@@ -8,35 +11,43 @@ package gtfsapp.id;
 public class StopTimeID extends GTFSID {
 
     /**
-     * Constructor for StopTimeID
-     * @param id String id to be associated with this object
+     * A map of existing IDs that uses ID strings for keys and ID objects for values
+     */
+    private final static Set<String> existingIDStrings = new HashSet<>();
+
+    /**
+     * Creates a Stop Time ID with a specified ID string
+     * @param id - the ID string to be associated with this object
      */
     public StopTimeID(String id) {
         super(id);
+        existingIDStrings.add(this.getIDString());
     }
 
     /**
-     * Generates a random stop time ID
+     * Creates a Stop Time ID with a unique procedurally generated ID string
      */
     public StopTimeID() {
-        super(generateID("ST"));
+        super(generateID("ST", existingIDStrings));
+        existingIDStrings.add(this.getIDString());
     }
 
     /**
-     * Procedurally generates a unique ID string
-     * @param prefix - a prefix for the ID
-     * @return a unique ID string
+     * Checks if a Stop Time ID with a specified ID string exists
+     * @param id - the ID string to test
+     * @return true if the ID string exists, false otherwise
      */
-    public static String generateID(String prefix) {
-
-        int count = 0;
-        StopTimeID id;
-
-        // increment count and test every ID until we are unique
-        do {
-            id = new StopTimeID(prefix + count++);
-        } while (exists(id));
-
-        return id.toString();
+    public static boolean exists(String id) {
+        return existingIDStrings.contains(id);
     }
+
+    /**
+     * Checks if a Stop Time ID object already exists
+     * @param id - the Stop Time ID object to test
+     * @return true if the Stop Time ID exists, false otherwise
+     */
+       public static boolean exists(StopTimeID id) {
+        return existingIDStrings.contains(id.getIDString());
+    }
+
 }
