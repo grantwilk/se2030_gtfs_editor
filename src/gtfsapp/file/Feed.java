@@ -124,6 +124,9 @@ public class Feed extends GTFSElement {
      * @param stops
      */
     public void addAllStops(List<Stop> stops){
+        for(int x = 0; x <= list.size(); x++){
+            this.stops.put(stops[x].getStopID, stops[x]);
+        }
 
     }
 
@@ -132,13 +135,14 @@ public class Feed extends GTFSElement {
      * @param stop
      */
     public void addStops(Stop stop) {
-
+        stops.put(stops.getStopID, stops);
     }
 
     /**
      *
      */
     public void clearRoutes() {
+        routes.clear();
 
     }
 
@@ -146,28 +150,28 @@ public class Feed extends GTFSElement {
      * @param id
      */
     public boolean containsRoute(RouteID id) {
-        return false;
+        return routes.containsKey(id);
     }
 
     /**
      * @param id
      */
     public boolean containsStop(StopID id) {
-        return false;
+        return routes.containsKey(id);
     }
 
     /**
      * @param id
      */
     public boolean containsStopTime(StopTimeID id) {
-        return false;
+        return routes.containsKey(id);
     }
 
     /**
      * @param id
      */
     public boolean containsTrip(TripID id) {
-        return false;
+        return routes.containsKey(id);
     }
 
     /**
@@ -175,14 +179,14 @@ public class Feed extends GTFSElement {
      * @return
      */
     public String getName() {
-        return "";
+        return name;
     }
 
     /**
      * @param id
      */
     public Route getRouteByID(RouteID id) {
-        return null;
+        return routes.get(id);
     }
 
     /**
@@ -190,7 +194,10 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<RouteID> getRouteIDs() {
-        return null;
+        set<Object> mySet = routes.keySet();
+        ArrayList<RouteID> routeIDArray = new ArrayList<>(mySet);
+        return routeIDArray;
+
     }
 
     /**
@@ -198,14 +205,17 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<Route> getRoutes() {
-        return null;
+        set<Object> mySet = routes.values();
+        ArrayList<Route> routeArray = new ArrayList<>(mySet);
+        return routeArray;
+
     }
 
     /**
      * @param id
      */
     public Stop getStopByID(StopID id) {
-        return null;
+        return stops.get(id)
     }
 
     /**
@@ -213,7 +223,10 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<StopID> getStopIDs() {
-        return null;
+        set<Object> mySet = stops.keySet();
+        ArrayList<StopID> stopArray = new ArrayList<>(mySet);
+        return stopArray;
+
     }
 
     /**
@@ -221,14 +234,20 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<Stop> getStops() {
-        return null;
+        set<Object> mySet = stops.values();
+        ArrayList<Stop> stopArray = new ArrayList<>(mySet);
+        return stopArray;
+
     }
 
     /**
      * @param id
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        return null;
+        set<Object> mySet = stopTimes.keySet();
+        ArrayList<StopTimeID> stopTimeArray = new ArrayList<>(mySet);
+        return stopTimeArray;
+
     }
 
     /**
@@ -236,7 +255,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<StopTimeID> getStopTimeIDs() {
-        return null;
+        set<Object> mySet = stopTimes.keySet();
+        ArrayList<StopTimeID> stopTimeArray = new ArrayList<>(mySet);
+        return stopTimeArray;
     }
 
     /**
@@ -244,14 +265,16 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<StopTime> getStopTimes() {
-        return null;
+        set<Object> mySet = stopTimes.values();
+        ArrayList<StopTimeID> stopTimeArray = new ArrayList<>(mySet);
+        return stopTimeArray;
     }
 
     /**
      * @param id
      */
     public Trip getTripByID(TripID id) {
-        return null;
+        return trips.get(id);
     }
 
     /**
@@ -259,7 +282,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<TripID> getTripIDs() {
-        return null;
+        set<Object> mySet = trips.keySet();
+        ArrayList<TripID> TripIDArray = new ArrayList<>(mySet);
+        return TripIDArrayArray;
     }
 
     /**
