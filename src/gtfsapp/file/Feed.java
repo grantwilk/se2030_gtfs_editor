@@ -208,8 +208,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<RouteID> getRouteIDs() {
-        ArrayList<RouteID> routeIDArrayList = new ArrayList;
-        return null;
+        set<Object> mySet = routes.keySet();
+        ArrayList<StopID> routesArray = new ArrayList<>(mySet);
+        return routesArray;
     }
 
     /**
