@@ -45,12 +45,30 @@ public abstract class GTFSController {
     }
 
     /**
+     * Sets the controller's scene
+     *
+     * @param scene - the scene to set
+     */
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    /**
      * Gets the controller's stage
      *
      * @return the controller's stage
      */
     public Stage getStage() {
         return stage;
+    }
+
+    /**
+     * Sets the controllers stage
+     *
+     * @param stage - the stage to set
+     */
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     /**
@@ -63,21 +81,12 @@ public abstract class GTFSController {
     }
 
     /**
-     * Sets the controller's scene
+     * Sets the title of the window
      *
-     * @param scene - the scene to set
+     * @param windowTitle - the title of the window
      */
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
-
-    /**
-     * Sets the controllers stage
-     *
-     * @param stage - the stage to set
-     */
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void setWindowTitle(String windowTitle) {
+        stage.setTitle(windowTitle);
     }
 
     /**
@@ -96,15 +105,6 @@ public abstract class GTFSController {
      */
     public void setWindowResizable(boolean isResizable) {
         stage.setResizable(isResizable);
-    }
-
-    /**
-     * Sets the title of the window
-     *
-     * @param windowTitle - the title of the window
-     */
-    public void setWindowTitle(String windowTitle) {
-        stage.setTitle(windowTitle);
     }
 
 }
