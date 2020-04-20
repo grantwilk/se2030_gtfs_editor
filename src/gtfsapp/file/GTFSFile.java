@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -30,22 +31,44 @@ public class GTFSFile {
      */
     private static final int MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
 
+    /**
+     * The internal feed
+     */
     private Feed feed;
+
+    /**
+     * The "trips.txt" file
+     */
     private File tripFile;
+
+    /**
+     * The "routes.txt" file
+     */
     private File routeFile;
+
+    /**
+     * The "stops.txt" file
+     */
     private File stopFile;
+
+    /**
+     * The "stop_times.txt" file
+     */
     private File stopTimesFile;
 
     /**
      * Creates a new GTFS File
+     *
      * @param files - a list of GTFS files to be loaded and parsed
      */
     public GTFSFile(List<File> files) throws IOException {
+        // TODO - make GTFS file accept a singular ZIP file instead of multiple TXT files
         extractFiles(files);
     }
 
     /**
      * Gets the GTFS feed and returns it
+     *
      * @return the GTFS feed
      */
     public Feed getFeed() {
@@ -86,14 +109,15 @@ public class GTFSFile {
     }
 
     /**
-     * Saves a GTFS file back to its original directory
+     * Exports a GTFS file to a specified directory
      */
-    public void save() {
+    public void save(Path path) {
         throw new UnsupportedOperationException();
     }
 
     /**
      * Extracts the four required GTFS files from a list of files and assigns them to the GTFS File's file attributes
+     *
      * @param files - a list of files
      */
     private void extractFiles(List<File> files) throws IOException {
@@ -148,6 +172,7 @@ public class GTFSFile {
 
     /**
      * Parses routes from the GTFS routes file and returns them as a list
+     *
      * @return the parsed routes as a list
      */
     private HashMap<String, Route> parseRoutes() throws IOException {
@@ -200,7 +225,7 @@ public class GTFSFile {
             }
 
             // set route URL
-            if(!route_url.isEmpty()) {
+            if (!route_url.isEmpty()) {
                 route.setURL(route_url);
             }
 
@@ -224,6 +249,7 @@ public class GTFSFile {
 
     /**
      * Parses trips from the GTFS trips file and returns them as a list
+     *
      * @param routes - the list of routes that the trips should be linked to
      * @return the list of trips
      */
@@ -276,6 +302,7 @@ public class GTFSFile {
 
     /**
      * Parses stop times from the GTFS stop times file and returns them as a list
+     *
      * @param trips - the list of trips that the stop times should be linked to
      * @param stops - the list of stops that the stop times should be linked to
      * @return the list of stop times
@@ -352,6 +379,7 @@ public class GTFSFile {
 
     /**
      * Parses stops from the GTFS stops file adn returns them as a list
+     *
      * @return the list of stops
      */
     private HashMap<String, Stop> parseStops() throws IOException {
@@ -417,15 +445,17 @@ public class GTFSFile {
 
     /**
      * Tokenizes a line from a CSV file using ',' as a delimiter
+     *
      * @param line - the line to tokenize
      * @return a list of string tokens
      */
-    private List<String> tokenizeLine(String line)  {
+    private List<String> tokenizeLine(String line) {
         return Arrays.asList(line.split(",", -1));
     }
 
     /**
      * Converts a hex color string to a Java FX color
+     *
      * @param hex - the hex color string to parse
      * @return the converted color
      */
@@ -447,6 +477,7 @@ public class GTFSFile {
 
     /**
      * Converts a time string to a time object
+     *
      * @param timeString - the time string
      * @return a time object
      */
