@@ -43,8 +43,8 @@ public class Feed extends GTFSElement {
      */
     public Feed(String id, String name) {
         // TODO - this constructor is not fully implemented!
-        this(id);
-        this(name);
+        this(id) = id;
+        this(name) = name;
     }
 
     /**
@@ -54,9 +54,9 @@ public class Feed extends GTFSElement {
      */
     public Feed(String id, String name, Color color) {
         // TODO - this constructor is not fully implemented!
-        this(id);
-        this(name);
-        this(color);
+        this(id) = id;
+        this(name) = name;
+        this(color) = color ;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Feed extends GTFSElement {
      */
     public void addAllRoutes(List<Route> routes) {
         for (int num:routes){
-            this.routes.put(,routes(num));
+            this.routes.put(routes(num).getRouteID(),routes(num));
         }
 
     }
@@ -73,7 +73,7 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public void addRoute(Route route) {
-    this.routes.put(,route);
+    this.routes.put(route.getRouteID(),route);
     }
 
     /**
@@ -82,7 +82,7 @@ public class Feed extends GTFSElement {
      */
     public void addAllTrips(List<Trip> trips){
         for (int num:trips){
-            this.trips.put(,trips(num));
+            this.trips.put(trips(num).getTripID(),trips(num));
         }
 
     }
@@ -92,7 +92,7 @@ public class Feed extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
-        this.routes.put(,route);
+        this.routes.put(trip.getTripID(),trip);
 
     }
 
@@ -101,6 +101,10 @@ public class Feed extends GTFSElement {
      * @param stopTimes
      */
     public void addAllStopTimes(List<StopTime> stopTimes){
+        for (int num:stopTimes){
+            this.trips.put(stopTimes(num).StopTimeID(),stopTimes(num));
+        }
+
 
     }
 
@@ -109,6 +113,7 @@ public class Feed extends GTFSElement {
      * @param stopTime
      */
     public void addStopTime(StopTime stopTime) {
+        stopTimes.put(stopTime.getStopTimeID(),stopTime);
 
     }
 
@@ -117,6 +122,9 @@ public class Feed extends GTFSElement {
      * @param stops
      */
     public void addAllStops(List<Stop> stops){
+        for (int num:stops){
+            this.stops.put(stops(num).getStopID(),stops(num));
+        }
 
     }
 
@@ -125,6 +133,7 @@ public class Feed extends GTFSElement {
      * @param stop
      */
     public void addStops(Stop stop) {
+        stops.put(stops.getStopID(),stop);
 
     }
 
@@ -208,7 +217,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<Route> getRoutes() {
-        return null;
+        set<Object> mySet = routes.keySet();
+        ArrayList<Route> routesArray = new ArrayList<>(mySet);
+        return routesArray;
     }
 
     /**
@@ -223,7 +234,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<StopID> getStopIDs() {
-        return null;
+        set<Object> mySet = stops.keySet();
+        ArrayList<StopID> stopArray = new ArrayList<>(mySet);
+        return stopArray;
     }
 
     /**
@@ -231,7 +244,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<Stop> getStops() {
-        return null;
+        set<Object> mySet = stops.values;
+        ArrayList<Stop> stopArray = new ArrayList<>(mySet);
+        return stopArray;
     }
 
     /**
@@ -246,7 +261,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<StopTimeID> getStopTimeIDs() {
-        return null;
+        set<Object> mySet = stops.keySet();
+        ArrayList<StopID> stopArray = new ArrayList<>(mySet);
+        return stopArray;
     }
 
     /**
@@ -254,7 +271,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<StopTime> getStopTimes() {
-        return null;
+        set<Object> mySet = stopTimes.values();
+        ArrayList<StopTime> stopTimeArray = new ArrayList<>(mySet);
+        return stopTimeArray;
     }
 
     /**
@@ -269,7 +288,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<TripID> getTripIDs() {
-        return null;
+        set<Object> mySet = trips.keySet();
+        ArrayList<StopID> tripArray = new ArrayList<>(mySet);
+        return tripArray;
     }
 
     /**
@@ -277,7 +298,9 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<Trip> getTrips() {
-        return null;
+        set<Object> mySet = trips.values();
+        ArrayList<StopID> tripArray = new ArrayList<>(mySet);
+        return tripArray;
     }
 
     /**
