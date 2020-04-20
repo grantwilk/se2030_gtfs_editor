@@ -65,6 +65,9 @@ public class Feed extends GTFSElement {
      * @param routes
      */
     public void addAllRoutes(List<Route> routes) {
+        for(int x = 0; x <= list.size(); x++){
+            this.routes.put(routes[x].getRouteID, routes[x]);
+        }
 
     }
 
@@ -72,6 +75,7 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public void addRoute(Route route) {
+        routes.put(route.getRouteID(),route);
 
     }
 
