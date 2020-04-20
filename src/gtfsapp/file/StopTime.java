@@ -7,6 +7,7 @@ import gtfsapp.id.StopTimeID;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * @author Mason Schlax
@@ -172,7 +173,22 @@ public class StopTime extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "Arrives at " + arrivalTime.toString();
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
+    }
+
+    /**
+     * Gets the stop time's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the stop time's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Stop", "Lorem ipsum dolor");
+        attributes.put("Arrival Time", "Lorem ipsum dolor");
+        attributes.put("Departure Time", "Lorem ipsum dolor");
+        return attributes;
     }
 
 }

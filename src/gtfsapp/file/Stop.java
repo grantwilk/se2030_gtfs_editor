@@ -9,6 +9,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Mason Schlax
@@ -258,7 +260,22 @@ public class Stop extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return name;
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
+    }
+
+    /**
+     * Gets the stop's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the stop's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Location", "Lorem ipsum dolor");
+        attributes.put("Next Trip", "Lorem ipsum dolor");
+        attributes.put("Last Trip", "Lorem ipsum dolor");
+        return attributes;
     }
 
 }

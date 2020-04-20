@@ -330,7 +330,22 @@ public class Feed extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "PLACEHOLDER!";
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
+    }
+
+    /**
+     * Gets the feed's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the feed's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Total Routes", "Lorem ipsum dolor");
+        attributes.put("Total Trips", "Lorem ipsum dolor");
+        attributes.put("Total Stops", "Lorem ipsum dolor");
+        return attributes;
     }
 
 }
