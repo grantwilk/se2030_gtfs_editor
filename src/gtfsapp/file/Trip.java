@@ -53,10 +53,11 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @param stopTime
+     * Adds a new stopTimeID and stopTime to the hash map containting both
+     * @param stopTime the stop time to be added
      */
     public void addStopTime(StopTime stopTime) {
-        // TODO - this needs to be implemented!
+        stopTimes.put(new StopTimeID(), stopTime);
     }
 
     /**
@@ -169,19 +170,29 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets all of the StopIDs from the hash map containing StopIDs and Stops
+     * @return An ArrayList with all of the StopIDs
      */
     public ArrayList<StopID> getStopIDs() {
-        // TODO - This needs to be implemented!
-        return null;
+        //Gets all of the keys (StopIDs from the hash map)
+        Set<StopID> stopIDSet = stops.keySet();
+        ArrayList<StopID> stopIDs = null;
+        //puts all of the keys into an ArrayList to be returned
+        stopIDs.addAll(stopIDSet);
+        return stopIDs;
     }
 
     /**
-     * @return
+     * Gets all of the Stops from the hash map containing StopIDs and Stops
+     * @return An ArrayList with all of the Stops
      */
     public ArrayList<Stop> getStops() {
-        // TODO - This needs to be implemented!
-        return null;
+        //Gets all of the values (Stops from the hash map)
+        Collection<Stop> stopsCollection = stops.values();
+        ArrayList<Stop> stopArrayList = null;
+        //puts all of the values into an ArrayList to be returned
+        stopArrayList.addAll(stopsCollection);
+        return stopArrayList;
     }
 
     /**
