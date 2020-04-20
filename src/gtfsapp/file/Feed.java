@@ -2,8 +2,6 @@ package gtfsapp.file;
 
 import gtfsapp.id.*;
 
-import javafx.scene.paint.Color;
-
 import java.util.*;
 
 /**
@@ -13,13 +11,32 @@ import java.util.*;
  */
 public class Feed extends GTFSElement {
 
+    /**
+     * A map of all routes in the feed
+     */
     private HashMap<RouteID, Route> routes;
+
+    /**
+     * A map of all trips in the feed
+     */
     private HashMap<TripID, Trip> trips;
+
+    /**
+     * A map of all stop times in the feed
+     */
     private HashMap<StopTimeID, StopTime> stopTimes;
+
+    /**
+     * A map of all stops in the feed
+     */
     private HashMap<StopID, Stop> stops;
-    private String name;
-    private String id;
-    private Color color;
+
+    /**
+     * Creates a new feed with a procedurally generated ID
+     */
+    public Feed() {
+        super(new FeedID());
+    }
 
     /**
      * Creates a new feed with a specified ID
@@ -30,36 +47,6 @@ public class Feed extends GTFSElement {
         super(new FeedID(id));
     }
 
-    /**
-     * Creates a new feed with a procedurally generated ID
-     */
-    public Feed() {
-        super(new FeedID());
-    }
-
-    /**
-     * @param id
-     * @param name
-     */
-    public Feed(String id, String name) {
-        // TODO - this constructor is not fully implemented!
-
-        this(id);
-        this.name = name;
-
-    }
-
-    /**
-     * @param id
-     * @param name
-     * @param color
-     */
-    public Feed(String id, String name, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id);
-        this.name = name;
-        this.color = color;
-    }
 
     /**
      * @param routes
@@ -172,14 +159,6 @@ public class Feed extends GTFSElement {
      */
     public boolean containsTrip(TripID id) {
         return routes.containsKey(id);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getName() {
-        return name;
     }
 
     /**
@@ -310,21 +289,6 @@ public class Feed extends GTFSElement {
     public Route removeRouteByID(RouteID id) {
         Route removedRoute = routes.get(id);
         return removedRoute;
-    }
-
-    /**
-     *
-     */
-    public void setColor() {
-
-
-    }
-
-    /**
-     * @param name
-     */
-    public void setName(String name) {
-
     }
 
     /**
