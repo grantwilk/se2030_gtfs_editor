@@ -2,11 +2,11 @@ package gtfsapp.gui.main;
 
 import gtfsapp.file.*;
 import gtfsapp.gui.GTFSController;
+import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController;
+import gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController;
 import gtfsapp.gui.map.GTFSMapController;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
@@ -19,10 +19,11 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Grant Wilk
@@ -101,6 +102,21 @@ public class GTFSMainController extends GTFSController {
 
     @FXML
     private VBox associatedStopsContainer;
+
+    /**
+     * The title displayed in the selected element panel if there is no selected element
+     */
+    private static final String NULL_SELECTED_ELEMENT_TITLE = "NULL";
+
+    /**
+     * The subtitle displayed in the selected element panel if there is no selected element
+     */
+    private static final String NULL_SELECTED_ELEMENT_SUBTITLE = "Nothing to see here!";
+
+    /**
+     * The color displayed in the selected element panel if there is no selected element
+     */
+    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
 
     /**
      * Gets the selected element's associated routes and returns them
@@ -215,7 +231,7 @@ public class GTFSMainController extends GTFSController {
 
             } catch (IOException e) {
                 // TODO - invoke error dialog with exception method here
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 
@@ -249,20 +265,14 @@ public class GTFSMainController extends GTFSController {
      */
     public void setSelectedElement(GTFSElement selectedElement) {
         this.selectedElement = selectedElement;
+        updateAssociatedElements();
         updateInfoPanel();
-        // TODO - what else needs to be updated? associations?
     }
 
     public void updateAssociatedElements() {
 
         // get the GTFS feed from the file
         Feed feed = gtfsFile.getFeed();
-
-        // clear the existing associations
-        associatedRoutes = new ArrayList<>();
-        associatedTrips = new ArrayList<>();
-        associatedStopTimes = new ArrayList<>();
-        associatedStops = new ArrayList<>();
 
         // if there is no selected object, display all routes, trips, times, and stops
         if (selectedElement == null) {
@@ -274,56 +284,173 @@ public class GTFSMainController extends GTFSController {
 
         // otherwise, find associations and update the class variables
         else {
-            associatedRoutes = findAssociatedRoutes();
-            associatedTrips = findAssociatedTrips();
-            associatedStopTimes = findAssociatedStopTimes();
-            associatedStops = findAssociatedStops();
+            // TODO - uncomment this once all GTFS element methods are implemented!
+            // associatedRoutes = findAssociatedRoutes();
+            // associatedTrips = findAssociatedTrips();
+            // associatedStopTimes = findAssociatedStopTimes();
+            // associatedStops = findAssociatedStops();
         }
+
+        // TODO - remove this once Feed is implemented!
+        associatedRoutes = new ArrayList<>();
+        associatedTrips = new ArrayList<>();
+        associatedStopTimes = new ArrayList<>();
+        associatedStops = new ArrayList<>();
+
+        // TODO - remove this! temporary route.
+        Route route = new Route(feed, "jeff!", RouteType.SUBWAY);
+        associatedRoutes.add(route);
+
+        Trip trip = new Trip(feed, "steve!");
+        associatedTrips.add(trip);
+
+        Stop stop = new Stop(feed, "luigi!");
+        associatedStops.add(stop);
+
+        StopTime stopTime = new StopTime(feed, stop, 0);
+        associatedStopTimes.add(stopTime);
 
     }
 
     /**
      * Updates the GUI's associations panel
      */
-    public void updateAssociationsPanel() {
-        updateAssociatedRoutes();
-        updateAssociatedTrips();
-        updateAssociatedStopTimes();
-        updateAssociatedStops();
+    public void updateAssociationsPanel() throws IOException {
+        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
+        updateAssociationsTab(associatedTrips, associatedTripsContainer);
+        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
+        updateAssociationsTab(associatedStops, associatedStopsContainer);
+    }
+
+    /**
+     * Converts all elements into an associations tile and places them in an associations container
+     * @param elements - the elements to add
+     * @param container - the container to place the tiles in
+     * @throws IOException if the GUI fails to load an FXML file
+     */
+    public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
+
+        // clear all of the children from the tab
+        container.getChildren().clear();
+
+        // convert each element to a tile and add it to the tab
+        for (GTFSElement element : elements) {
+
+            // load associations tile FXML
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("components/associations/tile/fxml/associations-tile.fxml")
+            );
+
+            // get the tile root (highest-level container)
+            Parent root = loader.load();
+
+            // get controller
+            GTFSAssociationsTileController tileController = loader.getController();
+
+            // configure controller attributes
+            tileController.setMainController(this);
+            tileController.setElement(element);
+            tileController.setTitle(element.getTitle());
+            tileController.setSubtitle(element.getSubtitle());
+
+            // add the tile to the GUI
+            container.getChildren().addAll(root);
+        }
+
     }
 
     /**
      * Updates the GUI's info panel
      */
     public void updateInfoPanel() {
-        updateAssociationsPanel();
-        updateSelectedElementPanel();
-        // TODO - does anything else need to be updated? search panel?
+
+        try {
+            updateSearchPanel();
+            updateAssociationsPanel();
+            updateSelectedElementPanel();
+        } catch (IOException e) {
+            // TODO - trigger error dialog
+            e.printStackTrace();
+        }
+
     }
 
     /**
      * Updates the GUI's selected element panel
      */
-    public void updateSelectedElementPanel() {
+    public void updateSelectedElementPanel() throws IOException {
 
-        // set the color
-        // String colorHex = colorToHex(selectedElement.getColor());
-        // selectedElementColor.setStyle("-fx-background-color: " + colorHex);
+        // set the selected elements title, subtitle, and color
+        if (selectedElement == null) {
+            selectedElementTitle.setText(NULL_SELECTED_ELEMENT_TITLE);
+            selectedElementSubtitle.setText(NULL_SELECTED_ELEMENT_SUBTITLE);
+            selectedElementColor.setStyle("-fx-background-color: " + NULL_SELECTED_ELEMENT_COLOR);
+        } else {
+            selectedElementTitle.setText(selectedElement.getTitle().toUpperCase());
+            selectedElementSubtitle.setText(selectedElement.getSubtitle());
+            // TODO - get element color and display that instead of red
+            selectedElementColor.setStyle("-fx-background-color: red");
 
-        // set the title
-        if (selectedElement instanceof Route) {
-            selectedElementTitle.setText("Route " + selectedElement.getID().toString());
-        } else if (selectedElement instanceof Trip) {
-            selectedElementTitle.setText("Trip " + selectedElement.getID().toString());
-        } else if (selectedElement instanceof StopTime) {
-            selectedElementTitle.setText("Time " + selectedElement.getID().toString());
-        } else if (selectedElement instanceof Stop) {
-            selectedElementTitle.setText("Stop " + selectedElement.getID().toString());
         }
 
-        // set the subtitle
-        // selectedElementSubtitle.setText(selectedElement.getName());
+        // update the selected element's attributes
+        updateSelectedElementAttributes();
 
+    }
+
+    /**
+     * Updates the selected element panel's attributes component for the GUI
+     */
+    public void updateSelectedElementAttributes() throws IOException {
+
+        // clear all of the container's children
+        selectedElementAttributesContainer.getChildren().clear();
+
+        // if there is a selected element, add all of its attributes to the list of attributes
+        if (selectedElement != null) {
+
+            // get the selected element's attributes
+            HashMap<String, String> attributes = selectedElement.getAttributes();
+
+            // iterate through all attribute entries
+            for (Map.Entry<String, String> entry : attributes.entrySet()) {
+
+                // load selected element attribute's FXML
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource(
+                                "components/selectedelement/attribute/fxml/selected-element-attribute.fxml"
+                        )
+                );
+
+                // get the tile root (highest-level container)
+                Parent root = loader.load();
+
+                // get controller
+                GTFSSelectedElementAttributeController attributeController = loader.getController();
+
+                // get attribute title and subtitle from entry
+                String title = entry.getKey();
+                String subtitle = entry.getValue();
+
+                // configure controller attributes
+                attributeController.setTitle(title);
+                attributeController.setSubtitle(subtitle);
+
+                // add the attribute to the GUI
+                selectedElementAttributesContainer.getChildren().addAll(root);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Updates the GUI's search panel
+     */
+    public void updateSearchPanel() {
+        // clear the search field
+        searchField.setText("");
     }
 
     /**
@@ -459,60 +586,6 @@ public class GTFSMainController extends GTFSController {
         }
 
         return associations;
-
-    }
-
-    /**
-     * Updates the associated routes in the GUI's associations panel
-     */
-    private void updateAssociatedRoutes() {
-        updateAssociationTab(associatedRoutesContainer, associatedRoutes, "Route");
-    }
-
-    /**
-     * Updates the associated trips in the GUI's associations panel
-     */
-    private void updateAssociatedTrips() {
-        updateAssociationTab(associatedTripsContainer, associatedTrips, "Trip");
-    }
-
-    /**
-     * Updates the associated stop times in the GUI's associations panel
-     */
-    private void updateAssociatedStopTimes() {
-        updateAssociationTab(associatedStopTimesContainer, associatedStopTimes, "Time");
-    }
-
-    /**
-     * Updates the associated stops in the GUI's associations panel
-     */
-    private void updateAssociatedStops() {
-        updateAssociationTab(associatedStopsContainer, associatedStops, "Stop");
-    }
-
-    /**
-     * Updates an association tab
-     * @param container - the GUI container that the tab uses to display its associations
-     * @param associatedElements - the list of associated GTFSElements
-     * @param labelPrefix - prefix for the placehodler label
-     */
-    private void updateAssociationTab(Pane container, ArrayList<? extends GTFSElement> associatedElements, String labelPrefix) {
-
-        // is the wildcard in the associated elements parameter appropriate here?
-
-        // get the container's children
-        ObservableList<Node> children = container.getChildren();
-
-        // remove all of the existing children
-        children.clear();
-
-        // add labels to the containers children to represent each element
-        // TODO - replace labels with tiles for each element
-        for (GTFSElement element : associatedElements) {
-            Label label = new Label();
-            label.setText(labelPrefix + " " + element.getID().toString());
-            children.add(label);
-        }
 
     }
 

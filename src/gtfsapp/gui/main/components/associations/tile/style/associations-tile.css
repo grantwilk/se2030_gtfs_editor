@@ -6,7 +6,7 @@
 }
 
 .associations-tile #color {
-    -fx-background-color: red;
+    -fx-background-color: #C0C0C0;
     -fx-background-radius: 7 0 0 7;
 }
 
@@ -21,4 +21,14 @@
 
 .associations-tile #subtitle {
     -fx-text-fill: #909090;
+}
+
+.associations-tile:pressed,
+.associations-tile:pressed #color {
+    -fx-background-color: #4C8BF5;
+}
+
+.associations-tile:pressed #title,
+.associations-tile:pressed #subtitle {
+    -fx-text-fill: white;
 }

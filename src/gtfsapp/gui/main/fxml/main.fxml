@@ -51,7 +51,7 @@
             </HBox>
             <VBox fx:id="serarchPanel" alignment="CENTER" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" styleClass="search-panel" stylesheets="@../style/search-panel.css">
                <children>
-                  <TextField id="search-field" maxHeight="1.7976931348623157E308" prefHeight="40.0" promptText="Search GTFS Elements" />
+                  <TextField id="search-field" fx:id="searchField" maxHeight="1.7976931348623157E308" prefHeight="40.0" promptText="Search GTFS Elements" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -95,9 +95,9 @@
                     <tabs>
                         <Tab text="Routes">
                            <content>
-                              <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
+                              <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="400.0">
                                  <content>
-                                    <VBox id="associations-container" fx:id="associatedRoutesContainer" />
+                                    <VBox id="associations-container" fx:id="associatedRoutesContainer" alignment="TOP_CENTER" stylesheets="@../components/associations/tile/style/associations-tile.css" />
                                  </content>
                               </ScrollPane>
                            </content>

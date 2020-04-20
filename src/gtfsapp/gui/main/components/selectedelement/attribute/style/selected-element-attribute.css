@@ -1,0 +1,12 @@
+.selected-element-attribute {
+    -fx-background-color: transparent;
+    -fx-spacing: -2;
+}
+
+.selected-element-attribute #title {
+    -fx-text-fill: #404040;
+}
+
+.selected-element-attribute #subtitle {
+    -fx-text-fill: #909090;
+}

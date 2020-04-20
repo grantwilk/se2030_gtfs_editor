@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane styleClass="associations-tile" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<GridPane fx:id="associationsTile" onMouseClicked="#setAsSelectedElement" styleClass="associations-tile" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
     <ColumnConstraints hgrow="SOMETIMES" />
@@ -20,13 +20,14 @@
       <Pane id="color" />
       <VBox id="info-container" alignment="CENTER_LEFT" GridPane.columnIndex="1">
          <children>
-            <Label id="title" text="Route J15" />
-            <Label id="subtitle" text="The Third Ward Loop" />
+            <Label id="title" fx:id="tileTitle" text="Route J15" />
+            <Label id="subtitle" fx:id="tileSubtitle" text="The Third Ward Loop" />
          </children>
       </VBox>
    </children>
    <stylesheets>
       <URL value="@../style/associations-tile.css" />
       <URL value="@../../../../../root/style/font.css" />
+      <URL value="@../../../../../root/style/root.css" />
    </stylesheets>
 </GridPane>

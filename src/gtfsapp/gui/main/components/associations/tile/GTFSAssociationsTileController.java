@@ -2,6 +2,9 @@ package gtfsapp.gui.main.components.associations.tile;
 
 import gtfsapp.file.GTFSElement;
 import gtfsapp.gui.main.GTFSMainController;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 /**
  * @author Grant Wilk
@@ -10,8 +13,17 @@ import gtfsapp.gui.main.GTFSMainController;
  */
 public class GTFSAssociationsTileController {
 
-    GTFSMainController mainController;
-    GTFSElement element;
+    private GTFSMainController mainController;
+    private GTFSElement element;
+
+    @FXML
+    private GridPane associationsTile;
+
+    @FXML
+    private Label tileTitle;
+
+    @FXML
+    private Label tileSubtitle;
 
     /**
      * Sets the tile's element as the selected element
@@ -51,4 +63,38 @@ public class GTFSAssociationsTileController {
     public GTFSElement getElement() {
         return element;
     }
+
+    /**
+     * Sets the title of the tile
+     * @param title - the title of the tile
+     */
+    public void setTitle(String title) {
+        tileTitle.setText(title);
+    }
+
+    /**
+     * Gets the title of the tile
+     * @return the title of the tile
+     */
+    public String getTitle() {
+        return tileTitle.getText();
+    }
+
+    /**
+     * Sets the subtitle of the tile
+     * @param subtitle - the of of the tile
+     */
+    public void setSubtitle(String subtitle) {
+        tileSubtitle.setText(subtitle);
+    }
+
+    /**
+     * Gets the subtitle of the tile
+     * @return the subtitle of the tile
+     */
+    public String getSubtitle() {
+        return tileSubtitle.getText();
+    }
+
+
 }
