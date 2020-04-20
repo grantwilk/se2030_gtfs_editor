@@ -19,6 +19,9 @@ public class Feed extends GTFSElement {
     private HashMap<TripID, Trip> trips;
     private HashMap<StopTimeID, StopTime> stopTimes;
     private HashMap<StopID, Stop> stops;
+    private String name;
+    private String id;
+    private Color color;
 
     /**
      * Creates a new feed with a specified ID
@@ -41,7 +44,9 @@ public class Feed extends GTFSElement {
      */
     public Feed(String id, String name) {
         // TODO - this constructor is not fully implemented!
-        this(id);
+        this.id = id;
+        this.name = name;
+
     }
 
     /**
@@ -51,13 +56,18 @@ public class Feed extends GTFSElement {
      */
     public Feed(String id, String name, Color color) {
         // TODO - this constructor is not fully implemented!
-        this(id);
+        this.id = id;
+        this.name = name;
+        this.color = color
     }
 
     /**
      * @param routes
      */
     public void addAllRoutes(List<Route> routes) {
+        for(int x = 0; x <= list.size(); x++){
+            this.routes.put(routes[x].getRouteID, routes[x]);
+        }
 
     }
 
@@ -65,6 +75,7 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public void addRoute(Route route) {
+        routes.put(route.getRouteID(),route);
 
     }
 
@@ -73,6 +84,10 @@ public class Feed extends GTFSElement {
      * @param trips
      */
     public void addAllTrips(List<Trip> trips){
+        for(int x = 0; x <= list.size(); x++){
+            this.trips.put(trips[x].getTripID, trips[x]);
+        }
+
 
     }
 
@@ -81,6 +96,7 @@ public class Feed extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
+        trips.put(trip.getTripID(),trip);
 
     }
 
@@ -89,6 +105,9 @@ public class Feed extends GTFSElement {
      * @param stopTimes
      */
     public void addAllStopTimes(List<StopTime> stopTimes){
+        for(int x = 0; x <= list.size(); x++){
+            this.stopTimes.put(stopTimes[x].getStopTimeID, stopTimes[x]);
+        }
 
     }
 
@@ -97,7 +116,7 @@ public class Feed extends GTFSElement {
      * @param stopTime
      */
     public void addStopTime(StopTime stopTime) {
-
+        stopTimes.put(stopTime.getStopTimeID, stopTime);
     }
 
     /**
@@ -294,7 +313,22 @@ public class Feed extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "PLACEHOLDER!";
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
+    }
+
+    /**
+     * Gets the feed's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the feed's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Total Routes", "Lorem ipsum dolor");
+        attributes.put("Total Trips", "Lorem ipsum dolor");
+        attributes.put("Total Stops", "Lorem ipsum dolor");
+        return attributes;
     }
 
 }

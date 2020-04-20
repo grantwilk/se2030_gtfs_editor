@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="selectedElementAttribute" alignment="CENTER_LEFT" styleClass="selected-element-attribute" stylesheets="@../style/selected-element-attribute.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController">
+   <children>
+      <Label id="title" fx:id="attributeName" text="Label" />
+      <Label id="subtitle" fx:id="attributeValue" text="Label" />
+   </children>
+</VBox>

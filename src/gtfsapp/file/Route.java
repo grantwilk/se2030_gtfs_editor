@@ -21,12 +21,15 @@ public class Route extends GTFSElement {
     private Feed feed;
     private RouteType routeType;
     private HashMap<TripID, Trip> trips;
+    private HashMap<TripID, Stop> stops;
+    private HashMap<StopTimeID, StopTime> stopTimes;
     private String shortName;
     private String longName;
     private String desc;
     private String url;
     private Color color;
     private Color textColor;
+    private RouteID id;
 
     /**
      *
@@ -43,6 +46,9 @@ public class Route extends GTFSElement {
      * @param trips
      */
     public void addAllTrips(ArrayList<Trip> trips) {
+        for (int num:trips){
+            this.trips.put(,trips(num));
+        }
 
     }
 
@@ -50,10 +56,12 @@ public class Route extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
+        trips.put(trip.getID(),trip);
 
     }
 
     public void clearTrips() {
+        trips.clear();
 
     }
 
@@ -61,21 +69,35 @@ public class Route extends GTFSElement {
      * @param id
      */
     public boolean containsStop(StopID id) {
-        return false;
+
+        boolean contains = false;
+        if (stops.containskey(id)) {
+            contains = true
+        }
+        return contains;
     }
 
     /**
      * @param id
      */
     public boolean containsStopTime(StopTimeID id) {
-        return false;
+        boolean contains = false;
+        if(stopTimes.containskey(id)){
+            contains = true
+        }
+        return contains;
     }
 
     /**
      * @param id
      */
     public boolean containsTrip(TripID id) {
-        return false;
+        boolean contains = false;
+        if(trips.containskey(id)){
+            contains = true
+        }
+        return contains;
+
     }
 
     public Stop getActiveStop() {
@@ -107,7 +129,7 @@ public class Route extends GTFSElement {
     }
 
     public Feed getFeed() {
-        return null;
+        return feed;
     }
 
     public Stop getNextStop() {
@@ -133,50 +155,75 @@ public class Route extends GTFSElement {
     public Trip getPreviousTrip() {
         return null;
     }
+    public RouteID getRouteID(){
+        return id;
+    }
 
     /**
      * @param id
      */
     public Stop getStopByID(StopID id) {
-        return null;
+        Stop removedStop = stops.get(id);
+        stops.remove(id);
+        return removedStop;
     }
 
     public ArrayList<StopID> getStopIDs() {
-        return null;
+        set<Object> mySet = stops.keySet();
+        ArrayList<StopID> stopArray = new ArrayList<>(mySet);
+        return stopArray;
+
+
     }
 
     public ArrayList<Stop> getStops() {
-        return null;
+        set<Object> mySet = stops.values();
+        ArrayList<Stop> stopArray = new ArrayList<>(mySet);
+        return stopArray;
     }
 
     /**
      * @param id
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        return null;
+        Stop removedStopTime = stopTimes.get(id);
+        stopTimes.remove(id);
+        return removedStopTime;
     }
 
     public ArrayList<StopTimeID> getStopTimeIDs() {
-        return null;
+        set<Object> mySet = stopTimes.keySet();
+        ArrayList<StopTimeID> stopTimesArray = new ArrayList<>(mySet);
+        return stopTimesArray;
     }
 
     public ArrayList<StopTime> getStopTimes() {
-        return null;
+        set<Object> mySet = stopTimes.values();
+        ArrayList<StopTime> stopTimesArray = new ArrayList<>(mySet);
+        return stopTimesArray;
     }
 
     /**
      * @param id
      */
     public Trip getTripByID(TripID id) {
-        return null;
+        Trip removedTrip = trips.get(id);
+        trips.remove(id);
+        return removedTrip;
     }
 
+
     public ArrayList<TripID> getTripIDs() {
-        return null;
+        set<Object> mySet = trips.keySet();
+        ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
+        return tripsArray;
+
     }
 
     public ArrayList<Trip> getTrips() {
-        return new ArrayList<>(trips.values());
+        set<Object> mySet = trips.values();
+        ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
+        return tripsArray;
     }
 
     public RouteType getRouteType() {
@@ -195,14 +242,18 @@ public class Route extends GTFSElement {
      * @param trip
      */
     public Trip removeTrip(Trip trip) {
-        return null;
+        Route removedTrip = routes.get(trip.getTripID);
+        trips.remove(trip.getTripID);
+        return removedTrip;
     }
 
     /**
      * @param id
      */
     public Trip removeTripByID(TripID id) {
-        return null;
+        Route removedTrip = trips.get(id);
+        routes.remove(id);
+        return removedTrip;
     }
 
     /**
@@ -284,7 +335,6 @@ public class Route extends GTFSElement {
     public void setURL(String url) {
         this.url = url;
     }
-
     /**
      *
      * @return
@@ -316,6 +366,20 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return longName;
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
+    }
+
+    /**
+     * Gets the route's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the route's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Next Stop", "Lorem ipsum dolor");
+        attributes.put("Last Stop", "Lorem ipsum dolor");
+        return attributes;
     }
 }

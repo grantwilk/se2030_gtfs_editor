@@ -2,7 +2,7 @@ package gtfsapp.file;
 
 import gtfsapp.id.*;
 
-import javafx.scene.paint.Color;
+import java.util.HashMap;
 
 /**
  * @author Mason Schlax
@@ -28,5 +28,23 @@ public abstract class GTFSElement {
     public GTFSID getID() {
         return id;
     }
+
+    /**
+     * Gets the element's title to be displayed in the GUI
+     * @return the element's title
+     */
+    public abstract String getTitle();
+
+    /**
+     * Gets the element's subtitle to be displayed in the GUI
+     * @return the element's subtitle
+     */
+    public abstract String getSubtitle();
+
+    /**
+     * Gets the element's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the element's attributes
+     */
+    public abstract HashMap<String, String> getAttributes();
 
 }

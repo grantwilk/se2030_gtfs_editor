@@ -1,0 +1,28 @@
+.error-dialog-root {
+    -fx-padding: 20 40 20 40;
+    -fx-background-color: #F0F0F0;
+}
+
+.error-dialog-root #error-type-indicator {
+    -fx-fill: #C0C0C0;
+}
+
+.error-info-container {
+    -fx-spacing: -4;
+    -fx-padding: 0 0 0 20;
+}
+
+.error-info-container #error-type {
+    -fx-text-fill: #404040;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.error-info-container #error-message {
+    -fx-text-fill: #909090;
+    -fx-font-size: 14px;
+}
+
+.button-container {
+    -fx-padding: 15 0 0 0;
+}

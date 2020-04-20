@@ -1,5 +1,6 @@
 package gtfsapp.gui;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,11 +11,33 @@ import javafx.stage.Stage;
  */
 public abstract class GTFSController {
 
+    /**
+     * The controller's scene
+     */
     private Scene scene;
+
+    /**
+     * The controller's stage
+     */
     private Stage stage;
 
     /**
-     * Gets the controller's scene and returns it
+     * Closes the window
+     */
+    public void close() {
+        stage.close();
+    }
+
+    /**
+     * Quits the application
+     */
+    public void quit() {
+        Platform.exit();
+    }
+
+    /**
+     * Gets the controller's scene
+     *
      * @return the controller's scene
      */
     public Scene getScene() {
@@ -22,15 +45,8 @@ public abstract class GTFSController {
     }
 
     /**
-     * Gets the controller's stage and returns it
-     * @return the controller's stage
-     */
-    public Stage getStage() {
-        return stage;
-    }
-
-    /**
      * Sets the controller's scene
+     *
      * @param scene - the scene to set
      */
     public void setScene(Scene scene) {
@@ -38,7 +54,17 @@ public abstract class GTFSController {
     }
 
     /**
+     * Gets the controller's stage
+     *
+     * @return the controller's stage
+     */
+    public Stage getStage() {
+        return stage;
+    }
+
+    /**
      * Sets the controllers stage
+     *
      * @param stage - the stage to set
      */
     public void setStage(Stage stage) {
@@ -46,7 +72,17 @@ public abstract class GTFSController {
     }
 
     /**
+     * Gets the title of the window
+     *
+     * @return the title of the window
+     */
+    public String getWindowTitle() {
+        return stage.getTitle();
+    }
+
+    /**
      * Sets the title of the window
+     *
      * @param windowTitle - the title of the window
      */
     public void setWindowTitle(String windowTitle) {
@@ -54,11 +90,21 @@ public abstract class GTFSController {
     }
 
     /**
-     * Gets the title of the window
-     * @return the title of the window
+     * Sets the window's always on top property
+     *
+     * @param alwaysOnTop - true if the window should be always on top, false otherwise
      */
-    public String getWindowTitle() {
-        return stage.getTitle();
+    public void setWindowAlwaysOnTop(boolean alwaysOnTop) {
+        stage.setAlwaysOnTop(alwaysOnTop);
+    }
+
+    /**
+     * Sets the window's resizable property
+     *
+     * @param isResizable - true if the window should be resizable, false otherwise
+     */
+    public void setWindowResizable(boolean isResizable) {
+        stage.setResizable(isResizable);
     }
 
 }

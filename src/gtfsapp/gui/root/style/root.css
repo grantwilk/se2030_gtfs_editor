@@ -128,3 +128,18 @@
 .scroll-bar:vertical:focused {
    -fx-background-color: transparent;
 }
+
+/* Button */
+.button {
+    -fx-background-color: #4C8BF5;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
+}
+
+.button:pressed {
+    -fx-background-color: #4580E6;
+}
