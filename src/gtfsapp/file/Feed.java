@@ -96,6 +96,7 @@ public class Feed extends GTFSElement {
      * @param trip
      */
     public void addTrip(Trip trip) {
+        trips.put(trip.getTripID(),trip);
 
     }
 
