@@ -14,3 +14,5 @@ Class Structure Changes:
 * Added multiple file support for GTFS File
 * Added HashMap of all types to feed
 * Removed unnecessary constructors from GTFS Elements
+*added get RouteID into Route class. 
+*added stop and stopTimes hashmap to Route class. 

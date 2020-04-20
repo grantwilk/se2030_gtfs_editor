@@ -29,6 +29,7 @@ public class Route extends GTFSElement {
     private String url;
     private Color color;
     private Color textColor;
+    private RouteID id;
 
     /**
      *
@@ -128,7 +129,7 @@ public class Route extends GTFSElement {
     }
 
     public Feed getFeed() {
-        return null;
+        return feed;
     }
 
     public Stop getNextStop() {
@@ -154,51 +155,75 @@ public class Route extends GTFSElement {
     public Trip getPreviousTrip() {
         return null;
     }
+    public RouteID getRouteID(){
+        return id;
+    }
 
     /**
      * @param id
      */
     public Stop getStopByID(StopID id) {
-        return null;
+        Stop removedStop = stops.get(id);
+        stops.remove(id);
+        return removedStop;
     }
 
     public ArrayList<StopID> getStopIDs() {
-        return null;
+        set<Object> mySet = stops.keySet();
+        ArrayList<StopID> stopArray = new ArrayList<>(mySet);
+        return stopArray;
+
+
     }
 
     public ArrayList<Stop> getStops() {
-        return null;
+        set<Object> mySet = stops.values();
+        ArrayList<Stop> stopArray = new ArrayList<>(mySet);
+        return stopArray;
     }
 
     /**
      * @param id
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        return null;
+        Stop removedStopTime = stopTimes.get(id);
+        stopTimes.remove(id);
+        return removedStopTime;
     }
 
     public ArrayList<StopTimeID> getStopTimeIDs() {
-        return null;
+        set<Object> mySet = stopTimes.keySet();
+        ArrayList<StopTimeID> stopTimesArray = new ArrayList<>(mySet);
+        return stopTimesArray;
     }
 
     public ArrayList<StopTime> getStopTimes() {
-        return null;
+        set<Object> mySet = stopTimes.values();
+        ArrayList<StopTime> stopTimesArray = new ArrayList<>(mySet);
+        return stopTimesArray;
     }
 
     /**
      * @param id
      */
     public Trip getTripByID(TripID id) {
-        return null;
+        Trip removedTrip = trips.get(id);
+        trips.remove(id);
+        return removedTrip;
     }
 
 
     public ArrayList<TripID> getTripIDs() {
-        return null;
+        set<Object> mySet = trips.keySet();
+        ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
+        return tripsArray;
+
     }
 
     public ArrayList<Trip> getTrips() {
-        return new ArrayList<>(trips.values());
+        set<Object> mySet = trips.values();
+        ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
+        return tripsArray;
     }
 
     public RouteType getRouteType() {
