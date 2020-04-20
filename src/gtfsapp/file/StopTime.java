@@ -86,12 +86,12 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     * ??Not sure about this one, but its late and imma just put it there for now??
+     *
      * Returns the trip this stop time belongs to
      * @return The trip
      */
     public Trip getTrip() {
-        return this.getTrip();
+        return null;
     }
 
     /**
