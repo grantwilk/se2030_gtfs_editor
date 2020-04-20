@@ -301,7 +301,21 @@ public class Trip extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
+        // TODO - remove placeholders
         return "PLACEHOLDER!";
+    }
+
+    /**
+     * Gets the trip's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the trip's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Next Stop", "PLACEHOLDER");
+        attributes.put("Last Stop", "PLACEHOLDER");
+        return attributes;
     }
 
 }

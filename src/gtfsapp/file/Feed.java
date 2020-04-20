@@ -297,4 +297,18 @@ public class Feed extends GTFSElement {
         return "PLACEHOLDER!";
     }
 
+    /**
+     * Gets the feed's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the feed's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Total Routes", "PLACEHOLDER");
+        attributes.put("Total Trips", "PLACEHOLDER");
+        attributes.put("Total Stops", "PLACEHOLDER");
+        return attributes;
+    }
+
 }

@@ -318,4 +318,17 @@ public class Route extends GTFSElement {
     public String getSubtitle() {
         return longName;
     }
+
+    /**
+     * Gets the route's attributes to be displayed in the GUI
+     * @return a HashMap<Attribute Title, Attribute Value> of the route's attributes
+     */
+    @Override
+    public HashMap<String, String> getAttributes() {
+        HashMap<String, String> attributes = new HashMap<>();
+        // TODO - remove placeholders
+        attributes.put("Next Stop", "PLACEHOLDER");
+        attributes.put("Last Stop", "PLACEHOLDER");
+        return attributes;
+    }
 }
