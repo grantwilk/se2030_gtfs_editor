@@ -2,12 +2,15 @@ package gtfsapp.gui.main;
 
 import gtfsapp.file.*;
 import gtfsapp.gui.GTFSController;
+import gtfsapp.gui.dialog.error.GTFSErrorDialogController;
+import gtfsapp.gui.dialog.error.GTFSErrorType;
 import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController;
 import gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController;
 import gtfsapp.gui.map.GTFSMapController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -219,8 +222,7 @@ public class GTFSMainController extends GTFSController {
                 // mapController.updateMap();
 
             } catch (IOException e) {
-                // TODO - invoke error dialog with exception method here
-                e.printStackTrace();
+                invokeErrorDialog(GTFSErrorType.EXCEPTION, "IO Exception", e.getMessage());
             }
         }
 
@@ -243,12 +245,47 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
-     * Invokes an error dialog with a message
-     *
-     * @param msg the message to display in the error dialog
+     * Invokes an error dialog with a type, title, and message
+     * @param errorType - the type of error
+     * @param errorTitle - the error title
+     * @param errorMessage - the error message
      */
-    public void invokeErrorDialog(String msg) {
-        // TODO
+    public void invokeErrorDialog(GTFSErrorType errorType, String errorTitle, String errorMessage) {
+
+        try {
+            // load error dialog FXML
+            FXMLLoader loader = new FXMLLoader(
+                    GTFSController.class.getResource("dialog/error/fxml/error-dialog.fxml")
+            );
+
+            // get the tile root (highest-level container)
+            Parent root = loader.load();
+
+            // get controller
+            GTFSErrorDialogController errorDialogController = loader.getController();
+
+            // create a new stage and scene
+            Stage errorStage = new Stage();
+            Scene errorScene = new Scene(root);
+
+            // set error attributes
+            errorDialogController.setErrorType(errorType);
+            errorDialogController.setErrorTitle(errorTitle);
+            errorDialogController.setErrorMessage(errorMessage);
+            errorDialogController.setStage(errorStage);
+            errorDialogController.setScene(errorScene);
+
+            // set stage attributes
+            errorStage.setScene(errorScene);
+            errorStage.setTitle(errorTitle);
+
+            // show the stage and do not allow background interaction
+            errorStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // TODO - can anything else be done here?
+        }
+
     }
 
     /**
@@ -277,8 +314,7 @@ public class GTFSMainController extends GTFSController {
             updateAssociationsPanel();
             updateSelectedElementPanel();
         } catch (IOException e) {
-            // TODO - trigger error dialog
-            e.printStackTrace();
+            invokeErrorDialog(GTFSErrorType.EXCEPTION, "IO Exception", e.getMessage());
         }
 
     }

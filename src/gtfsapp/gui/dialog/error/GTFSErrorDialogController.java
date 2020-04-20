@@ -89,7 +89,7 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 		}
 
 		// set the error type indicator's color
-		errorTypeIndicator.setStyle("-fx-background-color:" + hexColorString);
+		errorTypeIndicator.setStyle("-fx-fill: " + hexColorString);
 
 		// set the error type attribute
 		this.errorType = errorType;
@@ -109,7 +109,7 @@ public class GTFSErrorDialogController extends GTFSDialogController {
 	 * @param title - the error's title
 	 */
 	public void setErrorTitle(String title) {
-		errorTitle.setText(title);
+		errorTitle.setText(title.toUpperCase());
 	}
 
 	/**

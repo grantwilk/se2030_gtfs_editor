@@ -3,8 +3,8 @@
     -fx-background-color: #F0F0F0;
 }
 
-.eror-dialog-root #error-color {
-    -fx-background-color: #E07E53;
+.error-dialog-root #error-type-indicator {
+    -fx-fill: #C0C0C0;
 }
 
 .error-info-container {
