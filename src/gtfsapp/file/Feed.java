@@ -292,27 +292,33 @@ public class Feed extends GTFSElement {
      * @return
      */
     public ArrayList<Trip> getTrips() {
-        return null;
+        set<Object> mySet = trips.values();
+        ArrayList<TripID> TripIDArray = new ArrayList<>(mySet);
+        return TripIDArrayArray;
     }
 
     /**
      * @param route
      */
     public Route removeRoute(Route route) {
-        return null;
+        Route removedRoute = routes.get(route.getRouteID);
+        routes.remove(route.getRouteID);
+        return removedRoute;
     }
 
     /**
      * @param id
      */
     public Route removeRouteByID(RouteID id) {
-        return null;
+        Route removedRoute = routes.get(id);
+        return removedRoute;
     }
 
     /**
      *
      */
     public void setColor() {
+
 
     }
 
