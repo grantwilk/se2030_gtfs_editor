@@ -60,14 +60,6 @@ public class StopTime extends GTFSElement {
     /**
      * @return
      */
-    public boolean isActive() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @return
-     */
     public Trip getContainingTrip() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
@@ -177,6 +169,14 @@ public class StopTime extends GTFSElement {
      */
     public void setSequence(int sequence) {
         this.sequence = sequence;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isActive() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
     }
 
     /**
