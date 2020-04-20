@@ -357,6 +357,7 @@ public class GTFSMainController extends GTFSController {
 
             // hide the separator and the attributes container
             selectedElementAttributesSeparator.setVisible(false);
+            selectedElementAttributesContainer.setVisible(false);
             selectedElementAttributesContainer.setManaged(false);
 
         }
@@ -372,6 +373,7 @@ public class GTFSMainController extends GTFSController {
 
             // show the separator and the attributes container
             selectedElementAttributesSeparator.setVisible(true);
+            selectedElementAttributesContainer.setVisible(true);
             selectedElementAttributesContainer.setManaged(true);
 
         }
