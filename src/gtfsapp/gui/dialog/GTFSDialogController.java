@@ -10,29 +10,4 @@ import javafx.stage.Stage;
  */
 public abstract class GTFSDialogController extends GTFSController {
 
-    /**
-     *
-     */
-    public void closeDialog() {
-        // TODO
-    }
-
-    /**
-     * Gets the title of the dialog controller's window and returns it
-     * @return the title of the window
-     */
-    public String getWindowTitle() {
-        Stage stage = super.getStage();
-        return stage.getTitle();
-    }
-
-    /**
-     * Sets the title of the dialog controller's window
-     * @param windowTitle the title
-     */
-    public void setWindowTitle(String windowTitle) {
-        Stage stage = super.getStage();
-        stage.setTitle(windowTitle);
-    }
-
 }
