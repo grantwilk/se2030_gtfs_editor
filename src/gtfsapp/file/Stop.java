@@ -62,26 +62,6 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Getter for the feed the stop belongs to
-     *
-     * @return the feed
-     */
-    public Feed getFeed() {
-        return feed;
-    }
-
-    /**
-     * Gets the active stop time
-     * Currently unsupported
-     *
-     * @return
-     */
-    public StopTime getActiveStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * **Not fully implemented**
      * Uses the feed the stop belongs to to get the routeIDs
      *
@@ -234,6 +214,15 @@ public class Stop extends GTFSElement {
      */
     public void setURL(String url) {
         this.url = url;
+    }
+
+    /**
+     * Getter for the feed the stop belongs to
+     *
+     * @return the feed
+     */
+    public Feed getFeed() {
+        return feed;
     }
 
     /**
