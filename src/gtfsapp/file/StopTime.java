@@ -173,7 +173,8 @@ public class StopTime extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "Arrives at " + arrivalTime.toString();
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
     }
 
     /**
@@ -184,9 +185,9 @@ public class StopTime extends GTFSElement {
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
         // TODO - remove placeholders
-        attributes.put("Stop", "PLACEHOLDER");
-        attributes.put("Arrival Time", "PLACEHOLDER");
-        attributes.put("Departure Time", "PLACEHOLDER");
+        attributes.put("Stop", "Lorem ipsum dolor");
+        attributes.put("Arrival Time", "Lorem ipsum dolor");
+        attributes.put("Departure Time", "Lorem ipsum dolor");
         return attributes;
     }
 

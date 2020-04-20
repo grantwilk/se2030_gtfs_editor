@@ -316,7 +316,8 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return longName;
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
     }
 
     /**
@@ -327,8 +328,8 @@ public class Route extends GTFSElement {
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
         // TODO - remove placeholders
-        attributes.put("Next Stop", "PLACEHOLDER");
-        attributes.put("Last Stop", "PLACEHOLDER");
+        attributes.put("Next Stop", "Lorem ipsum dolor");
+        attributes.put("Last Stop", "Lorem ipsum dolor");
         return attributes;
     }
 }

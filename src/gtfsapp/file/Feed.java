@@ -294,7 +294,8 @@ public class Feed extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "PLACEHOLDER!";
+        // TODO - remove placeholder
+        return "Lorem ipsum dolor";
     }
 
     /**
@@ -305,9 +306,9 @@ public class Feed extends GTFSElement {
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
         // TODO - remove placeholders
-        attributes.put("Total Routes", "PLACEHOLDER");
-        attributes.put("Total Trips", "PLACEHOLDER");
-        attributes.put("Total Stops", "PLACEHOLDER");
+        attributes.put("Total Routes", "Lorem ipsum dolor");
+        attributes.put("Total Trips", "Lorem ipsum dolor");
+        attributes.put("Total Stops", "Lorem ipsum dolor");
         return attributes;
     }
 

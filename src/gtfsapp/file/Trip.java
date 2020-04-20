@@ -302,7 +302,7 @@ public class Trip extends GTFSElement {
     @Override
     public String getSubtitle() {
         // TODO - remove placeholders
-        return "PLACEHOLDER!";
+        return "Lorem ipsum dolor!";
     }
 
     /**
@@ -313,8 +313,8 @@ public class Trip extends GTFSElement {
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
         // TODO - remove placeholders
-        attributes.put("Next Stop", "PLACEHOLDER");
-        attributes.put("Last Stop", "PLACEHOLDER");
+        attributes.put("Next Stop", "Lorem ipsum dolor");
+        attributes.put("Last Stop", "Lorem ipsum dolor");
         return attributes;
     }
 
