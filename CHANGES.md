@@ -15,3 +15,4 @@ Class Structure Changes:
 * Added HashMap of all types to feed
 * Removed unnecessary constructors from GTFS Elements
 * Added additional attributes to all GTFS Elements
+*Added color, name, id to feed.
