@@ -32,76 +32,141 @@ import java.util.Map;
  */
 public class GTFSMainController extends GTFSController {
 
+    /**
+     * List of all routes associated with the selected element
+     */
     private ArrayList<Route> associatedRoutes;
-    private ArrayList<Stop> associatedStops;
-    private ArrayList<StopTime> associatedStopTimes;
+
+    /**
+     * List of all trips associated with the selected element
+     */
     private ArrayList<Trip> associatedTrips;
+
+    /**
+     * List of all stops associated with the selected element
+     */
+    private ArrayList<Stop> associatedStops;
+
+    /**
+     * List of all stop times associated with the selected element
+     */
+    private ArrayList<StopTime> associatedStopTimes;
+
+    /**
+     * The controller's GTFS file
+     */
     private GTFSFile gtfsFile;
+
+    /**
+     * The controller's child map controller
+     */
     private GTFSMapController mapController;
+
+    /**
+     * The controller's currently selected element
+     */
     private GTFSElement selectedElement = null;
 
     /**
-     * FXML attributes for primary GUI elements
+     * The main panel/root
      */
     @FXML
     private HBox mainPanel;
 
+    /**
+     * The root of the info panel
+     */
     @FXML
     private VBox infoPanel;
 
+    /**
+     * The root of the file header on the info panel
+     */
     @FXML
     private HBox fileHeaderPanel;
 
-    @FXML
-    private GridPane infoPanelBody;
-
     /**
-     * FXML attributes for the search panel
+     * The root of the search panel on the info panel
      */
     @FXML
     private VBox searchPanel;
 
+    /**
+     * The search field/box in the search panel
+     */
     @FXML
     private TextField searchField;
 
     /**
-     * FXML attributes for the selected elements panel
+     * The root of the selected element panel on the info panel
      */
     @FXML
     private VBox selectedElementPanel;
 
+    /**
+     * The pane that displays the selected element's color
+     */
     @FXML
     private Pane selectedElementColor;
 
+    /**
+     * The label that displays the title of the selected element
+     */
     @FXML
     private Label selectedElementTitle;
 
+    /**
+     * The label that displays the subtitle of the selected element
+     */
     @FXML
     private Label selectedElementSubtitle;
 
+    /**
+     * The container that holds the dynamically generated selected element attributes
+     */
     @FXML
     private VBox selectedElementAttributesContainer;
 
     /**
-     * FXML attributes for the associations panel
+     * The root of the associations panel on the info panel
      */
     @FXML
     private Pane associationsPanel;
 
+    /**
+     * The tab pane that holds the association type tabs
+     */
     @FXML
     private TabPane associationsTabPane;
 
+    /**
+     * The container that holds the dynamically generated associated routes
+     */
     @FXML
     private VBox associatedRoutesContainer;
 
+    /**
+     * The container that holds the dynamically generated associated trips
+     */
     @FXML
     private VBox associatedTripsContainer;
 
+    /**
+     * The container that holds the dynamically generated associated stop times
+     */
     @FXML
     private VBox associatedStopTimesContainer;
 
+    /**
+     * The container that holds the dynamically generated associated stops
+     */
     @FXML
     private VBox associatedStopsContainer;
+
+    /**
+     * The color displayed in the selected element panel if there is no selected element
+     */
+    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
 
     /**
      * The title displayed in the selected element panel if there is no selected element
@@ -112,82 +177,6 @@ public class GTFSMainController extends GTFSController {
      * The subtitle displayed in the selected element panel if there is no selected element
      */
     private static final String NULL_SELECTED_ELEMENT_SUBTITLE = "Nothing to see here!";
-
-    /**
-     * The color displayed in the selected element panel if there is no selected element
-     */
-    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
-
-    /**
-     * Gets the selected element's associated routes and returns them
-     * @return the selected element's associated routes
-     */
-    public ArrayList<Route> getAssociatedRoutes() {
-        return associatedRoutes;
-    }
-
-    /**
-     * Gets the selected element's associated trips and returns them
-     * @return the selected element's associated trips
-     */
-    public ArrayList<Trip> getAssociatedTrips() {
-        return associatedTrips;
-    }
-
-    /**
-     * Gets the selected element's associated stop times and returns them
-     * @return the selected element's associated stop times
-     */
-    public ArrayList<StopTime> getAssociatedStopTimes() {
-        return associatedStopTimes;
-    }
-
-    /**
-     * Gets the selected element's associated stops and returns them
-     * @return the selected element's associated stops
-     */
-    public ArrayList<Stop> getAssociatedStops() {
-        return associatedStops;
-    }
-
-    /**
-     * Gets the controller's GTFS file and returns it
-     * @return the controller's GTFS file
-     */
-    public GTFSFile getGTFSFile() {
-        return gtfsFile;
-    }
-
-    /**
-     * Gets the controller's map controller and returns it
-     * @return the controller's map controller
-     */
-    public GTFSMapController getMapController() {
-        return mapController;
-    }
-
-    /**
-     * Gets the controller's selected element and returns it
-     * @return
-     */
-    public GTFSElement getSelectedElement() {
-        return selectedElement;
-    }
-
-    /**
-     * Invokes an edit dialog for the selected element
-     */
-    public void invokeEditDialog() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Invokes an error dialog with a message
-     * @param msg the message to display in the error dialog
-     */
-    public void invokeErrorDialog(String msg) {
-        // TODO
-    }
 
     /**
      * Invokes the system's file chooser and loads a GTFS file from the computer's file system
@@ -238,6 +227,13 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
+     * Invokes the systems' file chooser and saves a GTFS file to the computer's file system
+     */
+    public void saveFile() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Saves the currently loaded GTFS file to its original path on the computer's file system
      */
     public void saveAsFile() {
@@ -245,10 +241,19 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
-     * Invokes the systems' file chooser and saves a GTFS file to the computer's file system
+     * Invokes an edit dialog for the selected element
      */
-    public void saveFile() {
+    public void invokeEditDialog() {
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Invokes an error dialog with a message
+     *
+     * @param msg the message to display in the error dialog
+     */
+    public void invokeErrorDialog(String msg) {
+        // TODO
     }
 
     /**
@@ -260,107 +265,7 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
-     * Sets the GUI's selected element
-     * @param selectedElement the element
-     */
-    public void setSelectedElement(GTFSElement selectedElement) {
-        this.selectedElement = selectedElement;
-        updateAssociatedElements();
-        updateInfoPanel();
-    }
-
-    public void updateAssociatedElements() {
-
-        // get the GTFS feed from the file
-        Feed feed = gtfsFile.getFeed();
-
-        // if there is no selected object, display all routes, trips, times, and stops
-        if (selectedElement == null) {
-            associatedRoutes = feed.getRoutes();
-            associatedTrips = feed.getTrips();
-            associatedStopTimes = feed.getStopTimes();
-            associatedStops = feed.getStops();
-        }
-
-        // otherwise, find associations and update the class variables
-        else {
-            // TODO - uncomment this once all GTFS element methods are implemented!
-            // associatedRoutes = findAssociatedRoutes();
-            // associatedTrips = findAssociatedTrips();
-            // associatedStopTimes = findAssociatedStopTimes();
-            // associatedStops = findAssociatedStops();
-        }
-
-        // TODO - remove this once Feed is implemented!
-        associatedRoutes = new ArrayList<>();
-        associatedTrips = new ArrayList<>();
-        associatedStopTimes = new ArrayList<>();
-        associatedStops = new ArrayList<>();
-
-        // TODO - remove this! temporary route.
-        Route route = new Route(feed, "jeff!", RouteType.SUBWAY);
-        associatedRoutes.add(route);
-
-        Trip trip = new Trip(feed, "steve!");
-        associatedTrips.add(trip);
-
-        Stop stop = new Stop(feed, "luigi!");
-        associatedStops.add(stop);
-
-        StopTime stopTime = new StopTime(feed, stop, 0);
-        associatedStopTimes.add(stopTime);
-
-    }
-
-    /**
-     * Updates the GUI's associations panel
-     */
-    public void updateAssociationsPanel() throws IOException {
-        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
-        updateAssociationsTab(associatedTrips, associatedTripsContainer);
-        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
-        updateAssociationsTab(associatedStops, associatedStopsContainer);
-    }
-
-    /**
-     * Converts all elements into an associations tile and places them in an associations container
-     * @param elements - the elements to add
-     * @param container - the container to place the tiles in
-     * @throws IOException if the GUI fails to load an FXML file
-     */
-    public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
-
-        // clear all of the children from the tab
-        container.getChildren().clear();
-
-        // convert each element to a tile and add it to the tab
-        for (GTFSElement element : elements) {
-
-            // load associations tile FXML
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("components/associations/tile/fxml/associations-tile.fxml")
-            );
-
-            // get the tile root (highest-level container)
-            Parent root = loader.load();
-
-            // get controller
-            GTFSAssociationsTileController tileController = loader.getController();
-
-            // configure controller attributes
-            tileController.setMainController(this);
-            tileController.setElement(element);
-            tileController.setTitle(element.getTitle());
-            tileController.setSubtitle(element.getSubtitle());
-
-            // add the tile to the GUI
-            container.getChildren().addAll(root);
-        }
-
-    }
-
-    /**
-     * Updates the GUI's info panel
+     * Updates the GUI's info panel and all of its subcomponents
      */
     public void updateInfoPanel() {
 
@@ -373,6 +278,14 @@ public class GTFSMainController extends GTFSController {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Updates the GUI's search panel
+     */
+    public void updateSearchPanel() {
+        // clear the search field
+        searchField.setText("");
     }
 
     /**
@@ -446,15 +359,102 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
-     * Updates the GUI's search panel
+     * Updates the GUI's associations panel
      */
-    public void updateSearchPanel() {
-        // clear the search field
-        searchField.setText("");
+    public void updateAssociationsPanel() throws IOException {
+        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
+        updateAssociationsTab(associatedTrips, associatedTripsContainer);
+        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
+        updateAssociationsTab(associatedStops, associatedStopsContainer);
     }
 
     /**
-     * Finds all of the routes associated with the selected element and returns them
+     * Updates the controller's associated elements lists
+     */
+    public void updateAssociatedElements() {
+
+        // get the GTFS feed from the file
+        Feed feed = gtfsFile.getFeed();
+
+        // if there is no selected object, display all routes, trips, times, and stops
+        if (selectedElement == null) {
+            associatedRoutes = feed.getRoutes();
+            associatedTrips = feed.getTrips();
+            associatedStopTimes = feed.getStopTimes();
+            associatedStops = feed.getStops();
+        }
+
+        // otherwise, find associations and update the class variables
+        else {
+            // TODO - uncomment this once all GTFS element methods are implemented!
+            // associatedRoutes = findAssociatedRoutes();
+            // associatedTrips = findAssociatedTrips();
+            // associatedStopTimes = findAssociatedStopTimes();
+            // associatedStops = findAssociatedStops();
+        }
+
+        // TODO - remove this once Feed is implemented!
+        associatedRoutes = new ArrayList<>();
+        associatedTrips = new ArrayList<>();
+        associatedStopTimes = new ArrayList<>();
+        associatedStops = new ArrayList<>();
+
+        // TODO - remove this! temporary route.
+        Route route = new Route(feed, "jeff!", RouteType.SUBWAY);
+        associatedRoutes.add(route);
+
+        Trip trip = new Trip(feed, "steve!");
+        associatedTrips.add(trip);
+
+        Stop stop = new Stop(feed, "luigi!");
+        associatedStops.add(stop);
+
+        StopTime stopTime = new StopTime(feed, stop, 0);
+        associatedStopTimes.add(stopTime);
+
+    }
+
+    /**
+     * Converts all elements into an associations tile and places them in an associations container
+     *
+     * @param elements  - the elements to add
+     * @param container - the container to place the tiles in
+     * @throws IOException if the GUI fails to load an FXML file
+     */
+    public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
+
+        // clear all of the children from the tab
+        container.getChildren().clear();
+
+        // convert each element to a tile and add it to the tab
+        for (GTFSElement element : elements) {
+
+            // load associations tile FXML
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("components/associations/tile/fxml/associations-tile.fxml")
+            );
+
+            // get the tile root (highest-level container)
+            Parent root = loader.load();
+
+            // get controller
+            GTFSAssociationsTileController tileController = loader.getController();
+
+            // configure controller attributes
+            tileController.setMainController(this);
+            tileController.setElement(element);
+            tileController.setTitle(element.getTitle());
+            tileController.setSubtitle(element.getSubtitle());
+
+            // add the tile to the GUI
+            container.getChildren().addAll(root);
+        }
+
+    }
+
+    /**
+     * Finds all of the routes associated with the selected element
+     *
      * @return an array list of routes associated with the selected element
      */
     private ArrayList<Route> findAssociatedRoutes() {
@@ -487,7 +487,8 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
-     * Finds all of the trips associated with the selected element and returns them
+     * Finds all of the trips associated with the selected element
+     *
      * @return an array list of trips associated with the selected element
      */
     private ArrayList<Trip> findAssociatedTrips() {
@@ -520,9 +521,9 @@ public class GTFSMainController extends GTFSController {
 
     }
 
-
     /**
-     * Finds all of the stop times associated with the selected element and returns them
+     * Finds all of the stop times associated with the selected element
+     *
      * @return an array list of stop times associated with the selected element
      */
     private ArrayList<StopTime> findAssociatedStopTimes() {
@@ -554,9 +555,9 @@ public class GTFSMainController extends GTFSController {
 
     }
 
-
     /**
-     * Finds all of the stops associated with the selected element and returns them
+     * Finds all of the stops associated with the selected element
+     *
      * @return an array list of stops associated with the selected element
      */
     private ArrayList<Stop> findAssociatedStops() {
@@ -590,15 +591,90 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
+     * Gets the selected element's associated routes
+     *
+     * @return the selected element's associated routes
+     */
+    public ArrayList<Route> getAssociatedRoutes() {
+        return associatedRoutes;
+    }
+
+    /**
+     * Gets the selected element's associated trips
+     *
+     * @return the selected element's associated trips
+     */
+    public ArrayList<Trip> getAssociatedTrips() {
+        return associatedTrips;
+    }
+
+    /**
+     * Gets the selected element's associated stop times
+     *
+     * @return the selected element's associated stop times
+     */
+    public ArrayList<StopTime> getAssociatedStopTimes() {
+        return associatedStopTimes;
+    }
+
+    /**
+     * Gets the selected element's associated stops
+     *
+     * @return the selected element's associated stops
+     */
+    public ArrayList<Stop> getAssociatedStops() {
+        return associatedStops;
+    }
+
+    /**
+     * Gets the controller's GTFS file
+     *
+     * @return the controller's GTFS file
+     */
+    public GTFSFile getGTFSFile() {
+        return gtfsFile;
+    }
+
+    /**
+     * Gets the controller's map controller
+     *
+     * @return the controller's map controller
+     */
+    public GTFSMapController getMapController() {
+        return mapController;
+    }
+
+    /**
+     * Gets the controller's selected element
+     *
+     * @return the controller's selected element
+     */
+    public GTFSElement getSelectedElement() {
+        return selectedElement;
+    }
+
+    /**
+     * Sets the GUI's selected element
+     *
+     * @param selectedElement the element
+     */
+    public void setSelectedElement(GTFSElement selectedElement) {
+        this.selectedElement = selectedElement;
+        updateAssociatedElements();
+        updateInfoPanel();
+    }
+
+    /**
      * Converts a JavaFX color to a hex string
+     *
      * @param color the color to convert
      * @return the color as a hex string
      */
     private String colorToHex(Color color) {
-        return String.format( "#%02X%02X%02X",
-                (int)( color.getRed() * 255 ),
-                (int)( color.getGreen() * 255 ),
-                (int)( color.getBlue() * 255 ) );
+        return String.format("#%02X%02X%02X",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255));
     }
 
 }
