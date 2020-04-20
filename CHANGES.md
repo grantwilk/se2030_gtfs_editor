@@ -14,4 +14,6 @@ Class Structure Changes:
 * Added multiple file support for GTFS File
 * Added HashMap of all types to feed
 * Removed unnecessary constructors from GTFS Elements
-* Added additional attributes to all GTFS Elements
+* Added additional GTFS attributes (w/ respective getters/setters) to all GTFS Elements
+* Added additional methods to GTFS Elements for GUI information grabs (e.g. title, subtitle, attributes)
+* Added additional methods to GTFSController for more stage control
