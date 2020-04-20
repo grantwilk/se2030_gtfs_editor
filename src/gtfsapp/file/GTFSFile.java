@@ -67,15 +67,6 @@ public class GTFSFile {
     }
 
     /**
-     * Gets the GTFS feed and returns it
-     *
-     * @return the GTFS feed
-     */
-    public Feed getFeed() {
-        return feed;
-    }
-
-    /**
      * Parses GTFS elements from a set of GTFS files, creates a new feed, and adds the parsed elements to it
      */
     public void load() throws IOException {
@@ -112,7 +103,17 @@ public class GTFSFile {
      * Exports a GTFS file to a specified directory
      */
     public void save(Path path) {
+        // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Gets the GTFS feed
+     *
+     * @return the GTFS feed
+     */
+    public Feed getFeed() {
+        return feed;
     }
 
     /**
@@ -171,7 +172,7 @@ public class GTFSFile {
     }
 
     /**
-     * Parses routes from the GTFS routes file and returns them as a list
+     * Parses routes from the GTFS routes file
      *
      * @return the parsed routes as a list
      */
@@ -248,7 +249,7 @@ public class GTFSFile {
     }
 
     /**
-     * Parses trips from the GTFS trips file and returns them as a list
+     * Parses trips from the GTFS trips file
      *
      * @param routes - the list of routes that the trips should be linked to
      * @return the list of trips
@@ -301,7 +302,7 @@ public class GTFSFile {
     }
 
     /**
-     * Parses stop times from the GTFS stop times file and returns them as a list
+     * Parses stop times from the GTFS stop times file
      *
      * @param trips - the list of trips that the stop times should be linked to
      * @param stops - the list of stops that the stop times should be linked to
@@ -444,16 +445,6 @@ public class GTFSFile {
     }
 
     /**
-     * Tokenizes a line from a CSV file using ',' as a delimiter
-     *
-     * @param line - the line to tokenize
-     * @return a list of string tokens
-     */
-    private List<String> tokenizeLine(String line) {
-        return Arrays.asList(line.split(",", -1));
-    }
-
-    /**
      * Converts a hex color string to a Java FX color
      *
      * @param hex - the hex color string to parse
@@ -507,5 +498,15 @@ public class GTFSFile {
         // return new date using millis and time zone offset
         return new Date(millis + timeZoneOffset);
 
+    }
+
+    /**
+     * Tokenizes a line from a CSV file using ',' as a delimiter
+     *
+     * @param line - the line to tokenize
+     * @return a list of string tokens
+     */
+    private List<String> tokenizeLine(String line) {
+        return Arrays.asList(line.split(",", -1));
     }
 }

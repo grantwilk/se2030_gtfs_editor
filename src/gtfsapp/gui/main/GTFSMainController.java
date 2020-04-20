@@ -230,13 +230,7 @@ public class GTFSMainController extends GTFSController {
      * Invokes the systems' file chooser and saves a GTFS file to the computer's file system
      */
     public void saveFile() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Saves the currently loaded GTFS file to its original path on the computer's file system
-     */
-    public void saveAsFile() {
+        // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
 
@@ -244,6 +238,7 @@ public class GTFSMainController extends GTFSController {
      * Invokes an edit dialog for the selected element
      */
     public void invokeEditDialog() {
+        // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
 
@@ -257,10 +252,18 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
+     * Deselects the currently selected element
+     */
+    public void deselectElement() {
+        setSelectedElement(null);
+    }
+
+    /**
      * Searches for an element within the currently loaded GTFS feed that matches the string entered in the GUI's
      * search field
      */
     public void searchForElement() {
+        // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
 
