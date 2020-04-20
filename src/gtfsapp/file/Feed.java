@@ -66,7 +66,7 @@ public class Feed extends GTFSElement {
      */
     public void addAllRoutes(List<Route> routes) {
         for(int x = 0; x <= routes.size(); x++){
-            this.routes.put(routes.get(x).getRouteID(), routes.get(x));
+            this.routes.put(new RouteID(), routes.get(x));
         }
 
     }
@@ -75,7 +75,7 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public void addRoute(Route route) {
-        routes.put(route.getRouteID(),route);
+        routes.put(new RouteID(), route);
 
     }
 
@@ -299,8 +299,8 @@ public class Feed extends GTFSElement {
      * @param route
      */
     public Route removeRoute(Route route) {
-        Route removedRoute = routes.get(route.getRouteID());
-        routes.remove(route.getRouteID());
+        Route removedRoute = routes.get(route.getID());
+        routes.remove(route.getID());
         return removedRoute;
     }
 

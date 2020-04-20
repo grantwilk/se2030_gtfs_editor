@@ -9,7 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @author Colton Rivard
@@ -21,7 +23,7 @@ public class Route extends GTFSElement {
     private Feed feed;
     private RouteType routeType;
     private HashMap<TripID, Trip> trips;
-    private HashMap<TripID, Stop> stops;
+    private HashMap<StopID, Stop> stops;
     private HashMap<StopTimeID, StopTime> stopTimes;
     private String shortName;
     private String longName;
@@ -46,17 +48,18 @@ public class Route extends GTFSElement {
      * @param trips
      */
     public void addAllTrips(ArrayList<Trip> trips) {
-        for (int num:trips){
-            this.trips.put(,trips(num));
+        for(int x = 0; x <= trips.size(); x++){
+            this.trips.put(new TripID(), trips.get(x));
+        }
         }
 
-    }
+
 
     /**
      * @param trip
      */
     public void addTrip(Trip trip) {
-        trips.put(trip.getID(),trip);
+        trips.put(new TripID(),trip);
 
     }
 
@@ -69,34 +72,21 @@ public class Route extends GTFSElement {
      * @param id
      */
     public boolean containsStop(StopID id) {
-
-        boolean contains = false;
-        if (stops.containskey(id)) {
-            contains = true
-        }
-        return contains;
+        return stops.containsKey(id);
     }
 
     /**
      * @param id
      */
     public boolean containsStopTime(StopTimeID id) {
-        boolean contains = false;
-        if(stopTimes.containskey(id)){
-            contains = true
-        }
-        return contains;
+        return stopTimes.containsKey(id);
     }
 
     /**
      * @param id
      */
     public boolean containsTrip(TripID id) {
-        boolean contains = false;
-        if(trips.containskey(id)){
-            contains = true
-        }
-        return contains;
+        return trips.containsKey(id);
 
     }
 
@@ -155,9 +145,6 @@ public class Route extends GTFSElement {
     public Trip getPreviousTrip() {
         return null;
     }
-    public RouteID getRouteID(){
-        return id;
-    }
 
     /**
      * @param id
@@ -169,7 +156,7 @@ public class Route extends GTFSElement {
     }
 
     public ArrayList<StopID> getStopIDs() {
-        set<Object> mySet = stops.keySet();
+        Set<StopID> mySet = stops.keySet();
         ArrayList<StopID> stopArray = new ArrayList<>(mySet);
         return stopArray;
 
@@ -177,7 +164,7 @@ public class Route extends GTFSElement {
     }
 
     public ArrayList<Stop> getStops() {
-        set<Object> mySet = stops.values();
+        Collection<Stop> mySet = stops.values();
         ArrayList<Stop> stopArray = new ArrayList<>(mySet);
         return stopArray;
     }
@@ -186,19 +173,19 @@ public class Route extends GTFSElement {
      * @param id
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        Stop removedStopTime = stopTimes.get(id);
+        StopTime removedStopTime = stopTimes.get(id);
         stopTimes.remove(id);
         return removedStopTime;
     }
 
     public ArrayList<StopTimeID> getStopTimeIDs() {
-        set<Object> mySet = stopTimes.keySet();
+        Set<StopTimeID> mySet = stopTimes.keySet();
         ArrayList<StopTimeID> stopTimesArray = new ArrayList<>(mySet);
         return stopTimesArray;
     }
 
     public ArrayList<StopTime> getStopTimes() {
-        set<Object> mySet = stopTimes.values();
+        Collection<StopTime> mySet = stopTimes.values();
         ArrayList<StopTime> stopTimesArray = new ArrayList<>(mySet);
         return stopTimesArray;
     }
@@ -214,14 +201,14 @@ public class Route extends GTFSElement {
 
 
     public ArrayList<TripID> getTripIDs() {
-        set<Object> mySet = trips.keySet();
-        ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
+        Set<TripID> mySet = trips.keySet();
+        ArrayList<TripID> tripsArray = new ArrayList<>(mySet);
         return tripsArray;
 
     }
 
     public ArrayList<Trip> getTrips() {
-        set<Object> mySet = trips.values();
+        Collection<Trip> mySet = trips.values();
         ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
         return tripsArray;
     }
@@ -242,8 +229,8 @@ public class Route extends GTFSElement {
      * @param trip
      */
     public Trip removeTrip(Trip trip) {
-        Route removedTrip = routes.get(trip.getTripID);
-        trips.remove(trip.getTripID);
+        Trip removedTrip = trips.get(trip.getID());
+        trips.remove(trip.getID());
         return removedTrip;
     }
 
@@ -251,8 +238,8 @@ public class Route extends GTFSElement {
      * @param id
      */
     public Trip removeTripByID(TripID id) {
-        Route removedTrip = trips.get(id);
-        routes.remove(id);
+        Trip removedTrip = trips.get(id);
+        trips.remove(id);
         return removedTrip;
     }
 
