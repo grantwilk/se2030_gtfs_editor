@@ -191,7 +191,6 @@ public class Stop extends GTFSElement {
 
     /**
      * Sets the code for the stop
-     * @return void
      */
     public void setCode(String code) {
         this.code = code;
@@ -207,7 +206,6 @@ public class Stop extends GTFSElement {
 
     /**
      * Sets the name for the stop
-     * @return void
      */
     public void setName(String name) {
         this.name = name;
@@ -223,7 +221,6 @@ public class Stop extends GTFSElement {
 
     /**
      * Sets the description for the stop
-     * @return void
      */
     public void setDesc(String desc) {
         this.desc = desc;
@@ -239,7 +236,6 @@ public class Stop extends GTFSElement {
 
     /**
      * Sets the url of the stop
-     * @return void
      */
     public void setURL(String url) {
         this.url = url;

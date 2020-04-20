@@ -1,7 +1,7 @@
 package gtfsapp.gui.dialog;
 
 import gtfsapp.gui.GTFSController;
-import javafx.stage.Stage;
+import gtfsapp.gui.main.GTFSMainController;
 
 /**
  * @author Grant Wilk
@@ -11,28 +11,24 @@ import javafx.stage.Stage;
 public abstract class GTFSDialogController extends GTFSController {
 
     /**
-     *
+     * The main controller that the dialog was invoked from
      */
-    public void closeDialog() {
-        // TODO
+    public GTFSMainController mainController;
+
+    /**
+     * Gets the dialog's main controller
+     * @return the dialog's main controller
+     */
+    public GTFSMainController getMainController() {
+        return mainController;
     }
 
     /**
-     * Gets the title of the dialog controller's window and returns it
-     * @return the title of the window
+     * Sets the dialog's main controller
+     * @param mainController - the dialog's main controller
      */
-    public String getWindowTitle() {
-        Stage stage = super.getStage();
-        return stage.getTitle();
-    }
-
-    /**
-     * Sets the title of the dialog controller's window
-     * @param windowTitle the title
-     */
-    public void setWindowTitle(String windowTitle) {
-        Stage stage = super.getStage();
-        stage.setTitle(windowTitle);
+    public void setMainController(GTFSMainController mainController) {
+        this.mainController = mainController;
     }
 
 }
