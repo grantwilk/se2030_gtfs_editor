@@ -21,12 +21,12 @@ public class Trip extends GTFSElement {
     /**
      * A map of all stop IDs and stops contained within this trip
      */
-    private HashMap<StopID, Stop> stops = new HashMap<>();
+    private final HashMap<StopID, Stop> stops = new HashMap<>();
 
     /**
      * A map of all stop time IDs and stop times contained within this trip
      */
-    private HashMap<StopTimeID, StopTime> stopTimes = new HashMap<>();
+    private final HashMap<StopTimeID, StopTime> stopTimes = new HashMap<>();
 
     /**
      * The head sign for this trip

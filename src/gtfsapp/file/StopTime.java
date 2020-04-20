@@ -4,7 +4,6 @@ import gtfsapp.id.RouteID;
 
 import gtfsapp.id.StopTimeID;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
