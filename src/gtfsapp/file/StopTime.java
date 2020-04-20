@@ -4,9 +4,9 @@ import gtfsapp.id.RouteID;
 
 import gtfsapp.id.StopTimeID;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Mason Schlax
@@ -67,7 +67,7 @@ public class StopTime extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -75,7 +75,7 @@ public class StopTime extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }

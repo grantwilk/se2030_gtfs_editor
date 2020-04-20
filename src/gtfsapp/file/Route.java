@@ -8,10 +8,8 @@ import gtfsapp.id.TripID;
 import javafx.scene.paint.Color;
 import javafx.geometry.Point2D;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Colton Rivard
@@ -20,18 +18,50 @@ import java.util.Set;
  */
 public class Route extends GTFSElement {
 
+    /**
+     * The feed that contains this route
+     */
     private Feed feed;
+
+    /**
+     * The type of transportation used on the route
+     */
     private RouteType routeType;
+
+    /**
+     * The trips that occur within this route
+     */
     private HashMap<TripID, Trip> trips;
-    private HashMap<StopID, Stop> stops;
-    private HashMap<StopTimeID, StopTime> stopTimes;
+
+    /**
+     * The short name of the route
+     */
     private String shortName;
+
+    /**
+     * The long name of the route
+     */
     private String longName;
+
+    /**
+     * The description of the route
+     */
     private String desc;
+
+    /**
+     * The URL of the route
+     */
     private String url;
+
+    /**
+     * The color of the route
+     */
     private Color color;
+
+    /**
+     * The text color of the route
+     */
     private Color textColor;
-    private RouteID id;
 
     /**
      *
@@ -47,11 +77,11 @@ public class Route extends GTFSElement {
     /**
      * @param trips
      */
-    public void addAllTrips(ArrayList<Trip> trips) {
+    public void addAllTrips(List<Trip> trips) {
         for(int x = 0; x <= trips.size(); x++){
             this.trips.put(new TripID(), trips.get(x));
         }
-        }
+    }
 
 
 
@@ -65,21 +95,20 @@ public class Route extends GTFSElement {
 
     public void clearTrips() {
         trips.clear();
-
     }
 
     /**
      * @param id
      */
     public boolean containsStop(StopID id) {
-        return stops.containsKey(id);
+        return getStopIDs().contains(id);
     }
 
     /**
      * @param id
      */
     public boolean containsStopTime(StopTimeID id) {
-        return stopTimes.containsKey(id);
+        return getStopTimeIDs().contains(id);
     }
 
     /**
@@ -150,44 +179,58 @@ public class Route extends GTFSElement {
      * @param id
      */
     public Stop getStopByID(StopID id) {
-        Stop removedStop = stops.get(id);
-        stops.remove(id);
-        return removedStop;
+        Stop stop = null;
+        for (Trip trip : trips.values()) {
+            if (trip.getStopByID(id) != null) {
+                stop = trip.getStopByID(id);
+            }
+        }
+        return stop;
     }
 
-    public ArrayList<StopID> getStopIDs() {
-        Set<StopID> mySet = stops.keySet();
-        ArrayList<StopID> stopArray = new ArrayList<>(mySet);
-        return stopArray;
-
-
+    public List<StopID> getStopIDs() {
+        List<StopID> allStopIDs = new ArrayList<>();
+        for (Trip trip : trips.values()) {
+            allStopIDs.addAll(trip.getStopIDs());
+        }
+        return allStopIDs.stream().distinct().collect(Collectors.toList());
     }
 
-    public ArrayList<Stop> getStops() {
-        Collection<Stop> mySet = stops.values();
-        ArrayList<Stop> stopArray = new ArrayList<>(mySet);
-        return stopArray;
+    public List<Stop> getStops() {
+        List<Stop> allStops = new ArrayList<>();
+        for (Trip trip : trips.values()) {
+            allStops.addAll(trip.getStops());
+        }
+        return allStops.stream().distinct().collect(Collectors.toList());
     }
 
     /**
      * @param id
      */
     public StopTime getStopTimeByID(StopTimeID id) {
-        StopTime removedStopTime = stopTimes.get(id);
-        stopTimes.remove(id);
-        return removedStopTime;
+        StopTime stopTime = null;
+        for (Trip trip : trips.values()) {
+            if (trip.getStopTimeByID(id) != null) {
+                stopTime = trip.getStopTimeByID(id);
+            }
+        }
+        return stopTime;
     }
 
-    public ArrayList<StopTimeID> getStopTimeIDs() {
-        Set<StopTimeID> mySet = stopTimes.keySet();
-        ArrayList<StopTimeID> stopTimesArray = new ArrayList<>(mySet);
-        return stopTimesArray;
+    public List<StopTimeID> getStopTimeIDs() {
+        List<StopTimeID> allStopTimeIDs = new ArrayList<>();
+        for (Trip trip : trips.values()) {
+            allStopTimeIDs.addAll(trip.getStopTimeIDs());
+        }
+        return allStopTimeIDs.stream().distinct().collect(Collectors.toList());
     }
 
-    public ArrayList<StopTime> getStopTimes() {
-        Collection<StopTime> mySet = stopTimes.values();
-        ArrayList<StopTime> stopTimesArray = new ArrayList<>(mySet);
-        return stopTimesArray;
+    public List<StopTime> getStopTimes() {
+        List<StopTime> allStopTimes = new ArrayList<>();
+        for (Trip trip : trips.values()) {
+            allStopTimes.addAll(trip.getStopTimes());
+        }
+        return allStopTimes.stream().distinct().collect(Collectors.toList());
     }
 
     /**
@@ -200,16 +243,16 @@ public class Route extends GTFSElement {
     }
 
 
-    public ArrayList<TripID> getTripIDs() {
+    public List<TripID> getTripIDs() {
         Set<TripID> mySet = trips.keySet();
-        ArrayList<TripID> tripsArray = new ArrayList<>(mySet);
+        List<TripID> tripsArray = new ArrayList<>(mySet);
         return tripsArray;
 
     }
 
-    public ArrayList<Trip> getTrips() {
+    public List<Trip> getTrips() {
         Collection<Trip> mySet = trips.values();
-        ArrayList<Trip> tripsArray = new ArrayList<>(mySet);
+        List<Trip> tripsArray = new ArrayList<>(mySet);
         return tripsArray;
     }
 

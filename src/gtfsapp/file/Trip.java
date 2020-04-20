@@ -65,7 +65,7 @@ public class Trip extends GTFSElement {
      *
      * @param stopTimes - the list of stop times
      */
-    public void addAllStopTimes(ArrayList<StopTime> stopTimes) {
+    public void addAllStopTimes(List<StopTime> stopTimes) {
 
         // for each stop time in the array
         for (StopTime stopTime : stopTimes) {
@@ -118,7 +118,7 @@ public class Trip extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -126,7 +126,7 @@ public class Trip extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -145,7 +145,7 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop time IDs contained within the trip
      */
-    public ArrayList<StopTimeID> getStopTimeIDs() {
+    public List<StopTimeID> getStopTimeIDs() {
         Set<StopTimeID> stopTimeIDSet = stopTimes.keySet();
         return new ArrayList<>(stopTimeIDSet);
     }
@@ -155,7 +155,7 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop times contained within the trip
      */
-    public ArrayList<StopTime> getStopTimes() {
+    public List<StopTime> getStopTimes() {
         Collection<StopTime> stopTimeSet = stopTimes.values();
         return new ArrayList<>(stopTimeSet);
     }
@@ -173,7 +173,7 @@ public class Trip extends GTFSElement {
      * Gets all of the stop IDs contained within the trip
      * @return a list of stop IDs contained within the trip
      */
-    public ArrayList<StopID> getStopIDs() {
+    public List<StopID> getStopIDs() {
         Set<StopID> stopIDSet = stops.keySet();
         return new ArrayList<>(stopIDSet);
     }
@@ -182,7 +182,7 @@ public class Trip extends GTFSElement {
      * Gets all of the stops contained within the trip
      * @return a list of stops contained within the trip
      */
-    public ArrayList<Stop> getStops() {
+    public List<Stop> getStops() {
         Collection<Stop> stopsCollection = stops.values();
         return new ArrayList<>(stopsCollection);
     }
