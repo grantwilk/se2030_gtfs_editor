@@ -64,55 +64,63 @@ public class Route extends GTFSElement {
     private Color textColor;
 
     /**
-     *
-     * @param id
-     * @param feed
-     * @param routeType
+     * Constructor for a Route
+     * @param id ID associated with this route
+     * @param feed Reference to Feed object
+     * @param routeType Route type for this specific route
      */
     public Route(Feed feed, String id, RouteType routeType) {
         // TODO - this constructor is not fully implemented!
         super(new RouteID(id));
+        this.feed = feed;
+        this.routeType = routeType;
     }
 
-    /**
-     * @param trips
+    /** Adds a list of trips to this route
+     * @param trips List of trips to add
      */
     public void addAllTrips(List<Trip> trips) {
+        // iterate through list of trips and add them
         for(int x = 0; x <= trips.size(); x++){
-            this.trips.put(new TripID(), trips.get(x));
+            this.trips.put((TripID)trips.get(x).getID(), trips.get(x));
         }
     }
 
 
 
-    /**
-     * @param trip
+    /** Adds a trip to the hash map of trips for this route
+     * @param trip Trip to add to hash map
      */
     public void addTrip(Trip trip) {
-        trips.put(new TripID(),trip);
+        // put trip into hash map
+        trips.put((TripID)trip.getID(),trip);
 
     }
 
+    /**
+     * Clears hash map of all trips
+     */
     public void clearTrips() {
+        // clear hash map
         trips.clear();
     }
 
-    /**
-     * @param id
+    /** Check if this route contains a specific stop
+     * @param id Stop id to check for
      */
     public boolean containsStop(StopID id) {
         return getStopIDs().contains(id);
     }
 
-    /**
-     * @param id
+    /** Checks route for a specific stop time
+     * @param id Stop_time id to check for
      */
     public boolean containsStopTime(StopTimeID id) {
         return getStopTimeIDs().contains(id);
     }
 
-    /**
-     * @param id
+    /** Check for a specific trip in this route
+     * @param id Trip id to check for
      */
     public boolean containsTrip(TripID id) {
         return trips.containsKey(id);
@@ -175,11 +183,12 @@ public class Route extends GTFSElement {
         return null;
     }
 
-    /**
-     * @param id
+    /** Get specific stop from this route
+     * @param id Stop id to check for
      */
     public Stop getStopByID(StopID id) {
         Stop stop = null;
+        // iterate through all trips to find given stop id
         for (Trip trip : trips.values()) {
             if (trip.getStopByID(id) != null) {
                 stop = trip.getStopByID(id);
@@ -188,27 +197,41 @@ public class Route extends GTFSElement {
         return stop;
     }
 
+    /**
+     * Get a list of the stop ids contained within the route
+     * @return List of all stop ids in this route
+     */
     public List<StopID> getStopIDs() {
         List<StopID> allStopIDs = new ArrayList<>();
+        // add all stop ids from each trip to a new array list
         for (Trip trip : trips.values()) {
             allStopIDs.addAll(trip.getStopIDs());
         }
+        // return the array list with duplicates removed
         return allStopIDs.stream().distinct().collect(Collectors.toList());
     }
 
+    /**
+     * Get a list of stops contained within the route
+     * @return List of all stops in this route
+     */
     public List<Stop> getStops() {
         List<Stop> allStops = new ArrayList<>();
+        // add all stops from each trip to a new array list
         for (Trip trip : trips.values()) {
             allStops.addAll(trip.getStops());
         }
+        // return the array list with duplicates removed
         return allStops.stream().distinct().collect(Collectors.toList());
     }
 
     /**
-     * @param id
+     * Get a stop time contained in route by using stop_time id
+     * @param id stop_time id to search for in this route
      */
     public StopTime getStopTimeByID(StopTimeID id) {
         StopTime stopTime = null;
+        // iterate through each trip and check for the given stop_time id
         for (Trip trip : trips.values()) {
             if (trip.getStopTimeByID(id) != null) {
                 stopTime = trip.getStopTimeByID(id);
@@ -217,43 +240,59 @@ public class Route extends GTFSElement {
         return stopTime;
     }
 
+    /**
+     * Returns the id of all stop_times contained in this route
+     * @return List of all stop_time ids in this route
+     */
     public List<StopTimeID> getStopTimeIDs() {
         List<StopTimeID> allStopTimeIDs = new ArrayList<>();
+        // iterate through all trips and add stop_times ids to new array list
         for (Trip trip : trips.values()) {
             allStopTimeIDs.addAll(trip.getStopTimeIDs());
         }
+        // return the array list with duplicates removed
         return allStopTimeIDs.stream().distinct().collect(Collectors.toList());
     }
 
+    /**
+     * Returns all the stop_times contained in this route
+     * @return List of stop_times in this route
+     */
     public List<StopTime> getStopTimes() {
         List<StopTime> allStopTimes = new ArrayList<>();
+        // iterate through all trips and add stop_times to new array list
         for (Trip trip : trips.values()) {
             allStopTimes.addAll(trip.getStopTimes());
         }
+        // return the array list with duplicates removed
         return allStopTimes.stream().distinct().collect(Collectors.toList());
     }
 
     /**
-     * @param id
+     * Get a specific trip in this route by trip id
+     * @param id Trip id to search for
      */
     public Trip getTripByID(TripID id) {
-        Trip removedTrip = trips.get(id);
-        trips.remove(id);
-        return removedTrip;
+        return trips.get(id);
     }
 
-
+    /**
+     * Get a list of trip ids contained in this route
+     * @return List of trip ids in this route
+     */
     public List<TripID> getTripIDs() {
-        Set<TripID> mySet = trips.keySet();
-        List<TripID> tripsArray = new ArrayList<>(mySet);
-        return tripsArray;
+        Set<TripID> tripIDS = trips.keySet();
+        return new ArrayList<>(tripIDS);
 
     }
 
+    /**
+     * Get a list of all trips contained in this route
+     * @return List of all trips in this route
+     */
     public List<Trip> getTrips() {
-        Collection<Trip> mySet = trips.values();
-        List<Trip> tripsArray = new ArrayList<>(mySet);
-        return tripsArray;
+        Collection<Trip> routeTrips = trips.values();
+        return new ArrayList<>(routeTrips);
     }
 
     public RouteType getRouteType() {
@@ -269,113 +308,115 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @param trip
+     * Remove a trip from this route
+     * @param trip Trip to remove from the route
      */
     public Trip removeTrip(Trip trip) {
-        Trip removedTrip = trips.get(trip.getID());
-        trips.remove(trip.getID());
-        return removedTrip;
+        // id of trip to remove
+        TripID removedID = (TripID) trip.getID();
+        // remove trip and return it
+        return trips.remove(removedID);
     }
 
     /**
-     * @param id
+     * Remove a trip from this route
+     * @param id ID of the trip to remove
      */
     public Trip removeTripByID(TripID id) {
-        Trip removedTrip = trips.get(id);
-        trips.remove(id);
-        return removedTrip;
+        return trips.remove(id);
     }
 
     /**
-     *
-     * @return
+     * Getter for route short name
+     * @return Short name of route
      */
     public String getShortName() {
         return shortName;
     }
 
     /**
-     *
-     * @param shortName
+     * Setter for route short name
+     * @param shortName Short name to set for this route
      */
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
 
     /**
-     *
-     * @return
+     * Getter for route long name
+     * @return Long name of route
      */
     public String getLongName() {
         return longName;
     }
 
     /**
-     *
-     * @param longName
+     * Setter for route long name
+     * @param longName Long name to set for this route
      */
     public void setLongName(String longName) {
         this.longName = longName;
     }
 
     /**
-     *
-     * @return
+     * Getter for route color
+     * @return Color of this route
      */
     public Color getColor() {
         return color;
     }
 
     /**
-     *
-     * @param color
+     * Seter for route color
+     * @param color Color to set for this route
      */
     public void setColor(Color color) {
         this.color = color;
     }
 
     /**
-     *
-     * @return
+     * Getter for route text color
+     * @return Color of this route text color
      */
     public Color getTextColor() {
         return textColor;
     }
 
     /**
-     *
-     * @param textColor
+     * Setter for route text color
+     * @param textColor Color to set for the text color
      */
     public void setTextColor(Color textColor) {
         this.textColor = textColor;
     }
 
     /**
-     *
-     * @return
+     * Getter for route URL
+     * @return URL of this route
      */
     public String getURL() {
         return url;
     }
 
     /**
-     *
-     * @param url
+     * Setter for route URL
+     * @param url URL to set for this route
      */
     public void setURL(String url) {
         this.url = url;
     }
+
     /**
-     *
-     * @return
+     * Getter for route description
+     * @return Description of this route
      */
     public String getDesc() {
         return desc;
     }
 
     /**
-     *
-     * @param desc
+     * Setter for route description
+     * @param desc Description to set for this route
      */
     public void setDesc(String desc) {
         this.desc = desc;
