@@ -36,11 +36,11 @@ public class Trip extends GTFSElement {
     /**
      * Constructor for the trip object with an id and feed as parameters
      *
-     * @param id   for the trip
+     * @param idString   for the trip
      * @param feed for the trip
      */
-    public Trip(Feed feed, String id) {
-        super(new TripID(id));
+    public Trip(Feed feed, String idString) {
+        super(new TripID(idString));
         this.feed = feed;
     }
 

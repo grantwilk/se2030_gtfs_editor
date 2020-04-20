@@ -45,11 +45,11 @@ public class Stop extends GTFSElement {
     /**
      * Constructor for the stop object with an id and feed as parameters
      *
-     * @param id   for the stop
+     * @param idString   for the stop
      * @param feed for the stop
      */
-    public Stop(Feed feed, String id) {
-        super(new StopID(id));
+    public Stop(Feed feed, String idString) {
+        super(new StopID(idString));
         this.feed = feed;
     }
 

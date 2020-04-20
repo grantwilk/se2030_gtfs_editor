@@ -40,26 +40,27 @@ public class Feed extends GTFSElement {
 
     /**
      * Creates a new feed with a specified ID
-     * @param id
+     * @param idString - the ID string to create the Feed ID from
      */
 
-    public Feed(String id) {
-        super(new FeedID(id));
+    public Feed(String idString) {
+        super(new FeedID(idString));
     }
 
 
     /**
-     * @param routes
+     * Adds a list of routes to the feed
+     * @param routes - the list of routes to add
      */
     public void addAllRoutes(List<Route> routes) {
-        for(int x = 0; x <= routes.size(); x++){
-            this.routes.put(new RouteID(), routes.get(x));
+        for(Route route : routes){
+            this.routes.put((RouteID) route.getID(), route);
         }
-
     }
 
     /**
-     * @param route
+     * Adds a route to the feed
+     * @param route 
      */
     public void addRoute(Route route) {
         routes.put(new RouteID(), route);
