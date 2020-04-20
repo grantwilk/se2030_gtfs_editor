@@ -84,6 +84,10 @@ public class Feed extends GTFSElement {
      * @param trips
      */
     public void addAllTrips(List<Trip> trips){
+        for(int x = 0; x <= list.size(); x++){
+            this.trips.put(trips[x].getTripID, trips[x]);
+        }
+
 
     }
 
