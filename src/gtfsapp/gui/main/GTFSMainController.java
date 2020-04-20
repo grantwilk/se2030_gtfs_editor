@@ -321,8 +321,8 @@ public class GTFSMainController extends GTFSController {
                 String subtitle = entry.getValue();
 
                 // configure controller attributes
-                attributeController.setTitle(title);
-                attributeController.setSubtitle(subtitle);
+                attributeController.setName(title);
+                attributeController.getValue(subtitle);
 
                 // add the attribute to the GUI
                 selectedElementAttributesContainer.getChildren().addAll(root);

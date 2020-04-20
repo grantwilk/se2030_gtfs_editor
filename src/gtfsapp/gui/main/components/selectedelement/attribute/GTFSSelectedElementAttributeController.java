@@ -4,50 +4,63 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
+/**
+ * @author Grant Wilk
+ * @version 1.0
+ * @created 19-Apr-2020 12:05:19 PM
+ */
 public class GTFSSelectedElementAttributeController {
 
+    /**
+     * The root container of the attribute
+     */
     @FXML
     VBox selectedElementAttribute;
 
+    /**
+     * The name of the attribute
+     */
     @FXML
-    Label attributeTitle;
+    Label attributeName;
 
+    /**
+     * The value of the attribute
+     */
     @FXML
-    Label attributeSubtitle;
+    Label attributeValue;
 
     /**
-     * Gets the title of the attribute
-     * @return the title of the attribute
+     * Gets the name of the attribute
+     *
+     * @return the name of the attribute
      */
-    public String getTitle() {
-        return attributeTitle.getText();
+    public String getName() {
+        return attributeName.getText();
     }
 
     /**
-     * Sets the title of the attribute
-     * @param title - the title of the attribute
+     * Sets the name of the attribute
+     *
+     * @param name - the name of the attribute
      */
-    public void setTitle(String title) {
-        attributeTitle.setText(title);
+    public void setName(String name) {
+        attributeName.setText(name);
     }
 
     /**
-     * Gets the subtitle of the attribute
-     * @return the subtitle of the attribute
+     * Gets the value of the attribute
+     *
+     * @return the value of the attribute
      */
-    public String getSubtitle() {
-        return attributeSubtitle.getText();
+    public String getValue() {
+        return attributeValue.getText();
     }
 
     /**
-     * Sets the subtitle of the attribute
+     * Sets the value of the attribute
      */
-    public void setSubtitle(String subtitle) {
-        attributeSubtitle.setText(subtitle);
+    public void getValue(String value) {
+        attributeValue.setText(value);
     }
 
 
