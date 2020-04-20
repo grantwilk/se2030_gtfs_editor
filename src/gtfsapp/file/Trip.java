@@ -63,7 +63,7 @@ public class Trip extends GTFSElement {
     /**
      * Adds a list of the stop times to the internal map of stop times
      *
-     * @param stopTimes - the list of stop times
+     * @param stopTimes the list of stop times
      */
     public void addAllStopTimes(List<StopTime> stopTimes) {
 
@@ -100,7 +100,7 @@ public class Trip extends GTFSElement {
     /**
      * Checks to see if this trip contains a specific stop
      *
-     * @param id - the ID of the stop
+     * @param id the ID of the stop
      */
     public boolean containsStop(StopID id) {
         return stops.containsKey(id);
@@ -109,7 +109,7 @@ public class Trip extends GTFSElement {
     /**
      * Checks to see if this trip contains a specific stop time
      *
-     * @param id - the ID of the stop time
+     * @param id the ID of the stop time
      */
     public boolean containsStopTime(StopTimeID id) {
         return stopTimes.containsKey(id);
@@ -134,7 +134,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets a stop time contained within the trip by its ID
      *
-     * @param id - the ID of the stop time
+     * @param id the ID of the stop time
      */
     public StopTime getStopTimeByID(StopTimeID id) {
         return stopTimes.get(id);
@@ -163,7 +163,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets a stop contained within the trip by its ID
      *
-     * @param id - the ID of the stop
+     * @param id the ID of the stop
      */
     public Stop getStopByID(StopID id) {
         return stops.get(id);
@@ -263,7 +263,7 @@ public class Trip extends GTFSElement {
     /**
      * Setter for the head sign for the trip
      *
-     * @param headSign - the headSign of the trip
+     * @param headSign the headSign of the trip
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;

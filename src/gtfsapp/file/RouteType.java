@@ -1,7 +1,7 @@
 package gtfsapp.file;
 
 /**
- * Types of routes
+ * The types of transportation used for a route
  */
 public enum RouteType {
     STREETCAR,

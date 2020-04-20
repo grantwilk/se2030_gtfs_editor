@@ -40,7 +40,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a route to the feed
-     * @param route - the route to add
+     * @param route the route to add
      */
     public void addRoute(Route route) {
         routes.put((RouteID) route.getID(), route);
@@ -49,7 +49,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of routes to the feed
-     * @param routes - the list of routes to add
+     * @param routes the list of routes to add
      */
     public void addAllRoutes(List<Route> routes) {
         for(Route route : routes){
@@ -59,7 +59,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a trip to the feed
-     * @param trip - the trip to add
+     * @param trip the trip to add
      */
     public void addTrip(Trip trip) {
         trips.put((TripID) trip.getID(),trip);
@@ -67,7 +67,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of trips to the feed
-     * @param trips - the list of trips to add
+     * @param trips the list of trips to add
      */
     public void addAllTrips(List<Trip> trips){
         for(Trip trip : trips){
@@ -78,7 +78,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a stop time to the feed
-     * @param stopTime - the stop time to add
+     * @param stopTime the stop time to add
      */
     public void addStopTime(StopTime stopTime) {
         stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
@@ -86,7 +86,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of stop times to the feed
-     * @param stopTimes - the list of stop times to add
+     * @param stopTimes the list of stop times to add
      */
     public void addAllStopTimes(List<StopTime> stopTimes){
         for(StopTime stopTime : stopTimes){
@@ -96,7 +96,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a stop to the feed
-     * @param stop - the stop to add
+     * @param stop the stop to add
      */
     public void addStops(Stop stop) {
         stops.put((StopID) stop.getID(), stop);
@@ -104,7 +104,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Adds a list of stops to the feed
-     * @param stops - the list of stops to add
+     * @param stops the list of stops to add
      */
     public void addAllStops(List<Stop> stops){
         for(Stop stop : stops){
@@ -121,7 +121,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a route
-     * @param id - the ID of the route
+     * @param id the ID of the route
      */
     public boolean containsRoute(RouteID id) {
         return routes.containsKey(id);
@@ -129,7 +129,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a trip
-     * @param id - the ID of the trip
+     * @param id the ID of the trip
      */
     public boolean containsTrip(TripID id) {
         return trips.containsKey(id);
@@ -137,7 +137,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a stop time
-     * @param id - the ID of the stop time
+     * @param id the ID of the stop time
      */
     public boolean containsStopTime(StopTimeID id) {
         return stopTimes.containsKey(id);
@@ -145,7 +145,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Determines whether the feed contains a stop
-     * @param id - the ID of the stop
+     * @param id the ID of the stop
      */
     public boolean containsStop(StopID id) {
         return stops.containsKey(id);
@@ -153,7 +153,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a route from the feed by its ID
-     * @param id - the ID of the route
+     * @param id the ID of the route
      * @return the route if it exists, otherwise return null
      */
     public Route getRouteByID(RouteID id) {
@@ -178,7 +178,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a trip from the feed by its ID
-     * @param id - the ID of the trip
+     * @param id the ID of the trip
      * @return the trip if it exists, otherwise return null
      */
     public Trip getTripByID(TripID id) {
@@ -203,7 +203,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a stop time from the feed by its ID
-     * @param id - the ID of the stop time
+     * @param id the ID of the stop time
      * @return the stop time if it exists, otherwise return null
      */
     public StopTime getStopTimeByID(StopTimeID id) {
@@ -229,7 +229,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets a stop within the feed by its ID
-     * @param id - the ID of the stop
+     * @param id the ID of the stop
      * @return the stop if it exists, otherwise return null
      */
     public Stop getStopByID(StopID id) {
@@ -254,7 +254,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Removes a route from the feed
-     * @param route - the route to remove
+     * @param route the route to remove
      */
     public Route removeRoute(Route route) {
         return routes.remove((RouteID) route.getID());
@@ -262,7 +262,7 @@ public class Feed extends GTFSElement {
 
     /**
      * Removes a route from the feed by its ID
-     * @param id - the ID of the route to remove
+     * @param id the ID of the route to remove
      */
     public Route removeRouteByID(RouteID id) {
         return routes.remove(id);

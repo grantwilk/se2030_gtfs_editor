@@ -99,7 +99,7 @@ public class StopTime extends GTFSElement {
     }
      /**
      * Sets the arrival time for the stop
-     * @param arrivalTime - the time the trip arrives at the stop
+     * @param arrivalTime the time the trip arrives at the stop
      */
     public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
@@ -118,7 +118,7 @@ public class StopTime extends GTFSElement {
     /**
      * Sets the departure time for the stop
      *
-     * @param departureTime - the time the trip leaves the stop
+     * @param departureTime the time the trip leaves the stop
      */
     public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
@@ -136,7 +136,7 @@ public class StopTime extends GTFSElement {
     /**
      * Sets the stop that this stop time occurs at
      *
-     * @param stop - the stop that this stop time occurs at
+     * @param stop the stop that this stop time occurs at
      */
     public void setStop(Stop stop) {
         this.stop = stop;
@@ -154,7 +154,7 @@ public class StopTime extends GTFSElement {
     /**
      * Sets the head sign for the stop time
      *
-     * @param headSign - the head sign
+     * @param headSign the head sign
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;
@@ -172,7 +172,7 @@ public class StopTime extends GTFSElement {
     /**
      * Sets the sequence of the stop
      *
-     * @param sequence - the sequence of the stop
+     * @param sequence the sequence of the stop
      */
     public void setSequence(int sequence) {
         this.sequence = sequence;
