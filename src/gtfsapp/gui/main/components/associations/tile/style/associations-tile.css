@@ -1,3 +1,10 @@
+/**
+  * file:       associations-tile.css
+  * author:     Grant Wilk
+  * created:    April 18, 2020
+  * brief:      contains styling for associations tiles
+ */
+
 .associations-tile {
     -fx-background-color: white;
     -fx-background-radius: 7;

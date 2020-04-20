@@ -1,3 +1,10 @@
+/**
+  * file:       selected-element-attribute.css
+  * author:     Grant Wilk
+  * created:    April 18, 2020
+  * brief:      contains styling for selected element attributes
+ */
+
 .selected-element-attribute {
     -fx-background-color: transparent;
     -fx-spacing: -2;
