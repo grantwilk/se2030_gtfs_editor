@@ -29,7 +29,6 @@ public class StopTime extends GTFSElement {
      * @param sequence of the stopTimes
      */
     public StopTime(Feed feed, Stop stop, int sequence) {
-        // TODO - this constructor is not fully implemented!
         super(new StopTimeID());
         this.feed = feed;
         this.stop = stop;
