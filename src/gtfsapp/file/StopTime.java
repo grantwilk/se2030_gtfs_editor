@@ -90,12 +90,20 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     * Sets the arrival time for the stop
      *
+     * Returns the trip this stop time belongs to
+     * @return The trip
+     */
+    public Trip getTrip() {
+        return null;
+    }
+     /**
+     * Sets the arrival time for the stop
      * @param arrivalTime - the time the trip arrives at the stop
      */
     public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
+
     }
 
     /**
@@ -104,7 +112,7 @@ public class StopTime extends GTFSElement {
      * @return the time the trip leaves the stop
      */
     public Date getDepartureTime() {
-        return departureTime;
+        return this.departureTime;
     }
 
     /**
