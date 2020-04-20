@@ -36,25 +36,6 @@ public class Feed extends GTFSElement {
     }
 
     /**
-     * @param id
-     * @param name
-     */
-    public Feed(String id, String name) {
-        // TODO - this constructor is not fully implemented!
-        this(id);
-    }
-
-    /**
-     * @param id
-     * @param name
-     * @param color
-     */
-    public Feed(String id, String name, Color color) {
-        // TODO - this constructor is not fully implemented!
-        this(id);
-    }
-
-    /**
      * @param routes
      */
     public void addAllRoutes(List<Route> routes) {
