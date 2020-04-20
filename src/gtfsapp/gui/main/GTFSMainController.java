@@ -33,150 +33,125 @@ import java.util.Map;
 public class GTFSMainController extends GTFSController {
 
     /**
+     * The color displayed in the selected element panel if there is no selected element
+     */
+    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
+    /**
+     * The title displayed in the selected element panel if there is no selected element
+     */
+    private static final String NULL_SELECTED_ELEMENT_TITLE = "NULL";
+    /**
+     * The subtitle displayed in the selected element panel if there is no selected element
+     */
+    private static final String NULL_SELECTED_ELEMENT_SUBTITLE = "Nothing to see here!";
+    /**
      * List of all routes associated with the selected element
      */
     private ArrayList<Route> associatedRoutes;
-
     /**
      * List of all trips associated with the selected element
      */
     private ArrayList<Trip> associatedTrips;
-
     /**
      * List of all stops associated with the selected element
      */
     private ArrayList<Stop> associatedStops;
-
     /**
      * List of all stop times associated with the selected element
      */
     private ArrayList<StopTime> associatedStopTimes;
-
     /**
      * The controller's GTFS file
      */
     private GTFSFile gtfsFile;
-
     /**
      * The controller's child map controller
      */
     private GTFSMapController mapController;
-
     /**
      * The controller's currently selected element
      */
     private GTFSElement selectedElement = null;
-
     /**
      * The main panel/root
      */
     @FXML
     private HBox mainPanel;
-
     /**
      * The root of the info panel
      */
     @FXML
     private VBox infoPanel;
-
     /**
      * The root of the file header on the info panel
      */
     @FXML
     private HBox fileHeaderPanel;
-
     /**
      * The root of the search panel on the info panel
      */
     @FXML
     private VBox searchPanel;
-
     /**
      * The search field/box in the search panel
      */
     @FXML
     private TextField searchField;
-
     /**
      * The root of the selected element panel on the info panel
      */
     @FXML
     private VBox selectedElementPanel;
-
     /**
      * The pane that displays the selected element's color
      */
     @FXML
     private Pane selectedElementColor;
-
     /**
      * The label that displays the title of the selected element
      */
     @FXML
     private Label selectedElementTitle;
-
     /**
      * The label that displays the subtitle of the selected element
      */
     @FXML
     private Label selectedElementSubtitle;
-
     /**
      * The container that holds the dynamically generated selected element attributes
      */
     @FXML
     private VBox selectedElementAttributesContainer;
-
     /**
      * The root of the associations panel on the info panel
      */
     @FXML
     private Pane associationsPanel;
-
     /**
      * The tab pane that holds the association type tabs
      */
     @FXML
     private TabPane associationsTabPane;
-
     /**
      * The container that holds the dynamically generated associated routes
      */
     @FXML
     private VBox associatedRoutesContainer;
-
     /**
      * The container that holds the dynamically generated associated trips
      */
     @FXML
     private VBox associatedTripsContainer;
-
     /**
      * The container that holds the dynamically generated associated stop times
      */
     @FXML
     private VBox associatedStopTimesContainer;
-
     /**
      * The container that holds the dynamically generated associated stops
      */
     @FXML
     private VBox associatedStopsContainer;
-
-    /**
-     * The color displayed in the selected element panel if there is no selected element
-     */
-    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
-
-    /**
-     * The title displayed in the selected element panel if there is no selected element
-     */
-    private static final String NULL_SELECTED_ELEMENT_TITLE = "NULL";
-
-    /**
-     * The subtitle displayed in the selected element panel if there is no selected element
-     */
-    private static final String NULL_SELECTED_ELEMENT_SUBTITLE = "Nothing to see here!";
 
     /**
      * Invokes the system's file chooser and loads a GTFS file from the computer's file system
