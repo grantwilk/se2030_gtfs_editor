@@ -23,7 +23,7 @@
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <Ellipse id="error-color" fx:id="errorTypeIndicator" fill="SILVER" radiusX="25.0" radiusY="25.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Ellipse id="error-type-indicator" fx:id="errorTypeIndicator" fill="SILVER" radiusX="25.0" radiusY="25.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER_LEFT" styleClass="error-info-container" GridPane.columnIndex="1">
