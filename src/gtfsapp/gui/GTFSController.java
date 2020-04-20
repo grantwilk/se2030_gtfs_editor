@@ -11,7 +11,14 @@ import javafx.stage.Stage;
  */
 public abstract class GTFSController {
 
+    /**
+     * The controller's scene
+     */
     private Scene scene;
+
+    /**
+     * The controller's stage
+     */
     private Stage stage;
 
     /**
