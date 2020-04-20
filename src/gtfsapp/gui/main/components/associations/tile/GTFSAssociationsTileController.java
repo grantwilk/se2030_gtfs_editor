@@ -13,15 +13,31 @@ import javafx.scene.layout.GridPane;
  */
 public class GTFSAssociationsTileController {
 
+    /**
+     * The main controller housing this controller
+     */
     private GTFSMainController mainController;
+
+    /**
+     * The element that this association tile is representing
+     */
     private GTFSElement element;
 
+    /**
+     * The root of the associations tile
+     */
     @FXML
     private GridPane associationsTile;
 
+    /**
+     * The title of the associations tile
+     */
     @FXML
     private Label tileTitle;
 
+    /**
+     * The subtitle of the associations tile
+     */
     @FXML
     private Label tileSubtitle;
 
@@ -33,31 +49,8 @@ public class GTFSAssociationsTileController {
     }
 
     /**
-     * Sets the main controller for the associations tile
-     * @param mainController - the main controller
-     */
-    public void setMainController(GTFSMainController mainController) {
-        this.mainController = mainController;
-    }
-
-    /**
-     * Gets the associations tile's main controller
-     * @return the associations tile's main controller
-     */
-    public GTFSMainController getMainController() {
-        return mainController;
-    }
-
-    /**
-     * Sets the tile's GTFS element
-     * @param element - the element
-     */
-    public void setElement(GTFSElement element) {
-        this.element = element;
-    }
-
-    /**
      * Gets the tile's GTFS element
+     *
      * @return the tile's GTFS element
      */
     public GTFSElement getElement() {
@@ -65,15 +58,17 @@ public class GTFSAssociationsTileController {
     }
 
     /**
-     * Sets the title of the tile
-     * @param title - the title of the tile
+     * Sets the tile's GTFS element
+     *
+     * @param element - the element
      */
-    public void setTitle(String title) {
-        tileTitle.setText(title);
+    public void setElement(GTFSElement element) {
+        this.element = element;
     }
 
     /**
      * Gets the title of the tile
+     *
      * @return the title of the tile
      */
     public String getTitle() {
@@ -81,7 +76,26 @@ public class GTFSAssociationsTileController {
     }
 
     /**
+     * Sets the title of the tile
+     *
+     * @param title - the title of the tile
+     */
+    public void setTitle(String title) {
+        tileTitle.setText(title);
+    }
+
+    /**
+     * Gets the subtitle of the tile
+     *
+     * @return the subtitle of the tile
+     */
+    public String getSubtitle() {
+        return tileSubtitle.getText();
+    }
+
+    /**
      * Sets the subtitle of the tile
+     *
      * @param subtitle - the of of the tile
      */
     public void setSubtitle(String subtitle) {
@@ -89,11 +103,21 @@ public class GTFSAssociationsTileController {
     }
 
     /**
-     * Gets the subtitle of the tile
-     * @return the subtitle of the tile
+     * Gets the associations tile's main controller
+     *
+     * @return the associations tile's main controller
      */
-    public String getSubtitle() {
-        return tileSubtitle.getText();
+    public GTFSMainController getMainController() {
+        return mainController;
+    }
+
+    /**
+     * Sets the main controller for the associations tile
+     *
+     * @param mainController - the main controller
+     */
+    public void setMainController(GTFSMainController mainController) {
+        this.mainController = mainController;
     }
 
 
