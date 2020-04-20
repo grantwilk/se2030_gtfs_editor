@@ -39,12 +39,11 @@ public class Feed extends GTFSElement {
     }
 
     /**
-     * Creates a new feed with a specified ID
-     * @param idString - the ID string to create the Feed ID from
+     * Adds a route to the feed
+     * @param route - the route to add
      */
-
-    public Feed(String idString) {
-        super(new FeedID(idString));
+    public void addRoute(Route route) {
+        routes.put((RouteID) route.getID(), route);
     }
 
 
@@ -59,169 +58,153 @@ public class Feed extends GTFSElement {
     }
 
     /**
-     * Adds a route to the feed
-     * @param route 
-     */
-    public void addRoute(Route route) {
-        routes.put(new RouteID(), route);
-
-    }
-
-    /**
-     *
-     * @param trips
-     */
-    public void addAllTrips(List<Trip> trips){
-        for(int x = 0; x <= trips.size(); x++){
-            this.trips.put(new TripID(), trips.get(x));
-        }
-
-
-    }
-
-    /**
-     *
-     * @param trip
+     * Adds a trip to the feed
+     * @param trip - the trip to add
      */
     public void addTrip(Trip trip) {
-        trips.put(new TripID(),trip);
-
+        trips.put((TripID) trip.getID(),trip);
     }
 
     /**
-     *
-     * @param stopTimes
+     * Adds a list of trips to the feed
+     * @param trips - the list of trips to add
      */
-    public void addAllStopTimes(List<StopTime> stopTimes){
-        for(int x = 0; x <= stopTimes.size(); x++){
-            this.stopTimes.put(new StopTimeID(), stopTimes.get(x));
+    public void addAllTrips(List<Trip> trips){
+        for(Trip trip : trips){
+            this.trips.put((TripID) trip.getID(), trip);
         }
 
     }
 
     /**
-     *
-     * @param stopTime
+     * Adds a stop time to the feed
+     * @param stopTime - the stop time to add
      */
     public void addStopTime(StopTime stopTime) {
-        stopTimes.put(new StopTimeID(), stopTime);
+        stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
     }
 
     /**
-     *
-     * @param stops
+     * Adds a list of stop times to the feed
+     * @param stopTimes - the list of stop times to add
      */
-    public void addAllStops(List<Stop> stops){
-        for(int x = 0; x <= stops.size(); x++){
-            this.stops.put(new StopID(), stops.get(x));
+    public void addAllStopTimes(List<StopTime> stopTimes){
+        for(StopTime stopTime : stopTimes){
+            this.stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
         }
-
     }
 
     /**
-     *
-     * @param stop
+     * Adds a stop to the feed
+     * @param stop - the stop to add
      */
     public void addStops(Stop stop) {
-        stops.put(new StopID(), stop);
+        stops.put((StopID) stop.getID(), stop);
     }
 
     /**
-     *
+     * Adds a list of stops to the feed
+     * @param stops - the list of stops to add
+     */
+    public void addAllStops(List<Stop> stops){
+        for(Stop stop : stops){
+            this.stops.put((StopID) stop.getID(), stop);
+        }
+    }
+
+    /**
+     * Clears all of the routes from the feed
      */
     public void clearRoutes() {
         routes.clear();
-
     }
 
     /**
-     * @param id
+     * Determines whether the feed contains a route
+     * @param id - the ID of the route
      */
     public boolean containsRoute(RouteID id) {
         return routes.containsKey(id);
     }
 
     /**
-     * @param id
-     */
-    public boolean containsStop(StopID id) {
-        return routes.containsKey(id);
-    }
-
-    /**
-     * @param id
-     */
-    public boolean containsStopTime(StopTimeID id) {
-        return routes.containsKey(id);
-    }
-
-    /**
-     * @param id
+     * Determines whether the feed contains a trip
+     * @param id - the ID of the trip
      */
     public boolean containsTrip(TripID id) {
-        return routes.containsKey(id);
+        return trips.containsKey(id);
     }
 
     /**
-     * @param id
+     * Determines whether the feed contains a stop time
+     * @param id - the ID of the stop time
+     */
+    public boolean containsStopTime(StopTimeID id) {
+        return stopTimes.containsKey(id);
+    }
+
+    /**
+     * Determines whether the feed contains a stop
+     * @param id - the ID of the stop
+     */
+    public boolean containsStop(StopID id) {
+        return stops.containsKey(id);
+    }
+
+    /**
+     * Gets a route from the feed by its ID
+     * @param id - the ID of the route
+     * @return the route if it exists, otherwise return null
      */
     public Route getRouteByID(RouteID id) {
         return routes.get(id);
     }
 
     /**
-     *
-     * @return
+     * Gets a list of the route IDs within the feed
+     * @return a list of route IDs within the feed
      */
     public List<RouteID> getRouteIDs() {
-        Set<RouteID> mySet = routes.keySet();
-        List<RouteID> routeIDArray = new ArrayList<>(mySet);
-        return routeIDArray;
-
+        return new ArrayList<>(routes.keySet());
     }
 
     /**
-     *
-     * @return
+     * Gets a list of routes within the feed
+     * @return a list of routes within the feed
      */
     public List<Route> getRoutes() {
-        Collection<Route> mySet = routes.values();
-        List<Route> routeArray = new ArrayList<>(mySet);
-        return routeArray;
-
+        return new ArrayList<>(routes.values());
     }
 
     /**
-     * @param id
+     * Gets a trip from the feed by its ID
+     * @param id - the ID of the trip
+     * @return the trip if it exists, otherwise return null
      */
-    public Stop getStopByID(StopID id) {
-        return stops.get(id);
+    public Trip getTripByID(TripID id) {
+        return trips.get(id);
     }
 
     /**
-     *
-     * @return
+     * Gets a list of trip IDs within the feed
+     * @return a list of trip IDs within the feed
      */
-    public List<StopID> getStopIDs() {
-        Set<StopID> mySet = stops.keySet();
-        List<StopID> stopArray = new ArrayList<>(mySet);
-        return stopArray;
-
+    public List<TripID> getTripIDs() {
+        return new ArrayList<>(trips.keySet());
     }
 
     /**
-     *
-     * @return
+     * Get a list of trips within the feed
+     * @return a list of trips within the feed
      */
-    public List<Stop> getStops() {
-        Collection<Stop> mySet = stops.values();
-        List<Stop> stopArray = new ArrayList<>(mySet);
-        return stopArray;
-
+    public List<Trip> getTrips() {
+        return new ArrayList<>(trips.values());
     }
 
     /**
-     * @param id
+     * Gets a stop time from the feed by its ID
+     * @param id - the ID of the stop time
+     * @return the stop time if it exists, otherwise return null
      */
     public StopTime getStopTimeByID(StopTimeID id) {
         return stopTimes.get(id);
@@ -229,67 +212,60 @@ public class Feed extends GTFSElement {
     }
 
     /**
-     *
-     * @return
+     * Gets a list of stop time IDs within the feed
+     * @return a list of stop time IDs within the feed
      */
     public List<StopTimeID> getStopTimeIDs() {
-        Set<StopTimeID> mySet = stopTimes.keySet();
-        List<StopTimeID> stopTimeArray = new ArrayList<>(mySet);
-        return stopTimeArray;
+        return new ArrayList<>(stopTimes.keySet());
     }
 
     /**
-     *
-     * @return
+     * Gets a list of stop times within the feed
+     * @return a list of stop times within the feed
      */
     public List<StopTime> getStopTimes() {
-        Collection<StopTime> mySet = stopTimes.values();
-        List<StopTime> stopTimeArray = new ArrayList<>(mySet);
-        return stopTimeArray;
+        return new ArrayList<>(stopTimes.values());
     }
 
     /**
-     * @param id
+     * Gets a stop within the feed by its ID
+     * @param id - the ID of the stop
+     * @return the stop if it exists, otherwise return null
      */
-    public Trip getTripByID(TripID id) {
-        return trips.get(id);
+    public Stop getStopByID(StopID id) {
+        return stops.get(id);
     }
 
     /**
-     *
-     * @return
+     * Gets all of the stop IDs within the feed
+     * @return a list of stop IDs within the feed
      */
-    public List<TripID> getTripIDs() {
-        Set<TripID> mySet = trips.keySet();
-        List<TripID> TripIDArray = new ArrayList<>(mySet);
-        return TripIDArray;
+    public List<StopID> getStopIDs() {
+        return new ArrayList<>(stops.keySet());
     }
 
     /**
-     *
-     * @return
+     * Gets all of the stops within the feed
+     * @return a list of stops within the feed
      */
-    public List<Trip> getTrips() {
-        Collection<Trip> mySet = trips.values();
-        List<Trip> TripArray = new ArrayList<>(mySet);
-        return TripArray;
+    public List<Stop> getStops() {
+        return new ArrayList<>(stops.values());
     }
 
     /**
-     * @param route
+     * Removes a route from the feed
+     * @param route - the route to remove
      */
     public Route removeRoute(Route route) {
-        Route removedRoute = routes.get(route.getID());
-        routes.remove(route.getID());
-        return removedRoute;
+        return routes.remove((RouteID) route.getID());
     }
 
     /**
-     * @param id
+     * Removes a route from the feed by its ID
+     * @param id - the ID of the route to remove
      */
     public Route removeRouteByID(RouteID id) {
-        Route removedRoute = routes.get(id);
-        return removedRoute;
+        return routes.remove(id);
     }
 
     /**
