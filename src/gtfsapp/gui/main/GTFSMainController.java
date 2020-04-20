@@ -16,6 +16,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -53,22 +54,22 @@ public class GTFSMainController extends GTFSController {
     /**
      * List of all routes associated with the selected element
      */
-    private ArrayList<Route> associatedRoutes;
+    private ArrayList<Route> associatedRoutes = new ArrayList<>();
 
     /**
      * List of all trips associated with the selected element
      */
-    private ArrayList<Trip> associatedTrips;
+    private ArrayList<Trip> associatedTrips = new ArrayList<>();
 
     /**
      * List of all stops associated with the selected element
      */
-    private ArrayList<Stop> associatedStops;
+    private ArrayList<Stop> associatedStops = new ArrayList<>();
 
     /**
      * List of all stop times associated with the selected element
      */
-    private ArrayList<StopTime> associatedStopTimes;
+    private ArrayList<StopTime> associatedStopTimes = new ArrayList<>();
 
     /**
      * The controller's GTFS file
@@ -140,6 +141,12 @@ public class GTFSMainController extends GTFSController {
     private Label selectedElementSubtitle;
 
     /**
+     * The separator between the selected element's title and the attributes container
+     */
+    @FXML
+    private Line selectedElementAttributesSeparator;
+
+    /**
      * The container that holds the dynamically generated selected element attributes
      */
     @FXML
@@ -180,6 +187,14 @@ public class GTFSMainController extends GTFSController {
      */
     @FXML
     private VBox associatedStopsContainer;
+
+    /**
+     * FXML initialization function
+     */
+    @FXML
+    public void initialize () {
+        updateInfoPanel();
+    }
 
     /**
      * Invokes the system's file chooser and loads a GTFS file from the computer's file system
@@ -332,16 +347,32 @@ public class GTFSMainController extends GTFSController {
      */
     public void updateSelectedElementPanel() throws IOException {
 
-        // set the selected elements title, subtitle, and color
+        // if there is no selected element
         if (selectedElement == null) {
+
+            // set the title, subtitle, and color to the null color
             selectedElementTitle.setText(NULL_SELECTED_ELEMENT_TITLE);
             selectedElementSubtitle.setText(NULL_SELECTED_ELEMENT_SUBTITLE);
             selectedElementColor.setStyle("-fx-background-color: " + NULL_SELECTED_ELEMENT_COLOR);
-        } else {
+
+            // hide the separator and the attributes container
+            selectedElementAttributesSeparator.setVisible(false);
+            selectedElementAttributesContainer.setManaged(false);
+
+        }
+
+        // if there is a selected element
+        else {
+
+            // set the title, subtitle, and color to the selected element's values
+            // TODO - get element color and display that instead of red
             selectedElementTitle.setText(selectedElement.getTitle().toUpperCase());
             selectedElementSubtitle.setText(selectedElement.getSubtitle());
-            // TODO - get element color and display that instead of red
             selectedElementColor.setStyle("-fx-background-color: red");
+
+            // show the separator and the attributes container
+            selectedElementAttributesSeparator.setVisible(true);
+            selectedElementAttributesContainer.setManaged(true);
 
         }
 

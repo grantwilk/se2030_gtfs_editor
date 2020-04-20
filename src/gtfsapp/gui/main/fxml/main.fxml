@@ -75,7 +75,7 @@
                                  <children>
                                     <Label id="element-title" fx:id="selectedElementTitle" focusTraversable="false" text="NULL" />
                                     <Label id="element-subtitle" fx:id="selectedElementSubtitle" focusTraversable="false" text="Nothing to see here!" />
-                                    <Line id="title-separator" endX="150.0">
+                                    <Line id="title-separator" fx:id="selectedElementAttributesSeparator" endX="150.0">
                                        <VBox.margin>
                                           <Insets top="6.0" />
                                        </VBox.margin>
