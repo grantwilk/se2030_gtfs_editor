@@ -228,7 +228,7 @@ public class GTFSMainController extends GTFSController {
                 gtfsFile.load();
 
                 // update GUI's associated elements
-                updateAssociatedElements();
+                updateAssociations();
 
                 // update info panel GUI
                 updateInfoPanel();
@@ -429,19 +429,9 @@ public class GTFSMainController extends GTFSController {
     }
 
     /**
-     * Updates the GUI's associations panel
-     */
-    public void updateAssociationsPanel() throws IOException {
-        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
-        updateAssociationsTab(associatedTrips, associatedTripsContainer);
-        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
-        updateAssociationsTab(associatedStops, associatedStopsContainer);
-    }
-
-    /**
      * Updates the controller's associated elements lists
      */
-    public void updateAssociatedElements() {
+    public void updateAssociations() {
 
         // get the GTFS feed from the file
         Feed feed = gtfsFile.getFeed();
@@ -482,6 +472,17 @@ public class GTFSMainController extends GTFSController {
         StopTime stopTime = new StopTime(feed, stop, 0);
         associatedStopTimes.add(stopTime);
 
+    }
+
+    /**
+     * Updates the GUI's associations panel
+     */
+    public void updateAssociationsPanel() throws IOException {
+        // update each tab of the associations panel
+        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
+        updateAssociationsTab(associatedTrips, associatedTripsContainer);
+        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
+        updateAssociationsTab(associatedStops, associatedStopsContainer);
     }
 
     /**
@@ -730,7 +731,7 @@ public class GTFSMainController extends GTFSController {
      */
     public void setSelectedElement(GTFSElement selectedElement) {
         this.selectedElement = selectedElement;
-        updateAssociatedElements();
+        updateAssociations();
         updateInfoPanel();
     }
 
