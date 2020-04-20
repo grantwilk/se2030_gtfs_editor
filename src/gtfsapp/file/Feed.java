@@ -105,6 +105,9 @@ public class Feed extends GTFSElement {
      * @param stopTimes
      */
     public void addAllStopTimes(List<StopTime> stopTimes){
+        for(int x = 0; x <= list.size(); x++){
+            this.stopTimes.put(stopTimes[x].getStopTimeID, stopTimes[x]);
+        }
 
     }
 
@@ -113,7 +116,7 @@ public class Feed extends GTFSElement {
      * @param stopTime
      */
     public void addStopTime(StopTime stopTime) {
-
+        stopTimes.put(stopTime.getStopTimeID, stopTime);
     }
 
     /**
