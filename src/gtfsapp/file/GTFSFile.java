@@ -1,5 +1,8 @@
 package gtfsapp.file;
 
+import gtfsapp.id.RouteID;
+import gtfsapp.id.StopID;
+import gtfsapp.id.TripID;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -178,6 +181,9 @@ public class GTFSFile {
      */
     private HashMap<String, Route> parseRoutes() throws IOException {
 
+        // get the name of the file for exceptions
+        String fileName = routeFile.getName();
+
         // get all lines from the file
         List<String> lines = Files.readAllLines(routeFile.toPath());
 
@@ -193,59 +199,100 @@ public class GTFSFile {
             // split the line into comma separated tokens
             List<String> tokens = tokenizeLine(line);
 
-            // extract all values
-            String route_id = tokens.get(0);
-            String agency_id = tokens.get(1);
-            String route_short_name = tokens.get(2);
-            String route_long_name = tokens.get(3);
-            String route_desc = tokens.get(4);
-            String route_type = tokens.get(5);
-            String route_url = tokens.get(6);
-            String route_color = tokens.get(7);
-            String route_text_color = tokens.get(8);
+            // check to see if there are enough tokens to get required information
+            if (tokens.size() < 6) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            }
 
-            // get the route type and route color
-            RouteType routeType = RouteType.values()[Integer.parseInt(route_type)];
+            // extract required values
+            String routeID = tokens.get(0);
+            String routeType = tokens.get(5);
+
+            // throw an exception if the route ID is empty
+            if (routeID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if route ID already exists
+            if (RouteID.exists(routeID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if route type is empty
+            if (routeType.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if route type is not a number
+            int routeTypeValue;
+            try {
+                routeTypeValue = Integer.parseInt(routeType);
+            } catch (NumberFormatException e) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if route type is not a valid route type enum
+            if (routeTypeValue > RouteType.values().length) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
 
             // create a new route
-            Route route = new Route(feed, route_id, routeType);
+            Route route = new Route(feed, routeID, RouteType.values()[routeTypeValue]);
 
-            // set route name to short name
-            if (!route_short_name.isEmpty()) {
-                route.setShortName(route_short_name);
+            // extract extra values
+
+            // get and set agency ID (ignored)
+            // String agencyID = tokens.get(1);
+
+            // get and set route short name
+            String routeShortName = tokens.get(2);
+            if (!routeShortName.isEmpty()) {
+                route.setShortName(routeShortName);
             }
 
-            // set route name to long name
-            if (!route_long_name.isEmpty()) {
-                route.setLongName(route_long_name);
+            // get  and set route long name
+            String routeLongName = tokens.get(3);
+            if (!routeLongName.isEmpty()) {
+                route.setLongName(routeLongName);
             }
 
-            // set route description
-            if (!route_desc.isEmpty()) {
-                route.setDesc(route_desc);
+            // get and set route description
+            String routeDesc = tokens.get(4);
+            if (!routeDesc.isEmpty()) {
+                route.setDesc(routeDesc);
             }
 
-            // set route URL
-            if (!route_url.isEmpty()) {
-                route.setURL(route_url);
+            // get and set route URL
+            if (tokens.size() > 6) {
+                String routeURL = tokens.get(6);
+                if (!routeURL.isEmpty()) {
+                    route.setURL(routeURL);
+                }
             }
 
-            // set route color
-            if (!route_color.isEmpty()) {
-                route.setColor(hexToColor(route_color));
+            // get and set route color
+            if (tokens.size() > 7) {
+                String routeColor = tokens.get(7);
+                if (!routeColor.isEmpty()) {
+                    route.setColor(hexToColor(routeColor));
+                }
             }
 
-            // set route text color
-            if (!route_text_color.isEmpty()) {
-                route.setColor(hexToColor(route_text_color));
+            // get and set route text color
+            if (tokens.size() > 8) {
+                String routeTextColor = tokens.get(8);
+                if (!routeTextColor.isEmpty()) {
+                    route.setTextColor(hexToColor(routeTextColor));
+                }
             }
 
             // add our routes to the routes list
-            routes.put(route_id, route);
+            routes.put(routeID, route);
 
         }
 
         return routes;
+
     }
 
     /**
@@ -255,6 +302,9 @@ public class GTFSFile {
      * @return the list of trips
      */
     private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
+
+        // get the name of the file for exceptions
+        String fileName = routeFile.getName();
 
         // get all lines from the file
         List<String> lines = Files.readAllLines(tripFile.toPath());
@@ -271,29 +321,63 @@ public class GTFSFile {
             // split the line into comma separated tokens
             List<String> tokens = tokenizeLine(line);
 
-            // extract all values
-            String route_id = tokens.get(0);
-            String service_id = tokens.get(1);
-            String trip_id = tokens.get(2);
-            String trip_headsign = tokens.get(3);
-            String direction_id = tokens.get(4);
-            String block_id = tokens.get(5);
-            String shape_id = tokens.get(6);
-
-            // create a trip
-            Trip trip = new Trip(feed, trip_id);
-
-            // set trip headsign
-            if (!trip_headsign.isEmpty()) {
-                trip.setHeadSign(trip_headsign);
+            if (tokens.size() < 3) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
             }
 
-            // add trip to route
-            Route route = routes.get(route_id);
+            // extract required values
+            String routeID = tokens.get(0);
+            String tripID = tokens.get(2);
+
+            // throw an exception if the route ID is empty
+            if (routeID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if route ID does not exists
+            if (RouteID.exists(routeID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if the trip ID is empty
+            if (tripID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if trip ID already exists
+            if (TripID.exists(tripID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // create a trip and add it to the route
+            Trip trip = new Trip(feed, tripID);
+            Route route = routes.get(routeID);
             route.addTrip(trip);
 
+            // extract extra values
+
+            // get and set service ID (ignored)
+            // String serviceID = tokens.get(1);
+
+            // get and set head sign
+            if (tokens.size() > 3) {
+                String headSign = tokens.get(3);
+                if (!headSign.isEmpty()) {
+                    trip.setHeadSign(headSign);
+                }
+            }
+
+            // get and set direction ID (ignored)
+            // String directionID = tokens.get(4);
+
+            // get and set block ID (ignored)
+            // String blockID = tokens.get(5);
+
+            // get and set shape ID (ignored)
+            // String shapeID = tokens.get(6);
+
             // add trip to list of trips
-            trips.put(trip_id, trip);
+            trips.put(tripID, trip);
 
         }
 
@@ -310,6 +394,9 @@ public class GTFSFile {
      */
     private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops) throws IOException {
 
+        // get the name of the file for exceptions
+        String fileName = stopTimesFile.getName();
+
         // get all lines from the file
         List<String> lines = Files.readAllLines(stopTimesFile.toPath());
 
@@ -325,46 +412,79 @@ public class GTFSFile {
             // split the line into comma separated tokens
             List<String> tokens = tokenizeLine(line);
 
+            // check to see if there are enough tokens to get required information
+            if (tokens.size() < 5) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            }
+
             // extract all values
-            String trip_id = tokens.get(0);
-            String arrival_time = tokens.get(1);
-            String departure_time = tokens.get(2);
-            String stop_id = tokens.get(3);
-            String stop_sequence = tokens.get(4);
-            String stop_headsign = tokens.get(5);
-            String pickup_type = tokens.get(6);
-            String drop_off_time = tokens.get(7);
-            String shape_dist_traveled = tokens.get(8);
+            String tripID = tokens.get(0);
+            String stopID = tokens.get(3);
+            String stopSequence = tokens.get(4);
+
+            // throw an exception if trip ID is empty
+            if (tripID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if trip ID does not exist
+            if (!TripID.exists(tripID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if stop ID is empty
+            if (stopID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if stop ID does not exist
+            if (!StopID.exists(stopID)) {
+                throw new IOException("One ore more missing dependent data in file \"" + fileName + "\".");
+            }
+
+            int sequence;
+            try {
+                sequence = Integer.parseInt(stopSequence);
+            } catch (NumberFormatException e) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
 
             // get stop object
-            Stop stop = stops.get(stop_id);
-
-            // get stop sequence as int
-            int sequence = Integer.parseInt(stop_sequence);
+            Stop stop = stops.get(stopID);
 
             // create a stop time
             StopTime stopTime = new StopTime(feed, stop, sequence);
 
-            // set arrival time
-            if (!arrival_time.isEmpty()) {
-                Date arrivalTime = timeStringToTime(arrival_time);
-                stopTime.setArrivalTime(arrivalTime);
+            // extract extra values
+
+            // get and set arrival time
+            String arrivalTime = tokens.get(1);
+            if (!arrivalTime.isEmpty()) {
+                stopTime.setArrivalTime(timeStringToTime(arrivalTime));
             }
 
-            // set departure time
-            if (!departure_time.isEmpty()) {
-                Date departureTime = timeStringToTime(departure_time);
-                stopTime.setDepartureTime(departureTime);
+            // get and set departure time
+            String departureTime = tokens.get(2);
+            if (!departureTime.isEmpty()) {
+                stopTime.setDepartureTime(timeStringToTime(departureTime));
             }
 
-            // set stop time headsign
-            if (!stop_headsign.isEmpty()) {
-                stopTime.setHeadSign(stop_headsign);
+            // get and set head sign
+            if (tokens.size() > 5) {
+                String headSign = tokens.get(5);
+                if (!headSign.isEmpty()) {
+                    stopTime.setHeadSign(headSign);
+                }
             }
 
-            // add stop time to trip
-            Trip trip = trips.get(trip_id);
-            trip.addStopTime(stopTime);
+            // get and set pickup type (ignored)
+            // String pickupType = tokens.get(6);
+
+            // get and set drop off time (ignored)
+            // String dropOffTime = tokens.get(7);
+
+            // get and set shape distance traveled (ignored)
+            // String shapeDistTraveled = tokens.get(8);
 
             // get stop time id string
             String stopTimeIDString = stopTime.getID().getIDString();
