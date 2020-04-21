@@ -221,6 +221,10 @@ public class GTFSMainController extends GTFSController {
         // if at least one file was selected
         if (!(files == null || files.isEmpty())) {
             try {
+
+                // deselect the selected element
+                deselectElement();
+
                 // create the GTFS file from the files
                 gtfsFile = new GTFSFile(files);
 
@@ -295,8 +299,9 @@ public class GTFSMainController extends GTFSController {
             errorStage.setScene(errorScene);
             errorStage.setTitle(errorTitle);
 
-            // show the stage and do not allow background interaction
+            // show the stage
             errorStage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
             // TODO - can anything else be done here?
@@ -436,44 +441,35 @@ public class GTFSMainController extends GTFSController {
      */
     public void updateAssociations() {
 
-        // get the GTFS feed from the file
-        Feed feed = gtfsFile.getFeed();
-
         // if there is no selected object, display all routes, trips, times, and stops
         if (selectedElement == null) {
-            associatedRoutes = feed.getRoutes();
-            associatedTrips = feed.getTrips();
-            associatedStopTimes = feed.getStopTimes();
-            associatedStops = feed.getStops();
+
+            // if there is no file loaded, reset all of the associations arrays
+            if (gtfsFile == null) {
+                associatedRoutes = new ArrayList<>();
+                associatedTrips = new ArrayList<>();
+                associatedStopTimes = new ArrayList<>();
+                associatedStops = new ArrayList<>();
+            }
+
+            // if there is a feed loaded, get all of the associations arrays from it
+            else {
+                Feed feed = gtfsFile.getFeed();
+                associatedRoutes = feed.getRoutes();
+                associatedTrips = feed.getTrips();
+                associatedStopTimes = feed.getStopTimes();
+                associatedStops = feed.getStops();
+            }
+
         }
 
         // otherwise, find associations and update the class variables
         else {
-            // TODO - uncomment this once all GTFS element methods are implemented!
-            // associatedRoutes = findAssociatedRoutes();
-            // associatedTrips = findAssociatedTrips();
-            // associatedStopTimes = findAssociatedStopTimes();
-            // associatedStops = findAssociatedStops();
+             associatedRoutes = findAssociatedRoutes();
+             associatedTrips = findAssociatedTrips();
+             associatedStopTimes = findAssociatedStopTimes();
+             associatedStops = findAssociatedStops();
         }
-
-        // TODO - remove this once Feed is implemented!
-        associatedRoutes = new ArrayList<>();
-        associatedTrips = new ArrayList<>();
-        associatedStopTimes = new ArrayList<>();
-        associatedStops = new ArrayList<>();
-
-        // TODO - remove this! temporary route.
-        Route route = new Route(feed, "jeff!", RouteType.SUBWAY);
-        associatedRoutes.add(route);
-
-        Trip trip = new Trip(feed, "steve!");
-        associatedTrips.add(trip);
-
-        Stop stop = new Stop(feed, "luigi!");
-        associatedStops.add(stop);
-
-        StopTime stopTime = new StopTime(feed, stop, 0);
-        associatedStopTimes.add(stopTime);
 
     }
 
