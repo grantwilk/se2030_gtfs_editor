@@ -628,7 +628,7 @@ public class GTFSMainController extends GTFSController {
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
             associations = new ArrayList<>();
-            associations.add(((StopTime) selectedElement).getTrip());
+            associations.add(((StopTime) selectedElement).getContainingTrip());
         }
 
         // if the element is a stop
