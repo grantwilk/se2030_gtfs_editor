@@ -93,7 +93,7 @@
                <children>
                   <TabPane id="tabs" fx:id="associationsTabPane" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab text="Routes">
+                        <Tab fx:id="routesTab" text="Routes">
                            <content>
                               <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="400.0">
                                  <content>
@@ -102,7 +102,7 @@
                               </ScrollPane>
                            </content>
                         </Tab>
-                        <Tab text="Trips">
+                        <Tab fx:id="tripsTab" text="Trips">
                            <content>
                               <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
                                  <content>
@@ -111,7 +111,7 @@
                               </ScrollPane>
                            </content>
                         </Tab>
-                        <Tab text="Times">
+                        <Tab fx:id="stopTimesTab" text="Times">
                            <content>
                               <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
                                  <content>
@@ -120,7 +120,7 @@
                               </ScrollPane>
                            </content>
                         </Tab>
-                        <Tab text="Stops">
+                        <Tab fx:id="stopsTab" text="Stops">
                            <content>
                               <ScrollPane id="scroll-container" fitToHeight="true" fitToWidth="true">
                                  <content>

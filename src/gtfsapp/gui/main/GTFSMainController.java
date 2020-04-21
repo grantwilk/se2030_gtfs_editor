@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -164,6 +165,30 @@ public class GTFSMainController extends GTFSController {
      */
     @FXML
     private TabPane associationsTabPane;
+
+    /**
+     * The tab that holds associated routes
+     */
+    @FXML
+    private Tab routesTab;
+
+    /**
+     * The tab that holds associated trips
+     */
+    @FXML
+    private Tab tripsTab;
+
+    /**
+     * The tab that holds associated stop times
+     */
+    @FXML
+    private Tab stopTimesTab;
+
+    /**
+     * The tab that holds associated stops
+     */
+    @FXML
+    private Tab stopsTab;
 
     /**
      * The container that holds the dynamically generated associated routes
@@ -481,11 +506,34 @@ public class GTFSMainController extends GTFSController {
      * Updates the GUI's associations panel
      */
     public void updateAssociationsPanel() throws IOException {
-        // update each tab of the associations panel
-        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
-        updateAssociationsTab(associatedTrips, associatedTripsContainer);
-        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
-        updateAssociationsTab(associatedStops, associatedStopsContainer);
+        // remove all of the tabs from the tab pane
+        associationsTabPane.getTabs().clear();
+
+        // if any route associations exist, update the tab and add it back to the tab pane
+        if (!associatedRoutes.isEmpty()) {
+            updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
+            associationsTabPane.getTabs().add(routesTab);
+        }
+
+        // if any trip associations exist, update the tab and add it back to the tab pane
+        if (!associatedTrips.isEmpty()) {
+            updateAssociationsTab(associatedTrips, associatedTripsContainer);
+            associationsTabPane.getTabs().add(tripsTab);
+        }
+
+        // if any stop time associations exist, update the tab and add it back to the tab pane
+        if (!associatedStopTimes.isEmpty()) {
+            updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
+            associationsTabPane.getTabs().add(stopTimesTab);
+        }
+
+        // if any stop associations exist, update the tab and add it back to the tab pane
+        if (!associatedStops.isEmpty()) {
+            updateAssociationsTab(associatedStops, associatedStopsContainer);
+            associationsTabPane.getTabs().add(stopsTab);
+        }
+
+
     }
 
     /**
