@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -232,8 +233,9 @@ public class GTFSMainController extends GTFSController {
         fileChooser.setTitle("Open GTFS File Set");
 
         // set the initial directory as the project directory
-        // TODO - remove this before going live, this is just for convenience
-        fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
+        // TODO - remove samples directory default before going live, this is just for convenience
+        String samplesDirectory = Paths.get(".").toAbsolutePath().normalize().toString() + "/samples/";
+        fileChooser.setInitialDirectory(new File(samplesDirectory));
 
         // configure extension filter
         FileChooser.ExtensionFilter txtFilter =
