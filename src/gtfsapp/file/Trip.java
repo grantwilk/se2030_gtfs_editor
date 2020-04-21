@@ -307,7 +307,7 @@ public class Trip extends GTFSElement {
     @Override
     public String getSubtitle() {
         // TODO - remove placeholders
-        return "Lorem ipsum dolor!";
+        return "Lorem ipsum dolor";
     }
 
     /**
