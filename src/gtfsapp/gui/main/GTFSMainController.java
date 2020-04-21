@@ -7,6 +7,7 @@ import gtfsapp.gui.dialog.error.GTFSErrorType;
 import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController;
 import gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController;
 import gtfsapp.gui.map.GTFSMapController;
+import gtfsapp.id.GTFSID;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -224,6 +225,9 @@ public class GTFSMainController extends GTFSController {
 
                 // deselect the selected element
                 deselectElement();
+
+                // clear all existing IDs
+                GTFSID.clear();
 
                 // create the GTFS file from the files
                 gtfsFile = new GTFSFile(files);
