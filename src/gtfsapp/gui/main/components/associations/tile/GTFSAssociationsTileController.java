@@ -81,7 +81,7 @@ public class GTFSAssociationsTileController {
      * @param title the title of the tile
      */
     public void setTitle(String title) {
-        tileTitle.setText(title);
+        tileTitle.setText(title.toUpperCase());
     }
 
     /**
