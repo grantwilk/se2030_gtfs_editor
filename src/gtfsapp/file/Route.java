@@ -131,22 +131,6 @@ public class Route extends GTFSElement {
     /**
      * @return
      */
-    public Stop getActiveStop() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @return
-     */
-    public StopTime getActiveStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @return
-     */
     public Trip getActiveTrip() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
