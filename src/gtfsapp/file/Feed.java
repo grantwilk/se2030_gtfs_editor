@@ -36,6 +36,10 @@ public class Feed extends GTFSElement {
      */
     public Feed() {
         super(new FeedID());
+        routes = new HashMap<>();
+        trips = new HashMap<>();
+        stopTimes = new HashMap<>();
+        stops = new HashMap<>();
     }
 
     /**
