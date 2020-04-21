@@ -34,6 +34,13 @@ public class TripID extends GTFSID {
     }
 
     /**
+     * Clears all ID strings from the map of existing IDs
+     */
+    public static void clear() {
+        existingIDStrings.clear();
+    }
+
+    /**
      * Checks if a Trip ID with a specified ID string exists
      *
      * @param id the ID string to test
