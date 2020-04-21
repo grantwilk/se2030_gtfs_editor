@@ -505,6 +505,9 @@ public class GTFSFile {
      */
     private HashMap<String, Stop> parseStops() throws IOException {
 
+        // get the name of the file for exceptions
+        String fileName = stopFile.getName();
+
         // get all lines from the file
         List<String> lines = Files.readAllLines(stopFile.toPath());
 
@@ -520,43 +523,88 @@ public class GTFSFile {
             // split the line into comma separated tokens
             List<String> tokens = tokenizeLine(line);
 
+            // check to see if there are enough tokens to get required information
+            if (tokens.size() < 1) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            }
+
             // extract all values
-            String stop_id = tokens.get(0);
-            String stop_name = tokens.get(1);
-            String stop_desc = tokens.get(2);
-            String stop_lat = tokens.get(3);
-            String stop_lon = tokens.get(4);
-            String zone_id = tokens.get(5);
-            String stop_url = tokens.get(6);
+            String stopID = tokens.get(0);
+
+            // throw an exception if stop ID is empty
+            if (stopID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // throw an exception if trip ID does not exist
+            if (!StopID.exists(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
 
             // create a new stop
-            Stop stop = new Stop(feed, stop_id);
+            Stop stop = new Stop(feed, stopID);
 
-            // set stop name
-            if (!stop_name.isEmpty()) {
-                stop.setName(stop_name);
+            // get and set stop name
+            if (tokens.size() > 1) {
+                String stopName = tokens.get(1);
+                if (!stopName.isEmpty()) {
+                    stop.setName(stopName);
+                }
             }
 
-            // set stop description
-            if (!stop_desc.isEmpty()) {
-                stop.setDesc(stop_desc);
+            // get and set stop description
+            if (tokens.size() > 2) {
+                String stopDesc = tokens.get(2);
+                if (!stopDesc.isEmpty()) {
+                    stop.setDesc(stopDesc);
+                }
             }
 
-            // set position if we have latitude and longitude
-            if (!stop_lat.isEmpty() && !stop_lon.isEmpty()) {
-                double lat = Double.parseDouble(stop_lat);
-                double lon = Double.parseDouble(stop_lon);
-                Point2D location = new Point2D(lon, lat);
-                stop.setLocation(location);
+            // get and set location
+            if (tokens.size() > 3) {
+
+                String stopLat = tokens.get(3);
+
+                // if longitude also exists
+                if (tokens.size() > 4) {
+
+                    String stopLon = tokens.get(4);
+
+                    // if both are not empty
+                    if (!stopLat.isEmpty() && !stopLon.isEmpty()) {
+
+                        // parse both and set as location
+                        try {
+
+                            double lat = Double.parseDouble(stopLat);
+                            double lon = Double.parseDouble(stopLon);
+
+                            stop.setLocation(new Point2D(lon, lat));
+
+                        } catch (NumberFormatException e) {
+                            throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+                        }
+                    } else {
+                        throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
+                    }
+                } else {
+                    throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
+                }
             }
 
-            // set stop url
-            if (!stop_url.isEmpty()) {
-                stop.setURL(stop_url);
+            // get and set zone ID (ignored)
+            // String zoneID = tokens.get(5);
+
+            // get and set stop URL
+            if (tokens.size() > 6) {
+                String stopURL = tokens.get(6);
+                if (!stopURL.isEmpty()) {
+                    stop.setURL(stopURL);
+                }
             }
 
             // add our stops to the stops list
-            stops.put(stop_id, stop);
+            stops.put(stopID, stop);
 
         }
 
