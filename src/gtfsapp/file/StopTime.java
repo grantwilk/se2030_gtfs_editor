@@ -60,14 +60,6 @@ public class StopTime extends GTFSElement {
     /**
      * @return
      */
-    public Trip getContainingTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @return
-     */
     public List<Trip> getContainingTrips() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
