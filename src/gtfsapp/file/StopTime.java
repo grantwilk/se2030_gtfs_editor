@@ -3,6 +3,7 @@ package gtfsapp.file;
 import gtfsapp.id.RouteID;
 
 import gtfsapp.id.StopTimeID;
+import gtfsapp.id.TripID;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -67,6 +68,22 @@ public class StopTime extends GTFSElement {
     /**
      * @return
      */
+    public List<Trip> getContainingTrips() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * @return
+     */
+    public List<TripID> getContainingTripIDs() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * @return
+     */
     public List<Route> getContainingRoutes() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
@@ -97,15 +114,6 @@ public class StopTime extends GTFSElement {
     public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
 
-    }
-
-    /**
-     * Returns the trip this stop time belongs to
-     *
-     * @return The trip
-     */
-    public Trip getTrip() {
-        return null;
     }
 
     /**
