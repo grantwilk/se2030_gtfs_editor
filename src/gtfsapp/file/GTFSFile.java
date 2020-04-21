@@ -536,8 +536,8 @@ public class GTFSFile {
                 throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
             }
 
-            // throw an exception if trip ID does not exist
-            if (!StopID.exists(stopID)) {
+            // throw an exception if stop ID already exists
+            if (StopID.exists(stopID)) {
                 throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
             }
 
