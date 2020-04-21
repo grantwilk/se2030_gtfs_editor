@@ -21,6 +21,17 @@ public abstract class GTFSID {
     }
 
     /**
+     * Clears all ID strings from all ID subclasses
+     */
+    public static void clear() {
+        FeedID.clear();
+        RouteID.clear();
+        TripID.clear();
+        StopTimeID.clear();
+        StopID.clear();
+    }
+
+    /**
      * Procedurally generates a unique ID string from a prefix
      *
      * @param prefix            a prefix for the ID
