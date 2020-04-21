@@ -304,7 +304,7 @@ public class GTFSFile {
     private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
 
         // get the name of the file for exceptions
-        String fileName = routeFile.getName();
+        String fileName = tripFile.getName();
 
         // get all lines from the file
         List<String> lines = Files.readAllLines(tripFile.toPath());
@@ -335,8 +335,8 @@ public class GTFSFile {
             }
 
             // throw an exception if route ID does not exists
-            if (RouteID.exists(routeID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            if (!RouteID.exists(routeID)) {
+                throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
             }
 
             // throw an exception if the trip ID is empty
@@ -439,7 +439,7 @@ public class GTFSFile {
 
             // throw an exception if stop ID does not exist
             if (!StopID.exists(stopID)) {
-                throw new IOException("One ore more missing dependent data in file \"" + fileName + "\".");
+                throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
             }
 
             int sequence;
