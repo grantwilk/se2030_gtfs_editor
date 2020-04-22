@@ -220,11 +220,12 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets the average speed of the trip as a double through
+     * using the getDistance and getDuration methods
+     * @return the average speed of the trip
      */
     public double getAvgSpeed() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return getDistance()/getDuration();
     }
 
     /**
@@ -239,16 +240,29 @@ public class Trip extends GTFSElement {
      * @return
      */
     public double getDistance() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        ArrayList<StopTime> distanceCalc = this.getStopTimes();
+        int lastLocation = distanceCalc.size();
+        StopTime FirstDepartLoc;
+        StopTime LastArriveLoc;
+        FirstDepartLoc = distanceCalc.get(0);
+        LastArriveLoc = distanceCalc.get(lastLocation -1);
     }
 
     /**
-     * @return
+     * Method to get the duration of the trip by taking the difference between
+     * the first depart time, and last arrival time
+     * @return the duration of the trip
      */
     public double getDuration() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        ArrayList<StopTime> durationCalc = this.getStopTimes();
+        int lastTime = durationCalc.size();
+        StopTime FirstDepartTime;
+        StopTime LastArriveTime;
+        FirstDepartTime = durationCalc.get(0);
+        LastArriveTime = durationCalc.get(lastTime -1);
+        double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
+        double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
+        return tripEnd - tripStart;
     }
 
     /**
