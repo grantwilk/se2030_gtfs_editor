@@ -3,7 +3,7 @@ package gtfsapp.file;
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.TripID;
-import javafx.geometry.Point2D;
+import gtfsapp.util.Location;
 import javafx.scene.paint.Color;
 
 import java.io.File;
@@ -579,7 +579,7 @@ public class GTFSFile {
                             double lat = Double.parseDouble(stopLat);
                             double lon = Double.parseDouble(stopLon);
 
-                            stop.setLocation(new Point2D(lon, lat));
+                            stop.setLocation(new Location(lon, lat));
 
                         } catch (NumberFormatException e) {
                             throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");

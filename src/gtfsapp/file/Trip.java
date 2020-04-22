@@ -1,8 +1,7 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
-
-import javafx.geometry.Point2D;
+import gtfsapp.util.Location;
 
 import java.util.*;
 
@@ -234,7 +233,7 @@ public class Trip extends GTFSElement {
     /**
      * @return
      */
-    public Point2D getBusPosition() {
+    public Location getBusPosition() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }

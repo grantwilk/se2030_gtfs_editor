@@ -5,8 +5,8 @@ import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 
+import gtfsapp.util.Location;
 import javafx.scene.paint.Color;
-import javafx.geometry.Point2D;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -147,7 +147,7 @@ public class Route extends GTFSElement {
     /**
      * @return
      */
-    public Point2D getBusPosition() {
+    public Location getBusPosition() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
