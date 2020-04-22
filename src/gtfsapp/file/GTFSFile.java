@@ -295,95 +295,89 @@ public class GTFSFile {
 
     }
 
-    /**
-     * Parses trips from the GTFS trips file
-     *
-     * @param routes the list of routes that the trips should be linked to
-     * @return the list of trips
-     */
-    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
-
-        // get the name of the file for exceptions
-        String fileName = tripFile.getName();
-
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(tripFile.toPath());
-
-        // remove the first line because it contains a template
-        lines.remove(0);
-
-        // create a new list of trips
-        HashMap<String, Trip> trips = new HashMap<>();
-
-        // for each line in the file
-        for (String line : lines) {
-
-            // split the line into comma separated tokens
-            List<String> tokens = tokenizeLine(line);
-
-            if (tokens.size() < 3) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // extract required values
-            String routeID = tokens.get(0);
-            String tripID = tokens.get(2);
-
-            // throw an exception if the route ID is empty
-            if (routeID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if route ID does not exists
-            if (!RouteID.exists(routeID)) {
-                throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if the trip ID is empty
-            if (tripID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if trip ID already exists
-            if (TripID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // create a trip and add it to the route
-            Trip trip = new Trip(feed, tripID);
-            Route route = routes.get(routeID);
-            route.addTrip(trip);
-
-            // extract extra values
-
-            // get and set service ID (ignored)
-            // String serviceID = tokens.get(1);
-
-            // get and set head sign
-            if (tokens.size() > 3) {
-                String headSign = tokens.get(3);
-                if (!headSign.isEmpty()) {
-                    trip.setHeadSign(headSign);
-                }
-            }
-
-            // get and set direction ID (ignored)
-            // String directionID = tokens.get(4);
-
-            // get and set block ID (ignored)
-            // String blockID = tokens.get(5);
-
-            // get and set shape ID (ignored)
-            // String shapeID = tokens.get(6);
-
-            // add trip to list of trips
-            trips.put(tripID, trip);
-
-        }
-
-        return trips;
-
-    }
+//    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
+//
+//        // get the name of the file for exceptions
+//        String fileName = tripFile.getName();
+//
+//        // get all lines from the file
+//        List<String> lines = Files.readAllLines(tripFile.toPath());
+//
+//        // remove the first line because it contains a template
+//        lines.remove(0);
+//
+//        // create a new list of trips
+//        HashMap<String, Trip> trips = new HashMap<>();
+//
+//        // for each line in the file
+//        for (String line : lines) {
+//
+//            // split the line into comma separated tokens
+//            List<String> tokens = tokenizeLine(line);
+//
+//            if (tokens.size() < 3) {
+//                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+//            }
+//
+//            // extract required values
+//            String routeID = tokens.get(0);
+//            String tripID = tokens.get(2);
+//
+//            // throw an exception if the route ID is empty
+//            if (routeID.isEmpty()) {
+//                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+//            }
+//
+//            // throw an exception if route ID does not exists
+//            if (!RouteID.exists(routeID)) {
+//                throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
+//            }
+//
+//            // throw an exception if the trip ID is empty
+//            if (tripID.isEmpty()) {
+//                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+//            }
+//
+//            // throw an exception if trip ID already exists
+//            if (TripID.exists(tripID)) {
+//                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+//            }
+//
+//            // create a trip and add it to the route
+//            Trip trip = new Trip(feed, tripID);
+//            Route route = routes.get(routeID);
+//            route.addTrip(trip);
+//
+//            // extract extra values
+//
+//            // get and set service ID (ignored)
+//            // String serviceID = tokens.get(1);
+//
+//            // get and set head sign
+//            if (tokens.size() > 3) {
+//                String headSign = tokens.get(3);
+//                if (!headSign.isEmpty()) {
+//                    trip.setHeadSign(headSign);
+//                }
+//            }
+//
+//            // get and set direction ID (ignored)
+//            // String directionID = tokens.get(4);
+//
+//            // get and set block ID (ignored)
+//            // String blockID = tokens.get(5);
+//
+//            // get and set shape ID (ignored)
+//            // String shapeID = tokens.get(6);
+//
+//            // add trip to list of trips
+//            trips.put(tripID, trip);
+//
+//        }
+//
+//        return trips;
+//
+//    }
 
     /**
      * Parses stop times from the GTFS stop times file
@@ -676,5 +670,59 @@ public class GTFSFile {
      */
     private List<String> tokenizeLine(String line) {
         return Arrays.asList(line.split(",", -1));
+    }
+
+
+    /**
+     * Parses trips from the GTFS trips file
+     *
+     * @param routes the list of routes that the trips should be linked to
+     * @return the list of trips
+     */
+    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
+        // get all lines from the file
+        List<String> lines = Files.readAllLines(tripFile.toPath());
+
+        // Get the format of the attributes for the file
+        List<String> format = tokenizeLine(lines.get(0));
+
+        // Create hash map of trips to be returned
+        HashMap<String, Trip> trips = new HashMap<>();
+
+        for(int i = 1; i < lines.size(); i++) {
+            // Create new hash map to create a trip from this line
+            HashMap<String, String> tripFields = new HashMap<>();
+
+
+
+            // Get line in file
+            List<String> currentLine = tokenizeLine(lines.get(i));
+
+            // Add each attribute in line to hash map
+            for(int j = 0; j < format.size(); j++) {
+                tripFields.put(format.get(i),currentLine.get(i));
+            }
+
+            // Create new trip for this line
+            String tripID = tripFields.get("trip_id");
+            Trip trip = new Trip(feed, tripID);
+
+            // Add trip to its route
+            String routeID = tripFields.get("route_id");
+            Route route = routes.get(routeID);
+            route.addTrip(trip);
+
+            // Set trip headsign
+            if(!tripFields.get("trip_headsign").isEmpty()) {
+                String headSign = tripFields.get("trip_headsign");
+                trip.setHeadSign(headSign);
+            }
+
+            // Add trip to return hash map
+            trips.put(tripID,trip);
+
+        }
+
+        return trips;
     }
 }
