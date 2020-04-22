@@ -116,11 +116,25 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of routes that contain this trip
+     * @return a list of routes that contain this trip
      */
     public List<Route> getContainingRoutes() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+
+        List<Route> containingRoutes = new ArrayList<>();
+
+        // check if this trip is contained in any of the routes in this feed
+        for (Route route : feed.getRoutes()) {
+
+            // if it is, add it to our list of containing routes
+            if (route.getTrips().contains(this)) {
+                containingRoutes.add(route);
+            }
+
+        }
+
+        return containingRoutes;
+
     }
 
     /**
