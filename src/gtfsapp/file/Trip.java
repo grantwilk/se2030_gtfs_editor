@@ -2,6 +2,7 @@ package gtfsapp.file;
 
 import gtfsapp.id.*;
 
+import gtfsapp.util.Location;
 import javafx.geometry.Point2D;
 
 import java.util.*;
@@ -249,6 +250,7 @@ public class Trip extends GTFSElement {
         StopTime LastArriveLoc;
         FirstDepartLoc = distanceCalc.get(0);
         LastArriveLoc = distanceCalc.get(lastLocation -1);
+        Location firstStop = new Location(FirstDepartLoc.getStop().getLocation().getLattitude(), FirstDepartLoc.getStop().getLocation().getLongitude());
         return 0;
     }
 
