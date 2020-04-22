@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * @author Michael Primeau and Grant Wilk
+ * @author Michael Primeau, Colton Rivard, Grant Wilk
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -693,8 +693,6 @@ public class GTFSFile {
             // Create new hash map to create a trip from this line
             HashMap<String, String> tripFields = new HashMap<>();
 
-
-
             // Get line in file
             List<String> currentLine = tokenizeLine(lines.get(i));
 
@@ -712,9 +710,9 @@ public class GTFSFile {
             Route route = routes.get(routeID);
             route.addTrip(trip);
 
-            // Set trip headsign
-            if(!tripFields.get("trip_headsign").isEmpty()) {
-                String headSign = tripFields.get("trip_headsign");
+            // Set trip headsign if headsign field is not empty
+            String headSign = tripFields.get("trip_headsign");
+            if (!headSign.isEmpty()) {
                 trip.setHeadSign(headSign);
             }
 
