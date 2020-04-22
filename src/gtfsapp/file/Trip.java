@@ -56,11 +56,11 @@ public class Trip extends GTFSElement {
 
     /**
      * Adds a new stopTimeID and stopTime to the hash map containting both
-     *
      * @param stopTime the stop time to be added
      */
     public void addStopTime(StopTime stopTime) {
         stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
+        stops.put((StopID) stopTime.getStop().getID(), stopTime.getStop());
     }
 
     /**
