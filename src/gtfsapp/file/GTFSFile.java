@@ -174,7 +174,7 @@ public class GTFSFile {
         }
     }
 
-    private boolean validateRoutes() throws  IOException {
+    private boolean validateRoutes() throws IOException {
 
         // gets name of the file
         String filename = routeFile.getName();
@@ -196,7 +196,8 @@ public class GTFSFile {
 
         }
 
-
+        // temp return
+        return true;
     }
 
     /**
