@@ -1,7 +1,10 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
+
+
 import gtfsapp.util.Location;
+
 
 import java.util.*;
 
@@ -238,7 +241,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets the average speed of the trip as a double through
      * using the getDistance and getDuration methods
-     * @return the average speed of the trip
+     * @return the average speed of the trip in miles per hour
      */
     public double getAvgSpeed() {
         return getDistance()/getDuration();
@@ -253,16 +256,25 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets the first stop on the trip's location and makes a new location object with those coordinates
+     * Then finds the distance to the last stop on the trip and returns it
+     * @return The distance between stops in miles
      */
     public double getDistance() {
-        ArrayList<StopTime> distanceCalc = (ArrayList<StopTime>) this.getStopTimes();
+        //Gets an array list of all of the stops
+        ArrayList<Stop> distanceCalc = (ArrayList<Stop>) this.getStops();
+        //Gets the number of stops in list
         int lastLocation = distanceCalc.size();
-        StopTime FirstDepartLoc;
-        StopTime LastArriveLoc;
+        Stop FirstDepartLoc;
+        Stop LastArriveLoc;
+        //Gets the first stop
         FirstDepartLoc = distanceCalc.get(0);
+        //Gets the last stop
         LastArriveLoc = distanceCalc.get(lastLocation -1);
-        return 0;
+        //Gets the location for the first stop
+        Location firstStop = new Location(FirstDepartLoc.getLocation().getLatitude(), FirstDepartLoc.getLocation().getLongitude());
+        //Returns the distance between the first and last stops
+         return firstStop.distanceTo(LastArriveLoc.getLocation());
     }
 
     /**
@@ -271,14 +283,21 @@ public class Trip extends GTFSElement {
      * @return the duration of the trip
      */
     public double getDuration() {
+        //Gets an ArrayList of the stop times
         ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
+        //Number of stop times in the ArrayList
         int lastTime = durationCalc.size();
         StopTime FirstDepartTime;
         StopTime LastArriveTime;
+        //Gets the first StopTime
         FirstDepartTime = durationCalc.get(0);
+        //Gets the second StopTime
         LastArriveTime = durationCalc.get(lastTime -1);
+        //Gets the time value for the first StopTime
         double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
+        //Gets the time value for the second StopTime
         double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
+        //Gets the total trip time
         return tripEnd - tripStart;
     }
 
@@ -301,12 +320,29 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Checks to see if the current system clock in milliseconds is in between the start and end times of a trip
+     * @return if the trip is ongoing
      */
     public boolean isActive() {
-        //TODO  - needs implementation eventually
-        throw new UnsupportedOperationException();
-
+        //Gets an ArrayList of the stop times
+        ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
+        //Number of stop times in the ArrayList
+        int lastTime = durationCalc.size();
+        StopTime FirstDepartTime;
+        StopTime LastArriveTime;
+        //Gets the first StopTime
+        FirstDepartTime = durationCalc.get(0);
+        //Gets the second StopTime
+        LastArriveTime = durationCalc.get(lastTime -1);
+        //Gets the time value for the first StopTime
+        double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
+        //Gets the time value for the second StopTime
+        double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
+        if(System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
