@@ -6,8 +6,8 @@ import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 import gtfsapp.util.Location;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Mason Schlax
@@ -61,56 +61,111 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * **Not fully implemented**
-     * Uses the feed the stop belongs to to get the routeIDs
+     * Gets a set of the IDs of all routes that contain this stop
      *
-     * @return a list of the RouteIDs
+     * @return a set of the IDs of all routes that contain this stop
      */
-    public List<RouteID> getContainingRouteIDs() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<RouteID> getContainingRouteIDs() {
+        return getContainingRoutes().stream()
+                                    .map(e -> (RouteID) e.getID())
+                                    .collect(Collectors.toSet());
     }
 
     /**
-     * Returns the routes
+     * Gets a set of all routes that contain this stop
      *
-     * @return all of the routes
+     * @return a set of all routes that contain this stop
      */
-    public List<Route> getContainingRoutes() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<Route> getContainingRoutes() {
+
+        Set<Route> containingRoutes = new HashSet<>();
+
+        // for each route in the feed
+        for (Route route : feed.getRoutes()) {
+
+            // check to see if the route's trips and our containing trips have anything in common
+            if (!Collections.disjoint(route.getTrips(), getContainingTrips())) {
+
+                // if they do, add the route to our set of containing route
+                containingRoutes.add(route);
+
+            }
+        }
+
+        return containingRoutes;
+
     }
 
     /**
-     * @return
+     * Gets a set of the IDs of all stop times that contain this stop
+     *
+     * @return a set of the IDs of all stop times that contain this stop
      */
-    public List<StopTimeID> getContainingStopTimeIDs() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<StopTimeID> getContainingStopTimeIDs() {
+        return getContainingStopTimes().stream()
+                                       .map(e -> (StopTimeID) e.getID())
+                                       .collect(Collectors.toSet());
     }
 
     /**
-     * @return
+     * Gets a set of all stop times that contain this stop
+     *
+     * @return a set of all stop times that contain this stop
      */
-    public List<StopTime> getContainingStopTimes() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<StopTime> getContainingStopTimes() {
+
+        Set<StopTime> containingStopTimes = new HashSet<>();
+
+        // for each stop time
+        for (StopTime stopTime : feed.getStopTimes()) {
+
+            // if the trip contains our stop ID
+            if (stopTime.getStop().getID().equals(getID())) {
+
+                // add the stop time to our set of containing stop times
+                containingStopTimes.add(stopTime);
+
+            }
+
+        }
+
+        return containingStopTimes;
+
     }
 
     /**
-     * @return
+     * Gets a set of the IDs of all trips that contain this stop
+     *
+     * @return a set of the IDs of all trips that contain this stop
      */
-    public List<TripID> getContainingTripIDs() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<TripID> getContainingTripIDs() {
+        return getContainingTrips().stream()
+                                    .map(e -> (TripID) e.getID())
+                                    .collect(Collectors.toSet());
     }
 
     /**
-     * @return
+     * Gets a set of all trips that contain this stop
+     *
+     * @return a set of all trips that contain this stop
      */
-    public List<Trip> getContainingTrips() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<Trip> getContainingTrips() {
+
+        Set<Trip> containingTrips = new HashSet<>();
+
+        // for each trip in the feed
+        for (Trip trip : feed.getTrips()) {
+
+            // check to see if the trips stop times and our containing stop times have anything in common
+            if (!Collections.disjoint(trip.getStopTimes(), getContainingStopTimes())) {
+
+                // if they do, add the trip to our set of containing trips
+                containingTrips.add(trip);
+
+            }
+        }
+
+        return containingTrips;
     }
 
     /**
