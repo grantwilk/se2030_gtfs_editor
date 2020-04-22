@@ -178,8 +178,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of route IDs within the feed
      */
-    public List<RouteID> getRouteIDs() {
-        return new ArrayList<>(routes.keySet());
+    public Set<RouteID> getRouteIDs() {
+        return routes.keySet();
     }
 
     /**
@@ -187,8 +187,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of routes within the feed
      */
-    public List<Route> getRoutes() {
-        return new ArrayList<>(routes.values());
+    public Set<Route> getRoutes() {
+        return new HashSet<>(routes.values());
     }
 
     /**
@@ -206,8 +206,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of trip IDs within the feed
      */
-    public List<TripID> getTripIDs() {
-        return new ArrayList<>(trips.keySet());
+    public Set<TripID> getTripIDs() {
+        return trips.keySet();
     }
 
     /**
@@ -215,8 +215,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of trips within the feed
      */
-    public List<Trip> getTrips() {
-        return new ArrayList<>(trips.values());
+    public Set<Trip> getTrips() {
+        return new HashSet<>(trips.values());
     }
 
     /**
@@ -235,8 +235,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of stop time IDs within the feed
      */
-    public List<StopTimeID> getStopTimeIDs() {
-        return new ArrayList<>(stopTimes.keySet());
+    public Set<StopTimeID> getStopTimeIDs() {
+        return stopTimes.keySet();
     }
 
     /**
@@ -244,8 +244,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of stop times within the feed
      */
-    public List<StopTime> getStopTimes() {
-        return new ArrayList<>(stopTimes.values());
+    public Set<StopTime> getStopTimes() {
+        return new HashSet<>(stopTimes.values());
     }
 
     /**
@@ -263,8 +263,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of stop IDs within the feed
      */
-    public List<StopID> getStopIDs() {
-        return new ArrayList<>(stops.keySet());
+    public Set<StopID> getStopIDs() {
+        return stops.keySet();
     }
 
     /**
@@ -272,8 +272,8 @@ public class Feed extends GTFSElement {
      *
      * @return a list of stops within the feed
      */
-    public List<Stop> getStops() {
-        return new ArrayList<>(stops.values());
+    public Set<Stop> getStops() {
+        return new HashSet<>(stops.values());
     }
 
     /**

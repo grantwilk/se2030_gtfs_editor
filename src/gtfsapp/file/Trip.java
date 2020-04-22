@@ -57,6 +57,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Adds a new stopTimeID and stopTime to the hash map containting both
+     *
      * @param stopTime the stop time to be added
      */
     public void addStopTime(StopTime stopTime) {
@@ -121,11 +122,12 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets a list of routes that contain this trip
+     *
      * @return a list of routes that contain this trip
      */
-    public List<Route> getContainingRoutes() {
+    public Set<Route> getContainingRoutes() {
 
-        List<Route> containingRoutes = new ArrayList<>();
+        Set<Route> containingRoutes = new HashSet<>();
 
         // check if this trip is contained in any of the routes in this feed
         for (Route route : feed.getRoutes()) {
@@ -143,12 +145,13 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets a list of the IDs of the routes that contain this trip
+     *
      * @return a list of the IDS of the routes that contain this trip
      */
-    public List<RouteID> getContainingRouteIDs() {
+    public Set<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
-                                    .map(e -> (RouteID) e.getID())
-                                    .collect(Collectors.toList());
+                .map(e -> (RouteID) e.getID())
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -165,8 +168,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop time IDs contained within the trip
      */
-    public List<StopTimeID> getStopTimeIDs() {
-        return new ArrayList<>(stopTimes.keySet());
+    public Set<StopTimeID> getStopTimeIDs() {
+        return stopTimes.keySet();
     }
 
     /**
@@ -174,8 +177,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop times contained within the trip
      */
-    public List<StopTime> getStopTimes() {
-        return new ArrayList<>(stopTimes.values());
+    public Set<StopTime> getStopTimes() {
+        return new HashSet<>(stopTimes.values());
     }
 
     /**
@@ -192,8 +195,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop IDs contained within the trip
      */
-    public List<StopID> getStopIDs() {
-        return new ArrayList<>(stops.keySet());
+    public Set<StopID> getStopIDs() {
+        return stops.keySet();
     }
 
     /**
@@ -201,8 +204,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stops contained within the trip
      */
-    public List<Stop> getStops() {
-        return new ArrayList<>(stops.values());
+    public Set<Stop> getStops() {
+        return new HashSet<>(stops.values());
     }
 
     /**
@@ -240,6 +243,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets the average speed of the trip as a double through
      * using the getDistance and getDuration methods
+     *
      * @return the average speed of the trip in miles per hour
      */
     public double getAvgSpeed() {
@@ -257,6 +261,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets the first stop on the trip's location and makes a new location object with those coordinates
      * Then finds the distance to the last stop on the trip and returns it
+     *
      * @return The distance between stops in miles
      */
     public double getDistance() {
@@ -269,16 +274,17 @@ public class Trip extends GTFSElement {
         //Gets the first stop
         FirstDepartLoc = distanceCalc.get(0);
         //Gets the last stop
-        LastArriveLoc = distanceCalc.get(lastLocation -1);
+        LastArriveLoc = distanceCalc.get(lastLocation - 1);
         //Gets the location for the first stop
         Location firstStop = new Location(FirstDepartLoc.getLocation().getLatitude(), FirstDepartLoc.getLocation().getLongitude());
         //Returns the distance between the first and last stops
-         return firstStop.distanceTo(LastArriveLoc.getLocation());
+        return firstStop.distanceTo(LastArriveLoc.getLocation());
     }
 
     /**
      * Method to get the duration of the trip by taking the difference between
      * the first depart time, and last arrival time
+     *
      * @return the duration of the trip
      */
     public double getDuration() {
@@ -291,11 +297,11 @@ public class Trip extends GTFSElement {
         //Gets the first StopTime
         FirstDepartTime = durationCalc.get(0);
         //Gets the second StopTime
-        LastArriveTime = durationCalc.get(lastTime -1);
+        LastArriveTime = durationCalc.get(lastTime - 1);
         //Gets the time value for the first StopTime
-        double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
+        double tripStart = (double) FirstDepartTime.getDepartureTime().getTime();
         //Gets the time value for the second StopTime
-        double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
+        double tripEnd = (double) LastArriveTime.getDepartureTime().getTime();
         //Gets the total trip time
         return tripEnd - tripStart;
     }
@@ -320,6 +326,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Checks to see if the current system clock in milliseconds is in between the start and end times of a trip
+     *
      * @return if the trip is ongoing
      */
     public boolean isActive() {
@@ -332,12 +339,12 @@ public class Trip extends GTFSElement {
         //Gets the first StopTime
         FirstDepartTime = durationCalc.get(0);
         //Gets the second StopTime
-        LastArriveTime = durationCalc.get(lastTime -1);
+        LastArriveTime = durationCalc.get(lastTime - 1);
         //Gets the time value for the first StopTime
-        double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
+        double tripStart = (double) FirstDepartTime.getDepartureTime().getTime();
         //Gets the time value for the second StopTime
-        double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
-        if(System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart){
+        double tripEnd = (double) LastArriveTime.getDepartureTime().getTime();
+        if (System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart) {
             return true;
         } else {
             return false;

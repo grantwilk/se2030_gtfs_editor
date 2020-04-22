@@ -67,8 +67,8 @@ public class Stop extends GTFSElement {
      */
     public Set<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
-                                    .map(e -> (RouteID) e.getID())
-                                    .collect(Collectors.toSet());
+                .map(e -> (RouteID) e.getID())
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -103,8 +103,8 @@ public class Stop extends GTFSElement {
      */
     public Set<StopTimeID> getContainingStopTimeIDs() {
         return getContainingStopTimes().stream()
-                                       .map(e -> (StopTimeID) e.getID())
-                                       .collect(Collectors.toSet());
+                .map(e -> (StopTimeID) e.getID())
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -140,8 +140,8 @@ public class Stop extends GTFSElement {
      */
     public Set<TripID> getContainingTripIDs() {
         return getContainingTrips().stream()
-                                    .map(e -> (TripID) e.getID())
-                                    .collect(Collectors.toSet());
+                .map(e -> (TripID) e.getID())
+                .collect(Collectors.toSet());
     }
 
     /**

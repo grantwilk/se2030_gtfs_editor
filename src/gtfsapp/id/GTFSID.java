@@ -70,9 +70,22 @@ public abstract class GTFSID {
      */
     @Override
     public boolean equals(Object obj) {
-        boolean stringMatch = id.equals(obj.toString());
-        boolean classMatch = getClass().equals(obj.getClass());
-        return stringMatch && classMatch;
+
+        boolean classMatch = false;
+        boolean idStringMatch = false;
+
+        // check to see if we actually have a GTFSID object
+        if (obj instanceof GTFSID) {
+
+            // check to make sure they have the same subclass
+            classMatch = getClass().equals(obj.getClass());
+
+            // check to make sure they have the same ID string
+            idStringMatch = getIDString().equals(((GTFSID) obj).getIDString());
+
+        }
+
+        return classMatch && idStringMatch;
     }
 
     /**

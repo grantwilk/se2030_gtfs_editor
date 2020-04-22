@@ -5,9 +5,8 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Mason Schlax
@@ -58,35 +57,68 @@ public class StopTime extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a set of all trips that contain this stop time
+     *
+     * @return a set of all trips that contain this stop time
      */
-    public List<Trip> getContainingTrips() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<Trip> getContainingTrips() {
+
+        Set<Trip> containingTrips = new HashSet<>();
+
+        // for each trip in the feed
+        for (Trip trip : feed.getTrips()) {
+            if (trip.containsStopTime((StopTimeID) getID())) {
+                containingTrips.add(trip);
+            }
+        }
+
+        return containingTrips;
+
+    }
+
+    /**
+     * Gets a set of the IDs of all trips that contain this stop time
+     *
+     * @return a set of the IDs of all trips that contain this stop time
+     */
+    public Set<TripID> getContainingTripIDs() {
+        return getContainingTrips().stream()
+                .map(e -> (TripID) e.getID())
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Gets a set of all routes that contain this stop time
+     *
+     * @return a set of all routes that contain this stop time
+     */
+    public Set<Route> getContainingRoutes() {
+
+        Set<Route> containingRoutes = new HashSet<>();
+
+        // for each route in the feed
+        for (Route route : feed.getRoutes()) {
+
+            // check to see if the route's trips and our containing trips have anything in common
+            if (!Collections.disjoint(route.getTrips(), getContainingTrips())) {
+
+                // if they do, add the route to our set of containing route
+                containingRoutes.add(route);
+
+            }
+        }
+
+        return containingRoutes;
+
     }
 
     /**
      * @return
      */
-    public List<TripID> getContainingTripIDs() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @return
-     */
-    public List<Route> getContainingRoutes() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @return
-     */
-    public List<RouteID> getContainingRouteIDs() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+    public Set<RouteID> getContainingRouteIDs() {
+        return getContainingRoutes().stream()
+                .map(e -> (RouteID) e.getID())
+                .collect(Collectors.toSet());
     }
 
     /**
