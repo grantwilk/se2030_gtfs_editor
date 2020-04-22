@@ -227,7 +227,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets the average speed of the trip as a double through
      * using the getDistance and getDuration methods
-     * @return the average speed of the trip
+     * @return the average speed of the trip in miles per hour
      */
     public double getAvgSpeed() {
         return getDistance()/getDuration();
@@ -242,7 +242,9 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets the first stop on the trip's location and makes a new location object with those coordinates
+     * Then finds the distance to the last stop on the trip and returns it
+     * @return The distance between stops in miles
      */
     public double getDistance() {
         ArrayList<StopTime> distanceCalc = (ArrayList<StopTime>) this.getStopTimes();
@@ -251,8 +253,8 @@ public class Trip extends GTFSElement {
         StopTime LastArriveLoc;
         FirstDepartLoc = distanceCalc.get(0);
         LastArriveLoc = distanceCalc.get(lastLocation -1);
-        Location firstStop = new Location(FirstDepartLoc.getStop().getLocation().getLattitude(), FirstDepartLoc.getStop().getLocation().getLongitude());
-        return 0;
+        Location firstStop = new Location(FirstDepartLoc.getStop().getLocation().getLatitude(), FirstDepartLoc.getStop().getLocation().getLongitude());
+         return firstStop.distanceTo(LastArriveLoc.getStop().getLocation());
     }
 
     /**
