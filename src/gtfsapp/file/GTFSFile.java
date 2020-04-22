@@ -174,6 +174,31 @@ public class GTFSFile {
         }
     }
 
+    private boolean validateRoutes() throws  IOException {
+
+        // gets name of the file
+        String filename = routeFile.getName();
+
+        //get all lines from file
+        List<String> lines = Files.readAllLines(routeFile.toPath());
+
+        //creates keys from the first line of code
+        List<String> format = tokenizeLine(lines.get(0));
+
+        for(int i = 1; 1 < lines.size(); i++) {
+            HashMap<String,String> validationKey = new HashMap<String, String>();
+            List<String> currentLine = tokenizeLine(lines.get(i));
+
+            if(format.size() != currentLine.size()){
+                throw new IOException("The amount of elements is not equal to how big the key is");
+            }
+
+
+        }
+
+
+    }
+
     /**
      * Parses routes from the GTFS routes file
      *
