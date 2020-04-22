@@ -36,11 +36,11 @@ public class Trip extends GTFSElement {
     /**
      * Constructor for the trip object with an id and feed as parameters
      *
-     * @param id   for the trip
-     * @param feed for the trip
+     * @param idString for the trip
+     * @param feed     for the trip
      */
-    public Trip(Feed feed, String id) {
-        super(new TripID(id));
+    public Trip(Feed feed, String idString) {
+        super(new TripID(idString));
         this.feed = feed;
     }
 
@@ -54,6 +54,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Adds a new stopTimeID and stopTime to the hash map containting both
+     *
      * @param stopTime the stop time to be added
      */
     public void addStopTime(StopTime stopTime) {
@@ -63,9 +64,9 @@ public class Trip extends GTFSElement {
     /**
      * Adds a list of the stop times to the internal map of stop times
      *
-     * @param stopTimes - the list of stop times
+     * @param stopTimes the list of stop times
      */
-    public void addAllStopTimes(ArrayList<StopTime> stopTimes) {
+    public void addAllStopTimes(List<StopTime> stopTimes) {
 
         // for each stop time in the array
         for (StopTime stopTime : stopTimes) {
@@ -100,7 +101,7 @@ public class Trip extends GTFSElement {
     /**
      * Checks to see if this trip contains a specific stop
      *
-     * @param id - the ID of the stop
+     * @param id the ID of the stop
      */
     public boolean containsStop(StopID id) {
         return stops.containsKey(id);
@@ -109,7 +110,7 @@ public class Trip extends GTFSElement {
     /**
      * Checks to see if this trip contains a specific stop time
      *
-     * @param id - the ID of the stop time
+     * @param id the ID of the stop time
      */
     public boolean containsStopTime(StopTimeID id) {
         return stopTimes.containsKey(id);
@@ -118,7 +119,7 @@ public class Trip extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -126,7 +127,7 @@ public class Trip extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -134,7 +135,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets a stop time contained within the trip by its ID
      *
-     * @param id - the ID of the stop time
+     * @param id the ID of the stop time
      */
     public StopTime getStopTimeByID(StopTimeID id) {
         return stopTimes.get(id);
@@ -145,7 +146,7 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop time IDs contained within the trip
      */
-    public ArrayList<StopTimeID> getStopTimeIDs() {
+    public List<StopTimeID> getStopTimeIDs() {
         Set<StopTimeID> stopTimeIDSet = stopTimes.keySet();
         return new ArrayList<>(stopTimeIDSet);
     }
@@ -155,7 +156,7 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop times contained within the trip
      */
-    public ArrayList<StopTime> getStopTimes() {
+    public List<StopTime> getStopTimes() {
         Collection<StopTime> stopTimeSet = stopTimes.values();
         return new ArrayList<>(stopTimeSet);
     }
@@ -163,7 +164,7 @@ public class Trip extends GTFSElement {
     /**
      * Gets a stop contained within the trip by its ID
      *
-     * @param id - the ID of the stop
+     * @param id the ID of the stop
      */
     public Stop getStopByID(StopID id) {
         return stops.get(id);
@@ -171,18 +172,20 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets all of the stop IDs contained within the trip
+     *
      * @return a list of stop IDs contained within the trip
      */
-    public ArrayList<StopID> getStopIDs() {
+    public List<StopID> getStopIDs() {
         Set<StopID> stopIDSet = stops.keySet();
         return new ArrayList<>(stopIDSet);
     }
 
     /**
      * Gets all of the stops contained within the trip
+     *
      * @return a list of stops contained within the trip
      */
-    public ArrayList<Stop> getStops() {
+    public List<Stop> getStops() {
         Collection<Stop> stopsCollection = stops.values();
         return new ArrayList<>(stopsCollection);
     }
@@ -277,7 +280,7 @@ public class Trip extends GTFSElement {
     /**
      * Setter for the head sign for the trip
      *
-     * @param headSign - the headSign of the trip
+     * @param headSign the headSign of the trip
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;
@@ -318,7 +321,7 @@ public class Trip extends GTFSElement {
     @Override
     public String getSubtitle() {
         // TODO - remove placeholders
-        return "Lorem ipsum dolor!";
+        return "Lorem ipsum dolor";
     }
 
     /**
@@ -330,8 +333,9 @@ public class Trip extends GTFSElement {
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
         // TODO - remove placeholders
-        attributes.put("Next Stop", "Lorem ipsum dolor");
-        attributes.put("Last Stop", "Lorem ipsum dolor");
+        attributes.put("Average Speed", "" + getAvgSpeed());
+        attributes.put("Distance", "" + getDistance());
+        attributes.put("Duration", "" + getDuration());
         return attributes;
     }
 

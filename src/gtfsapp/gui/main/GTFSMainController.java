@@ -7,11 +7,13 @@ import gtfsapp.gui.dialog.error.GTFSErrorType;
 import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController;
 import gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController;
 import gtfsapp.gui.map.GTFSMapController;
+import gtfsapp.id.GTFSID;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -23,6 +25,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,22 +57,22 @@ public class GTFSMainController extends GTFSController {
     /**
      * List of all routes associated with the selected element
      */
-    private ArrayList<Route> associatedRoutes = new ArrayList<>();
+    private List<Route> associatedRoutes = new ArrayList<>();
 
     /**
      * List of all trips associated with the selected element
      */
-    private ArrayList<Trip> associatedTrips = new ArrayList<>();
+    private List<Trip> associatedTrips = new ArrayList<>();
 
     /**
      * List of all stops associated with the selected element
      */
-    private ArrayList<Stop> associatedStops = new ArrayList<>();
+    private List<Stop> associatedStops = new ArrayList<>();
 
     /**
      * List of all stop times associated with the selected element
      */
-    private ArrayList<StopTime> associatedStopTimes = new ArrayList<>();
+    private List<StopTime> associatedStopTimes = new ArrayList<>();
 
     /**
      * The controller's GTFS file
@@ -165,6 +168,30 @@ public class GTFSMainController extends GTFSController {
     private TabPane associationsTabPane;
 
     /**
+     * The tab that holds associated routes
+     */
+    @FXML
+    private Tab routesTab;
+
+    /**
+     * The tab that holds associated trips
+     */
+    @FXML
+    private Tab tripsTab;
+
+    /**
+     * The tab that holds associated stop times
+     */
+    @FXML
+    private Tab stopTimesTab;
+
+    /**
+     * The tab that holds associated stops
+     */
+    @FXML
+    private Tab stopsTab;
+
+    /**
      * The container that holds the dynamically generated associated routes
      */
     @FXML
@@ -192,22 +219,23 @@ public class GTFSMainController extends GTFSController {
      * FXML initialization function
      */
     @FXML
-    public void initialize () {
+    public void initialize() {
         updateInfoPanel();
     }
 
     /**
      * Invokes the system's file chooser and loads a GTFS file from the computer's file system
      */
-    public void loadFile() throws FileNotFoundException {
+    public void loadFile() {
 
         // invoke a file chooser
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open GTFS File Set");
 
         // set the initial directory as the project directory
-        // TODO - remove this before going live, this is just for convenience
-        fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
+        // TODO - remove samples directory default before going live, this is just for convenience
+        String samplesDirectory = Paths.get(".").toAbsolutePath().normalize().toString() + "/samples/";
+        fileChooser.setInitialDirectory(new File(samplesDirectory));
 
         // configure extension filter
         FileChooser.ExtensionFilter txtFilter =
@@ -221,6 +249,13 @@ public class GTFSMainController extends GTFSController {
         // if at least one file was selected
         if (!(files == null || files.isEmpty())) {
             try {
+
+                // deselect the selected element
+                deselectElement();
+
+                // clear all existing IDs
+                GTFSID.clear();
+
                 // create the GTFS file from the files
                 gtfsFile = new GTFSFile(files);
 
@@ -261,9 +296,10 @@ public class GTFSMainController extends GTFSController {
 
     /**
      * Invokes an error dialog with a type, title, and message
-     * @param errorType - the type of error
-     * @param errorTitle - the error title
-     * @param errorMessage - the error message
+     *
+     * @param errorType    the type of error
+     * @param errorTitle   the error title
+     * @param errorMessage the error message
      */
     public void invokeErrorDialog(GTFSErrorType errorType, String errorTitle, String errorMessage) {
 
@@ -294,8 +330,9 @@ public class GTFSMainController extends GTFSController {
             errorStage.setScene(errorScene);
             errorStage.setTitle(errorTitle);
 
-            // show the stage and do not allow background interaction
+            // show the stage
             errorStage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
             // TODO - can anything else be done here?
@@ -435,44 +472,35 @@ public class GTFSMainController extends GTFSController {
      */
     public void updateAssociations() {
 
-        // get the GTFS feed from the file
-        Feed feed = gtfsFile.getFeed();
-
         // if there is no selected object, display all routes, trips, times, and stops
         if (selectedElement == null) {
-            associatedRoutes = feed.getRoutes();
-            associatedTrips = feed.getTrips();
-            associatedStopTimes = feed.getStopTimes();
-            associatedStops = feed.getStops();
+
+            // if there is no file loaded, reset all of the associations arrays
+            if (gtfsFile == null) {
+                associatedRoutes = new ArrayList<>();
+                associatedTrips = new ArrayList<>();
+                associatedStopTimes = new ArrayList<>();
+                associatedStops = new ArrayList<>();
+            }
+
+            // if there is a feed loaded, get all of the associations arrays from it
+            else {
+                Feed feed = gtfsFile.getFeed();
+                associatedRoutes = feed.getRoutes();
+                associatedTrips = feed.getTrips();
+                associatedStopTimes = feed.getStopTimes();
+                associatedStops = feed.getStops();
+            }
+
         }
 
         // otherwise, find associations and update the class variables
         else {
-            // TODO - uncomment this once all GTFS element methods are implemented!
-            // associatedRoutes = findAssociatedRoutes();
-            // associatedTrips = findAssociatedTrips();
-            // associatedStopTimes = findAssociatedStopTimes();
-            // associatedStops = findAssociatedStops();
+             associatedRoutes = findAssociatedRoutes();
+             associatedTrips = findAssociatedTrips();
+             associatedStopTimes = findAssociatedStopTimes();
+             associatedStops = findAssociatedStops();
         }
-
-        // TODO - remove this once Feed is implemented!
-        associatedRoutes = new ArrayList<>();
-        associatedTrips = new ArrayList<>();
-        associatedStopTimes = new ArrayList<>();
-        associatedStops = new ArrayList<>();
-
-        // TODO - remove this! temporary route.
-        Route route = new Route(feed, "jeff!", RouteType.SUBWAY);
-        associatedRoutes.add(route);
-
-        Trip trip = new Trip(feed, "steve!");
-        associatedTrips.add(trip);
-
-        Stop stop = new Stop(feed, "luigi!");
-        associatedStops.add(stop);
-
-        StopTime stopTime = new StopTime(feed, stop, 0);
-        associatedStopTimes.add(stopTime);
 
     }
 
@@ -480,18 +508,41 @@ public class GTFSMainController extends GTFSController {
      * Updates the GUI's associations panel
      */
     public void updateAssociationsPanel() throws IOException {
-        // update each tab of the associations panel
-        updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
-        updateAssociationsTab(associatedTrips, associatedTripsContainer);
-        updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
-        updateAssociationsTab(associatedStops, associatedStopsContainer);
+        // remove all of the tabs from the tab pane
+        associationsTabPane.getTabs().clear();
+
+        // if any route associations exist, update the tab and add it back to the tab pane
+        if (!associatedRoutes.isEmpty()) {
+            updateAssociationsTab(associatedRoutes, associatedRoutesContainer);
+            associationsTabPane.getTabs().add(routesTab);
+        }
+
+        // if any trip associations exist, update the tab and add it back to the tab pane
+        if (!associatedTrips.isEmpty()) {
+            updateAssociationsTab(associatedTrips, associatedTripsContainer);
+            associationsTabPane.getTabs().add(tripsTab);
+        }
+
+        // if any stop time associations exist, update the tab and add it back to the tab pane
+        if (!associatedStopTimes.isEmpty()) {
+            updateAssociationsTab(associatedStopTimes, associatedStopTimesContainer);
+            associationsTabPane.getTabs().add(stopTimesTab);
+        }
+
+        // if any stop associations exist, update the tab and add it back to the tab pane
+        if (!associatedStops.isEmpty()) {
+            updateAssociationsTab(associatedStops, associatedStopsContainer);
+            associationsTabPane.getTabs().add(stopsTab);
+        }
+
+
     }
 
     /**
      * Converts all elements into an associations tile and places them in an associations container
      *
-     * @param elements  - the elements to add
-     * @param container - the container to place the tiles in
+     * @param elements  the elements to add
+     * @param container the container to place the tiles in
      * @throws IOException if the GUI fails to load an FXML file
      */
     public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
@@ -530,10 +581,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of routes associated with the selected element
      */
-    private ArrayList<Route> findAssociatedRoutes() {
+    private List<Route> findAssociatedRoutes() {
 
         // our new list of associations
-        ArrayList<Route> associations;
+        List<Route> associations;
 
         // if the element is a trip
         if (selectedElement instanceof Trip) {
@@ -564,10 +615,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of trips associated with the selected element
      */
-    private ArrayList<Trip> findAssociatedTrips() {
+    private List<Trip> findAssociatedTrips() {
 
         // our new list of associations
-        ArrayList<Trip> associations;
+        List<Trip> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -576,8 +627,7 @@ public class GTFSMainController extends GTFSController {
 
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
-            associations = new ArrayList<>();
-            associations.add(((StopTime) selectedElement).getTrip());
+            associations = ((StopTime) selectedElement).getContainingTrips();
         }
 
         // if the element is a stop
@@ -599,10 +649,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of stop times associated with the selected element
      */
-    private ArrayList<StopTime> findAssociatedStopTimes() {
+    private List<StopTime> findAssociatedStopTimes() {
 
         // our new list of associations
-        ArrayList<StopTime> associations;
+        List<StopTime> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -633,10 +683,10 @@ public class GTFSMainController extends GTFSController {
      *
      * @return an array list of stops associated with the selected element
      */
-    private ArrayList<Stop> findAssociatedStops() {
+    private List<Stop> findAssociatedStops() {
 
         // our new list of associations
-        ArrayList<Stop> associations;
+        List<Stop> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -668,7 +718,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated routes
      */
-    public ArrayList<Route> getAssociatedRoutes() {
+    public List<Route> getAssociatedRoutes() {
         return associatedRoutes;
     }
 
@@ -677,7 +727,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated trips
      */
-    public ArrayList<Trip> getAssociatedTrips() {
+    public List<Trip> getAssociatedTrips() {
         return associatedTrips;
     }
 
@@ -686,7 +736,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated stop times
      */
-    public ArrayList<StopTime> getAssociatedStopTimes() {
+    public List<StopTime> getAssociatedStopTimes() {
         return associatedStopTimes;
     }
 
@@ -695,7 +745,7 @@ public class GTFSMainController extends GTFSController {
      *
      * @return the selected element's associated stops
      */
-    public ArrayList<Stop> getAssociatedStops() {
+    public List<Stop> getAssociatedStops() {
         return associatedStops;
     }
 

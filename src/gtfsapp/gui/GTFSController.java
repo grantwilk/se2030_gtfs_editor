@@ -47,7 +47,7 @@ public abstract class GTFSController {
     /**
      * Sets the controller's scene
      *
-     * @param scene - the scene to set
+     * @param scene the scene to set
      */
     public void setScene(Scene scene) {
         this.scene = scene;
@@ -65,7 +65,7 @@ public abstract class GTFSController {
     /**
      * Sets the controllers stage
      *
-     * @param stage - the stage to set
+     * @param stage the stage to set
      */
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -83,7 +83,7 @@ public abstract class GTFSController {
     /**
      * Sets the title of the window
      *
-     * @param windowTitle - the title of the window
+     * @param windowTitle the title of the window
      */
     public void setWindowTitle(String windowTitle) {
         stage.setTitle(windowTitle);
@@ -92,7 +92,7 @@ public abstract class GTFSController {
     /**
      * Sets the window's always on top property
      *
-     * @param alwaysOnTop - true if the window should be always on top, false otherwise
+     * @param alwaysOnTop true if the window should be always on top, false otherwise
      */
     public void setWindowAlwaysOnTop(boolean alwaysOnTop) {
         stage.setAlwaysOnTop(alwaysOnTop);
@@ -101,7 +101,7 @@ public abstract class GTFSController {
     /**
      * Sets the window's resizable property
      *
-     * @param isResizable - true if the window should be resizable, false otherwise
+     * @param isResizable true if the window should be resizable, false otherwise
      */
     public void setWindowResizable(boolean isResizable) {
         stage.setResizable(isResizable);

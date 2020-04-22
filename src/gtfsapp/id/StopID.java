@@ -15,7 +15,9 @@ public class StopID extends GTFSID {
      */
     private final static Set<String> existingIDStrings = new HashSet<>();
 
-    /** Constructor for StopID
+    /**
+     * Constructor for StopID
+     *
      * @param id String id to be associated with this object
      */
     public StopID(String id) {
@@ -32,8 +34,16 @@ public class StopID extends GTFSID {
     }
 
     /**
+     * Clears all ID strings from the map of existing IDs
+     */
+    public static void clear() {
+        existingIDStrings.clear();
+    }
+
+    /**
      * Checks if a Stop ID with a specified ID string exists
-     * @param id - the ID string to test
+     *
+     * @param id the ID string to test
      * @return true if the ID string exists, false otherwise
      */
     public static boolean exists(String id) {
@@ -42,7 +52,8 @@ public class StopID extends GTFSID {
 
     /**
      * Checks if a Stop ID object already exists
-     * @param id - the Stop ID object to test
+     *
+     * @param id the Stop ID object to test
      * @return true if the Stop ID exists, false otherwise
      */
     public static boolean exists(StopID id) {

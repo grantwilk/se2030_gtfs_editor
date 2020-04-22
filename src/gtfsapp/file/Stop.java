@@ -7,8 +7,8 @@ import gtfsapp.id.TripID;
 
 import javafx.geometry.Point2D;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Mason Schlax
@@ -45,11 +45,11 @@ public class Stop extends GTFSElement {
     /**
      * Constructor for the stop object with an id and feed as parameters
      *
-     * @param id   for the stop
-     * @param feed for the stop
+     * @param idString for the stop
+     * @param feed     for the stop
      */
-    public Stop(Feed feed, String id) {
-        super(new StopID(id));
+    public Stop(Feed feed, String idString) {
+        super(new StopID(idString));
         this.feed = feed;
     }
 
@@ -67,7 +67,7 @@ public class Stop extends GTFSElement {
      *
      * @return a list of the RouteIDs
      */
-    public ArrayList<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -77,7 +77,7 @@ public class Stop extends GTFSElement {
      *
      * @return all of the routes
      */
-    public ArrayList<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -85,7 +85,7 @@ public class Stop extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<StopTimeID> getContainingStopTimeIDs() {
+    public List<StopTimeID> getContainingStopTimeIDs() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -93,7 +93,7 @@ public class Stop extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<StopTime> getContainingStopTimes() {
+    public List<StopTime> getContainingStopTimes() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -101,7 +101,7 @@ public class Stop extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<TripID> getContainingTripIDs() {
+    public List<TripID> getContainingTripIDs() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
@@ -109,7 +109,7 @@ public class Stop extends GTFSElement {
     /**
      * @return
      */
-    public ArrayList<Trip> getContainingTrips() {
+    public List<Trip> getContainingTrips() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }

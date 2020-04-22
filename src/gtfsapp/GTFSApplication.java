@@ -18,19 +18,20 @@ import java.io.IOException;
  */
 public class GTFSApplication extends Application {
 
-	/**
-	 * The maximum height of the main stage in pixels
-	 */
-	private static final double MAIN_STAGE_MINIMUM_WIDTH = 1280;
-
-	/**
-	 * The minimum height of the main stage in pixels
-	 */
-	private static final double MAIN_STAGE_MINIMUM_HEIGHT = 720;
+    /**
+     * The maximum height of the main stage in pixels
+     */
+    private static final double MAIN_STAGE_MINIMUM_WIDTH = 1280;
 
     /**
-	 * The entry point for the application
-     * @param mainStage - the stage that will be running the main GUI
+     * The minimum height of the main stage in pixels
+     */
+    private static final double MAIN_STAGE_MINIMUM_HEIGHT = 720;
+
+    /**
+     * The entry point for the application
+     *
+     * @param mainStage the stage that will be running the main GUI
      */
     public void start(Stage mainStage) throws IOException {
 
@@ -39,21 +40,21 @@ public class GTFSApplication extends Application {
         Parent root = loader.load();
 
         // configure basic stage attributes
-		mainStage.setTitle("GTFS Editor");
-		mainStage.setMinWidth(MAIN_STAGE_MINIMUM_WIDTH);
-		mainStage.setMinHeight(MAIN_STAGE_MINIMUM_HEIGHT);
+        mainStage.setTitle("GTFS Editor");
+        mainStage.setMinWidth(MAIN_STAGE_MINIMUM_WIDTH);
+        mainStage.setMinHeight(MAIN_STAGE_MINIMUM_HEIGHT);
 
-		// create and set stage scene
-		Scene mainScene = new Scene(root);
-		mainStage.setScene(mainScene);
+        // create and set stage scene
+        Scene mainScene = new Scene(root);
+        mainStage.setScene(mainScene);
 
-		// get and configure main controller
-		GTFSMainController mainController = loader.getController();
-		mainController.setStage(mainStage);
-		mainController.setScene(mainScene);
+        // get and configure main controller
+        GTFSMainController mainController = loader.getController();
+        mainController.setStage(mainStage);
+        mainController.setScene(mainScene);
 
-		// show the stage
-		mainStage.show();
+        // show the stage
+        mainStage.show();
 
     }
 
