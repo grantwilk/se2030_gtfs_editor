@@ -455,6 +455,10 @@ public class GTFSFile {
             // create a stop time
             StopTime stopTime = new StopTime(feed, stop, sequence);
 
+
+            // add the stop time to the trip
+            trips.get(tripID).addStopTime(stopTime);
+
             // extract extra values
 
             // get and set arrival time
