@@ -306,12 +306,29 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Checks to see if the current system clock in milliseconds is in between the start and end times of a trip
+     * @return if the trip is ongoing
      */
     public boolean isActive() {
-        //TODO  - needs implementation eventually
-        throw new UnsupportedOperationException();
-
+        //Gets an ArrayList of the stop times
+        ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
+        //Number of stop times in the ArrayList
+        int lastTime = durationCalc.size();
+        StopTime FirstDepartTime;
+        StopTime LastArriveTime;
+        //Gets the first StopTime
+        FirstDepartTime = durationCalc.get(0);
+        //Gets the second StopTime
+        LastArriveTime = durationCalc.get(lastTime -1);
+        //Gets the time value for the first StopTime
+        double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
+        //Gets the time value for the second StopTime
+        double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
+        if(System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
