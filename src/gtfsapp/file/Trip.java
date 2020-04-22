@@ -35,6 +35,9 @@ public class Trip extends GTFSElement {
      */
     private String headSign;
 
+
+    private static final double MILLI_TO_HOUR = 3600000;
+
     /**
      * Constructor for the trip object with an id and feed as parameters
      *
@@ -298,6 +301,9 @@ public class Trip extends GTFSElement {
         //Gets the time value for the second StopTime
         double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
         //Gets the total trip time
+        //convert trip times from milliseconds to hours
+        tripStart = tripStart/MILLI_TO_HOUR;
+        tripEnd = tripEnd/MILLI_TO_HOUR;
         return tripEnd - tripStart;
     }
 
