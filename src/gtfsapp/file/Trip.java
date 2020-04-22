@@ -7,6 +7,7 @@ import gtfsapp.util.Location;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Mason Schlax
@@ -141,11 +142,13 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of the IDs of the routes that contain this trip
+     * @return a list of the IDS of the routes that contain this trip
      */
     public List<RouteID> getContainingRouteIDs() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return getContainingRoutes().stream()
+                                    .map(e -> (RouteID) e.getID())
+                                    .collect(Collectors.toList());
     }
 
     /**
@@ -163,8 +166,7 @@ public class Trip extends GTFSElement {
      * @return a list of stop time IDs contained within the trip
      */
     public List<StopTimeID> getStopTimeIDs() {
-        Set<StopTimeID> stopTimeIDSet = stopTimes.keySet();
-        return new ArrayList<>(stopTimeIDSet);
+        return new ArrayList<>(stopTimes.keySet());
     }
 
     /**
@@ -173,8 +175,7 @@ public class Trip extends GTFSElement {
      * @return a list of stop times contained within the trip
      */
     public List<StopTime> getStopTimes() {
-        Collection<StopTime> stopTimeSet = stopTimes.values();
-        return new ArrayList<>(stopTimeSet);
+        return new ArrayList<>(stopTimes.values());
     }
 
     /**
@@ -192,8 +193,7 @@ public class Trip extends GTFSElement {
      * @return a list of stop IDs contained within the trip
      */
     public List<StopID> getStopIDs() {
-        Set<StopID> stopIDSet = stops.keySet();
-        return new ArrayList<>(stopIDSet);
+        return new ArrayList<>(stops.keySet());
     }
 
     /**
@@ -202,8 +202,7 @@ public class Trip extends GTFSElement {
      * @return a list of stops contained within the trip
      */
     public List<Stop> getStops() {
-        Collection<Stop> stopsCollection = stops.values();
-        return new ArrayList<>(stopsCollection);
+        return new ArrayList<>(stops.values());
     }
 
     /**
@@ -244,7 +243,7 @@ public class Trip extends GTFSElement {
      * @return the average speed of the trip in miles per hour
      */
     public double getAvgSpeed() {
-        return getDistance()/getDuration();
+        return getDistance() / getDuration();
     }
 
     /**
