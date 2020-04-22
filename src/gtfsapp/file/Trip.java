@@ -243,12 +243,13 @@ public class Trip extends GTFSElement {
      * @return
      */
     public double getDistance() {
-        ArrayList<StopTime> distanceCalc = this.getStopTimes();
+        ArrayList<StopTime> distanceCalc = (ArrayList<StopTime>) this.getStopTimes();
         int lastLocation = distanceCalc.size();
         StopTime FirstDepartLoc;
         StopTime LastArriveLoc;
         FirstDepartLoc = distanceCalc.get(0);
         LastArriveLoc = distanceCalc.get(lastLocation -1);
+        return 0;
     }
 
     /**
@@ -257,7 +258,7 @@ public class Trip extends GTFSElement {
      * @return the duration of the trip
      */
     public double getDuration() {
-        ArrayList<StopTime> durationCalc = this.getStopTimes();
+        ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
         int lastTime = durationCalc.size();
         StopTime FirstDepartTime;
         StopTime LastArriveTime;
@@ -290,8 +291,9 @@ public class Trip extends GTFSElement {
      * @return
      */
     public boolean isActive() {
-        // TODO - needs implementation eventually
+        //TODO  - needs implementation eventually
         throw new UnsupportedOperationException();
+
     }
 
     /**
