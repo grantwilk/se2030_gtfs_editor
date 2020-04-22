@@ -319,8 +319,9 @@ public class Trip extends GTFSElement {
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
         // TODO - remove placeholders
-        attributes.put("Next Stop", "Lorem ipsum dolor");
-        attributes.put("Last Stop", "Lorem ipsum dolor");
+        attributes.put("Average Speed", "" + getAvgSpeed());
+        attributes.put("Distance", "" + getDistance());
+        attributes.put("Duration", "" + getDuration());
         return attributes;
     }
 
