@@ -4,8 +4,7 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
-
-import javafx.geometry.Point2D;
+import gtfsapp.util.Location;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,7 @@ public class Stop extends GTFSElement {
     /**
      * The location of the stop in latitude and longitude
      */
-    private Point2D location;
+    private Location location;
 
     /**
      * The name of the stop
@@ -155,7 +154,7 @@ public class Stop extends GTFSElement {
      *
      * @return the location
      */
-    public Point2D getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -164,7 +163,7 @@ public class Stop extends GTFSElement {
      *
      * @param location the map location for the stop
      */
-    public void setLocation(Point2D location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
