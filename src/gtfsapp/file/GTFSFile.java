@@ -719,7 +719,7 @@ public class GTFSFile {
             // Create new hash map to create a trip from this line
             HashMap<String, String> tripFields = new HashMap<>();
 
-            // Get line in file
+            // Get next line from file
             List<String> currentLine = tokenizeLine(lines.get(i));
 
             // Add each attribute in line to hash map
@@ -746,7 +746,80 @@ public class GTFSFile {
             trips.put(tripID,trip);
 
         }
-
         return trips;
+    }
+
+    private HashMap<String, Route> parse() throws IOException {
+        // get all lines from the file
+        List<String> lines = Files.readAllLines(routeFile.toPath());
+
+        // get format of the file
+        List<String> format = tokenizeLine(lines.get(0));
+        lines.remove(0);
+
+        // create a new list of routes
+        HashMap<String, Route> routes = new HashMap<>();
+
+        for(int i = 0; i < lines.size(); i++) {
+            // create a new hash map for the attributes of the route for this line
+            HashMap<String, String> routeFields = new HashMap<>();
+
+            // get next line from file
+            List<String> currentLine = tokenizeLine(lines.get(i));
+
+            // put all route attributes into hash map
+            for(int j = 0; j < format.size(); j++) {
+                routeFields.put(format.get(i),currentLine.get(i));
+            }
+
+            // get route ID and route type
+            String routeID = routeFields.get("route_id");
+            String routeType = routeFields.get("route_type");
+            int routeTypeValue = Integer.parseInt(routeType);
+
+            // create new route
+            Route route = new Route(feed, routeID, RouteType.values()[routeTypeValue]);
+
+            // set route short name
+            String shortName = routeFields.get("route_short_name");
+            if(!shortName.isEmpty()) {
+                route.setShortName(shortName);
+            }
+
+            // set long name
+            String longName = routeFields.get("route_long_name");
+            if(!longName.isEmpty()) {
+                route.setLongName(longName);
+            }
+
+            // set description
+            String description = routeFields.get("route_desc");
+            if(!description.isEmpty()) {
+                route.setDesc(description);
+            }
+
+            // set url
+            String url = routeFields.get("route_url");
+            if(!url.isEmpty()) {
+                route.setURL(url);
+            }
+
+            // set color
+            String color = routeFields.get("route_color");
+            if(!color.isEmpty()) {
+                route.setColor(hexToColor(color));
+            }
+
+            // set text color
+            String textColor = routeFields.get("route_text_color");
+            if(!textColor.isEmpty()) {
+                route.setTextColor(hexToColor(textColor));
+            }
+
+            // add route to return hash map
+            routes.put(routeID, route);
+        }
+
+        return routes;
     }
 }
