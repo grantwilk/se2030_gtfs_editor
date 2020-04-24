@@ -277,14 +277,18 @@ public class Trip extends GTFSElement {
         List<StopTime> stopTimes = new ArrayList<>(getStopTimes());
         stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
         List<Stop> stop = stopTimes.stream().map(StopTime::getStop).collect(Collectors.toList());
+
         //number of stops on the trip
         int numStops = stop.size()-1;
         double distanceTraveled = 0;
-        //starting at the first index, and going to the second last, the difference between the stops is calculated in miles
+
+        //starting at the first index, and going to the second to last, the difference between the stops is calculated in miles
         for(int i = 0; i < numStops; i++){
-            Location start = new Location(stop.get(i).getLocation().getLatitude(), stop.get(i).getLocation().getLongitude());
-            distanceTraveled += start.distanceTo(stop.get(i+1).getLocation());
+            Location locationOne = stop.get(i).getLocation();
+            Location locationTwo = stop.get(i+1).getLocation();
+            distanceTraveled += locationOne.distanceTo(locationTwo);
         }
+
         return distanceTraveled;
     }
 
