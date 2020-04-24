@@ -266,8 +266,8 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Gets the first stop on the trip's location and makes a new location object with those coordinates
-     * Then finds the distance to the last stop on the trip and returns it
+     * Puts all of the stops in a sorted list, then finds the distance in miles between
+     * consecutive stops
      *
      * @return The distance between stops in miles
      */
@@ -277,34 +277,15 @@ public class Trip extends GTFSElement {
         List<StopTime> stopTimes = new ArrayList<>(getStopTimes());
         stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
         List<Stop> stop = stopTimes.stream().map(StopTime::getStop).collect(Collectors.toList());
-
-        // TODO - Mason
-
-        // We forgot that trips can have multiple stops in them, and that the distance is a factor of all of the stops
-        // along the way, not just the displacement between the first and last stop. Could you implement this so that
-        // it sums up the distance between each of the distances between each of the stops so we have a better number?
-
-        // I already got a sorted list of all of the stop times in the trip called "stops" above, I recommend you use
-        // that to make sure things stay in order. Thank you! :)
-
-        // -Grant
-
-        /*
-        //Gets the number of stops in list
-        int lastLocation = distanceCalc.size();
-        Stop FirstDepartLoc;
-        Stop LastArriveLoc;
-        //Gets the first stop
-        FirstDepartLoc = distanceCalc.get(0);
-        //Gets the last stop
-        LastArriveLoc = distanceCalc.get(lastLocation - 1);
-        //Gets the location for the first stop
-        Location firstStop = new Location(FirstDepartLoc.getLocation().getLatitude(), FirstDepartLoc.getLocation().getLongitude());
-        //Returns the distance between the first and last stops
-        return firstStop.distanceTo(LastArriveLoc.getLocation());
-        */
-
-        return 0;
+        //number of stops on the trip
+        int numStops = stop.size()-1;
+        double distanceTraveled = 0;
+        //starting at the first index, and going to the second last, the difference between the stops is calculated in miles
+        for(int i = 0; i < numStops; i++){
+            Location start = new Location(stop.get(i).getLocation().getLatitude(), stop.get(i).getLocation().getLongitude());
+            distanceTraveled += start.distanceTo(stop.get(i+1).getLocation());
+        }
+        return distanceTraveled;
     }
 
     /**
