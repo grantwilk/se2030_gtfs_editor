@@ -393,10 +393,9 @@ public class Trip extends GTFSElement {
     @Override
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
-        // TODO - remove placeholders
-        attributes.put("Average Speed", "" + getAvgSpeed());
-        attributes.put("Distance", "" + getDistance());
-        attributes.put("Duration", "" + getDuration());
+        attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
+        attributes.put("Distance", String.format("%.02f miles", getDistance()));
+        attributes.put("Duration", String.format("%.02f hours", getDuration() / MILLIS_IN_HOUR));
         return attributes;
     }
 
