@@ -38,6 +38,9 @@ public class Location {
      */
     public double distanceTo(Location location) {
 
+        // conversion from lat/long to statute miles source from:
+        // https://introcs.cs.princeton.edu/java/44st/Location.java.html
+
         // convert latitudes and longitudes to radians
         double lat1 = Math.toRadians(this.latitude);
         double lon1 = Math.toRadians(this.longitude);
