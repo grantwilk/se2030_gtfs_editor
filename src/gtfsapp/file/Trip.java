@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 public class Trip extends GTFSElement {
 
     /**
+     * The number of milliseconds in an hour
+     */
+    private static final double MILLIS_IN_HOUR = 3600000;
+
+    /**
      * The feed the trip belongs to
      */
     private final Feed feed;
@@ -32,9 +37,6 @@ public class Trip extends GTFSElement {
      * The head sign for this trip
      */
     private String headSign;
-
-
-    private static final double MILLI_TO_HOUR = 3600000;
 
     /**
      * Constructor for the trip object with an id and feed as parameters
@@ -241,13 +243,18 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Gets the average speed of the trip as a double through
-     * using the getDistance and getDuration methods
+     * Gets the average speed of a trip in miles per hour
      *
      * @return the average speed of the trip in miles per hour
      */
     public double getAvgSpeed() {
-        return getDistance() / getDuration();
+
+        // get the distance in miles and the duration in hours
+        double distanceMiles = getDistance();
+        double durationHours = getDuration() / MILLIS_IN_HOUR;
+
+        // return the average speed of the trip in miles per hour
+        return distanceMiles / durationHours;
     }
 
     /**
@@ -267,8 +274,9 @@ public class Trip extends GTFSElement {
     public double getDistance() {
 
         // get a list of all stops in order of arrival times
-        List<Stop> stops = new ArrayList<>(getStops());
-        stops = stops.stream().sorted().collect(Collectors.toList());
+        List<StopTime> stopTimes = new ArrayList<>(getStopTimes());
+        stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
+        List<Stop> stop = stopTimes.stream().map(StopTime::getStop).collect(Collectors.toList());
 
         // TODO - Mason
 
@@ -300,31 +308,21 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Method to get the duration of the trip by taking the difference between
-     * the first depart time, and last arrival time
+     * Gets the duration of the trip in milliseconds
      *
-     * @return the duration of the trip
+     * @return the duration of the trip in milliseconds
      */
-    public double getDuration() {
-        //Gets an ArrayList of the stop times
-        ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
-        //Number of stop times in the ArrayList
-        int lastTime = durationCalc.size();
-        StopTime FirstDepartTime;
-        StopTime LastArriveTime;
-        //Gets the first StopTime
-        FirstDepartTime = durationCalc.get(0);
-        //Gets the second StopTime
-        LastArriveTime = durationCalc.get(lastTime - 1);
-        //Gets the time value for the first StopTime
-        double tripStart = (double) FirstDepartTime.getDepartureTime().getTime();
-        //Gets the time value for the second StopTime
-        double tripEnd = (double) LastArriveTime.getDepartureTime().getTime();
-        //Gets the total trip time
-        //convert trip times from milliseconds to hours
-        tripStart = tripStart/MILLI_TO_HOUR;
-        tripEnd = tripEnd/MILLI_TO_HOUR;
-        return tripEnd - tripStart;
+    public long getDuration() {
+        // get a list of all stop times in order of arrival times
+        List<StopTime> stopTimes = new ArrayList<>(getStopTimes());
+        stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
+
+        // get the first departure time and the last arrival time
+        Date firstDepartureTime = stopTimes.get(0).getDepartureTime();
+        Date lastArrivalTime = stopTimes.get(stopTimes.size() - 1).getArrivalTime();
+
+        // return the duration in milliseconds
+        return lastArrivalTime.getTime() - firstDepartureTime.getTime();
     }
 
     /**
