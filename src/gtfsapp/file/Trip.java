@@ -1,10 +1,7 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
-
-
 import gtfsapp.util.Location;
-
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -268,8 +265,23 @@ public class Trip extends GTFSElement {
      * @return The distance between stops in miles
      */
     public double getDistance() {
-        //Gets an array list of all of the stops
-        ArrayList<Stop> distanceCalc = (ArrayList<Stop>) this.getStops();
+
+        // get a list of all stops in order of arrival times
+        List<Stop> stops = new ArrayList<>(getStops());
+        stops = stops.stream().sorted().collect(Collectors.toList());
+
+        // TODO - Mason
+
+        // We forgot that trips can have multiple stops in them, and that the distance is a factor of all of the stops
+        // along the way, not just the displacement between the first and last stop. Could you implement this so that
+        // it sums up the distance between each of the distances between each of the stops so we have a better number?
+
+        // I already got a sorted list of all of the stop times in the trip called "stops" above, I recommend you use
+        // that to make sure things stay in order. Thank you! :)
+
+        // -Grant
+
+        /*
         //Gets the number of stops in list
         int lastLocation = distanceCalc.size();
         Stop FirstDepartLoc;
@@ -282,6 +294,9 @@ public class Trip extends GTFSElement {
         Location firstStop = new Location(FirstDepartLoc.getLocation().getLatitude(), FirstDepartLoc.getLocation().getLongitude());
         //Returns the distance between the first and last stops
         return firstStop.distanceTo(LastArriveLoc.getLocation());
+        */
+
+        return 0;
     }
 
     /**
