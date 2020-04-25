@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * @author Michael Primeau and Grant Wilk
+ * @author Michael Primeau, Colton Rivard, Grant Wilk
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -174,8 +174,7 @@ public class GTFSFile {
         }
     }
 
-    private boolean validateRoutes() throws IOException {
-        boolean passFail = true;
+    private boolean validateRoutes() throws  IOException {
 
         // gets name of the file
         String filename = routeFile.getName();
@@ -186,29 +185,19 @@ public class GTFSFile {
         //creates keys from the first line of code
         List<String> format = tokenizeLine(lines.get(0));
 
-        for (int i = 1; 1 < lines.size(); i++) {
-
-            HashMap<String, String> validationKey = new HashMap<String, String>();
+        for(int i = 1; 1 < lines.size(); i++) {
+            HashMap<String,String> validationKey = new HashMap<String, String>();
             List<String> currentLine = tokenizeLine(lines.get(i));
 
-            //if the two lines are not the same size that means they are not compatible
-            if (format.size() != currentLine.size()) {
-                passFail = false;
+            if(format.size() != currentLine.size()){
                 throw new IOException("The amount of elements is not equal to how big the key is");
-            }
-            // adds each attribute to hash map
-            for (int x = 0; x < format.size(); x++) {
-                validationKey.put(format.get(x), currentLine.get(x));
             }
 
 
         }
-        return passFail;
 
 
     }
-
-
 
     /**
      * Parses routes from the GTFS routes file
