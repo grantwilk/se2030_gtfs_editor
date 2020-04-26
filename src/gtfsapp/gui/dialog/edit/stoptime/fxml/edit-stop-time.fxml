@@ -9,16 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 
 
+<?import gtfsapp.util.LimitedTextField?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="edit-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController">
    <children>
       <VBox alignment="CENTER" styleClass="settings-container">
          <children>
-            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
-               <children>
-                  <Label id="title" text="Stop" />
-                  <ChoiceBox fx:id="stopChoiceBox" maxWidth="1.7976931348623157E308" />
-               </children>
-            </VBox>
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
                <children>
                   <Label id="title" text="Trip" />
@@ -27,14 +22,20 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
                <children>
+                  <Label id="title" text="Stop" />
+                  <ChoiceBox fx:id="stopChoiceBox" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
+               <children>
                   <Label id="title" text="Arrival Time" />
                   <HBox alignment="CENTER_LEFT" styleClass="time-field-container">
                      <children>
-                        <TextField id="text-field" fx:id="arrivalTimeHoursField" />
+                        <LimitedTextField id="text-field" fx:id="arrivalTimeHoursField" promptText="00" />
                         <Label id="colon" text=":" />
-                        <TextField id="text-field" fx:id="arrivalTimeMinutesField" />
+                        <LimitedTextField id="text-field" fx:id="arrivalTimeMinutesField" promptText="00" />
                         <Label id="colon" text=":" />
-                        <TextField id="text-field" fx:id="arrivalTimeSecondsField" />
+                        <LimitedTextField id="text-field" fx:id="arrivalTimeSecondsField" promptText="00" />
                      </children>
                   </HBox>
                </children>
@@ -44,11 +45,11 @@
                   <Label id="title" text="Departure Time" />
                   <HBox alignment="CENTER_LEFT" styleClass="time-field-container">
                      <children>
-                        <TextField id="text-field" fx:id="departureTimeHoursField" />
+                        <LimitedTextField id="text-field" fx:id="departureTimeHoursField" promptText="00" />
                         <Label id="colon" text=":" />
-                        <TextField id="text-field" fx:id="departureTimeMinutesField" />
+                        <LimitedTextField id="text-field" fx:id="departureTimeMinutesField" promptText="00" />
                         <Label id="colon" text=":" />
-                        <TextField id="text-field" fx:id="departureTimeSecondsField" />
+                        <LimitedTextField id="text-field" fx:id="departureTimeSecondsField" promptText="00" />
                      </children>
                   </HBox>
                </children>

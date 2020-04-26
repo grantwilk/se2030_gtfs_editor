@@ -4,14 +4,30 @@ import gtfsapp.file.Stop;
 import gtfsapp.file.StopTime;
 import gtfsapp.file.Trip;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
+import gtfsapp.util.LimitedTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-
-import java.util.ArrayList;
 import java.util.Set;
 
 public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
+
+    /**
+     * Regular expression for a 24 hour time
+     */
+    public static final String HOURS_REGEX = "^([2][0-3]|[0-1]?[0-9])";
+
+    /**
+     * Regular expression for minutes
+     */
+    public static final String MINUTES_REGEX = "^([0-5]?[0-9])";
+
+    /**
+     * Regular expression for seconds
+     */
+    public static final String SECONDS_REGEX = MINUTES_REGEX;
 
     /**
      * The number of milliseconds in a second
@@ -44,43 +60,61 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
      * Text field for updating the arrival time's hours
      */
     @FXML
-    private TextField arrivalTimeHoursField;
+    private LimitedTextField arrivalTimeHoursField;
 
     /**
      * Text field for updating the arrival time's minutes
      */
     @FXML
-    private TextField arrivalTimeMinutesField;
+    private LimitedTextField arrivalTimeMinutesField;
 
     /**
      * Text field for updating the arrival time's seconds
      */
     @FXML
-    private TextField arrivalTimeSecondsField;
+    private LimitedTextField arrivalTimeSecondsField;
 
     /**
      * Text field for updating the departure time's hours
      */
     @FXML
-    private TextField departureTimeHoursField;
+    private LimitedTextField departureTimeHoursField;
 
     /**
      * Text field for updating the departure time's minutes
      */
     @FXML
-    private TextField departureTimeMinutesField;
+    private LimitedTextField departureTimeMinutesField;
 
     /**
      * Text field for updating the departure time's seconds
      */
     @FXML
-    private TextField departureTimeSecondsField;
+    private LimitedTextField departureTimeSecondsField;
 
     /**
      * Text field for updating the stop time head sign
      */
     @FXML
     private TextField headSignField;
+
+    /**
+     * Initializes the edit dialog
+     */
+    @FXML
+    public void initialize() {
+
+        // set arrival time regex restrictions
+        arrivalTimeHoursField.setRestrict(HOURS_REGEX);
+        arrivalTimeMinutesField.setRestrict(MINUTES_REGEX);
+        arrivalTimeSecondsField.setRestrict(SECONDS_REGEX);
+
+        // set departure time regex restrictions
+        departureTimeHoursField.setRestrict(HOURS_REGEX);
+        departureTimeMinutesField.setRestrict(MINUTES_REGEX);
+        departureTimeSecondsField.setRestrict(SECONDS_REGEX);
+
+    }
 
     /**
      * Initializes the values of the fields in the edit dialog
