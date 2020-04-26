@@ -1,0 +1,28 @@
+.buttons-container {
+    -fx-padding: 20 0 0 0;
+    -fx-spacing: 10;
+}
+
+.settings-container {
+    -fx-spacing: 12;
+}
+
+.attribute-container {
+    -fx-spacing: 2;
+}
+
+.attribute-container #title {
+    -fx-text-fill: #404040;
+}
+
+.time-field-container {
+    -fx-spacing: 5;
+}
+
+.time-field-container #colon {
+    -fx-text-fill: #404040;
+}
+
+.time-field-container #text-field {
+    -fx-alignment: center;
+}

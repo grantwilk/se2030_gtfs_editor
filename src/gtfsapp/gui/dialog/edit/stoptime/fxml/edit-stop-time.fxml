@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController" />
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="260.0" styleClass="edit-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController">
+   <children>
+      <VBox alignment="CENTER" styleClass="settings-container">
+         <children>
+            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
+               <children>
+                  <Label id="title" text="Stop" />
+                  <ChoiceBox fx:id="stopChoiceBox" prefWidth="220.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
+               <children>
+                  <Label id="title" text="Arrival Time" />
+                  <HBox alignment="CENTER_LEFT" styleClass="time-field-container">
+                     <children>
+                        <TextField id="text-field" fx:id="arrivalTimeHoursField" />
+                        <Label id="colon" text=":" />
+                        <TextField id="text-field" fx:id="arrivalTimeMinutesField" />
+                        <Label id="colon" text=":" />
+                        <TextField id="text-field" fx:id="arrivalTimeSecondsField" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
+               <children>
+                  <Label id="title" text="Departure Time" />
+                  <HBox alignment="CENTER_LEFT" styleClass="time-field-container">
+                     <children>
+                        <TextField id="text-field" fx:id="departureTimeHoursField" />
+                        <Label id="colon" text=":" />
+                        <TextField id="text-field" fx:id="departureTimeMinutesField" />
+                        <Label id="colon" text=":" />
+                        <TextField id="text-field" fx:id="departureTimeSecondsField" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
+               <children>
+                  <Label id="title" text="Head Sign" />
+                  <TextField id="text-field" fx:id="headSignField" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" styleClass="buttons-container">
+         <children>
+            <Button minWidth="80.0" mnemonicParsing="false" onAction="#apply" text="Apply" />
+            <Button minWidth="80.0" mnemonicParsing="false" onAction="#appyToMultiple" text="Apply to Multiple" />
+         </children>
+      </HBox>
+   </children>
+   <stylesheets>
+      <URL value="@../../../../root/style/root.css" />
+      <URL value="@../../../../root/style/font.css" />
+      <URL value="@../../style/edit-dialog.css" />
+      <URL value="@../style/edit-stop-time.css" />
+   </stylesheets>
+</VBox>
