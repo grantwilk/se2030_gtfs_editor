@@ -40,6 +40,22 @@ public abstract class GTFSElement {
     }
 
     /**
+     * Checks to see whether two
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        // return false if the object is not GTFS element
+        if (!(obj instanceof GTFSElement)) {
+            return false;
+        }
+
+        // otherwise, return whether the IDs are equal
+        return (this.getID().equals(((GTFSElement) obj).getID()));
+
+    }
+
+    /**
      * Gets the element's title to be displayed in the GUI
      *
      * @return the element's title
