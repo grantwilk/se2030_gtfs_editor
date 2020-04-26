@@ -21,6 +21,12 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
                <children>
+                  <Label id="title" text="Trip" />
+                  <ChoiceBox fx:id="tripChoiceBox" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
+               <children>
                   <Label id="title" text="Arrival Time" />
                   <HBox alignment="CENTER_LEFT" styleClass="time-field-container">
                      <children>
