@@ -58,7 +58,7 @@
       <HBox alignment="CENTER" styleClass="buttons-container">
          <children>
             <Button minWidth="80.0" mnemonicParsing="false" onAction="#apply" text="Apply" />
-            <Button minWidth="80.0" mnemonicParsing="false" onAction="#appyToMultiple" text="Apply to Multiple" />
+            <Button minWidth="80.0" mnemonicParsing="false" onAction="#applyMultiple" text="Apply to Multiple" />
          </children>
       </HBox>
    </children>
