@@ -36,7 +36,7 @@ public abstract class GTFSElement {
      */
     @Override
     public String toString() {
-        return getTitle();
+        return getTitle().toUpperCase();
     }
 
     /**
