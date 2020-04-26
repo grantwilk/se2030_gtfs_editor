@@ -57,34 +57,36 @@ public class StopTime extends GTFSElement implements Comparable<StopTime> {
     }
 
     /**
-     * Gets a set of all trips that contain this stop time
+     * Gets the trip that contains this stop time
      *
-     * @return a set of all trips that contain this stop time
+     * @return a the trip that contains this stop time
      */
-    public Set<Trip> getContainingTrips() {
-
-        Set<Trip> containingTrips = new HashSet<>();
+    public Trip getContainingTrip() {
 
         // for each trip in the feed
         for (Trip trip : feed.getTrips()) {
+
+            // if the trip contains this stop time's ID
             if (trip.containsStopTime((StopTimeID) getID())) {
-                containingTrips.add(trip);
+
+                // return the trip
+                return trip;
+
             }
         }
 
-        return containingTrips;
+        // return null if nothing is found
+        return null;
 
     }
 
     /**
-     * Gets a set of the IDs of all trips that contain this stop time
+     * Gets the ID of the trip that contains this stop time
      *
-     * @return a set of the IDs of all trips that contain this stop time
+     * @return the ID of the trip that contains this stop time
      */
-    public Set<TripID> getContainingTripIDs() {
-        return getContainingTrips().stream()
-                .map(e -> (TripID) e.getID())
-                .collect(Collectors.toSet());
+    public TripID getContainingTripID() {
+        return (TripID) getContainingTrip().getID();
     }
 
     /**
@@ -99,8 +101,8 @@ public class StopTime extends GTFSElement implements Comparable<StopTime> {
         // for each route in the feed
         for (Route route : feed.getRoutes()) {
 
-            // check to see if the route's trips and our containing trips have anything in common
-            if (!Collections.disjoint(route.getTrips(), getContainingTrips())) {
+            // check to see if the route's trips contains our stop time's trip
+            if (!route.getTrips().contains(getContainingTrip())) {
 
                 // if they do, add the route to our set of containing route
                 containingRoutes.add(route);
@@ -113,7 +115,9 @@ public class StopTime extends GTFSElement implements Comparable<StopTime> {
     }
 
     /**
-     * @return
+     * Gets a set of the IDs of all routes that contain this stop time
+     *
+     * @return a set of the IDs of all routes that contain this stop time
      */
     public Set<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
