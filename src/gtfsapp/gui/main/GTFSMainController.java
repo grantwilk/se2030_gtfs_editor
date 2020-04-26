@@ -2,6 +2,7 @@ package gtfsapp.gui.main;
 
 import gtfsapp.file.*;
 import gtfsapp.gui.GTFSController;
+import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 import gtfsapp.gui.dialog.error.GTFSErrorDialogController;
 import gtfsapp.gui.dialog.error.GTFSErrorType;
 import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController;
@@ -23,9 +24,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -121,6 +120,12 @@ public class GTFSMainController extends GTFSController {
      */
     @FXML
     private VBox selectedElementPanel;
+
+    /**
+     * The tile containing information about the selected element
+     */
+    @FXML
+    private GridPane selectedElementTile;
 
     /**
      * The pane that displays the selected element's color
@@ -287,8 +292,112 @@ public class GTFSMainController extends GTFSController {
      * Invokes an edit dialog for the selected element
      */
     public void invokeEditDialog() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+
+        try {
+
+            // if there is a selected object
+            if (!(selectedElement == null)) {
+
+                // initialize the fxml loader, edit controller, root node, and element title
+                FXMLLoader loader;
+                GTFSEditDialogController editController;
+                Parent root;
+                String elementTitle;
+
+                if (selectedElement instanceof Route) {
+
+                    // load edit route dialog FXML
+                    loader = new FXMLLoader(
+                            GTFSController.class.getResource("dialog/edit/route/fxml/edit-route.fxml")
+                    );
+
+                    // get the selected elements title as a route
+                    elementTitle = selectedElement.getTitle();
+
+                }
+
+                else if (selectedElement instanceof Trip) {
+
+                    // load edit trip dialog FXML
+                    loader = new FXMLLoader(
+                            GTFSController.class.getResource("dialog/edit/trip/fxml/edit-trip.fxml")
+                    );
+
+                    // get the selected elements title as a trip
+                    elementTitle = selectedElement.getTitle();
+
+                }
+
+                else if (selectedElement instanceof StopTime) {
+
+                    // load edit stop time dialog FXML
+                    loader = new FXMLLoader(
+                            GTFSController.class.getResource("dialog/edit/stoptime/fxml/edit-stop-time.fxml")
+                    );
+
+                    // get the selected elements title as a stop time
+                    elementTitle = selectedElement.getTitle();
+
+                }
+
+                else if (selectedElement instanceof Stop) {
+
+                    // load edit stop dialog FXML
+                    loader = new FXMLLoader(
+                            GTFSController.class.getResource("dialog/edit/stop/fxml/edit-stop.fxml")
+                    );
+
+                    // get the selected elements title as a stop
+                    elementTitle = selectedElement.getTitle();
+
+                }
+
+                else {
+                    throw new ClassCastException("Selected object could not be edited.");
+                }
+
+                // get the dialog root (highest-level container)
+                root = loader.load();
+
+                // get controller
+                editController = loader.getController();
+
+                // create a new stage and scene
+                Stage editStage = new Stage();
+                Scene editScene = new Scene(root);
+
+                // set error attributes
+                editController.setElement(selectedElement);
+                editController.setStage(editStage);
+                editController.setScene(editScene);
+                editController.setMainController(this);
+
+                // set stage attributes
+                editStage.setScene(editScene);
+                editStage.setTitle(elementTitle.toUpperCase());
+
+                // show the stage
+                editStage.show();
+
+            }
+
+        }
+
+        // catch class cast exceptions
+        catch (ClassCastException e) {
+            invokeErrorDialog(GTFSErrorType.EXCEPTION, "Class Cast Exception", e.getMessage());
+        }
+
+        // catch IO exceptions
+        catch (IOException e) {
+            invokeErrorDialog(GTFSErrorType.EXCEPTION, "IO Exception", e.getMessage());
+        }
+
+        // catch unsupported operation exceptions
+        catch (UnsupportedOperationException e) {
+            invokeErrorDialog(GTFSErrorType.WARNING, "Unsupported Operation", e.getMessage());
+        }
+
     }
 
     /**
