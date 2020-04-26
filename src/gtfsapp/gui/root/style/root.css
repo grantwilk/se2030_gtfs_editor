@@ -131,6 +131,7 @@
 
 /* Button */
 .button {
+    -fx-padding: 10 15 10 15;
     -fx-background-color: #4C8BF5;
     -fx-background-radius: 5;
     -fx-text-fill: white;
