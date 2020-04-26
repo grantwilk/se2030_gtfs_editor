@@ -264,9 +264,6 @@ public class GTFSMainController extends GTFSController {
                 // attempt to parse the files
                 gtfsFile.load();
 
-                // update GUI's associated elements
-                updateAssociations();
-
                 // update info panel GUI
                 updateInfoPanel();
 
@@ -468,6 +465,10 @@ public class GTFSMainController extends GTFSController {
      */
     public void updateInfoPanel() {
 
+        // update associations
+        updateAssociations();
+
+        // update info panel sub-panels
         try {
             updateSearchPanel();
             updateAssociationsPanel();
@@ -892,7 +893,6 @@ public class GTFSMainController extends GTFSController {
      */
     public void setSelectedElement(GTFSElement selectedElement) {
         this.selectedElement = selectedElement;
-        updateAssociations();
         updateInfoPanel();
     }
 

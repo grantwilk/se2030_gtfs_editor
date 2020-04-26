@@ -154,6 +154,38 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
     @Override
     public void apply() {
 
+        StopTime element = (StopTime) getElement();
+
+        // update the stop time's stop
+        if (!stopChoiceBox.getValue().equals(element.getStop())) {
+            element.setStop(stopChoiceBox.getValue());
+        }
+
+        // update the stop time's trip
+        if (!tripChoiceBox.getValue().equals(element.getContainingTrip())) {
+            element.getContainingTrip().removeStopTime(element);
+            tripChoiceBox.getValue().addStopTime(element);
+        }
+
+        // update the stop time's arrival time
+        long arrivalTimeHourMillis = Integer.parseInt(arrivalTimeHoursField.getText()) * MILLIS_IN_HOUR;
+        long arrivalTimeMinuteMillis = Integer.parseInt(arrivalTimeMinutesField.getText()) * MILLIS_IN_MINUTE;
+        long arrivalTimeSecondMillis = Integer.parseInt(arrivalTimeSecondsField.getText()) * MILLIS_IN_SECOND;
+        element.getArrivalTime().setTime(
+                arrivalTimeHourMillis + arrivalTimeMinuteMillis + arrivalTimeSecondMillis
+        );
+
+        // update the stop time's departure time
+        long departureTimeHourMillis = Integer.parseInt(departureTimeHoursField.getText()) * MILLIS_IN_HOUR;
+        long departureTimeMinuteMillis = Integer.parseInt(departureTimeMinutesField.getText()) * MILLIS_IN_MINUTE;
+        long departureTimeSecondMillis = Integer.parseInt(departureTimeSecondsField.getText()) * MILLIS_IN_SECOND;
+        element.getDepartureTime().setTime(
+                departureTimeHourMillis + departureTimeMinuteMillis + departureTimeSecondMillis
+        );
+
+        // update the stop time's head sign
+        element.setHeadSign(headSignField.getText());
+
         // update the info panel
         mainController.updateInfoPanel();
 
