@@ -32,6 +32,14 @@ public abstract class GTFSElement {
     }
 
     /**
+     * Converts the GTFS element to a string
+     */
+    @Override
+    public String toString() {
+        return getTitle();
+    }
+
+    /**
      * Gets the element's title to be displayed in the GUI
      *
      * @return the element's title
