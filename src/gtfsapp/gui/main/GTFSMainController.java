@@ -367,14 +367,15 @@ public class GTFSMainController extends GTFSController {
                 Scene editScene = new Scene(root);
 
                 // set error attributes
-                editController.setElement(selectedElement);
                 editController.setStage(editStage);
                 editController.setScene(editScene);
                 editController.setMainController(this);
+                editController.setElement(selectedElement);
 
                 // set stage attributes
                 editStage.setScene(editScene);
                 editStage.setTitle(elementTitle.toUpperCase());
+                editStage.setResizable(false);
 
                 // show the stage
                 editStage.show();
@@ -719,6 +720,7 @@ public class GTFSMainController extends GTFSController {
     /**
      * Finds all of the trips associated with the selected element
      *
+     *
      * @return an array list of trips associated with the selected element
      */
     private Set<Trip> findAssociatedTrips() {
@@ -733,7 +735,8 @@ public class GTFSMainController extends GTFSController {
 
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
-            associations = ((StopTime) selectedElement).getContainingTrips();
+            associations = new HashSet<>();
+            associations.add(((StopTime) selectedElement).getContainingTrip());
         }
 
         // if the element is a stop

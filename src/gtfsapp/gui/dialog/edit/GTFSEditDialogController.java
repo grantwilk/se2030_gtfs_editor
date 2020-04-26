@@ -21,6 +21,7 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
      */
     public void setElement(GTFSElement element) {
         this.element = element;
+        initializeEditFields();
     }
 
     /**
@@ -30,6 +31,11 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
     public GTFSElement getElement() {
         return element;
     }
+
+    /**
+     * Initializes the values of the fields in the edit dialog
+     */
+    public abstract void initializeEditFields();
 
     /**
      * Applies the new attributes in the edit dialog to the edit dialog's element
