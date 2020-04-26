@@ -59,7 +59,7 @@
             </VBox>
             <VBox fx:id="selectedElementPanel" alignment="CENTER" styleClass="selected-element-panel" stylesheets="@../style/selected-element-panel.css">
                <children>
-                  <GridPane id="tile">
+                  <GridPane id="tile" fx:id="selectedElementTile" onMouseClicked="#invokeEditDialog">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="7.0" minWidth="7.0" prefWidth="7.0" />
                         <ColumnConstraints hgrow="SOMETIMES" />
