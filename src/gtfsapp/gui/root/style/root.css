@@ -164,6 +164,8 @@
     -fx-border-color: #E0E0E0;
     -fx-border-radius: 5;
     -fx-border-width: 2;
+    -fx-text-fill: #404040;
+    -fx-prompt-fill: #909090;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 8, 0, 3, 3);
 }
 
