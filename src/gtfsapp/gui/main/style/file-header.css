@@ -29,6 +29,7 @@
     -fx-background-radius: 20;
     -fx-background-insets: 4;
     -fx-background-color: transparent;
+    -fx-border-width: 0;
     -fx-cursor: hand;
 }
 

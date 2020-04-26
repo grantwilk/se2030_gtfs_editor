@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="260.0" styleClass="edit-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="edit-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController">
    <children>
       <VBox alignment="CENTER" styleClass="settings-container">
          <children>
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
                <children>
                   <Label id="title" text="Stop" />
-                  <ChoiceBox fx:id="stopChoiceBox" prefWidth="220.0" />
+                  <ChoiceBox fx:id="stopChoiceBox" maxWidth="1.7976931348623157E308" />
                </children>
             </VBox>
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
@@ -50,22 +50,22 @@
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
                <children>
                   <Label id="title" text="Head Sign" />
-                  <TextField id="text-field" fx:id="headSignField" />
+                  <TextField id="text-field" fx:id="headSignField" maxWidth="1.7976931348623157E308" />
                </children>
             </VBox>
          </children>
       </VBox>
       <HBox alignment="CENTER" styleClass="buttons-container">
          <children>
-            <Button minWidth="80.0" mnemonicParsing="false" onAction="#apply" text="Apply" />
-            <Button minWidth="80.0" mnemonicParsing="false" onAction="#applyMultiple" text="Apply to Multiple" />
+            <Button id="apply-to-multiple-button" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#applyMultiple" text="Apply to Multiple" HBox.hgrow="ALWAYS" />
+            <Button id="apply-button" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#apply" text="Apply" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>
    <stylesheets>
+      <URL value="@../style/edit-stop-time.css" />
+      <URL value="@../../style/edit-dialog.css" />
       <URL value="@../../../../root/style/root.css" />
       <URL value="@../../../../root/style/font.css" />
-      <URL value="@../../style/edit-dialog.css" />
-      <URL value="@../style/edit-stop-time.css" />
    </stylesheets>
 </VBox>
