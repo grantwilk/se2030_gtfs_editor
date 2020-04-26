@@ -9,7 +9,13 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
      */
     @Override
     public void updateAttributes() {
+
+        // update the info panel
+        mainController.updateInfoPanel();
+
+        // close the dialog
         close();
+
     }
 
 }
