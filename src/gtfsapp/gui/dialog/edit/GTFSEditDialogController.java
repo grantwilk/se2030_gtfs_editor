@@ -32,8 +32,13 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
     }
 
     /**
-     * Updates the attributes associated with the edit dialog's elements
+     * Applies the new attributes in the edit dialog to the edit dialog's element
      */
-    public abstract void updateAttributes();
+    public abstract void apply();
+
+    /**
+     * Applies the new attributes in the edit dialog to multiple elements
+     */
+    public abstract void applyMultiple();
 
 }

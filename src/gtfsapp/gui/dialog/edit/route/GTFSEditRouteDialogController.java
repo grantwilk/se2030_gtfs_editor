@@ -5,10 +5,10 @@ import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 public class GTFSEditRouteDialogController extends GTFSEditDialogController {
 
     /**
-     * Updates the attributes associated with the edit dialog's elements
+     * Applies the new attributes in the edit dialog to the edit dialog's element
      */
     @Override
-    public void updateAttributes() {
+    public void apply() {
 
         // update the info panel
         mainController.updateInfoPanel();
@@ -16,6 +16,14 @@ public class GTFSEditRouteDialogController extends GTFSEditDialogController {
         // close the dialog
         close();
 
+    }
+
+    /**
+     * Applies the new attributes in the edit dialog to multiple elements
+     */
+    @Override
+    public void applyMultiple() {
+        throw new UnsupportedOperationException();
     }
 
 }
