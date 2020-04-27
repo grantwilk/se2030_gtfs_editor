@@ -71,7 +71,6 @@ public class GTFSFile {
     public GTFSFile(List<File> files) throws IOException {
         // TODO - make GTFS file accept a singular ZIP file instead of multiple TXT files
         extractFiles(files);
-        validateRoutes();
     }
 
     /**
@@ -101,6 +100,7 @@ public class GTFSFile {
 
         // validate files
         validateStops(stopLines);
+        validateStopTimes(stopTimeLines);
 
         // parse the files (must be in this order!)
         HashMap<String, Stop> stops = parseStops(stopLines);
@@ -214,6 +214,12 @@ public class GTFSFile {
         return true;
     }
 
+    /**
+     * Parse through stops file to check that all data is valid
+     * @param lines List of each line in the stops file
+     * @return True if the file is valid
+     * @throws IOException Thrown if there is invalid data in the file
+     */
     public boolean validateStops(List<String> lines) throws IOException {
         // get file name for exceptions
         String fileName = stopFile.getName();
@@ -248,6 +254,53 @@ public class GTFSFile {
             // check if stop id already exists
             if(StopID.exists(stopID)) {
                 throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Parse through stop times file to check that all data is valid
+     * @param lines List of each line in the stop times file
+     * @return True if the file is valid
+     * @throws IOException Thrown if there is invalid data in the file
+     */
+    public boolean validateStopTimes(List<String> lines) throws IOException {
+        // get file name for exceptions
+        String fileName = stopTimesFile.getName();
+
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
+        // remove format line
+        lines.remove(0);
+
+        // check for required fields in format line
+        if(!format.contains("trip_id") || !format.contains("stop_id") || !format.contains("stop_sequence")) {
+            throw new IOException("Missing one or more required attributes in first line of \"" + fileName + "\"");
+        }
+
+        for(String line:lines) {
+            // tokenize current line
+            List<String> currentLine = tokenizeLine(line);
+
+            // check if line has required number of elements
+            if(currentLine.size() != format.size()) {
+                throw new IOException("Missing one or more attributes in line of \"" + fileName + "\"");
+            }
+
+            // check if all required attributes for line are present
+            String tripID = currentLine.get(format.indexOf("trip_id"));
+            String stopID = currentLine.get(format.indexOf("stop_id"));
+            String stopSequence = currentLine.get(format.indexOf("stop_sequence"));
+            if(tripID.isEmpty()) {
+                throw new IOException("Missing attribute \"trip_id\" in line of \"" + fileName + "\"");
+            }
+            if(stopID.isEmpty()) {
+                throw new IOException("Missing attribute \"stop_id\" in line of \"" + fileName + "\"");
+            }
+            if(stopSequence.isEmpty()) {
+                throw new IOException("Missing attribute \"stop_sequence\" in line of \"" + fileName + "\"");
             }
         }
 

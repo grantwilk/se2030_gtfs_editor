@@ -41,7 +41,7 @@ class GTFSFileTest {
             testFile = new GTFSFile(files);
             List<String> lines = Files.readAllLines(file.toPath());
             testFile.validateStops(lines);
-            
+
         } catch(IOException e) { }
 
 
