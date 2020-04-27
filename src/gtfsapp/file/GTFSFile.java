@@ -71,6 +71,7 @@ public class GTFSFile {
     public GTFSFile(List<File> files) throws IOException {
         // TODO - make GTFS file accept a singular ZIP file instead of multiple TXT files
         extractFiles(files);
+        validateRoutes();
     }
 
     /**
@@ -92,11 +93,17 @@ public class GTFSFile {
         // create a new GTFS feed
         feed = new Feed();
 
+        // Get list of lines for each file
+        List<String> stopLines = Files.readAllLines(stopFile.toPath());
+        List<String> stopTimeLines = Files.readAllLines(stopTimesFile.toPath());
+        List<String> routeLines = Files.readAllLines(routeFile.toPath());
+        List<String> tripLines = Files.readAllLines(tripFile.toPath());
+
         // parse the files (must be in this order!)
-        HashMap<String, Stop> stops = parseStops();
-        HashMap<String, Route> routes = parseRoutes();
-        HashMap<String, Trip> trips = parseTrips(routes);
-        HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops);
+        HashMap<String, Stop> stops = parseStops(stopLines);
+        HashMap<String, Route> routes = parseRoutes(routeLines);
+        HashMap<String, Trip> trips = parseTrips(routes,tripLines);
+        HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops,stopTimeLines);
 
         // add our GTFS elements to our feed
         feed.addAllRoutes(new ArrayList<>(routes.values()));
@@ -178,7 +185,7 @@ public class GTFSFile {
         }
     }
 
-    private boolean validateRoutes() throws IOException {
+    public boolean validateRoutes() throws IOException {
 
         // gets name of the file
         String filename = routeFile.getName();
@@ -202,6 +209,10 @@ public class GTFSFile {
 
         // temp return
         return true;
+    }
+
+    public boolean validateStops() {
+
     }
 
     /**
