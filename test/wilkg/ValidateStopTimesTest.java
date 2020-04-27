@@ -39,7 +39,7 @@ class ValidateStopTimesTest {
 
     /**
      * Tests a valid stop times file with one trip, consecutive hourly stops with synchronous arrival and departure,
-     * consecutive stops, and consecutive sequences that follow. There are no extra parameters.
+     * consecutive stops, and consecutive sequences that follow order of arrival time. There are no extra parameters.
      */
     @Test
     void validateSunnyDayOne() {
@@ -57,8 +57,8 @@ class ValidateStopTimesTest {
     }
 
     /**
-     * Tests a valid stop times file with multiple trips, non-consecutive hourly stops with synchronous arrival and departure, consecutive stops,
-     * and consecutive sequences that follow. There are no extra parameters.
+     * Tests a valid stop times file with multiple trips, non-consecutive stops with asynchronous arrival and departure,
+     * non-consecutive stops, and ordered sequences that follow order of arrival time. There are no extra parameters.
      */
     @Test
     void validateSunnyDayTwo() {
