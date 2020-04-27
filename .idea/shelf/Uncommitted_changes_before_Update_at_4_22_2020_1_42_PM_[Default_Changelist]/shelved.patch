@@ -1,0 +1,83 @@
+Index: src/gtfsapp/file/Trip.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package gtfsapp.file;\r\n\r\nimport gtfsapp.id.*;\r\nimport gtfsapp.util.Location;\r\n\r\nimport java.util.*;\r\n\r\n/**\r\n * @author Mason Schlax\r\n * @version 1.0\r\n * @created 15-Apr-2020 1:20:18 PM\r\n */\r\npublic class Trip extends GTFSElement {\r\n\r\n    /**\r\n     * The feed the trip belongs to\r\n     */\r\n    private final Feed feed;\r\n\r\n    /**\r\n     * A map of all stop IDs and stops contained within this trip\r\n     */\r\n    private final HashMap<StopID, Stop> stops = new HashMap<>();\r\n\r\n    /**\r\n     * A map of all stop time IDs and stop times contained within this trip\r\n     */\r\n    private final HashMap<StopTimeID, StopTime> stopTimes = new HashMap<>();\r\n\r\n    /**\r\n     * The head sign for this trip\r\n     */\r\n    private String headSign;\r\n\r\n    /**\r\n     * Constructor for the trip object with an id and feed as parameters\r\n     *\r\n     * @param idString for the trip\r\n     * @param feed     for the trip\r\n     */\r\n    public Trip(Feed feed, String idString) {\r\n        super(new TripID(idString));\r\n        this.feed = feed;\r\n    }\r\n\r\n    /**\r\n     * Clears all of the stop times from the internal hash map\r\n     */\r\n    public void clearStopTimes() {\r\n        stopTimes.clear();\r\n        stops.clear();\r\n    }\r\n\r\n    /**\r\n     * Adds a new stopTimeID and stopTime to the hash map containting both\r\n     *\r\n     * @param stopTime the stop time to be added\r\n     */\r\n    public void addStopTime(StopTime stopTime) {\r\n        stopTimes.put((StopTimeID) stopTime.getID(), stopTime);\r\n    }\r\n\r\n    /**\r\n     * Adds a list of the stop times to the internal map of stop times\r\n     *\r\n     * @param stopTimes the list of stop times\r\n     */\r\n    public void addAllStopTimes(List<StopTime> stopTimes) {\r\n\r\n        // for each stop time in the array\r\n        for (StopTime stopTime : stopTimes) {\r\n            // add the list of stop times to the stop times map\r\n            this.stopTimes.put((StopTimeID) stopTime.getID(), stopTime);\r\n            // add the stop time's stop to the stops map\r\n            stops.put((StopID) stopTime.getStop().getID(), stopTime.getStop());\r\n        }\r\n\r\n    }\r\n\r\n    /**\r\n     * Removes the stop time from the stopTimes hash map\r\n     *\r\n     * @param stopTime to be removed\r\n     * @return the stopTime removed\r\n     */\r\n    public StopTime removeStopTime(StopTime stopTime) {\r\n        return stopTimes.remove((StopTimeID) stopTime.getID());\r\n    }\r\n\r\n    /**\r\n     * Removes the Stop time that was previously at the id passed\r\n     *\r\n     * @param id of the stop time to be removed\r\n     * @return the StopTimeID removed\r\n     */\r\n    public StopTime removeStopTimeByID(StopTimeID id) {\r\n        return stopTimes.remove(id);\r\n    }\r\n\r\n    /**\r\n     * Checks to see if this trip contains a specific stop\r\n     *\r\n     * @param id the ID of the stop\r\n     */\r\n    public boolean containsStop(StopID id) {\r\n        return stops.containsKey(id);\r\n    }\r\n\r\n    /**\r\n     * Checks to see if this trip contains a specific stop time\r\n     *\r\n     * @param id the ID of the stop time\r\n     */\r\n    public boolean containsStopTime(StopTimeID id) {\r\n        return stopTimes.containsKey(id);\r\n    }\r\n\r\n    /**\r\n     * Gets a list of routes that contain this trip\r\n     * @return a list of routes that contain this trip\r\n     */\r\n    public List<Route> getContainingRoutes() {\r\n\r\n        List<Route> containingRoutes = new ArrayList<>();\r\n\r\n        // check if this trip is contained in any of the routes in this feed\r\n        for (Route route : feed.getRoutes()) {\r\n\r\n            // if it is, add it to our list of containing routes\r\n            if (route.getTrips().contains(this)) {\r\n                containingRoutes.add(route);\r\n            }\r\n\r\n        }\r\n\r\n        return containingRoutes;\r\n\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public List<RouteID> getContainingRouteIDs() {\r\n        // TODO - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n    }\r\n\r\n    /**\r\n     * Gets a stop time contained within the trip by its ID\r\n     *\r\n     * @param id the ID of the stop time\r\n     */\r\n    public StopTime getStopTimeByID(StopTimeID id) {\r\n        return stopTimes.get(id);\r\n    }\r\n\r\n    /**\r\n     * Gets all of the stop time IDs contained within the trip\r\n     *\r\n     * @return a list of stop time IDs contained within the trip\r\n     */\r\n    public List<StopTimeID> getStopTimeIDs() {\r\n        Set<StopTimeID> stopTimeIDSet = stopTimes.keySet();\r\n        return new ArrayList<>(stopTimeIDSet);\r\n    }\r\n\r\n    /**\r\n     * Gets all of the stop times contained within the trip\r\n     *\r\n     * @return a list of stop times contained within the trip\r\n     */\r\n    public List<StopTime> getStopTimes() {\r\n        Collection<StopTime> stopTimeSet = stopTimes.values();\r\n        return new ArrayList<>(stopTimeSet);\r\n    }\r\n\r\n    /**\r\n     * Gets a stop contained within the trip by its ID\r\n     *\r\n     * @param id the ID of the stop\r\n     */\r\n    public Stop getStopByID(StopID id) {\r\n        return stops.get(id);\r\n    }\r\n\r\n    /**\r\n     * Gets all of the stop IDs contained within the trip\r\n     *\r\n     * @return a list of stop IDs contained within the trip\r\n     */\r\n    public List<StopID> getStopIDs() {\r\n        Set<StopID> stopIDSet = stops.keySet();\r\n        return new ArrayList<>(stopIDSet);\r\n    }\r\n\r\n    /**\r\n     * Gets all of the stops contained within the trip\r\n     *\r\n     * @return a list of stops contained within the trip\r\n     */\r\n    public List<Stop> getStops() {\r\n        Collection<Stop> stopsCollection = stops.values();\r\n        return new ArrayList<>(stopsCollection);\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public StopTime getNextStopTime() {\r\n        // TODO - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public StopTime getPreviousStopTime() {\r\n        // TODO - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public Stop getNextStop() {\r\n        // TODO - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public Stop getPreviousStop() {\r\n        // TODO - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n    }\r\n\r\n    /**\r\n     * Gets the average speed of the trip as a double through\r\n     * using the getDistance and getDuration methods\r\n     * @return the average speed of the trip\r\n     */\r\n    public double getAvgSpeed() {\r\n        return getDistance()/getDuration();\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public Location getBusPosition() {\r\n        // TODO - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public double getDistance() {\r\n        ArrayList<StopTime> distanceCalc = (ArrayList<StopTime>) this.getStopTimes();\r\n        int lastLocation = distanceCalc.size();\r\n        StopTime FirstDepartLoc;\r\n        StopTime LastArriveLoc;\r\n        FirstDepartLoc = distanceCalc.get(0);\r\n        LastArriveLoc = distanceCalc.get(lastLocation -1);\r\n        return 0;\r\n    }\r\n\r\n    /**\r\n     * Method to get the duration of the trip by taking the difference between\r\n     * the first depart time, and last arrival time\r\n     * @return the duration of the trip\r\n     */\r\n    public double getDuration() {\r\n        ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();\r\n        int lastTime = durationCalc.size();\r\n        StopTime FirstDepartTime;\r\n        StopTime LastArriveTime;\r\n        FirstDepartTime = durationCalc.get(0);\r\n        LastArriveTime = durationCalc.get(lastTime -1);\r\n        double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();\r\n        double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();\r\n        return tripEnd - tripStart;\r\n    }\r\n\r\n    /**\r\n     * Getter for the head sign of the trip\r\n     *\r\n     * @return the head sign of the trip\r\n     */\r\n    public String getHeadSign() {\r\n        return headSign;\r\n    }\r\n\r\n    /**\r\n     * Setter for the head sign for the trip\r\n     *\r\n     * @param headSign the headSign of the trip\r\n     */\r\n    public void setHeadSign(String headSign) {\r\n        this.headSign = headSign;\r\n    }\r\n\r\n    /**\r\n     * @return\r\n     */\r\n    public boolean isActive() {\r\n        //TODO  - needs implementation eventually\r\n        throw new UnsupportedOperationException();\r\n\r\n    }\r\n\r\n    /**\r\n     * Getter for the feed that contains this trip\r\n     *\r\n     * @return the feed that contains this trip\r\n     */\r\n    public Feed getFeed() {\r\n        return feed;\r\n    }\r\n\r\n    /**\r\n     * Gets the trip's title to be displayed in the GUI\r\n     *\r\n     * @return the trip's title\r\n     */\r\n    @Override\r\n    public String getTitle() {\r\n        return \"Trip \" + getID().getIDString();\r\n    }\r\n\r\n    /**\r\n     * Gets the trip's subtitle to be displayed in the GUI\r\n     *\r\n     * @return the trip's subtitle\r\n     */\r\n    @Override\r\n    public String getSubtitle() {\r\n        // TODO - remove placeholders\r\n        return \"Lorem ipsum dolor\";\r\n    }\r\n\r\n    /**\r\n     * Gets the trip's attributes to be displayed in the GUI\r\n     *\r\n     * @return a HashMap<Attribute Title, Attribute Value> of the trip's attributes\r\n     */\r\n    @Override\r\n    public HashMap<String, String> getAttributes() {\r\n        HashMap<String, String> attributes = new HashMap<>();\r\n        // TODO - remove placeholders\r\n        attributes.put(\"Average Speed\", \"\" + getAvgSpeed());\r\n        attributes.put(\"Distance\", \"\" + getDistance());\r\n        attributes.put(\"Duration\", \"\" + getDuration());\r\n        return attributes;\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/gtfsapp/file/Trip.java	(revision 08cee54fa07c567ca7098e76c14252dde11c9e30)
++++ src/gtfsapp/file/Trip.java	(date 1587580922008)
+@@ -1,8 +1,11 @@
+ package gtfsapp.file;
+ 
+ import gtfsapp.id.*;
++
++
+ import gtfsapp.util.Location;
+ 
++
+ import java.util.*;
+ 
+ /**
+@@ -238,7 +241,7 @@
+     /**
+      * Gets the average speed of the trip as a double through
+      * using the getDistance and getDuration methods
+-     * @return the average speed of the trip
++     * @return the average speed of the trip in miles per hour
+      */
+     public double getAvgSpeed() {
+         return getDistance()/getDuration();
+@@ -253,16 +256,25 @@
+     }
+ 
+     /**
+-     * @return
++     * Gets the first stop on the trip's location and makes a new location object with those coordinates
++     * Then finds the distance to the last stop on the trip and returns it
++     * @return The distance between stops in miles
+      */
+     public double getDistance() {
+-        ArrayList<StopTime> distanceCalc = (ArrayList<StopTime>) this.getStopTimes();
++        //Gets an array list of all of the stops
++        ArrayList<Stop> distanceCalc = (ArrayList<Stop>) this.getStops();
++        //Gets the number of stops in list
+         int lastLocation = distanceCalc.size();
+-        StopTime FirstDepartLoc;
+-        StopTime LastArriveLoc;
++        Stop FirstDepartLoc;
++        Stop LastArriveLoc;
++        //Gets the first stop
+         FirstDepartLoc = distanceCalc.get(0);
++        //Gets the last stop
+         LastArriveLoc = distanceCalc.get(lastLocation -1);
+-        return 0;
++        //Gets the location for the first stop
++        Location firstStop = new Location(FirstDepartLoc.getLocation().getLatitude(), FirstDepartLoc.getLocation().getLongitude());
++        //Returns the distance between the first and last stops
++         return firstStop.distanceTo(LastArriveLoc.getLocation());
+     }
+ 
+     /**
+@@ -271,14 +283,21 @@
+      * @return the duration of the trip
+      */
+     public double getDuration() {
++        //Gets an ArrayList of the stop times
+         ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
++        //Number of stop times in the ArrayList
+         int lastTime = durationCalc.size();
+         StopTime FirstDepartTime;
+         StopTime LastArriveTime;
++        //Gets the first StopTime
+         FirstDepartTime = durationCalc.get(0);
++        //Gets the second StopTime
+         LastArriveTime = durationCalc.get(lastTime -1);
++        //Gets the time value for the first StopTime
+         double tripStart = (double)FirstDepartTime.getDepartureTime().getTime();
++        //Gets the time value for the second StopTime
+         double tripEnd = (double)LastArriveTime.getDepartureTime().getTime();
++        //Gets the total trip time
+         return tripEnd - tripStart;
+     }
+ 
