@@ -9,6 +9,7 @@ import gtfsapp.gui.main.GTFSMainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -135,6 +136,8 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
             selectStage.setScene(selectScene);
             selectStage.setTitle("Select Multiple");
             selectStage.setResizable(false);
+            selectStage.initModality(Modality.APPLICATION_MODAL);
+            selectStage.initOwner(getScene().getWindow());
 
             // show stage
             selectStage.showAndWait();
