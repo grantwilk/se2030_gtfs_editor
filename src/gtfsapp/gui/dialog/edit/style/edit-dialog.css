@@ -1,3 +1,20 @@
 .edit-root {
     -fx-padding: 20;
 }
+
+.settings-container {
+    -fx-spacing: 12;
+}
+
+.attribute-container {
+    -fx-spacing: 2;
+}
+
+.attribute-container #title {
+    -fx-text-fill: #404040;
+}
+
+.buttons-container {
+    -fx-padding: 20 0 0 0;
+    -fx-spacing: 10;
+}

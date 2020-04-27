@@ -1,11 +1,23 @@
 package gtfsapp.gui.dialog.edit.trip;
 
 import gtfsapp.file.GTFSElement;
+import gtfsapp.file.Trip;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
+import gtfsapp.gui.main.GTFSMainController;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class GTFSEditTripDialogController extends GTFSEditDialogController {
+
+    @FXML
+    private TextField tripIDField;
+
+    @FXML
+    private TextField headSignField;
 
 
     /**
@@ -13,7 +25,9 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
      */
     @Override
     public void initializeEditFields() {
-        throw new UnsupportedOperationException();
+        Trip trip = (Trip) getElement();
+        tripIDField.setText(trip.getID().getIDString());
+        headSignField.setText(trip.getHeadSign());
     }
 
     /**
@@ -21,7 +35,22 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
      */
     @Override
     public List<GTFSElement> getSimilar() {
-        throw new UnsupportedOperationException();
+
+        GTFSMainController mainController = (GTFSMainController) parentController;
+        Set<Trip> trips = mainController.getGTFSFile().getFeed().getTrips();
+        Trip element = (Trip) getElement();
+
+        List<GTFSElement> similar = new ArrayList<>();
+
+        // add all trips with the same stops as our current trip to our list
+        for (Trip trip : trips) {
+            if (trip.getStops().equals(element.getStops())) {
+                similar.add(trip);
+            }
+        }
+
+        return similar;
+
     }
 
     /**
@@ -31,6 +60,6 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
      */
     @Override
     public void applyOne(GTFSElement element) {
-        throw new UnsupportedOperationException();
+        ((Trip) element).setHeadSign(headSignField.getText());
     }
 }
