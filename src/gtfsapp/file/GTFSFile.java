@@ -233,6 +233,11 @@ public class GTFSFile {
             // tokenize current line
             List<String> currentLine = tokenizeLine(line);
 
+            // make sure all expected elements are there
+            if(currentLine.size() != format.size()) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            }
+
             // check if stop id is present
             int stopIdIndex = format.indexOf("stop_id");
             String stopID = currentLine.get(stopIdIndex);
