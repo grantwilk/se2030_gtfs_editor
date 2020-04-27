@@ -201,7 +201,24 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
      */
     @Override
     public List<GTFSElement> getSimilar() {
-        throw new UnsupportedOperationException();
+
+        // get the stop times from the parent controller
+        Set<StopTime> stopTimes = ((GTFSMainController) parentController).getGTFSFile().getFeed().getStopTimes();
+
+        // get our dialog's element
+        StopTime element = (StopTime) getElement();
+
+        // create a list of similar stop times
+        List<GTFSElement> similar = new ArrayList<>();
+
+        // add all stop times with the same arrival time to our list of similar stop times
+        for (StopTime stopTime : stopTimes) {
+            if (!stopTime.equals(element) && stopTime.getArrivalTime().equals(element.getArrivalTime())) {
+                similar.add(stopTime);
+            }
+        }
+
+        return similar;
     }
 
     /**
