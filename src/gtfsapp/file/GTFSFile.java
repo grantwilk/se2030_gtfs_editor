@@ -185,10 +185,7 @@ public class GTFSFile {
         }
     }
 
-    private boolean validateRoutes(List<String> lines) throws  IOException {
-
-        // get file name for exceptions
-        String fileName = routeFile.getName();
+    private static boolean validateRoutes(List<String> lines) throws  IOException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -207,19 +204,19 @@ public class GTFSFile {
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+                throw new IOException("Missing one or more required GTFS attributes in \"routes.txt\".");
             }
 
             // check if route id is present
             int routeIdIndex = format.indexOf("route_id");
             String routeID = currentLine.get( routeIdIndex);
             if(routeID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+                throw new IOException("One or more invalid GTFS attributes in file \"routes.txt\".");
             }
 
             // check if route id already exists
             if(RouteID.exists(routeID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+                throw new IOException("One or more duplicate GTFS attributes in file \"routes.txt\".");
             }
         }
 
@@ -233,9 +230,7 @@ public class GTFSFile {
      * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public boolean validateStops(List<String> lines) throws IOException {
-        // get file name for exceptions
-        String fileName = stopFile.getName();
+    public static boolean validateStops(List<String> lines) throws IOException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -254,19 +249,19 @@ public class GTFSFile {
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+                throw new IOException("Missing one or more required GTFS attributes in file \"stops.txt\".");
             }
 
             // check if stop id is present
             int stopIdIndex = format.indexOf("stop_id");
             String stopID = currentLine.get(stopIdIndex);
             if(stopID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+                throw new IOException("One or more invalid GTFS attributes in file \"stops.txt\".");
             }
 
             // check if stop id already exists
             if(StopID.exists(stopID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+                throw new IOException("One or more duplicate GTFS attributes in file \"stops.txt\".");
             }
         }
 
@@ -279,9 +274,7 @@ public class GTFSFile {
      * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public boolean validateStopTimes(List<String> lines) throws IOException {
-        // get file name for exceptions
-        String fileName = stopTimesFile.getName();
+    public static boolean validateStopTimes(List<String> lines) throws IOException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -290,7 +283,7 @@ public class GTFSFile {
 
         // check for required fields in format line
         if(!format.contains("trip_id") || !format.contains("stop_id") || !format.contains("stop_sequence")) {
-            throw new IOException("Missing one or more required attributes in first line of \"" + fileName + "\"");
+            throw new IOException("Missing one or more required attributes in first line of \"stops_times.txt\"");
         }
 
         for(String line:lines) {
@@ -299,7 +292,7 @@ public class GTFSFile {
 
             // check if line has required number of elements
             if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more attributes in line of \"" + fileName + "\"");
+                throw new IOException("Missing one or more attributes in line of \"stops_times.txt\"");
             }
 
             // check if all required attributes for line are present
@@ -307,13 +300,13 @@ public class GTFSFile {
             String stopID = currentLine.get(format.indexOf("stop_id"));
             String stopSequence = currentLine.get(format.indexOf("stop_sequence"));
             if(tripID.isEmpty()) {
-                throw new IOException("Missing attribute \"trip_id\" in line of \"" + fileName + "\"");
+                throw new IOException("Missing attribute \"trip_id\" in line of \"stops_times.txt\"");
             }
             if(stopID.isEmpty()) {
-                throw new IOException("Missing attribute \"stop_id\" in line of \"" + fileName + "\"");
+                throw new IOException("Missing attribute \"stop_id\" in line of \"stops_times.txt\"");
             }
             if(stopSequence.isEmpty()) {
-                throw new IOException("Missing attribute \"stop_sequence\" in line of \"" + fileName + "\"");
+                throw new IOException("Missing attribute \"stop_sequence\" in line of \"stops_times.txt\"");
             }
         }
 
@@ -815,7 +808,7 @@ public class GTFSFile {
      * @param line the line to tokenize
      * @return a list of string tokens
      */
-    private List<String> tokenizeLine(String line) {
+    private static List<String> tokenizeLine(String line) {
         return Arrays.asList(line.split(",", -1));
     }
 
