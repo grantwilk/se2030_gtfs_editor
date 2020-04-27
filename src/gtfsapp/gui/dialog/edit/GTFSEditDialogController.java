@@ -84,11 +84,6 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
     }
 
     /**
-     * Initializes the values of the fields in the edit dialog
-     */
-    public abstract void initializeEditFields();
-
-    /**
      * Shows the select multiple window
      */
     public void showSelectMultiple() {
@@ -164,8 +159,17 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
                     e.getMessage()
             );
         }
-
     }
+
+    /**
+     * Initializes the values of the fields in the edit dialog
+     */
+    public abstract void initializeEditFields();
+
+    /**
+     * Gets all elements that are similar to the edit dialog's GTFS element
+     */
+    public abstract List<GTFSElement> getSimilar();
 
 
 }

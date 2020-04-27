@@ -3,6 +3,8 @@ package gtfsapp.gui.dialog.edit.route;
 import gtfsapp.file.GTFSElement;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 
+import java.util.List;
+
 public class GTFSEditRouteDialogController extends GTFSEditDialogController {
 
 
@@ -15,10 +17,10 @@ public class GTFSEditRouteDialogController extends GTFSEditDialogController {
     }
 
     /**
-     * Applies the new attributes to the edit dialog's element
+     * Gets all elements that are similar to the edit dialog's GTFS element
      */
     @Override
-    public void apply() {
+    public List<GTFSElement> getSimilar() {
         throw new UnsupportedOperationException();
     }
 

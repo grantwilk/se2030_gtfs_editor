@@ -197,6 +197,14 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
     }
 
     /**
+     * Gets all elements that are similar to the edit dialog's GTFS element
+     */
+    @Override
+    public List<GTFSElement> getSimilar() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Applies the new attributes in the edit dialog to one element
      */
     @Override
