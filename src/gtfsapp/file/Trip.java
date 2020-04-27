@@ -24,11 +24,6 @@ public class Trip extends GTFSElement {
     private final Feed feed;
 
     /**
-     * A map of all stop IDs and stops contained within this trip
-     */
-    private final HashMap<StopID, Stop> stops = new HashMap<>();
-
-    /**
      * A map of all stop time IDs and stop times contained within this trip
      */
     private final HashMap<StopTimeID, StopTime> stopTimes = new HashMap<>();
@@ -54,7 +49,6 @@ public class Trip extends GTFSElement {
      */
     public void clearStopTimes() {
         stopTimes.clear();
-        stops.clear();
     }
 
     /**
@@ -64,7 +58,6 @@ public class Trip extends GTFSElement {
      */
     public void addStopTime(StopTime stopTime) {
         stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
-        stops.put((StopID) stopTime.getStop().getID(), stopTime.getStop());
     }
 
     /**
@@ -75,7 +68,6 @@ public class Trip extends GTFSElement {
     public void addAllStopTimes(List<StopTime> stopTimes) {
         for (StopTime stopTime : stopTimes) {
             this.stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
-            stops.put((StopID) stopTime.getStop().getID(), stopTime.getStop());
         }
     }
 
@@ -86,7 +78,6 @@ public class Trip extends GTFSElement {
      * @return the stopTime removed
      */
     public StopTime removeStopTime(StopTime stopTime) {
-        stops.remove((StopID) stopTime.getStop().getID());
         return stopTimes.remove((StopTimeID) stopTime.getID());
     }
 
@@ -97,7 +88,6 @@ public class Trip extends GTFSElement {
      * @return the StopTimeID removed
      */
     public StopTime removeStopTimeByID(StopTimeID id) {
-        stops.remove((StopID) stopTimes.get(id).getStop().getID());
         return stopTimes.remove(id);
     }
 
@@ -107,7 +97,7 @@ public class Trip extends GTFSElement {
      * @param id the ID of the stop
      */
     public boolean containsStop(StopID id) {
-        return stops.containsKey(id);
+        return getStopIDs().contains(id);
     }
 
     /**
@@ -186,7 +176,14 @@ public class Trip extends GTFSElement {
      * @param id the ID of the stop
      */
     public Stop getStopByID(StopID id) {
-        return stops.get(id);
+        if (getStopIDs().contains(id)){
+            for (Stop stop : getStops()) {
+                if (stop.getID().equals(id)) {
+                    return stop;
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -195,7 +192,11 @@ public class Trip extends GTFSElement {
      * @return a list of stop IDs contained within the trip
      */
     public Set<StopID> getStopIDs() {
-        return stops.keySet();
+        Set<StopID> stopIDs = new HashSet<>();
+        for (StopTime stopTime : stopTimes.values()) {
+            stopIDs.add((StopID) stopTime.getID());
+        }
+        return stopIDs;
     }
 
     /**
@@ -204,7 +205,11 @@ public class Trip extends GTFSElement {
      * @return a list of stops contained within the trip
      */
     public Set<Stop> getStops() {
-        return new HashSet<>(stops.values());
+        Set<Stop> stops = new HashSet<>();
+        for (StopTime stopTime : stopTimes.values()) {
+            stops.add(stopTime.getStop());
+        }
+        return stops;
     }
 
     /**

@@ -190,14 +190,18 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         StopTime element = (StopTime) getElement();
 
         // update the stop time's stop
-        if (!stopChoiceBox.getValue().equals(element.getStop())) {
-            element.setStop(stopChoiceBox.getValue());
+        Stop newStop = stopChoiceBox.getValue();
+        Stop oldStop = element.getStop();
+        if (!oldStop.equals(newStop)) {
+            element.setStop(newStop);
         }
 
         // update the stop time's trip
-        if (!tripChoiceBox.getValue().equals(element.getContainingTrip())) {
-            element.getContainingTrip().removeStopTime(element);
-            tripChoiceBox.getValue().addStopTime(element);
+        Trip newTrip = tripChoiceBox.getValue();
+        Trip oldTrip = element.getContainingTrip();
+        if (!oldTrip.equals(newTrip)) {
+            oldTrip.removeStopTime(element);
+            newTrip.addStopTime(element);
         }
 
         // update the stop time's head sign
