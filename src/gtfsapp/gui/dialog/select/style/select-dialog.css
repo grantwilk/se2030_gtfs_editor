@@ -25,4 +25,5 @@
 
 .apply-button-container {
     -fx-padding: 20 0 0 0;
+    -fx-spacing: 10;
 }

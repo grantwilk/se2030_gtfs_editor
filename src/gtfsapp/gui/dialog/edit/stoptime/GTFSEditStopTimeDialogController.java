@@ -227,6 +227,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
             selectController.setStage(selectStage);
 
             // add all of the stop times to our selection list
+            selectController.setBaseElement(getElement());
             List<GTFSElement> elements = new ArrayList<>(mainController.getGTFSFile().getFeed().getStopTimes());
             selectController.addElements(elements);
 

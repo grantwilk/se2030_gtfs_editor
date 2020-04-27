@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="300.0" maxWidth="-Infinity" minWidth="600.0" styleClass="select-dialog-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.select.GTFSSelectDialogController">
+<VBox maxHeight="300.0" maxWidth="600.0" styleClass="select-dialog-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.select.GTFSSelectDialogController">
    <children>
       <HBox styleClass="switch-container">
          <children>
@@ -16,7 +16,7 @@
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectSome" text="&gt;" />
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectAll" text="&gt;&gt;" />
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deselectAll" text="&lt;&lt;" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deselectSome" text="&lt;" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deselectOne" text="&lt;" />
                </children>
             </VBox>
             <ListView id="list" fx:id="selectedElements" maxWidth="1.7976931348623157E308" styleClass="element-container" HBox.hgrow="ALWAYS" />
@@ -24,7 +24,8 @@
       </HBox>
       <HBox alignment="CENTER" styleClass="apply-button-container">
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#applyMultiple" styleClass="button-blue" text="Apply to Multiple" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectSimilar" prefWidth="275.0" text="Select Similar" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#applyMultiple" prefWidth="275.0" styleClass="button-blue" text="Apply to Multiple" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

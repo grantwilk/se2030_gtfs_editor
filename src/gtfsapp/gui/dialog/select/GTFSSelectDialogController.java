@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class GTFSSelectDialogController extends GTFSDialogController {
 
+    GTFSElement baseElement;
+
     @FXML
     private ListView<GTFSElement> selectedElements;
 
@@ -21,12 +23,25 @@ public class GTFSSelectDialogController extends GTFSDialogController {
     private ListView<GTFSElement> unselectedElements;
 
     /**
+     * Sets the base element of the selection dialog
+     * @param element - the element to set as the base
+     */
+    public void setBaseElement(GTFSElement element) {
+        baseElement = element;
+        selectedElements.getItems().add(baseElement);
+    }
+
+    /**
      * Adds a list of elements to the unselected elements GUI list
      * @param elements - the list of elements to add
      */
     public void addElements(List<GTFSElement> elements) {
+
         for (GTFSElement element : elements) {
-            if (!(unselectedElements.getItems().contains(element) || selectedElements.getItems().contains(element))) {
+            if (!unselectedElements.getItems().contains(element) &&
+                    !selectedElements.getItems().contains(element) &&
+                    !element.equals(baseElement)
+            ) {
                 unselectedElements.getItems().add(element);
             }
         }
@@ -41,11 +56,16 @@ public class GTFSSelectDialogController extends GTFSDialogController {
         // get the currently selected items from the list of unselected elements
         GTFSElement selectedItem = unselectedElements.getSelectionModel().getSelectedItem();
 
-        // add the items to the selected elements list
-        selectedElements.getItems().add(selectedItem);
+        // if there is a selected item
+        if (selectedItem != null) {
 
-        // remove the items from the unselected elements list
-        unselectedElements.getItems().remove(selectedItem);
+            // add the items to the selected elements list
+            selectedElements.getItems().add(selectedItem);
+
+            // remove the items from the unselected elements list
+            unselectedElements.getItems().remove(selectedItem);
+
+        }
 
     }
 
@@ -63,16 +83,21 @@ public class GTFSSelectDialogController extends GTFSDialogController {
      * Moves the currently selected items from the selected elements GUI list to the unselected elements GUI list
      */
     @FXML
-    private void deselectSome() {
+    private void deselectOne() {
 
         // get the currently selected items from the list of unselected elements
         GTFSElement selectedItem = selectedElements.getSelectionModel().getSelectedItem();
 
-        // add the items to the unselected elements list
-        unselectedElements.getItems().add(selectedItem);
+        // if the selected element is not our base element and is not null
+        if (selectedItem != null && !selectedItem.equals(baseElement)) {
 
-        // remove the items from the selected elements list
-        selectedElements.getItems().remove(selectedItem);
+            // add the items to the unselected elements list
+            unselectedElements.getItems().add(selectedItem);
+
+            // remove the items from the selected elements list
+            selectedElements.getItems().remove(selectedItem);
+
+        }
 
     }
 
@@ -81,11 +106,30 @@ public class GTFSSelectDialogController extends GTFSDialogController {
      */
     @FXML
     private void deselectAll() {
+        // get all of the elements from our selected elements GUI list
         List<GTFSElement> items = selectedElements.getItems();
+
+        // move the items to the unselected elements list
         unselectedElements.getItems().addAll(items);
         selectedElements.getItems().removeAll(items);
+
+        // move the base element back over to the selected side
+        selectedElements.getItems().add(baseElement);
+        unselectedElements.getItems().remove(baseElement);
+
     }
 
+    /**
+     * Selects all elements similar to the base element
+     */
+    @FXML
+    private void selectSimilar() {
+
+    }
+
+    /**
+     * Applies the attributes to the selected elements
+     */
     @FXML
     private void applyMultiple() {
         ((GTFSEditDialogController) parentController).applyMultiple(selectedElements.getItems());
