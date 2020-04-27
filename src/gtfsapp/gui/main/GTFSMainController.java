@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -373,9 +374,11 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 editStage.setScene(editScene);
                 editStage.setTitle(windowTitle);
                 editStage.setResizable(false);
+                editStage.initModality(Modality.APPLICATION_MODAL);
+                editStage.initOwner(getScene().getWindow());
 
                 // show the stage
-                editStage.show();
+                editStage.showAndWait();
 
             }
 
