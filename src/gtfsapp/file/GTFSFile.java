@@ -174,7 +174,8 @@ public class GTFSFile {
         }
     }
 
-    private boolean validateRoutes() throws  IOException {
+    private void validateRoutes() throws  IOException {
+
 
         // gets name of the file
         String filename = routeFile.getName();
@@ -192,6 +193,7 @@ public class GTFSFile {
             if(format.size() != currentLine.size()){
                 throw new IOException("The amount of elements is not equal to how big the key is");
             }
+            for(int x = 1; )
 
 
         }
