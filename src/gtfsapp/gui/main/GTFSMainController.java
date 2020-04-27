@@ -299,7 +299,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 FXMLLoader loader;
                 GTFSEditDialogController editController;
                 Parent root;
-                String elementTitle;
+                String windowTitle;
 
                 if (selectedElement instanceof Route) {
 
@@ -309,7 +309,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a route
-                    elementTitle = selectedElement.getTitle();
+                    windowTitle = "Edit Route";
 
                 }
 
@@ -321,7 +321,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a trip
-                    elementTitle = selectedElement.getTitle();
+                    windowTitle = "Edit Trip";
 
                 }
 
@@ -333,7 +333,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop time
-                    elementTitle = selectedElement.getTitle();
+                    windowTitle = "Edit Stop Time";
 
                 }
 
@@ -345,7 +345,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop
-                    elementTitle = selectedElement.getTitle();
+                    windowTitle = "Edit Stop";
 
                 }
 
@@ -371,7 +371,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
                 // set stage attributes
                 editStage.setScene(editScene);
-                editStage.setTitle(elementTitle.toUpperCase());
+                editStage.setTitle(windowTitle);
                 editStage.setResizable(false);
 
                 // show the stage
@@ -620,19 +620,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise, find associations and update the class variables
         else {
-
-            Feed feed = gtfsFile.getFeed();
-            associatedRoutes = feed.getRoutes();
-            associatedTrips = feed.getTrips();
-            associatedStopTimes = feed.getStopTimes();
-            associatedStops = feed.getStops();
-
-            // TODO - remove code above and uncomment once the map is up and running
-            // associatedRoutes = findAssociatedRoutes();
-            // associatedTrips = findAssociatedTrips();
-            // associatedStopTimes = findAssociatedStopTimes();
-            // associatedStops = findAssociatedStops();
-
+            associatedRoutes = findAssociatedRoutes();
+            associatedTrips = findAssociatedTrips();
+            associatedStopTimes = findAssociatedStopTimes();
+            associatedStops = findAssociatedStops();
         }
 
     }
