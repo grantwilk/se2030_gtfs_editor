@@ -195,61 +195,6 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         headSignField.setText(element.getHeadSign());
 
     }
-
-    /**
-     * Shows the select multiple window
-     */
-    @Override
-    public void showSelectMultiple() {
-        // get the parent as a main controller
-        GTFSMainController mainController = (GTFSMainController) parentController;
-
-        try {
-
-            // load the select dialog FXML
-            FXMLLoader loader = new FXMLLoader(
-                    GTFSController.class.getResource("dialog/select/fxml/select-dialog.fxml")
-            );
-
-            // get the root
-            Parent root = loader.load();
-
-            // get controller
-            GTFSSelectDialogController selectController = loader.getController();
-
-            // create a new stage and scene
-            Stage selectStage = new Stage();
-            Scene selectScene = new Scene(root);
-
-            // set selection dialog attributes
-            selectController.setParentController(this);
-            selectController.setScene(selectScene);
-            selectController.setStage(selectStage);
-
-            // add all of the stop times to our selection list
-            selectController.setBaseElement(getElement());
-            List<GTFSElement> elements = new ArrayList<>(mainController.getGTFSFile().getFeed().getStopTimes());
-            selectController.addElements(elements);
-
-            // set stage attributes
-            selectStage.setScene(selectScene);
-            selectStage.setTitle("Select Multiple");
-            selectStage.setResizable(false);
-
-            // show stage
-            selectStage.showAndWait();
-
-
-        } catch (IOException e) {
-            mainController.invokeErrorDialog(
-                    GTFSErrorType.EXCEPTION,
-                    "Could Not Load GUI",
-                    "An error occurred while loading the GUI."
-            );
-        }
-
-    }
-
     /**
      * Applies the new attributes in the edit dialog to one element
      */

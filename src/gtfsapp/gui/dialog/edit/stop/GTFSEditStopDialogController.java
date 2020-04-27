@@ -23,14 +23,6 @@ public class GTFSEditStopDialogController extends GTFSEditDialogController {
     }
 
     /**
-     * Shows the select multiple window
-     */
-    @Override
-    public void showSelectMultiple() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * Applies the new attributes in the edit dialog to one element
      *
      * @param element
