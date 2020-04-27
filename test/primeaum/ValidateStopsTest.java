@@ -30,7 +30,7 @@ class ValidateStopsTest {
 
     @Test
     void validateStops() {
-        File file = new File("C:/Users/primeaum/Documents/SE2030Project/2020-project-team-delta/samples/rainy-day-1/stops.txt");
+        File file = new File("samples/rainy-day-1/stops.txt");
         List<File> files = new ArrayList<>();
         files.add(file);
         GTFSFile testFile;
