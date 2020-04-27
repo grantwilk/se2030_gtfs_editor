@@ -26,13 +26,3 @@
     -fx-padding: 20 0 0 0;
     -fx-spacing: 10;
 }
-
-.buttons-container #apply-button {
-    -fx-border-color: #3C6FC7;
-    -fx-background-color: #4C8BF5;
-    -fx-text-fill: white;
-}
-
-.buttons-container #apply-button:pressed {
-    -fx-background-color: #4981DE;
-}

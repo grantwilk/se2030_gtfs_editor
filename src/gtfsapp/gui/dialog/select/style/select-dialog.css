@@ -1,0 +1,33 @@
+.select-dialog-root {
+    -fx-padding: 20;
+}
+
+.switch-container {
+    -fx-spacing: 10;
+}
+
+.switch-buttons-container {
+    -fx-spacing: 5;
+}
+
+.element-scroll-container {
+    -fx-vbar-policy: as_needed;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 8, 0, 3, 3);
+}
+
+.element-scroll-container .viewport {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.element-scroll-container #list {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.apply-button-container {
+    -fx-padding: 20 0 0 0;
+}
