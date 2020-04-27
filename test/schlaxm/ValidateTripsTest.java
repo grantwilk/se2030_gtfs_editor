@@ -1,8 +1,7 @@
-package wilkg;
+package schlaxm;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ValidateStopTimesTest {
-
+class ValidateTripsTest {
 
 }
