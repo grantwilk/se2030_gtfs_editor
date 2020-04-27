@@ -27,6 +27,6 @@ class GTFSFileTest {
 
     @Test
     void validateStops() {
-        
+
     }
 }

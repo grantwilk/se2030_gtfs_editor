@@ -93,11 +93,14 @@ public class GTFSFile {
         // create a new GTFS feed
         feed = new Feed();
 
-        // Get list of lines for each file
+        // get list of lines for each file
         List<String> stopLines = Files.readAllLines(stopFile.toPath());
         List<String> stopTimeLines = Files.readAllLines(stopTimesFile.toPath());
         List<String> routeLines = Files.readAllLines(routeFile.toPath());
         List<String> tripLines = Files.readAllLines(tripFile.toPath());
+
+        // validate files
+        validateStops(stopLines);
 
         // parse the files (must be in this order!)
         HashMap<String, Stop> stops = parseStops(stopLines);
@@ -211,8 +214,39 @@ public class GTFSFile {
         return true;
     }
 
-    public boolean validateStops() {
+    public boolean validateStops(List<String> lines) throws IOException {
+        // get file name for exceptions
+        String fileName = stopFile.getName();
 
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
+        // remove format line
+        lines.remove(0);
+
+        // check if format contains stop_id field
+        if(!format.contains("stop_id")) {
+            throw new IOException();
+        }
+
+        // Check each line for proper information
+        for(String line:lines) {
+            // tokenize current line
+            List<String> currentLine = tokenizeLine(line);
+
+            // check if stop id is present
+            int stopIdIndex = format.indexOf("stop_id");
+            String stopID = currentLine.get(stopIdIndex);
+            if(stopID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // check if stop id already exists
+            if(StopID.exists(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+        }
+
+        return true;
     }
 
     /**
