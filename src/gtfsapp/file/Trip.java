@@ -73,15 +73,10 @@ public class Trip extends GTFSElement {
      * @param stopTimes the list of stop times
      */
     public void addAllStopTimes(List<StopTime> stopTimes) {
-
-        // for each stop time in the array
         for (StopTime stopTime : stopTimes) {
-            // add the list of stop times to the stop times map
             this.stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
-            // add the stop time's stop to the stops map
             stops.put((StopID) stopTime.getStop().getID(), stopTime.getStop());
         }
-
     }
 
     /**
@@ -91,6 +86,7 @@ public class Trip extends GTFSElement {
      * @return the stopTime removed
      */
     public StopTime removeStopTime(StopTime stopTime) {
+        stops.remove((StopID) stopTime.getStop().getID());
         return stopTimes.remove((StopTimeID) stopTime.getID());
     }
 
@@ -101,6 +97,7 @@ public class Trip extends GTFSElement {
      * @return the StopTimeID removed
      */
     public StopTime removeStopTimeByID(StopTimeID id) {
+        stops.remove((StopID) stopTimes.get(id).getStop().getID());
         return stopTimes.remove(id);
     }
 

@@ -102,7 +102,7 @@ public class StopTime extends GTFSElement implements Comparable<StopTime> {
         for (Route route : feed.getRoutes()) {
 
             // check to see if the route's trips contains our stop time's trip
-            if (!route.getTrips().contains(getContainingTrip())) {
+            if (route.getTrips().contains(getContainingTrip())) {
 
                 // if they do, add the route to our set of containing route
                 containingRoutes.add(route);

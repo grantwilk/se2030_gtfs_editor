@@ -643,7 +643,6 @@ public class GTFSMainController extends GTFSController {
             associationsTabPane.getTabs().add(stopsTab);
         }
 
-
     }
 
     /**
