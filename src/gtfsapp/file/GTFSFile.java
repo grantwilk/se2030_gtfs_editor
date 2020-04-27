@@ -709,10 +709,7 @@ public class GTFSFile {
      * @param routes the list of routes that the trips should be linked to
      * @return the list of trips
      */
-    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(tripFile.toPath());
-
+    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes, List<String> lines) {
         // Get the format of the attributes for the file
         List<String> format = tokenizeLine(lines.get(0));
 
@@ -758,10 +755,7 @@ public class GTFSFile {
      *
      * @return the parsed routes as a list
      */
-    private HashMap<String, Route> parseRoutes() throws IOException {
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(routeFile.toPath());
-
+    private HashMap<String, Route> parseRoutes(List<String> lines) {
         // get format of the file
         List<String> format = tokenizeLine(lines.get(0));
         lines.remove(0);
@@ -832,10 +826,7 @@ public class GTFSFile {
         return routes;
     }
 
-    private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops) throws IOException, ParseException {
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(routeFile.toPath());
-
+    private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops, List<String> lines) {
         // get format of the file
         List<String> format = tokenizeLine(lines.get(0));
         lines.remove(0);
@@ -897,10 +888,7 @@ public class GTFSFile {
      *
      * @return the list of stops
      */
-    private HashMap<String, Stop> parseStops() throws IOException {
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(routeFile.toPath());
-
+    private HashMap<String, Stop> parseStops(List<String> lines) {
         // get format of the file
         List<String> format = tokenizeLine(lines.get(0));
         lines.remove(0);
