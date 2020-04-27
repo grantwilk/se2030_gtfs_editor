@@ -1,7 +1,6 @@
 package gtfsapp.gui.main;
 
 import gtfsapp.file.*;
-import gtfsapp.gui.GTFSController;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 import gtfsapp.gui.dialog.error.GTFSErrorDialogController;
 import gtfsapp.gui.dialog.error.GTFSErrorType;
@@ -33,7 +32,7 @@ import java.util.*;
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
-public class GTFSMainController extends GTFSController {
+public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
     /**
      * The color displayed in the selected element panel if there is no selected element
@@ -305,7 +304,7 @@ public class GTFSMainController extends GTFSController {
 
                     // load edit route dialog FXML
                     loader = new FXMLLoader(
-                            GTFSController.class.getResource("dialog/edit/route/fxml/edit-route.fxml")
+                            gtfsapp.gui.GTFSController.class.getResource("dialog/edit/route/fxml/edit-route.fxml")
                     );
 
                     // get the selected elements title as a route
@@ -317,7 +316,7 @@ public class GTFSMainController extends GTFSController {
 
                     // load edit trip dialog FXML
                     loader = new FXMLLoader(
-                            GTFSController.class.getResource("dialog/edit/trip/fxml/edit-trip.fxml")
+                            gtfsapp.gui.GTFSController.class.getResource("dialog/edit/trip/fxml/edit-trip.fxml")
                     );
 
                     // get the selected elements title as a trip
@@ -329,7 +328,7 @@ public class GTFSMainController extends GTFSController {
 
                     // load edit stop time dialog FXML
                     loader = new FXMLLoader(
-                            GTFSController.class.getResource("dialog/edit/stoptime/fxml/edit-stop-time.fxml")
+                            gtfsapp.gui.GTFSController.class.getResource("dialog/edit/stoptime/fxml/edit-stop-time.fxml")
                     );
 
                     // get the selected elements title as a stop time
@@ -341,7 +340,7 @@ public class GTFSMainController extends GTFSController {
 
                     // load edit stop dialog FXML
                     loader = new FXMLLoader(
-                            GTFSController.class.getResource("dialog/edit/stop/fxml/edit-stop.fxml")
+                            gtfsapp.gui.GTFSController.class.getResource("dialog/edit/stop/fxml/edit-stop.fxml")
                     );
 
                     // get the selected elements title as a stop
@@ -366,7 +365,7 @@ public class GTFSMainController extends GTFSController {
                 // set error attributes
                 editController.setStage(editStage);
                 editController.setScene(editScene);
-                editController.setMainController(this);
+                editController.setParentController(this);
                 editController.setElement(selectedElement);
 
                 // set stage attributes
@@ -383,17 +382,29 @@ public class GTFSMainController extends GTFSController {
 
         // catch class cast exceptions
         catch (ClassCastException e) {
-            invokeErrorDialog(GTFSErrorType.EXCEPTION, "Class Cast Exception", e.getMessage());
+            invokeErrorDialog(
+                    GTFSErrorType.EXCEPTION,
+                    "Class Cast Exception",
+                    e.getMessage()
+            );
         }
 
         // catch IO exceptions
         catch (IOException e) {
-            invokeErrorDialog(GTFSErrorType.EXCEPTION, "IO Exception", e.getMessage());
+            invokeErrorDialog(
+                    GTFSErrorType.EXCEPTION,
+                    "Could Not Load GUI",
+                    "An error occurred while loading the GUI."
+            );
         }
 
         // catch unsupported operation exceptions
         catch (UnsupportedOperationException e) {
-            invokeErrorDialog(GTFSErrorType.WARNING, "Unsupported Operation", e.getMessage());
+            invokeErrorDialog(
+                    GTFSErrorType.WARNING,
+                    "Unsupported Operation",
+                    e.getMessage()
+            );
         }
 
     }
@@ -410,7 +421,7 @@ public class GTFSMainController extends GTFSController {
         try {
             // load error dialog FXML
             FXMLLoader loader = new FXMLLoader(
-                    GTFSController.class.getResource("dialog/error/fxml/error-dialog.fxml")
+                    gtfsapp.gui.GTFSController.class.getResource("dialog/error/fxml/error-dialog.fxml")
             );
 
             // get the tile root (highest-level container)
@@ -433,13 +444,17 @@ public class GTFSMainController extends GTFSController {
             // set stage attributes
             errorStage.setScene(errorScene);
             errorStage.setTitle(errorTitle);
+            errorStage.setResizable(false);
 
             // show the stage
             errorStage.showAndWait();
 
         } catch (IOException e) {
-            e.printStackTrace();
-            // TODO - can anything else be done here?
+            invokeErrorDialog(
+                    GTFSErrorType.EXCEPTION,
+                    "Could Not Load GUI",
+                    "An error occurred while loading the GUI."
+            );
         }
 
     }
@@ -604,10 +619,19 @@ public class GTFSMainController extends GTFSController {
 
         // otherwise, find associations and update the class variables
         else {
-            associatedRoutes = findAssociatedRoutes();
-            associatedTrips = findAssociatedTrips();
-            associatedStopTimes = findAssociatedStopTimes();
-            associatedStops = findAssociatedStops();
+
+            Feed feed = gtfsFile.getFeed();
+            associatedRoutes = feed.getRoutes();
+            associatedTrips = feed.getTrips();
+            associatedStopTimes = feed.getStopTimes();
+            associatedStops = feed.getStops();
+
+            // TODO - remove code above and uncomment once the map is up and running
+            // associatedRoutes = findAssociatedRoutes();
+            // associatedTrips = findAssociatedTrips();
+            // associatedStopTimes = findAssociatedStopTimes();
+            // associatedStops = findAssociatedStops();
+
         }
 
     }

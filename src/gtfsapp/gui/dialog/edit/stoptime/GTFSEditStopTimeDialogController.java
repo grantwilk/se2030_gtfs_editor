@@ -1,14 +1,26 @@
 package gtfsapp.gui.dialog.edit.stoptime;
 
+import gtfsapp.file.GTFSElement;
 import gtfsapp.file.Stop;
 import gtfsapp.file.StopTime;
 import gtfsapp.file.Trip;
+import gtfsapp.gui.GTFSController;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 import gtfsapp.gui.dialog.error.GTFSErrorType;
+import gtfsapp.gui.dialog.select.GTFSSelectDialogController;
+import gtfsapp.gui.main.GTFSMainController;
 import gtfsapp.util.LimitedTextField;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
@@ -124,6 +136,9 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         // get the currently selected stop time
         StopTime element = (StopTime) getElement();
 
+        // get the parent as a main controller
+        GTFSMainController mainController = (GTFSMainController) parentController;
+
         // get all of the stops in the feed
         Set<Stop> stops = mainController.getGTFSFile().getFeed().getStops();
 
@@ -182,30 +197,87 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
     }
 
     /**
-     * Applies the new attributes in the edit dialog to the edit dialog's element
+     * Shows the select multiple window
      */
     @Override
-    public void apply() {
+    public void showSelectMultiple() {
+        // get the parent as a main controller
+        GTFSMainController mainController = (GTFSMainController) parentController;
 
-        StopTime element = (StopTime) getElement();
+        try {
+
+            // load the select dialog FXML
+            FXMLLoader loader = new FXMLLoader(
+                    GTFSController.class.getResource("dialog/select/fxml/select-dialog.fxml")
+            );
+
+            // get the root
+            Parent root = loader.load();
+
+            // get controller
+            GTFSSelectDialogController selectController = loader.getController();
+
+            // create a new stage and scene
+            Stage selectStage = new Stage();
+            Scene selectScene = new Scene(root);
+
+            // set selection dialog attributes
+            selectController.setParentController(this);
+            selectController.setScene(selectScene);
+            selectController.setStage(selectStage);
+
+            // add all of the stop times to our selection list
+            List<GTFSElement> elements = new ArrayList<>(mainController.getGTFSFile().getFeed().getStopTimes());
+            selectController.addElements(elements);
+
+            // set stage attributes
+            selectStage.setScene(selectScene);
+            selectStage.setTitle("Select Multiple");
+            selectStage.setResizable(false);
+
+            // show stage
+            selectStage.showAndWait();
+
+
+        } catch (IOException e) {
+            mainController.invokeErrorDialog(
+                    GTFSErrorType.EXCEPTION,
+                    "Could Not Load GUI",
+                    "An error occurred while loading the GUI."
+            );
+        }
+
+    }
+
+    /**
+     * Applies the new attributes in the edit dialog to one element
+     */
+    @Override
+    public void applyOne(GTFSElement element) {
+
+        // get the parent as a main controller
+        GTFSMainController mainController = (GTFSMainController) parentController;
+
+        // get the stop time
+        StopTime stopTime = (StopTime) element;
 
         // update the stop time's stop
         Stop newStop = stopChoiceBox.getValue();
-        Stop oldStop = element.getStop();
+        Stop oldStop = stopTime.getStop();
         if (!oldStop.equals(newStop)) {
-            element.setStop(newStop);
+            stopTime.setStop(newStop);
         }
 
         // update the stop time's trip
         Trip newTrip = tripChoiceBox.getValue();
-        Trip oldTrip = element.getContainingTrip();
+        Trip oldTrip = stopTime.getContainingTrip();
         if (!oldTrip.equals(newTrip)) {
-            oldTrip.removeStopTime(element);
-            newTrip.addStopTime(element);
+            oldTrip.removeStopTime(stopTime);
+            newTrip.addStopTime(stopTime);
         }
 
         // update the stop time's head sign
-        element.setHeadSign(headSignField.getText());
+        stopTime.setHeadSign(headSignField.getText());
 
         try {
 
@@ -213,7 +285,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
             long arrivalTimeHourMillis = Integer.parseInt(arrivalTimeHoursField.getText()) * MILLIS_IN_HOUR;
             long arrivalTimeMinuteMillis = Integer.parseInt(arrivalTimeMinutesField.getText()) * MILLIS_IN_MINUTE;
             long arrivalTimeSecondMillis = Integer.parseInt(arrivalTimeSecondsField.getText()) * MILLIS_IN_SECOND;
-            element.getArrivalTime().setTime(
+            stopTime.getArrivalTime().setTime(
                     arrivalTimeHourMillis + arrivalTimeMinuteMillis + arrivalTimeSecondMillis
             );
 
@@ -221,15 +293,9 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
             long departureTimeHourMillis = Integer.parseInt(departureTimeHoursField.getText()) * MILLIS_IN_HOUR;
             long departureTimeMinuteMillis = Integer.parseInt(departureTimeMinutesField.getText()) * MILLIS_IN_MINUTE;
             long departureTimeSecondMillis = Integer.parseInt(departureTimeSecondsField.getText()) * MILLIS_IN_SECOND;
-            element.getDepartureTime().setTime(
+            stopTime.getDepartureTime().setTime(
                     departureTimeHourMillis + departureTimeMinuteMillis + departureTimeSecondMillis
             );
-
-            // update the info panel
-            mainController.updateInfoPanel();
-
-            // close the dialog
-            close();
 
         }
 
@@ -239,17 +305,8 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
                     GTFSErrorType.EXCEPTION,
                     "Invalid Time",
                     "One or more times were entered incorrectly."
-                    );
+            );
         }
-
-    }
-
-    /**
-     * Applies the new attributes in the edit dialog to multiple elements
-     */
-    @Override
-    public void applyMultiple() {
-        throw new UnsupportedOperationException();
     }
 
 }

@@ -1,7 +1,6 @@
 package gtfsapp.gui.dialog;
 
 import gtfsapp.gui.GTFSController;
-import gtfsapp.gui.main.GTFSMainController;
 
 /**
  * @author Grant Wilk
@@ -11,26 +10,26 @@ import gtfsapp.gui.main.GTFSMainController;
 public abstract class GTFSDialogController extends GTFSController {
 
     /**
-     * The main controller that the dialog was invoked from
+     * The parent controller that the dialog was invoked from
      */
-    public GTFSMainController mainController;
+    public GTFSController parentController;
 
     /**
-     * Gets the dialog's main controller
+     * Gets the dialog's parent controller
      *
-     * @return the dialog's main controller
+     * @return the dialog's parent controller
      */
-    public GTFSMainController getMainController() {
-        return mainController;
+    public GTFSController getParentController() {
+        return parentController;
     }
 
     /**
-     * Sets the dialog's main controller
+     * Sets the dialog's parent controller
      *
-     * @param mainController the dialog's main controller
+     * @param parentController the dialog's parent controller
      */
-    public void setMainController(GTFSMainController mainController) {
-        this.mainController = mainController;
+    public void setParentController(GTFSController parentController) {
+        this.parentController = parentController;
     }
 
 }

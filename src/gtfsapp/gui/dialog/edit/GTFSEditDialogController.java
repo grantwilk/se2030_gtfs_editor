@@ -2,6 +2,9 @@ package gtfsapp.gui.dialog.edit;
 
 import gtfsapp.file.GTFSElement;
 import gtfsapp.gui.dialog.GTFSDialogController;
+import gtfsapp.gui.main.GTFSMainController;
+
+import java.util.List;
 
 /**
  * @author Grant Wilk
@@ -25,6 +28,40 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
     }
 
     /**
+     * Applies the new attributes to the edit dialog's element
+     */
+    public void apply() {
+
+        // apply the attributes to the current element
+        applyOne(element);
+
+        // update the info panel
+        ((GTFSMainController) parentController).updateInfoPanel();
+
+        // close the dialog
+        close();
+
+    }
+
+    /**
+     * Applies the new attributes in the edit dialog to multiple elements
+     */
+    public void applyMultiple(List<GTFSElement> elements) {
+
+        // apply the attributes to all of the elements
+        for (GTFSElement element : elements) {
+            applyOne(element);
+        }
+
+        // update the info panel
+        ((GTFSMainController) parentController).updateInfoPanel();
+
+        // close the dialog
+        close();
+
+    }
+
+    /**
      * Gets the edit dialog's element
      * @return the edit dialog's element
      */
@@ -38,13 +75,15 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
     public abstract void initializeEditFields();
 
     /**
-     * Applies the new attributes in the edit dialog to the edit dialog's element
+     * Shows the select multiple window
      */
-    public abstract void apply();
+    public abstract void showSelectMultiple();
 
     /**
-     * Applies the new attributes in the edit dialog to multiple elements
+     * Applies the new attributes in the edit dialog to one element
      */
-    public abstract void applyMultiple();
+    public abstract void applyOne(GTFSElement element);
+
+
 
 }

@@ -10,22 +10,17 @@
     -fx-spacing: 5;
 }
 
-.element-scroll-container {
+.element-container {
     -fx-vbar-policy: as_needed;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 8, 0, 3, 3);
-}
-
-.element-scroll-container .viewport {
     -fx-background-color: white;
     -fx-border-color: #E0E0E0;
     -fx-border-width: 2;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-}
-
-.element-scroll-container #list {
-    -fx-border-width: 0;
-    -fx-background-color: transparent;
+    -fx-background-insets: 2;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 8, 0, 3, 3);
 }
 
 .apply-button-container {

@@ -1,6 +1,5 @@
 package gtfsapp;
 
-import gtfsapp.gui.GTFSController;
 import gtfsapp.gui.main.GTFSMainController;
 
 import javafx.application.Application;

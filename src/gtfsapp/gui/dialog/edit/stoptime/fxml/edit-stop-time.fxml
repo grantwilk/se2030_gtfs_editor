@@ -64,8 +64,8 @@
       </VBox>
       <HBox alignment="CENTER" styleClass="buttons-container">
          <children>
-            <Button id="apply-to-multiple-button" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#applyMultiple" text="Apply to Multiple" HBox.hgrow="ALWAYS" />
-            <Button id="apply-button" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#apply" text="Apply" HBox.hgrow="ALWAYS" />
+            <Button id="apply-to-multiple-button" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#showSelectMultiple" text="Apply to Multiple" HBox.hgrow="ALWAYS" />
+            <Button id="apply-button" styleClass="button-blue" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#apply" text="Apply" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

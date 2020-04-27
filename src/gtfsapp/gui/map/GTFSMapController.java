@@ -2,7 +2,6 @@ package gtfsapp.gui.map;
 
 import gtfsapp.file.GTFSElement;
 import gtfsapp.file.Stop;
-import gtfsapp.gui.GTFSController;
 import gtfsapp.gui.main.GTFSMainController;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
-public class GTFSMapController extends GTFSController {
+public class GTFSMapController extends gtfsapp.gui.GTFSController {
 
     private ArrayList<Stop> associatedStops;
     private GTFSMainController mainController;
