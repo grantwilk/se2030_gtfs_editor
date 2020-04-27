@@ -124,9 +124,20 @@ public class GTFSSelectDialogController extends GTFSDialogController {
      */
     @FXML
     private void selectSimilar() {
+
+        // get the similar elements
         List<GTFSElement> similarElements = ((GTFSEditDialogController) parentController).getSimilar();
+
+        // remove the similar elements from the unselected elements list
         unselectedElements.getItems().removeAll(similarElements);
-        selectedElements.getItems().addAll(similarElements);
+
+        // add the elements to our selected elements if it is not already included
+        for (GTFSElement element : similarElements) {
+            if (!selectedElements.getItems().contains(element)) {
+                selectedElements.getItems().add(element);
+            }
+        }
+
     }
 
     /**
