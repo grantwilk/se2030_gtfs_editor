@@ -213,7 +213,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
 
         // add all stop times with the same arrival time to our list of similar stop times
         for (StopTime stopTime : stopTimes) {
-            if (!stopTime.equals(element) && stopTime.getArrivalTime().equals(element.getArrivalTime())) {
+            if (stopTime.getStop().equals(element.getStop())) {
                 similar.add(stopTime);
             }
         }
