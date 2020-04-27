@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Grant Wilk
@@ -678,11 +679,14 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     public void updateAssociationsTab(Set<? extends GTFSElement> elements, Pane container) throws IOException {
 
+        // get a sorted list of elements
+        List<GTFSElement> sortedElements = elements.stream().sorted().collect(Collectors.toList());
+
         // clear all of the children from the tab
         container.getChildren().clear();
 
         // convert each element to a tile and add it to the tab
-        for (GTFSElement element : elements) {
+        for (GTFSElement element : sortedElements) {
 
             // load associations tile FXML
             FXMLLoader loader = new FXMLLoader(

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
-public class StopTime extends GTFSElement implements Comparable<StopTime> {
+public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * The feed the stop time belongs to
@@ -271,14 +271,18 @@ public class StopTime extends GTFSElement implements Comparable<StopTime> {
 
     /**
      * Determines when one stop time's arrival time occurs with relevance to another
-     * @param stopTime - the stop time to compare to
+     * @param element - the element to compare to
      * @return -1 if the other stop time's arrival time occurs before this stop time's arrival time , 0 if the stop
      * time's arrival times occur simultaneously, or 1 if the other stop time's arrival time occurs after this stop
      * time's arrival time
      */
     @Override
-    public int compareTo(StopTime stopTime) {
-        return getArrivalTime().compareTo(stopTime.getArrivalTime());
+    public int compareTo(GTFSElement element) {
+        if (element instanceof StopTime) {
+            return getArrivalTime().compareTo(((StopTime) element).getArrivalTime());
+        } else {
+            return super.compareTo(element);
+        }
     }
 
 }

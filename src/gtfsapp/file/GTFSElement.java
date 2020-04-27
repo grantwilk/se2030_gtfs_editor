@@ -9,7 +9,7 @@ import java.util.HashMap;
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
-public abstract class GTFSElement {
+public abstract class GTFSElement implements Comparable<GTFSElement> {
 
     private final GTFSID id;
 
@@ -40,7 +40,7 @@ public abstract class GTFSElement {
     }
 
     /**
-     * Checks to see whether two
+     * Checks to see whether two elements are equal
      */
     @Override
     public boolean equals(Object obj) {
@@ -53,6 +53,15 @@ public abstract class GTFSElement {
         // otherwise, return whether the IDs are equal
         return (this.getID().equals(((GTFSElement) obj).getID()));
 
+    }
+
+    /**
+     * Compares two elements by their IDs
+     * @param element - the element to compare to
+     */
+    @Override
+    public int compareTo(GTFSElement element) {
+        return this.getID().compareTo(element.getID());
     }
 
     /**

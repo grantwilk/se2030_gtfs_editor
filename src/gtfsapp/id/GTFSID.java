@@ -7,7 +7,7 @@ import java.util.Set;
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
-public abstract class GTFSID {
+public abstract class GTFSID implements Comparable<GTFSID> {
 
     private final String id;
 
@@ -46,7 +46,7 @@ public abstract class GTFSID {
 
         // create a new ID in the format "<prefix><count>" until it is unique
         do {
-            idString = prefix + count++;
+            idString = String.format("%s%02d", prefix, count++);
         } while (existingIDStrings.contains(idString));
 
         return idString;
@@ -86,6 +86,15 @@ public abstract class GTFSID {
         }
 
         return classMatch && idStringMatch;
+    }
+
+    /**
+     * Compares two IDs by their ID strings
+     * @param id - the ID to compare to
+     */
+    @Override
+    public int compareTo(GTFSID id) {
+        return this.getIDString().compareTo(id.getIDString());
     }
 
     /**
