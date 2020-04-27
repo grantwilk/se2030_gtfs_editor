@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-class GTFSFileTest {
+class ValidateStopsTest {
 
 
     @BeforeEach
