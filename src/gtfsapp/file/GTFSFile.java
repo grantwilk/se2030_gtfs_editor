@@ -184,32 +184,47 @@ public class GTFSFile {
         }
     }
 
-    private void validateRoutes() throws  IOException {
+    private boolean validateRoutes(List<String> lines) throws  IOException {
 
+        // get file name for exceptions
+        String fileName = routeFile.getName();
 
-        // gets name of the file
-        String filename = routeFile.getName();
-
-        //get all lines from file
-        List<String> lines = Files.readAllLines(routeFile.toPath());
-
-        //creates keys from the first line of code
+        // get format for file
         List<String> format = tokenizeLine(lines.get(0));
+        // remove format line
+        lines.remove(0);
 
-        for(int i = 1; 1 < lines.size(); i++) {
-            HashMap<String,String> validationKey = new HashMap<String, String>();
-            List<String> currentLine = tokenizeLine(lines.get(i));
-
-            if(format.size() != currentLine.size()){
-                throw new IOException("The amount of elements is not equal to how big the key is");
-            }
-            for(int x = 1; )
-
-
+        // check if format contains route_id field
+        if(!format.contains("route_id")) {
+            throw new IOException();
         }
 
+        // Check each line for proper information
+        for(String line:lines) {
+            // tokenize current line
+            List<String> currentLine = tokenizeLine(line);
 
+            // make sure all expected elements are there
+            if(currentLine.size() != format.size()) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // check if route id is present
+            int routeIdIndex = format.indexOf("route_id");
+            String routeID = currentLine.get( routeIdIndex);
+            if(routeID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            }
+
+            // check if route id already exists
+            if(RouteID.exists(routeID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            }
+        }
+
+        return true;
     }
+
 
     /**
      * Parse through stops file to check that all data is valid
