@@ -14,9 +14,6 @@ import java.util.Set;
 public class GTFSEditTripDialogController extends GTFSEditDialogController {
 
     @FXML
-    private TextField tripIDField;
-
-    @FXML
     private TextField headSignField;
 
 
@@ -26,7 +23,6 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
     @Override
     public void initializeEditFields() {
         Trip trip = (Trip) getElement();
-        tripIDField.setText(trip.getID().getIDString());
         headSignField.setText(trip.getHeadSign());
     }
 

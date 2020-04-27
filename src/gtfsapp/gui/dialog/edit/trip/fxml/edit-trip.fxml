@@ -11,12 +11,6 @@
     <children>
         <VBox alignment="CENTER" styleClass="settings-container">
             <children>
-                <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
-                    <children>
-                        <Label id="title" text="Trip ID" />
-                        <TextField id="text-field" fx:id="tripIDField" editable="false" maxWidth="1.7976931348623157E308" />
-                    </children>
-                </VBox>
             <VBox alignment="CENTER_LEFT" styleClass="attribute-container">
                <children>
                   <Label id="title" text="Head Sign" />
