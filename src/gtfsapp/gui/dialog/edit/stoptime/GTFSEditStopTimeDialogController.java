@@ -195,6 +195,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         headSignField.setText(element.getHeadSign());
 
     }
+
     /**
      * Applies the new attributes in the edit dialog to one element
      */
