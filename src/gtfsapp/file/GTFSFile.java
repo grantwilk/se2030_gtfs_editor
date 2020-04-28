@@ -353,7 +353,7 @@ public class GTFSFile {
             String arrivalTime = stopTimeFields.get("arrival_time");
             String departureTime = stopTimeFields.get("departure_time");
 
-            // check to make sure no required values are null
+            // throw an exception if any required attributes are null
             if (tripID == null) {
                 throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
             }
@@ -370,27 +370,19 @@ public class GTFSFile {
                 throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
             }
 
-            // check to make sure stop IDs fit their regular expression
+            // throw an exception if any required attributes are invalidly formatted
             if (!tripID.matches(ID_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
             }
-
-            // check to make sure stop IDs fit their regular expression
             if (!stopID.matches(ID_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop ID in \"stop_times.txt\".");
             }
-
-            // check to make sure stop IDs fit their regular expression
             if (!stopSequence.matches(UNSIGNED_INT_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
-
-            // check to make sure arrival time fit their regular expression
             if (!arrivalTime.matches(TIME_STAMP_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
             }
-
-            // check to make sure departure time its their regular expression
             if (!departureTime.matches(TIME_STAMP_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
             }
