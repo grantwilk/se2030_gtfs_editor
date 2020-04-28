@@ -436,7 +436,7 @@ public class GTFSFile {
         ArrayList<String> tripIDS = new ArrayList<>();
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
