@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * @author Michael Primeau, Colton Rivard, Grant Wilk
+ * @author Michael Primeau, Colton Rivard, Grant Wilk, Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -313,6 +313,54 @@ public class GTFSFile {
         return true;
     }
 
+<<<<<<< HEAD
+=======
+
+
+    /**
+     * Parse through Trips file to check that all data is valid
+     * @param lines List of each line in the stops file
+     * @return True if the file is valid
+     * @throws IOException Thrown if there is invalid data in the file
+     */
+    public static boolean validateTrips(List<String> lines) throws IOException {
+
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
+        // remove format line
+        lines.remove(0);
+
+        // check if format contains stop_id field
+        if(!format.contains("trip_id")) {
+            throw new IOException();
+        }
+
+        // Check each line for proper information
+        for(String line:lines) {
+            // tokenize current line
+            List<String> currentLine = tokenizeLine(line);
+
+            // make sure all expected elements are there
+            if(currentLine.size() != format.size()) {
+                throw new IOException("Missing one or more required GTFS attributes in file \"trips.txt\".");
+            }
+
+            // check if stop id is present
+            int tripIdIndex = format.indexOf("trip_id");
+            String tripID = currentLine.get(tripIdIndex);
+            if(tripID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
+            }
+
+            // check if stop id already exists
+            if(StopID.exists(tripID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"tripss.txt\".");
+            }
+        }
+
+        return true;
+    }
+    
     /**
      * Converts a hex color string to a Java FX color
      *
