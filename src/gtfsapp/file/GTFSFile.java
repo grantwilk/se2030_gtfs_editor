@@ -416,10 +416,9 @@ public class GTFSFile {
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
 
-        // check if format contains stop_id field
-        if(!format.contains("trip_id") || !format.contains("arrival_time") || !format.contains("departure_time")
-                || !format.contains("stop_id") || !format.contains("stop_sequence")) {
-            throw new IOException("Missing one or more required attributes in first line of \"trip.txt\"");
+        // check if format contains trip_id field and route_id field
+        if(!format.contains("trip_id") || !format.contains("route_id")) {
+            throw new IOException("Missing one or more required attributes in first line of \"trip.txt\".");
         }
 
         ArrayList<String> sequenceList = new ArrayList<>();
@@ -455,7 +454,7 @@ public class GTFSFile {
                 throw new IOException("One or more required elements is missing in file \"trips.txt\".");
             }
             if(sequenceList.contains(stopSeq) && tripIDS.contains(tripID)){
-                throw new IOException("One or more duplicate trip IDs in file \"trips.txt\"");
+                throw new IOException("One or more duplicate trip IDs in file \"trips.txt\".");
             }
             sequenceList.add(stopSeq);
             tripIDS.add(tripID);
