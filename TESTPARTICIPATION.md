@@ -1,4 +1,5 @@
 ## Team Delta Test Participation
+
 | Name            | No. Test Suites | No. Test Cases | Focus               |
 |-----------------|-----------------|----------------|---------------------|
 | Colton Rivard   | 1               | 5              | validateRoutes()    |
