@@ -201,7 +201,9 @@ public class GTFSFile {
         }
     }
 
-    private static boolean validateRoutes(List<String> lines) throws  IOException {
+    public static boolean validateRoutes(List<String> lines) throws  IOException {
+
+        ArrayList<String> routeIDS = new ArrayList<>();
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -209,10 +211,11 @@ public class GTFSFile {
         // check if format contains route_id field
         if(!format.contains("route_id")) {
             throw new IOException();
+
         }
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
@@ -232,6 +235,11 @@ public class GTFSFile {
             if(RouteID.exists(routeID)) {
                 throw new IOException("One or more duplicate GTFS attributes in file \"routes.txt\".");
             }
+
+            if(routeIDS.contains(routeID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+            routeIDS.add(routeID);
         }
 
         return true;

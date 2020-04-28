@@ -24,7 +24,7 @@ class ValidateRoutesTest {
         List<String> lines = Files.readAllLines(path);
 
         // validate the stop times
-        GTFSFile.validateTrips(lines);
+        GTFSFile.validateRoutes(lines);
 
     }
     /**
@@ -35,7 +35,7 @@ class ValidateRoutesTest {
 
         // validate test file
         try {
-            validateTestFile("routes-sunny-day-1.txt");
+            validateTestFile("route-sunny-day-1.txt");
         }
 
         // catch IO exceptions
@@ -53,12 +53,12 @@ class ValidateRoutesTest {
 
         // validate test file
         try {
-            validateTestFile("routes-rainy-day-1.txt");
+            validateTestFile("route-rainy-day-1.txt");
+            fail("Missing RouteID parameter");
         }
 
         // catch IO exceptions
         catch (IOException e) {
-            fail("Missing RouteID parameter");
         }
 
     }
@@ -71,12 +71,12 @@ class ValidateRoutesTest {
 
         // validate test file
         try {
-            validateTestFile("routes-rainy-day-2.txt");
+            validateTestFile("route-rainy-day-2.txt");
+            fail("Failed to realize important inormation was missing");
         }
 
         // catch IO exceptions
         catch (IOException e) {
-            fail("Failed to realize important inormation was missing");
         }
 
     }
@@ -89,12 +89,12 @@ class ValidateRoutesTest {
 
         // validate test file
         try {
-            validateTestFile("routes-rainy-day3.txt");
+            validateTestFile("route-rainy-day3.txt");
+            fail("Failed to realize duplicate IDs");
         }
 
         // catch IO exceptions
         catch (IOException e) {
-            fail("Failed to realize duplicate IDs");
         }
 
     }
@@ -107,12 +107,12 @@ class ValidateRoutesTest {
 
         // validate test file
         try {
-            validateTestFile("routes-rainy-day4.txt");
+            validateTestFile("route-rainy-day4.txt");
+            fail("Failed to realize additional parameters exist");
         }
 
         // catch IO exceptions
         catch (IOException e) {
-            fail("Failed to realize additional parameters exist");
         }
 
     }
