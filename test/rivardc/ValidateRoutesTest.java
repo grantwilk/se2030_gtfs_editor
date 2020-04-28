@@ -103,7 +103,7 @@ class ValidateRoutesTest {
      * looks for additional parameters
      */
     @Test
-    void validateRainyDayfour() {
+    void validateRainyDayFour() {
 
         // validate test file
         try {
@@ -116,7 +116,20 @@ class ValidateRoutesTest {
         }
 
     }
+    @Test
+    void validateRainyDayFive() {
 
+        // validate test file
+        try {
+            validateTestFile("route-rainy-day-5.txt");
+            fail("Failed to realize additional parameters exist");
+        }
+
+        // catch IO exceptions
+        catch (IOException e) {
+        }
+
+    }
 
 
 
