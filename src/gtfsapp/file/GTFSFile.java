@@ -35,6 +35,21 @@ public class GTFSFile {
     private static final int MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
 
     /**
+     * Regular expression for a GTFS ID
+     */
+    private static final String ID_REGEX = "^.+";
+
+    /**
+     * Regular expression for an unsigned integer
+     */
+    private static final String UNSIGNED_INT_REGEX = "^[0-9]+";
+
+    /**
+     * Regular expression for a time stamp in HH:MM:SS form
+     */
+    private static final String TIME_STAMP_REGEX = "^([2][0-3]|[0-1]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
+
+    /**
      * The internal feed
      */
     private Feed feed;
@@ -275,33 +290,58 @@ public class GTFSFile {
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
 
-        // check for required fields in format line
-        if(!format.contains("trip_id") || !format.contains("stop_id") || !format.contains("stop_sequence")) {
-            throw new IOException("Missing one or more required attributes in first line of \"stops_times.txt\"");
+        // check that all required fields are present in format line
+        if (
+                !format.contains("trip_id") ||
+                !format.contains("stop_id") ||
+                !format.contains("stop_sequence") ||
+                !format.contains("arrival_time") ||
+                !format.contains("departure_time")
+        ) {
+            throw new IOException("Missing one or more required attributes in \"stops_times.txt\".");
         }
 
         for (int i = 1; i < lines.size() - 1; i++) {
-            // tokenize current line
-            List<String> currentLine = tokenizeLine(lines.get(i));
 
-            // check if line has required number of elements
-            if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more attributes in line of \"stops_times.txt\"");
+            // tokenize line
+            List<String> line = tokenizeLine(lines.get(i));
+
+            // map fields into a hash map
+            Map<String, String> stopTimeFields = new HashMap<>();
+            for (int j = 0; j < format.size(); j++) {
+                stopTimeFields.put(format.get(j), line.get(j));
             }
 
-            // check if all required attributes for line are present
-            String tripID = currentLine.get(format.indexOf("trip_id"));
-            String stopID = currentLine.get(format.indexOf("stop_id"));
-            String stopSequence = currentLine.get(format.indexOf("stop_sequence"));
-            if(tripID.isEmpty()) {
-                throw new IOException("Missing attribute \"trip_id\" in line of \"stops_times.txt\"");
+            // check to make sure stop IDs fit their regular expression
+            String tripID = stopTimeFields.get("trip_id");
+            if (!tripID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
             }
-            if(stopID.isEmpty()) {
-                throw new IOException("Missing attribute \"stop_id\" in line of \"stops_times.txt\"");
+
+            // check to make sure stop IDs fit their regular expression
+            String stopID = stopTimeFields.get("stop_id");
+            if (!stopID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted stop ID in \"stop_times.txt\".");
             }
-            if(stopSequence.isEmpty()) {
-                throw new IOException("Missing attribute \"stop_sequence\" in line of \"stops_times.txt\"");
+
+            // check to make sure stop IDs fit their regular expression
+            String stopSequence = stopTimeFields.get("stop_sequence");
+            if (!stopID.matches(UNSIGNED_INT_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
+
+            // check to make sure arrival time fit their regular expression
+            String arrivalTime = stopTimeFields.get("arrival_time");
+            if (!arrivalTime.matches(TIME_STAMP_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
+            }
+
+            // check to make sure departure time its their regular expression
+            String departureTime = stopTimeFields.get("departure_time");
+            if (!departureTime.matches(TIME_STAMP_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
+            }
+
         }
 
         return true;
@@ -380,7 +420,7 @@ public class GTFSFile {
     private Date timeStringToTime(String timeString) {
 
         // throw an exception if the time string is improperly formatted
-        if (!timeString.matches("^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}")) {
+        if (!timeString.matches(TIME_STAMP_REGEX)) {
             throw new IllegalArgumentException("Time \"" + timeString + "\" is improperly formatted.");
         }
 
