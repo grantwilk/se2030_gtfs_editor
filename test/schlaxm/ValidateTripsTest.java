@@ -1,5 +1,6 @@
 package schlaxm;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,7 @@ class ValidateTripsTest {
 
     /**
      * Helper method for validating a singular test file
+     *
      * @param fileName - the name of the file to test
      * @throws IOException when the test file fails to load
      */
@@ -38,59 +40,71 @@ class ValidateTripsTest {
     }
 
     /**
-     * Tests a valid trip file with one trip
+     * Tests the google provided sunny day scenario
      */
     @Test
-    void validateSunnyDayOne() {
+    void validateSunnyDay() throws IOException {
+
+        // attempt to validate the test file
+        validateTestFile("trips-sunny-day-1.txt");
+
+    }
+
+
+    /**
+     * Tests a trip file, missing the trip_id
+     */
+    @Test
+    void validateMissingInformation() throws IOException {
 
         // attempt to validate the test file
         try {
-            validateTestFile("trips-sunny-day-1.txt");
-        }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("Failed to load the test file.");
+            validateTestFile("trips-no-id.txt");
+            fail("Exception not thrown");
+        } catch (IOException e) {
         }
 
     }
 
     /**
-     * Tests a valid stop times file with multiple trips
+     * Tests a trip file, missing data for the trip
      */
     @Test
-    void validateSunnyDayTwo() {
+    void validateNoData() throws IOException {
 
         // attempt to validate the test file
         try {
-            validateTestFile("trips-sunny-day-2.txt");
+            validateTestFile("trips-no-data.txt");
+            fail("Exception not thrown");
         }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("Failed to load the test file.");
-        }
-
+        catch (IOException e) {        }
     }
 
     /**
-     * Tests a valid stop times file with no trips
+     * Tests a trip file with a duplicate trip ID, done by seeing if the same trip has the same stop sequence number
      */
     @Test
-    void validateRainyDay() {
+    void validateDuplicate() throws IOException {
 
         // attempt to validate the test file
         try {
-            validateTestFile("trips-rainy-day.txt");
+            validateTestFile("trips-duplicate-data.txt");
+            fail("Exception not thrown");
         }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("Failed to load the test file.");
-        }
-
+        catch (IOException e) {        }
     }
 
+    /**
+     * Tests a trip file to see if there is only one stop on it
+     */
+    @Test
+    void validateSingleStop() throws IOException {
 
-
+        // attempt to validate the test file
+        try {
+            validateTestFile("trips-one-stop.txt");
+            fail("Exception not thrown");
+        }
+        catch (IOException e) {        }
+    }
 }
