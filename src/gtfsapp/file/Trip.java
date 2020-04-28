@@ -1,10 +1,10 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
-import gtfsapp.util.Location;
+
+import javafx.geometry.Point2D;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Mason Schlax
@@ -12,11 +12,6 @@ import java.util.stream.Collectors;
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class Trip extends GTFSElement {
-
-    /**
-     * The number of milliseconds in an hour
-     */
-    private static final double MILLIS_IN_HOUR = 3600000;
 
     /**
      * The feed the trip belongs to
@@ -64,7 +59,6 @@ public class Trip extends GTFSElement {
      */
     public void addStopTime(StopTime stopTime) {
         stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
-        stops.put((StopID) stopTime.getStop().getID(), stopTime.getStop());
     }
 
     /**
@@ -123,37 +117,19 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Gets a list of routes that contain this trip
-     *
-     * @return a list of routes that contain this trip
+     * @return
      */
-    public Set<Route> getContainingRoutes() {
-
-        Set<Route> containingRoutes = new HashSet<>();
-
-        // check if this trip is contained in any of the routes in this feed
-        for (Route route : feed.getRoutes()) {
-
-            // if it is, add it to our list of containing routes
-            if (route.getTrips().contains(this)) {
-                containingRoutes.add(route);
-            }
-
-        }
-
-        return containingRoutes;
-
+    public List<Route> getContainingRoutes() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
     }
 
     /**
-     * Gets a list of the IDs of the routes that contain this trip
-     *
-     * @return a list of the IDS of the routes that contain this trip
+     * @return
      */
-    public Set<RouteID> getContainingRouteIDs() {
-        return getContainingRoutes().stream()
-                .map(e -> (RouteID) e.getID())
-                .collect(Collectors.toSet());
+    public List<RouteID> getContainingRouteIDs() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -170,8 +146,9 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop time IDs contained within the trip
      */
-    public Set<StopTimeID> getStopTimeIDs() {
-        return stopTimes.keySet();
+    public List<StopTimeID> getStopTimeIDs() {
+        Set<StopTimeID> stopTimeIDSet = stopTimes.keySet();
+        return new ArrayList<>(stopTimeIDSet);
     }
 
     /**
@@ -179,8 +156,9 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop times contained within the trip
      */
-    public Set<StopTime> getStopTimes() {
-        return new HashSet<>(stopTimes.values());
+    public List<StopTime> getStopTimes() {
+        Collection<StopTime> stopTimeSet = stopTimes.values();
+        return new ArrayList<>(stopTimeSet);
     }
 
     /**
@@ -197,8 +175,9 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop IDs contained within the trip
      */
-    public Set<StopID> getStopIDs() {
-        return stops.keySet();
+    public List<StopID> getStopIDs() {
+        Set<StopID> stopIDSet = stops.keySet();
+        return new ArrayList<>(stopIDSet);
     }
 
     /**
@@ -206,8 +185,9 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stops contained within the trip
      */
-    public Set<Stop> getStops() {
-        return new HashSet<>(stops.values());
+    public List<Stop> getStops() {
+        Collection<Stop> stopsCollection = stops.values();
+        return new ArrayList<>(stopsCollection);
     }
 
     /**
@@ -243,71 +223,35 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Gets the average speed of a trip in miles per hour
-     *
-     * @return the average speed of the trip in miles per hour
-     */
-    public double getAvgSpeed() {
-
-        // get the distance in miles and the duration in hours
-        double distanceMiles = getDistance();
-        double durationHours = getDuration() / MILLIS_IN_HOUR;
-
-        // return the average speed of the trip in miles per hour
-        return distanceMiles / durationHours;
-    }
-
-    /**
      * @return
      */
-    public Location getBusPosition() {
+    public double getAvgSpeed() {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
 
     /**
-     * Puts all of the stops in a sorted list, then finds the distance in miles between
-     * consecutive stops
-     *
-     * @return The distance between stops in miles
+     * @return
      */
-    public double getDistance() {
-
-        // get a list of all stops in order of arrival times
-        List<StopTime> stopTimes = new ArrayList<>(getStopTimes());
-        stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
-        List<Stop> stop = stopTimes.stream().map(StopTime::getStop).collect(Collectors.toList());
-
-        //number of stops on the trip
-        int numStops = stop.size()-1;
-        double distanceTraveled = 0;
-
-        //starting at the first index, and going to the second to last, the difference between the stops is calculated in miles
-        for(int i = 0; i < numStops; i++){
-            Location locationOne = stop.get(i).getLocation();
-            Location locationTwo = stop.get(i+1).getLocation();
-            distanceTraveled += locationOne.distanceTo(locationTwo);
-        }
-
-        return distanceTraveled;
+    public Point2D getBusPosition() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
     }
 
     /**
-     * Gets the duration of the trip in milliseconds
-     *
-     * @return the duration of the trip in milliseconds
+     * @return
      */
-    public long getDuration() {
-        // get a list of all stop times in order of arrival times
-        List<StopTime> stopTimes = new ArrayList<>(getStopTimes());
-        stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
+    public double getDistance() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
+    }
 
-        // get the first departure time and the last arrival time
-        Date firstDepartureTime = stopTimes.get(0).getDepartureTime();
-        Date lastArrivalTime = stopTimes.get(stopTimes.size() - 1).getArrivalTime();
-
-        // return the duration in milliseconds
-        return lastArrivalTime.getTime() - firstDepartureTime.getTime();
+    /**
+     * @return
+     */
+    public double getDuration() {
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -329,30 +273,11 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Checks to see if the current system clock in milliseconds is in between the start and end times of a trip
-     *
-     * @return if the trip is ongoing
+     * @return
      */
     public boolean isActive() {
-        //Gets an ArrayList of the stop times
-        ArrayList<StopTime> durationCalc = (ArrayList<StopTime>) this.getStopTimes();
-        //Number of stop times in the ArrayList
-        int lastTime = durationCalc.size();
-        StopTime FirstDepartTime;
-        StopTime LastArriveTime;
-        //Gets the first StopTime
-        FirstDepartTime = durationCalc.get(0);
-        //Gets the second StopTime
-        LastArriveTime = durationCalc.get(lastTime - 1);
-        //Gets the time value for the first StopTime
-        double tripStart = (double) FirstDepartTime.getDepartureTime().getTime();
-        //Gets the time value for the second StopTime
-        double tripEnd = (double) LastArriveTime.getDepartureTime().getTime();
-        if (System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart) {
-            return true;
-        } else {
-            return false;
-        }
+        // TODO - needs implementation eventually
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -393,9 +318,9 @@ public class Trip extends GTFSElement {
     @Override
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
-        attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
-        attributes.put("Distance", String.format("%.02f miles", getDistance()));
-        attributes.put("Duration", String.format("%.02f hours", getDuration() / MILLIS_IN_HOUR));
+        // TODO - remove placeholders
+        attributes.put("Next Stop", "Lorem ipsum dolor");
+        attributes.put("Last Stop", "Lorem ipsum dolor");
         return attributes;
     }
 
