@@ -56,11 +56,6 @@ public class Route extends GTFSElement {
     private Color color;
 
     /**
-     * The text color of the route
-     */
-    private Color textColor;
-
-    /**
      * Constructor for a Route
      *
      * @param id        ID associated with this route
@@ -464,24 +459,6 @@ public class Route extends GTFSElement {
      */
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    /**
-     * Getter for route text color
-     *
-     * @return Color of this route text color
-     */
-    public Color getTextColor() {
-        return textColor;
-    }
-
-    /**
-     * Setter for route text color
-     *
-     * @param textColor Color to set for the text color
-     */
-    public void setTextColor(Color textColor) {
-        this.textColor = textColor;
     }
 
     /**
