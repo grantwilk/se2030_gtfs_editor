@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class InvalidDataTest extends ValidateStopsTest {
 
 
+    /**
+     * Run validation test with an invalid latitude
+     */
     @Test
     void nonDoubleLat() {
         try {
@@ -19,6 +22,9 @@ public class InvalidDataTest extends ValidateStopsTest {
         } catch(NumberFormatException e) { }
     }
 
+    /**
+     * Run validation test with an invalud longitude
+     */
     @Test
     void nonDoubleLon() {
         try {
@@ -29,6 +35,9 @@ public class InvalidDataTest extends ValidateStopsTest {
         } catch(NumberFormatException e) { }
     }
 
+    /**
+     * Run validation test with duplicate stop ids
+     */
     @Test
     void duplicateStopID() {
         try {

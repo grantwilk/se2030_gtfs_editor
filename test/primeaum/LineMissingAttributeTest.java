@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class LineMissingAttributeTest extends ValidateStopsTest {
 
 
+    /**
+     * Run validation test with line missing stop_id attribute
+     */
     @Test
     void validateLineMissingStopID() {
         try {
@@ -17,6 +20,9 @@ public class LineMissingAttributeTest extends ValidateStopsTest {
         } catch(IOException e) { }
     }
 
+    /**
+     * Run validation test with line missing stop_lat attribute
+     */
     @Test
     void validateLineMissingStopLat() {
         try {
@@ -25,6 +31,9 @@ public class LineMissingAttributeTest extends ValidateStopsTest {
         } catch(IOException e) { }
     }
 
+    /**
+     * Run validation test with line missing stop_lon attribute
+     */
     @Test
     void validateLineMissingStopLon() {
         try {
