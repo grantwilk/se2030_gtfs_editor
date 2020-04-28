@@ -110,25 +110,24 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Gets a list of routes that contain this trip
+     * Gets the route that contains this trip
      *
-     * @return a list of routes that contain this trip
+     * @return the route that contains this trip
      */
-    public Set<Route> getContainingRoutes() {
+    public Route getRoute() {
 
-        Set<Route> containingRoutes = new HashSet<>();
-
-        // check if this trip is contained in any of the routes in this feed
+        // for each route in our feed
         for (Route route : feed.getRoutes()) {
 
-            // if it is, add it to our list of containing routes
+            // if the route's trips contains our trip, return the route
             if (route.getTrips().contains(this)) {
-                containingRoutes.add(route);
+                return route;
             }
 
         }
 
-        return containingRoutes;
+        // return null if nothing is found
+        return null;
 
     }
 
@@ -137,10 +136,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of the IDS of the routes that contain this trip
      */
-    public Set<RouteID> getContainingRouteIDs() {
-        return getContainingRoutes().stream()
-                .map(e -> (RouteID) e.getID())
-                .collect(Collectors.toSet());
+    public RouteID getContainingRouteID() {
+        return (RouteID) getRoute().getID();
     }
 
     /**

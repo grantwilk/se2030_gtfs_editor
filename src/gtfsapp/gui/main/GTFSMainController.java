@@ -726,7 +726,8 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // if the element is a trip
         if (selectedElement instanceof Trip) {
-            associations = ((Trip) selectedElement).getContainingRoutes();
+            associations = new HashSet<>();
+            associations.add(((Trip) selectedElement).getRoute());
         }
 
         // if the element is a stop time
