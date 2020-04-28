@@ -319,8 +319,9 @@ public class GTFSFile {
         List<String> format = tokenizeLine(lines.get(0));
 
         // check if format contains stop_id field
-        if(!format.contains("trip_id")) {
-            throw new IOException("Missing one or more required attributes in first line of \"stops_times.txt\"");
+        if(!format.contains("trip_id") || !format.contains("arrival_time") || !format.contains("departure_time")
+                || !format.contains("stop_id") || !format.contains("stop_sequence")) {
+            throw new IOException("Missing one or more required attributes in first line of \"trip.txt\"");
         }
 
         // Check each line for proper information
@@ -335,14 +336,18 @@ public class GTFSFile {
 
             // check if trip id is present
             String tripID = currentLine.get(format.indexOf("trip_id"));
+            String arriveTime = currentLine.get(format.indexOf("arrival_time"));
+            String departTime = currentLine.get(format.indexOf("departure_time"));
+            String stopId = currentLine.get(format.indexOf("stop_id"));
+            String stopSeq = currentLine.get(format.indexOf("stop_sequence"));
             if(tripID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if trip id already exists
-            if(TripID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"trips.txt\".");
+            if(tripID.isEmpty() || arriveTime.isEmpty()|| departTime.isEmpty()|| stopId.isEmpty()|| stopSeq.isEmpty()){
+                throw new IOException("One or more required elements is missing in file \"trips.txt\".");
             }
+
 
         }
 

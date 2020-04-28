@@ -1,5 +1,6 @@
 package schlaxm;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,7 @@ class ValidateTripsTest {
      * Tests the google provided sunny day scenario
      */
     @Test
-    void validateSunnyDayOne() throws IOException {
+    void validateSunnyDay() throws IOException {
 
         // attempt to validate the test file
         validateTestFile("trips-sunny-day-1.txt");
@@ -51,13 +52,31 @@ class ValidateTripsTest {
 
 
     /**
-     * Tests a trip file with valid tokens, but no included data
+     * Tests a trip file, missing the trip_id, should throw an exception
      */
     @Test
-    void validateSunnyDayThree() {
+    void validateMissingInformation() throws IOException {
 
         // attempt to validate the test file
-        validateTestFile("trips-no-data.txt");
+        try {
+            validateTestFile("trips-no-id.txt");
+            fail("Exception not thrown");
+        } catch (IOException e) {
+        }
 
+    }
+
+    /**
+     *
+     */
+    @Test
+    void validateDuplicate() throws IOException {
+
+        // attempt to validate the test file
+        try {
+            validateTestFile("trip-duplicate-id.txt");
+            fail("Exception not thrown");
+        }
+        catch (IOException e) {        }
     }
 }
