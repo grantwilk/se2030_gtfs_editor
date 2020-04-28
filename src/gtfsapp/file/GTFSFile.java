@@ -267,7 +267,7 @@ public class GTFSFile {
         ArrayList<String> stopIDS = new ArrayList<>();
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
@@ -330,7 +330,7 @@ public class GTFSFile {
             throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
         }
 
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
 
             // tokenize line
             List<String> line = tokenizeLine(lines.get(i));
@@ -393,7 +393,7 @@ public class GTFSFile {
         }
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
