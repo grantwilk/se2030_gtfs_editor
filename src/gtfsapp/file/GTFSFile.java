@@ -430,17 +430,16 @@ public class GTFSFile {
         HashMap<String, Trip> trips = new HashMap<>();
 
         for(int i = 1; i < lines.size(); i++) {
+
             // Create new hash map to create a trip from this line
             HashMap<String, String> tripFields = new HashMap<>();
-
-
 
             // Get line in file
             List<String> currentLine = tokenizeLine(lines.get(i));
 
             // Add each attribute in line to hash map
             for(int j = 0; j < format.size(); j++) {
-                tripFields.put(format.get(i),currentLine.get(i));
+                tripFields.put(format.get(j),currentLine.get(j));
             }
 
             // Create new trip for this line
@@ -462,7 +461,9 @@ public class GTFSFile {
             trips.put(tripID,trip);
 
         }
+
         return trips;
+
     }
 
     /**
@@ -544,7 +545,7 @@ public class GTFSFile {
 
             // put all route attributes into hash map
             for(int j = 0; j < format.size(); j++) {
-                stopTimeFields.put(format.get(i),currentLine.get(i));
+                stopTimeFields.put(format.get(j),currentLine.get(j));
             }
 
             // Get required attributes for stop time
@@ -556,32 +557,26 @@ public class GTFSFile {
 
             // set arrival time
             String arrivalTime = stopTimeFields.get("arrival_time");
-            if(!arrivalTime.isEmpty()) {
-                Date date = timeStringToTime(arrivalTime);
-                stopTime.setArrivalTime(date);
-            }
+            stopTime.setArrivalTime(timeStringToTime(arrivalTime));
 
             // set departure time
             String departureTime = stopTimeFields.get("departure_time");
-            if(!arrivalTime.isEmpty()) {
-                Date date = timeStringToTime(departureTime);
-                stopTime.setDepartureTime(date);
-            }
+            stopTime.setDepartureTime(timeStringToTime(departureTime));
 
             // set headsign
             String headsign = stopTimeFields.get("stop_headsign");
-            if(!headsign.isEmpty()) {
-                stopTime.setHeadSign(headsign);
-            }
+            stopTime.setHeadSign(headsign);
 
             // get stop time id
             String stopTimeID = stopTime.getID().getIDString();
 
             // add stop time to return hash map
             stopTimes.put(stopTimeID, stopTime);
+
         }
 
         return stopTimes;
+
     }
 
     /**
