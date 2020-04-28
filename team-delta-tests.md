@@ -1,7 +1,7 @@
 ## Team Delta Test Participation
-| Name            | No. Test Suites | No. Test Cases | Focus      |
-|-----------------|-----------------|----------------|------------|
-| Colton Rivard   | 1               | 5              | Routes     |
-| Mason Schlax    | 1               |                | Trips      |
-| Michael Primeau | 4               | 14             | Stops      |
-| Grant Wilk      | 5               | 24             | Stop Times |
+| Name            | No. Test Suites | No. Test Cases | Focus               |
+|-----------------|-----------------|----------------|---------------------|
+| Colton Rivard   | 1               | 5              | validateRoutes()    |
+| Mason Schlax    | 1               | 5              | validateTrips()     |
+| Michael Primeau | 4               | 14             | validateStops()     |
+| Grant Wilk      | 5               | 24             | validateStopTimes() |
