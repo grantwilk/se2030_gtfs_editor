@@ -122,4 +122,18 @@ class ValidateTripsTest {
         catch (IOException e) {        }
     }
 
+    /**
+     * Tests a trip file to see if there extra data not specified in the format line
+     */
+    @Test
+    void validateExtraData() throws IOException {
+
+        // attempt to validate the test file
+        try {
+            validateTestFile("trips-extra-data.txt");
+            fail("Exception not thrown");
+        }
+        catch (IOException e) {        }
+    }
+
 }
