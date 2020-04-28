@@ -233,19 +233,30 @@ public class GTFSFile {
             int routeIdIndex = format.indexOf("route_id");
             String routeID = currentLine.get(routeIdIndex);
             if(routeID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"routes.txt\".");
+                throw new IOException("ROUTE_ID IS MISSING \"routes.txt\".");
             }
 
             // check if route id already exists
             if(RouteID.exists(routeID)) {
                 throw new IOException("One or more duplicate GTFS attributes in file \"routes.txt\".");
             }
-
+            // looks for duplicate ID
             if(routeIDS.contains(routeID)) {
                 throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
             }
             routeIDS.add(routeID);
+
+            //Checks if the color is in the correct format
+            int routeColorIndex = format.indexOf("route_color");
+            String routeColor = currentLine.get(routeColorIndex);
+            if(!routeColor.matches(COLOR_REGEX)){
+                throw new IOException("COLOR FORMAT IS INCORRECT \"stops.txt\".");
+            }
+
+
         }
+
+
 
         return true;
     }
