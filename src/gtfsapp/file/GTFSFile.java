@@ -3,6 +3,7 @@ package gtfsapp.file;
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.TripID;
+import gtfsapp.util.Location;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -775,7 +776,7 @@ public class GTFSFile {
                 double lat = Double.parseDouble(stopLat);
                 double lon = Double.parseDouble(stopLon);
                 // TODO - replace Point2D with Location on merge w/ master
-                stop.setLocation(new Point2D(lon, lat));
+                stop.setLocation(new Location(lat, lon));
             }
 
             // set stop url

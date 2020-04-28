@@ -305,6 +305,7 @@ public class Trip extends GTFSElement {
         stopTimes = stopTimes.stream().sorted().collect(Collectors.toList());
 
         // get the first departure time and the last arrival time
+        // TODO - find duration without stops
         Date firstDepartureTime = stopTimes.get(0).getDepartureTime();
         Date lastArrivalTime = stopTimes.get(stopTimes.size() - 1).getArrivalTime();
 
