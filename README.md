@@ -7,5 +7,3 @@ An application designed to efficiently view and edit General Transit Feed Specif
 * Colton Rivard
 * Mason Schlax
 * Grant Wilk
-
-![](https://i.imgur.com/63EOZJB.png)
