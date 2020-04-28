@@ -623,10 +623,19 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise, find associations and update the class variables
         else {
-            associatedRoutes = findAssociatedRoutes();
-            associatedTrips = findAssociatedTrips();
-            associatedStopTimes = findAssociatedStopTimes();
-            associatedStops = findAssociatedStops();
+
+            // TODO - remove and replace with code below for proper associations
+            Feed feed = gtfsFile.getFeed();
+            associatedRoutes = feed.getRoutes();
+            associatedTrips = feed.getTrips();
+            associatedStopTimes = feed.getStopTimes();
+            associatedStops = feed.getStops();
+
+            // associatedRoutes = findAssociatedRoutes();
+            // associatedTrips = findAssociatedTrips();
+            // associatedStopTimes = findAssociatedStopTimes();
+            // associatedStops = findAssociatedStops();
+
         }
 
     }
