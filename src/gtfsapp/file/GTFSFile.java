@@ -354,7 +354,7 @@ public class GTFSFile {
 
             // check to make sure stop IDs fit their regular expression
             String stopSequence = stopTimeFields.get("stop_sequence");
-            if (!stopID.matches(UNSIGNED_INT_REGEX)) {
+            if (!stopSequence.matches(UNSIGNED_INT_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
 
