@@ -1,4 +1,4 @@
-package test;
+package primeaum;
 
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.AfterEach;
@@ -8,13 +8,10 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class GTFSFileTest {
+class ValidateStopsTest {
 
 
     @BeforeEach
@@ -33,7 +30,7 @@ class GTFSFileTest {
 
     @Test
     void validateStops() {
-        File file = new File("C:/Users/primeaum/Documents/SE2030Project/2020-project-team-delta/samples/rainy-day-1/stops.txt");
+        File file = new File("samples/rainy-day-1/stops.txt");
         List<File> files = new ArrayList<>();
         files.add(file);
         GTFSFile testFile;
