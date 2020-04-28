@@ -41,7 +41,7 @@ class ValidateStopTimesTest {
      * consecutive stops, and consecutive sequences that follow order of arrival time. There are no extra parameters.
      */
     @Test
-    void validateSunnyDayOne() throws IOException {
+    void sunnyDayOne() throws IOException {
 
         // attempt to validate the test file
         validateTestFile("sunny-day-1.txt");
@@ -49,22 +49,10 @@ class ValidateStopTimesTest {
     }
 
     /**
-     * Tests a valid stop times file with multiple trips, non-consecutive stops with asynchronous arrival and departure,
-     * non-consecutive stops, and ordered sequences that follow order of arrival time. There are no extra parameters.
-     */
-    @Test
-    void validateSunnyDayTwo() throws IOException {
-
-        // attempt to validate the test file
-        validateTestFile("sunny-day-2.txt");
-
-    }
-
-    /**
      * Tests a valid stop times file that has its attributes rearranged out of the typical order
      */
     @Test
-    void validateDisorderedAttributes() throws IOException {
+    void disorderedAttributes() throws IOException {
 
         // attempt to validate the test file
         validateTestFile("disordered-attributes.txt");

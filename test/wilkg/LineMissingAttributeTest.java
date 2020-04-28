@@ -12,7 +12,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the trip ID attribute
      */
     @Test
-    void validateLineMissingTripID() {
+    void lineMissingTripID() {
 
         // attempt to validate the test file
         try {
@@ -29,7 +29,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the arrival time attribute
      */
     @Test
-    void validateLineMissingArrivalTime() {
+    void lineMissingArrivalTime() {
 
         // attempt to validate the test file
         try {
@@ -46,7 +46,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the departure time attribute
      */
     @Test
-    void validateLineMissingDepartureTime() {
+    void lineMissingDepartureTime() {
 
         // attempt to validate the test file
         try {
@@ -63,7 +63,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the stop ID attribute
      */
     @Test
-    void validateLineMissingStopID() {
+    void lineMissingStopID() {
 
         // attempt to validate the test file
         try {
@@ -80,7 +80,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the stop sequence attribute
      */
     @Test
-    void validateLineMissingStopSequence() {
+    void lineMissingStopSequence() {
 
         // attempt to validate the test file
         try {
