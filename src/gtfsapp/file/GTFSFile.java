@@ -619,6 +619,7 @@ public class GTFSFile {
         HashMap<String, Stop> stops = new HashMap<>();
 
         for(int i = 0; i < lines.size(); i++) {
+
             // create a new hash map for the attributes of the route for this line
             HashMap<String, String> stopFields = new HashMap<>();
 
@@ -635,15 +636,19 @@ public class GTFSFile {
             Stop stop = new Stop(feed, stopID);
 
             // set stop name
-            String stopName = stopFields.get("stop_name");
-            if(!stopName.isEmpty()) {
-                stop.setName(stopName);
+            if (stopFields.containsKey("stop_name")) {
+                String stopName = stopFields.get("stop_name");
+                if (!stopName.isEmpty()) {
+                    stop.setName(stopName);
+                }
             }
 
             // set stop description
-            String stopDesc = stopFields.get("stop_desc");
-            if(!stopDesc.isEmpty()) {
-                stop.setDesc(stopDesc);
+            if (stopFields.containsKey("stop_desc")) {
+                String stopDesc = stopFields.get("stop_desc");
+                if (!stopDesc.isEmpty()) {
+                    stop.setDesc(stopDesc);
+                }
             }
 
             // set stop location
@@ -652,17 +657,20 @@ public class GTFSFile {
             if(!stopLat.isEmpty() && !stopLon.isEmpty()) {
                 double lat = Double.parseDouble(stopLat);
                 double lon = Double.parseDouble(stopLon);
-
+                // TODO - replace Point2D with Location on merge w/ master
                 stop.setLocation(new Point2D(lon, lat));
             }
 
             // set stop url
-            String url = stopFields.get("stop_url");
-            if(!url.isEmpty()) {
-                stop.setURL(url);
+            if (stopFields.containsKey("stop_url")) {
+                String url = stopFields.get("stop_url");
+                if(!url.isEmpty()) {
+                    stop.setURL(url);
+                }
             }
 
             stops.put(stop.getID().getIDString(), stop);
+
         }
 
         return stops;
