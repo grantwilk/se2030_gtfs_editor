@@ -1,5 +1,6 @@
 package gtfsapp.file;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.TripID;
@@ -343,38 +344,54 @@ public class GTFSFile {
             // tokenize line
             List<String> line = tokenizeLine(lines.get(i));
 
+            // throw an exception if there are more elements in the line than there are format elements
+            if (line.size() > format.size()) {
+                throw new IllegalArgumentException();
+            }
+
             // map fields into a hash map
             Map<String, String> stopTimeFields = new HashMap<>();
-            for (int j = 0; j < format.size(); j++) {
+            for (int j = 0; j < line.size(); j++) {
                 stopTimeFields.put(format.get(j), line.get(j));
             }
 
-            // check to make sure stop IDs fit their regular expression
+            // get all of the values from the hash map
             String tripID = stopTimeFields.get("trip_id");
+            String stopID = stopTimeFields.get("stop_id");
+            String stopSequence = stopTimeFields.get("stop_sequence");
+            String arrivalTime = stopTimeFields.get("arrival_time");
+            String departureTime = stopTimeFields.get("departure_time");
+
+            // throw an exception if any required attributes are null
+            if (tripID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (stopID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (stopSequence == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (arrivalTime == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (departureTime == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+
+            // throw an exception if any required attributes are invalidly formatted
             if (!tripID.matches(ID_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
             }
-
-            // check to make sure stop IDs fit their regular expression
-            String stopID = stopTimeFields.get("stop_id");
             if (!stopID.matches(ID_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop ID in \"stop_times.txt\".");
             }
-
-            // check to make sure stop IDs fit their regular expression
-            String stopSequence = stopTimeFields.get("stop_sequence");
             if (!stopSequence.matches(UNSIGNED_INT_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
-
-            // check to make sure arrival time fit their regular expression
-            String arrivalTime = stopTimeFields.get("arrival_time");
             if (!arrivalTime.matches(TIME_STAMP_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
             }
-
-            // check to make sure departure time its their regular expression
-            String departureTime = stopTimeFields.get("departure_time");
             if (!departureTime.matches(TIME_STAMP_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
             }
@@ -396,9 +413,13 @@ public class GTFSFile {
         List<String> format = tokenizeLine(lines.get(0));
 
         // check if format contains stop_id field
-        if(!format.contains("trip_id")) {
-            throw new IOException();
+        if(!format.contains("trip_id") || !format.contains("arrival_time") || !format.contains("departure_time")
+                || !format.contains("stop_id") || !format.contains("stop_sequence")) {
+            throw new IOException("Missing one or more required attributes in first line of \"trip.txt\"");
         }
+
+        ArrayList<String> sequenceList = new ArrayList<>();
+        ArrayList<String> tripIDS = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size(); i++) {
@@ -410,17 +431,38 @@ public class GTFSFile {
                 throw new IOException("Missing one or more required GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if stop id is present
+            // check if trip id is present
             int tripIdIndex = format.indexOf("trip_id");
             String tripID = currentLine.get(tripIdIndex);
+            int arriveTimeIndex = format.indexOf("arrival_time");
+            String arriveTime = currentLine.get(arriveTimeIndex);
+            int departTimeIndex = format.indexOf("departure_time");
+            String departTime = currentLine.get(departTimeIndex);
+            int stopIdIndex = format.indexOf("stop_id");
+            String stopId = currentLine.get(stopIdIndex);
+            int stopSeqIndex = format.indexOf("stop_sequence");
+            String stopSeq = currentLine.get(stopSeqIndex);
+
             if(tripID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if stop id already exists
-            if(StopID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"tripss.txt\".");
+            if(tripID.isEmpty() || arriveTime.isEmpty()|| departTime.isEmpty()|| stopId.isEmpty()|| stopSeq.isEmpty()){
+                throw new IOException("One or more required elements is missing in file \"trips.txt\".");
             }
+            if(sequenceList.contains(stopSeq) && tripIDS.contains(tripID)){
+                throw new IOException("One or more duplicate trip IDs in file \"trips.txt\"");
+            }
+            sequenceList.add(stopSeq);
+            tripIDS.add(tripID);
+        }
+
+        if(lines.size()==1){
+            throw new IOException("Missing data for one or more elements in file \"trips.txt\".");
+        }
+
+        if(lines.size()==2){
+            throw new IOException("Trip only has one stop in file \"trips.txt\".");
         }
 
         return true;
