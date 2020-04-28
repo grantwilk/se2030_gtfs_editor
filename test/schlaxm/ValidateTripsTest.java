@@ -56,7 +56,7 @@ class ValidateTripsTest {
     }
 
     /**
-     * Tests a valid stop times file with multiple trips
+     * Tests a valid trip file with multiple trips
      */
     @Test
     void validateSunnyDayTwo() {
@@ -74,14 +74,33 @@ class ValidateTripsTest {
     }
 
     /**
-     * Tests a valid stop times file with no trips
+     * Tests a trip file with no trips
+     * should fail
      */
     @Test
-    void validateRainyDay() {
+    void validateRainyDayOne() {
 
         // attempt to validate the test file
         try {
             validateTestFile("trips-rainy-day.txt");
+        }
+
+        // catch IO exceptions
+        catch (IOException e) {
+            fail("No trip was designated in the file.");
+        }
+
+    }
+
+    /**
+     * Tests a trip file with valid tokens, but no included data
+     */
+    @Test
+    void validateSunnyDayThree() {
+
+        // attempt to validate the test file
+        try {
+            validateTestFile("trips-no-data.txt");
         }
 
         // catch IO exceptions

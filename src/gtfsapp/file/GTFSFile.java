@@ -333,17 +333,21 @@ public class GTFSFile {
                 throw new IOException("Missing one or more required GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if stop id is present
-            int tripIdIndex = format.indexOf("trip_id");
-            String tripID = currentLine.get(tripIdIndex);
+            // check if trip id is present
+            String tripID = currentLine.get(format.indexOf("trip_id"));
             if(tripID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if stop id already exists
-            if(StopID.exists(tripID)) {
+            // check if trip id already exists
+            if(TripID.exists(tripID)) {
                 throw new IOException("One or more duplicate GTFS attributes in file \"tripss.txt\".");
             }
+
+            if(tripID.isEmpty()) {
+                throw new IOException("Missing attribute \"trip_id\" in line of \"stops_times.txt\"");
+            }
+
         }
 
         return true;
