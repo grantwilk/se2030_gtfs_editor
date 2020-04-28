@@ -15,11 +15,6 @@ import java.util.stream.Collectors;
 public class Trip extends GTFSElement {
 
     /**
-     * The number of milliseconds in an hour
-     */
-    private static final double MILLIS_IN_HOUR = 3600000;
-
-    /**
      * The feed the trip belongs to
      */
     private final Feed feed;
@@ -251,7 +246,7 @@ public class Trip extends GTFSElement {
 
         // get the distance in miles and the duration in hours
         double distanceMiles = getDistance();
-        double durationHours = getDuration() / MILLIS_IN_HOUR;
+        double durationHours = getDuration() / (double) Time.getMillisInHour();
 
         // return the average speed of the trip in miles per hour
         return distanceMiles / durationHours;
@@ -399,7 +394,7 @@ public class Trip extends GTFSElement {
         HashMap<String, String> attributes = new HashMap<>();
         attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
         attributes.put("Distance", String.format("%.02f miles", getDistance()));
-        attributes.put("Duration", String.format("%.02f hours", getDuration() / MILLIS_IN_HOUR));
+        attributes.put("Duration", String.format("%.02f hours", getDuration() / (double) Time.getMillisInHour()));
         return attributes;
     }
 

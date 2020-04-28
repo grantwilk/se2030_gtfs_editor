@@ -36,21 +36,6 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
     public static final String SECONDS_REGEX = MINUTES_REGEX;
 
     /**
-     * The number of milliseconds in a second
-     */
-    public static final int MILLIS_IN_SECOND = 1000;
-
-    /**
-     * The number of milliseconds in a minute
-     */
-    public static final int MILLIS_IN_MINUTE = MILLIS_IN_SECOND * 60;
-
-    /**
-     * The number of milliseconds in an hour
-     */
-    public static final int MILLIS_IN_HOUR = MILLIS_IN_MINUTE * 60;
-
-    /**
      * Choice box for selecting the stop time's stop
      */
     @FXML
