@@ -4,6 +4,7 @@ import gtfsapp.id.RouteID;
 
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
+import gtfsapp.util.Time;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,20 +23,15 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     /**
      * The time the trip arrives at the stop
      */
-    private Date arrivalTime;
+    private Time arrivalTime;
     /**
      * The time the trip departs from the stop
      */
-    private Date departureTime;
+    private Time departureTime;
     /**
      * The stop that the stop time occurs at
      */
     private Stop stop;
-
-    /**
-     * The sequence that the stop time occurs in (lower values preceed higher values)
-     */
-    private int sequence;
 
     /**
      * The head sign of the stop time
@@ -44,16 +40,17 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Constructor for StopTime object, with three parameters
-     *
-     * @param feed     for the stopTime
-     * @param stop     for the StopTime
-     * @param sequence of the stopTimes
+     * @param feed - the feed that contains the stop time
+     * @param stop - the stop that the stop time occurs at
+     * @param arrivalTime - the time the trip arrives at the stop
+     * @param departureTime - the time the trip departs from the stop
      */
-    public StopTime(Feed feed, Stop stop, int sequence) {
+    public StopTime(Feed feed, Stop stop, Time arrivalTime, Time departureTime) {
         super(new StopTimeID());
         this.feed = feed;
         this.stop = stop;
-        this.sequence = sequence;
+        this.arrivalTime = arrivalTime;
+        this.departureTime = departureTime;
     }
 
     /**
@@ -61,7 +58,7 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
      *
      * @return a the trip that contains this stop time
      */
-    public Trip getContainingTrip() {
+    public Trip getTrip() {
 
         // for each trip in the feed
         for (Trip trip : feed.getTrips()) {
@@ -82,16 +79,14 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Gets the ID of the trip that contains this stop time
-     *
      * @return the ID of the trip that contains this stop time
      */
-    public TripID getContainingTripID() {
-        return (TripID) getContainingTrip().getID();
+    public TripID getTripID() {
+        return (TripID) getTrip().getID();
     }
 
     /**
      * Gets a set of all routes that contain this stop time
-     *
      * @return a set of all routes that contain this stop time
      */
     public Set<Route> getContainingRoutes() {
@@ -102,7 +97,7 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
         for (Route route : feed.getRoutes()) {
 
             // check to see if the route's trips contains our stop time's trip
-            if (route.getTrips().contains(getContainingTrip())) {
+            if (route.getTrips().contains(getTrip())) {
 
                 // if they do, add the route to our set of containing route
                 containingRoutes.add(route);
@@ -116,7 +111,6 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Gets a set of the IDs of all routes that contain this stop time
-     *
      * @return a set of the IDs of all routes that contain this stop time
      */
     public Set<RouteID> getContainingRouteIDs() {
@@ -127,38 +121,34 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Getter for the arrival times
-     *
      * @return the arrival times
      */
-    public Date getArrivalTime() {
+    public Time getArrivalTime() {
         return arrivalTime;
     }
 
     /**
      * Sets the arrival time for the stop
-     *
      * @param arrivalTime the time the trip arrives at the stop
      */
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(Time arrivalTime) {
         this.arrivalTime = arrivalTime;
 
     }
 
     /**
      * Getter for the departure times for the stop
-     *
      * @return the time the trip leaves the stop
      */
-    public Date getDepartureTime() {
+    public Time getDepartureTime() {
         return this.departureTime;
     }
 
     /**
      * Sets the departure time for the stop
-     *
      * @param departureTime the time the trip leaves the stop
      */
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -196,24 +186,6 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
      */
     public void setHeadSign(String headSign) {
         this.headSign = headSign;
-    }
-
-    /**
-     * Gets the sequence of the stop
-     *
-     * @return the sequence of the stop
-     */
-    public int getSequence() {
-        return sequence;
-    }
-
-    /**
-     * Sets the sequence of the stop
-     *
-     * @param sequence the sequence of the stop
-     */
-    public void setSequence(int sequence) {
-        this.sequence = sequence;
     }
 
     /**

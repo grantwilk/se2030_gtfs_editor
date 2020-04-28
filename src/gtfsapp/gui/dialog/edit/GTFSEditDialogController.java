@@ -50,14 +50,26 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
      */
     public void apply() {
 
-        // apply the attributes to the current element
-        applyOne(element);
+        try {
 
-        // update the info panel
-        ((GTFSMainController) parentController).updateInfoPanel();
+            // apply the attributes to the current element
+            applyOne(element);
 
-        // close the dialog
-        close();
+            // update the info panel
+            ((GTFSMainController) parentController).updateInfoPanel();
+
+            // close the dialog
+            close();
+
+        }
+
+        catch (IllegalArgumentException e) {
+            ((GTFSMainController) parentController).invokeErrorDialog(
+                    GTFSErrorType.WARNING,
+                    "Invalid Attribute",
+                    e.getMessage()
+            );
+        }
 
     }
 
@@ -71,16 +83,28 @@ public abstract class GTFSEditDialogController extends GTFSDialogController {
      */
     public void applyMultiple(List<GTFSElement> elements) {
 
-        // apply the attributes to all of the elements
-        for (GTFSElement element : elements) {
-            applyOne(element);
+        try {
+
+            // apply the attributes to all of the elements
+            for (GTFSElement element : elements) {
+                applyOne(element);
+            }
+
+            // update the info panel
+            ((GTFSMainController) parentController).updateInfoPanel();
+
+            // close the dialog
+            close();
+
         }
 
-        // update the info panel
-        ((GTFSMainController) parentController).updateInfoPanel();
-
-        // close the dialog
-        close();
+        catch (IllegalArgumentException e) {
+            ((GTFSMainController) parentController).invokeErrorDialog(
+                    GTFSErrorType.WARNING,
+                    "Invalid Attribute",
+                    e.getMessage()
+            );
+        }
 
     }
 

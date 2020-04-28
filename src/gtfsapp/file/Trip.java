@@ -2,6 +2,7 @@ package gtfsapp.file;
 
 import gtfsapp.id.*;
 import gtfsapp.util.Location;
+import gtfsapp.util.Time;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -303,11 +304,11 @@ public class Trip extends GTFSElement {
 
         // get the first departure time and the last arrival time
         // TODO - find duration without stops
-        Date firstDepartureTime = stopTimes.get(0).getDepartureTime();
-        Date lastArrivalTime = stopTimes.get(stopTimes.size() - 1).getArrivalTime();
+        Time firstDepartureTime = stopTimes.get(0).getDepartureTime();
+        Time lastArrivalTime = stopTimes.get(stopTimes.size() - 1).getArrivalTime();
 
         // return the duration in milliseconds
-        return lastArrivalTime.getTime() - firstDepartureTime.getTime();
+        return lastArrivalTime.getMillis() - firstDepartureTime.getMillis();
     }
 
     /**
@@ -345,9 +346,9 @@ public class Trip extends GTFSElement {
         //Gets the second StopTime
         LastArriveTime = durationCalc.get(lastTime - 1);
         //Gets the time value for the first StopTime
-        double tripStart = (double) FirstDepartTime.getDepartureTime().getTime();
+        double tripStart = (double) FirstDepartTime.getDepartureTime().getMillis();
         //Gets the time value for the second StopTime
-        double tripEnd = (double) LastArriveTime.getDepartureTime().getTime();
+        double tripEnd = (double) LastArriveTime.getDepartureTime().getMillis();
         if (System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart) {
             return true;
         } else {

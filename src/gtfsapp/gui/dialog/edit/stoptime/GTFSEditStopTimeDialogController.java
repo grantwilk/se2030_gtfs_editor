@@ -4,19 +4,14 @@ import gtfsapp.file.GTFSElement;
 import gtfsapp.file.Stop;
 import gtfsapp.file.StopTime;
 import gtfsapp.file.Trip;
-import gtfsapp.gui.GTFSController;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 import gtfsapp.gui.dialog.error.GTFSErrorType;
-import gtfsapp.gui.dialog.select.GTFSSelectDialogController;
 import gtfsapp.gui.main.GTFSMainController;
 import gtfsapp.util.LimitedTextField;
+import gtfsapp.util.Time;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -157,41 +152,23 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         tripChoiceBox.getItems().addAll(trips);
 
         // set the stop time's current stop as the currently selected stop
-        tripChoiceBox.setValue(element.getContainingTrip());
+        tripChoiceBox.setValue(element.getTrip());
 
-        // get the arrival time and its hour, minute, and second subcomponents
-        long arrivalTime = element.getArrivalTime().getTime();
-
-        int arrivalTimeHours = (int) Math.floor(arrivalTime / (double) MILLIS_IN_HOUR);
-        arrivalTime -= arrivalTimeHours * MILLIS_IN_HOUR;
-
-        int arrivalTimeMinutes = (int) Math.floor(arrivalTime / (double) MILLIS_IN_MINUTE);
-        arrivalTime -= arrivalTimeMinutes * MILLIS_IN_MINUTE;
-
-        int arrivalTimeSeconds = (int) Math.floor(arrivalTime / (double) MILLIS_IN_SECOND);
-
-        // set arrival time text fields
-        arrivalTimeHoursField.setText(String.format("%02d", arrivalTimeHours));
-        arrivalTimeMinutesField.setText(String.format("%02d", arrivalTimeMinutes));
-        arrivalTimeSecondsField.setText(String.format("%02d", arrivalTimeSeconds));
-
-        // get the departure time and its hour, minute, and second subcomponents
-        long departureTime = element.getDepartureTime().getTime();
-
-        int departureTimeHours = (int) Math.floor(departureTime / (double) MILLIS_IN_HOUR);
-        departureTime -= departureTimeHours * MILLIS_IN_HOUR;
-
-        int departureTimeMinutes = (int) Math.floor(departureTime / (double) MILLIS_IN_MINUTE);
-        departureTime -= departureTimeMinutes * MILLIS_IN_MINUTE;
-
-        int departureTimeSeconds = (int) Math.floor(departureTime / (double) MILLIS_IN_SECOND);
+        // get the departure time and arrival time
+        Time arrivalTime = element.getArrivalTime();
+        Time departureTime = element.getDepartureTime();
 
         // set departure time text fields
-        departureTimeHoursField.setText(String.format("%02d", departureTimeHours));
-        departureTimeMinutesField.setText(String.format("%02d", departureTimeMinutes));
-        departureTimeSecondsField.setText(String.format("%02d", departureTimeSeconds));
+        arrivalTimeHoursField.setText(String.format("%02d", arrivalTime.getHours()));
+        arrivalTimeMinutesField.setText(String.format("%02d", arrivalTime.getMinutes()));
+        arrivalTimeSecondsField.setText(String.format("%02d", arrivalTime.getSeconds()));
 
-        // set departure time head sign field
+        // set departure time text fields
+        departureTimeHoursField.setText(String.format("%02d", departureTime.getHours()));
+        departureTimeMinutesField.setText(String.format("%02d", departureTime.getMinutes()));
+        departureTimeSecondsField.setText(String.format("%02d", departureTime.getSeconds()));
+
+        // set head sign field
         headSignField.setText(element.getHeadSign());
 
     }
@@ -227,58 +204,56 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
     @Override
     public void applyOne(GTFSElement element) {
 
-        // get the parent as a main controller
+        // get the main controller
         GTFSMainController mainController = (GTFSMainController) parentController;
 
         // get the stop time
         StopTime stopTime = (StopTime) element;
 
-        // update the stop time's stop
+        // get the new stop
         Stop newStop = stopChoiceBox.getValue();
-        Stop oldStop = stopTime.getStop();
-        if (!oldStop.equals(newStop)) {
-            stopTime.setStop(newStop);
+
+        // get the new trip
+        Trip newTrip = tripChoiceBox.getValue();
+
+        // get the new arrival time
+        String arrivalHours = arrivalTimeHoursField.getText();
+        String arrivalMinutes = arrivalTimeMinutesField.getText();
+        String arrivalSeconds = arrivalTimeSecondsField.getText();
+        String arrivalTimeString = String.format("%s:%s:%s", arrivalHours, arrivalMinutes, arrivalSeconds);
+        Time arrivalTime = new Time(arrivalTimeString);
+
+        // get the new departure time
+        String departureHours = departureTimeHoursField.getText();
+        String departureMinutes = departureTimeMinutesField.getText();
+        String departureSeconds = departureTimeSecondsField.getText();
+        String departureTimeString = String.format("%s:%s:%s", departureHours, departureMinutes, departureSeconds);
+        Time departureTime = new Time(departureTimeString);
+
+        // throw an exception if the arrival time occurs after the departure time
+        if (arrivalTime.getMillis() > departureTime.getMillis()) {
+            throw new IllegalArgumentException("Arrival time must occur before departure time.");
         }
 
-        // update the stop time's trip
-        Trip newTrip = tripChoiceBox.getValue();
-        Trip oldTrip = stopTime.getContainingTrip();
-        if (!oldTrip.equals(newTrip)) {
-            oldTrip.removeStopTime(stopTime);
+        // update the trip
+        if (!stopTime.getTrip().equals(newTrip)) {
+            stopTime.getTrip().removeStopTime(stopTime);
             newTrip.addStopTime(stopTime);
         }
 
-        // update the stop time's head sign
+        // update the stop
+        if (!stopTime.getStop().equals(newStop)) {
+            stopTime.setStop(newStop);
+        }
+
+        // update the arrival and departure time
+        stopTime.setArrivalTime(arrivalTime);
+        stopTime.setDepartureTime(departureTime);
+
+        // update the head sign
         stopTime.setHeadSign(headSignField.getText());
 
-        try {
 
-            // update the stop time's arrival time
-            long arrivalTimeHourMillis = Integer.parseInt(arrivalTimeHoursField.getText()) * MILLIS_IN_HOUR;
-            long arrivalTimeMinuteMillis = Integer.parseInt(arrivalTimeMinutesField.getText()) * MILLIS_IN_MINUTE;
-            long arrivalTimeSecondMillis = Integer.parseInt(arrivalTimeSecondsField.getText()) * MILLIS_IN_SECOND;
-            stopTime.getArrivalTime().setTime(
-                    arrivalTimeHourMillis + arrivalTimeMinuteMillis + arrivalTimeSecondMillis
-            );
-
-            // update the stop time's departure time
-            long departureTimeHourMillis = Integer.parseInt(departureTimeHoursField.getText()) * MILLIS_IN_HOUR;
-            long departureTimeMinuteMillis = Integer.parseInt(departureTimeMinutesField.getText()) * MILLIS_IN_MINUTE;
-            long departureTimeSecondMillis = Integer.parseInt(departureTimeSecondsField.getText()) * MILLIS_IN_SECOND;
-            stopTime.getDepartureTime().setTime(
-                    departureTimeHourMillis + departureTimeMinuteMillis + departureTimeSecondMillis
-            );
-
-        }
-
-        // catch invalid time entries
-        catch (NumberFormatException e) {
-            mainController.invokeErrorDialog(
-                    GTFSErrorType.EXCEPTION,
-                    "Invalid Time",
-                    "One or more times were entered incorrectly."
-            );
-        }
     }
 
 }

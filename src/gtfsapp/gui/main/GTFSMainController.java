@@ -768,7 +768,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
             associations = new HashSet<>();
-            associations.add(((StopTime) selectedElement).getContainingTrip());
+            associations.add(((StopTime) selectedElement).getTrip());
         }
 
         // if the element is a stop

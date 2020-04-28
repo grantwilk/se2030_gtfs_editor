@@ -2,9 +2,8 @@ package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
-import gtfsapp.id.TripID;
 import gtfsapp.util.Location;
-import javafx.geometry.Point2D;
+import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
 import java.io.File;
@@ -21,21 +20,6 @@ import java.util.*;
 public class GTFSFile {
 
     /**
-     * The number of milliseconds in a second
-     */
-    private static final int MILLIS_IN_SECOND = 1000;
-
-    /**
-     * The number of milliseconds in a minute
-     */
-    private static final int MILLIS_IN_MINUTE = 60 * MILLIS_IN_SECOND;
-
-    /**
-     * The number of milliseconds in an hour
-     */
-    private static final int MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
-
-    /**
      * Regular expression for a GTFS ID
      */
     private static final String ID_REGEX = "^.+";
@@ -44,12 +28,6 @@ public class GTFSFile {
      * Regular expression for an unsigned integer
      */
     private static final String UNSIGNED_INT_REGEX = "^[0-9]+";
-
-    /**
-     * Regular expression for a time stamp in HH:MM:SS form
-     */
-    private static final String TIME_STAMP_REGEX = "^([2][0-3]|[0-1]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
-
     /**
      * Regular expression for a hexadecimal color
      */
@@ -405,10 +383,10 @@ public class GTFSFile {
             if (!stopSequence.matches(UNSIGNED_INT_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
-            if (!arrivalTime.matches(TIME_STAMP_REGEX)) {
+            if (!arrivalTime.matches(Time.getRegex())) {
                 throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
             }
-            if (!departureTime.matches(TIME_STAMP_REGEX)) {
+            if (!departureTime.matches(Time.getRegex())) {
                 throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
             }
 
@@ -506,36 +484,6 @@ public class GTFSFile {
 
         // return new color
         return new Color(red, green, blue, 1.0);
-    }
-
-    /**
-     * Converts a time string to a time object
-     *
-     * @param timeString the time string
-     * @return a time object
-     */
-    private Date timeStringToTime(String timeString) {
-
-        // throw an exception if the time string is improperly formatted
-        if (!timeString.matches(TIME_STAMP_REGEX)) {
-            throw new IllegalArgumentException("Time \"" + timeString + "\" is improperly formatted.");
-        }
-
-        // set up scanner
-        Scanner timeScanner = new Scanner(timeString);
-        timeScanner.useDelimiter(":");
-
-        // parse hours, minutes, and seconds
-        int hours = timeScanner.nextInt();
-        int minutes = timeScanner.nextInt();
-        int seconds = timeScanner.nextInt();
-
-        // calculate millis
-        long millis = hours * MILLIS_IN_HOUR + minutes * MILLIS_IN_MINUTE + seconds * MILLIS_IN_SECOND;
-
-        // return new date using millis and time zone offset
-        return new Date(millis);
-
     }
 
     /**
@@ -693,23 +641,16 @@ public class GTFSFile {
 
             // Get required attributes for stop time
             String stopID = stopTimeFields.get("stop_id");
-            int sequence = Integer.parseInt(stopTimeFields.get("stop_sequence"));
+            Time arrivalTime = new Time(stopTimeFields.get("arrival_time"));
+            Time departureTime = new Time(stopTimeFields.get("departure_time"));
             Stop stop = stops.get(stopID);
 
             // create a new stop time
-            StopTime stopTime = new StopTime(feed, stop, sequence);
+            StopTime stopTime = new StopTime(feed, stop, arrivalTime, departureTime);
 
             // Add stop time to its trip
             Trip trip = trips.get(stopTimeFields.get("trip_id"));
             trip.addStopTime(stopTime);
-
-            // set arrival time
-            String arrivalTime = stopTimeFields.get("arrival_time");
-            stopTime.setArrivalTime(timeStringToTime(arrivalTime));
-
-            // set departure time
-            String departureTime = stopTimeFields.get("departure_time");
-            stopTime.setDepartureTime(timeStringToTime(departureTime));
 
             // set headsign
             String headsign = stopTimeFields.get("stop_headsign");
