@@ -49,7 +49,6 @@ public class RouteID extends GTFSID {
     public static boolean exists(String id) {
         return existingIDStrings.contains(id);
     }
-
     /**
      * Checks if a Route ID object already exists
      *

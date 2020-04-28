@@ -1,0 +1,3 @@
+level_id,stop_name,stop_lat,stop_lon
+FUR_CREEK_RES,Furnace Creek Resort (Demo),,36.425288,-117.133162,,
+BEATTY_AIRPORT,Nye County Airport (Demo),,36.868446,-116.784582,,

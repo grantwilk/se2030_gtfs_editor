@@ -3,7 +3,7 @@ package gtfsapp.file;
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.TripID;
-import gtfsapp.util.Location;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 import java.io.File;
@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * @author Michael Primeau and Grant Wilk
+ * @author Michael Primeau, Colton Rivard, Grant Wilk, Mason Schlax
  * @version 1.0
  * @created 15-Apr-2020 1:20:18 PM
  */
@@ -35,6 +35,26 @@ public class GTFSFile {
     private static final int MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
 
     /**
+     * Regular expression for a GTFS ID
+     */
+    private static final String ID_REGEX = "^.+";
+
+    /**
+     * Regular expression for an unsigned integer
+     */
+    private static final String UNSIGNED_INT_REGEX = "^[0-9]+";
+
+    /**
+     * Regular expression for a time stamp in HH:MM:SS form
+     */
+    private static final String TIME_STAMP_REGEX = "^([2][0-3]|[0-1]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
+
+    /**
+     * Regular expression for a hexadecimal color
+     */
+    private static final String COLOR_REGEX = "^[0-9a-fA-F]{6}";
+
+    /**
      * The internal feed
      */
     private Feed feed;
@@ -50,7 +70,7 @@ public class GTFSFile {
     private File routeFile;
 
     /**
-     * The "stops.txt" file
+     * The "sunny-day-one.txt" file
      */
     private File stopFile;
 
@@ -82,17 +102,29 @@ public class GTFSFile {
         } else if (stopTimesFile == null) {
             throw new IOException("Required GTFS file \"stop_times.txt\" was not found.");
         } else if (stopFile == null) {
-            throw new IOException("Required GTFS file \"stops.txt\" was not found.");
+            throw new IOException("Required GTFS file \"sunny-day-one.txt\" was not found.");
         }
 
         // create a new GTFS feed
         feed = new Feed();
 
+        // get list of lines for each file
+        List<String> stopLines = Files.readAllLines(stopFile.toPath());
+        List<String> stopTimeLines = Files.readAllLines(stopTimesFile.toPath());
+        List<String> routeLines = Files.readAllLines(routeFile.toPath());
+        List<String> tripLines = Files.readAllLines(tripFile.toPath());
+
+        // validate files
+        validateStops(stopLines);
+        validateStopTimes(stopTimeLines);
+        validateTrips(tripLines);
+        validateRoutes(routeLines);
+
         // parse the files (must be in this order!)
-        HashMap<String, Stop> stops = parseStops();
-        HashMap<String, Route> routes = parseRoutes();
-        HashMap<String, Trip> trips = parseTrips(routes);
-        HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops);
+        HashMap<String, Stop> stops = parseStops(stopLines);
+        HashMap<String, Route> routes = parseRoutes(routeLines);
+        HashMap<String, Trip> trips = parseTrips(routes,tripLines);
+        HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops,stopTimeLines);
 
         // add our GTFS elements to our feed
         feed.addAllRoutes(new ArrayList<>(routes.values()));
@@ -107,7 +139,7 @@ public class GTFSFile {
      */
     public void save(Path path) {
         // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Too many elements in file \"stop_times.txt\".");
     }
 
     /**
@@ -159,7 +191,7 @@ public class GTFSFile {
                     stopTimesFile = file;
                     break;
 
-                // if the file name is stops.txt
+                // if the file name is sunny-day-one.txt
                 case "stops.txt":
                     if (stopFile != null) {
                         throw new IOException("Found multiple \"" + fileName + "\" files.");
@@ -174,445 +206,282 @@ public class GTFSFile {
         }
     }
 
-    /**
-     * Parses routes from the GTFS routes file
-     *
-     * @return the parsed routes as a list
-     */
-    private HashMap<String, Route> parseRoutes() throws IOException {
+    public static boolean validateRoutes(List<String> lines) throws  IOException {
 
-        // get the name of the file for exceptions
-        String fileName = routeFile.getName();
+        ArrayList<String> routeIDS = new ArrayList<>();
 
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(routeFile.toPath());
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
 
-        // remove the first line because it contains a template
-        lines.remove(0);
-
-        // create a new list of routes
-        HashMap<String, Route> routes = new HashMap<>();
-
-        // for each line in the file
-        for (String line : lines) {
-
-            // split the line into comma separated tokens
-            List<String> tokens = tokenizeLine(line);
-
-            // check to see if there are enough tokens to get required information
-            if (tokens.size() < 6) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // extract required values
-            String routeID = tokens.get(0);
-            String routeType = tokens.get(5);
-
-            // throw an exception if the route ID is empty
-            if (routeID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if route ID already exists
-            if (RouteID.exists(routeID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if route type is empty
-            if (routeType.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if route type is not a number
-            int routeTypeValue;
-            try {
-                routeTypeValue = Integer.parseInt(routeType);
-            } catch (NumberFormatException e) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if route type is not a valid route type enum
-            if (routeTypeValue > RouteType.values().length) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // create a new route
-            Route route = new Route(feed, routeID, RouteType.values()[routeTypeValue]);
-
-            // extract extra values
-
-            // get and set agency ID (ignored)
-            // String agencyID = tokens.get(1);
-
-            // get and set route short name
-            String routeShortName = tokens.get(2);
-            if (!routeShortName.isEmpty()) {
-                route.setShortName(routeShortName);
-            }
-
-            // get  and set route long name
-            String routeLongName = tokens.get(3);
-            if (!routeLongName.isEmpty()) {
-                route.setLongName(routeLongName);
-            }
-
-            // get and set route description
-            String routeDesc = tokens.get(4);
-            if (!routeDesc.isEmpty()) {
-                route.setDesc(routeDesc);
-            }
-
-            // get and set route URL
-            if (tokens.size() > 6) {
-                String routeURL = tokens.get(6);
-                if (!routeURL.isEmpty()) {
-                    route.setURL(routeURL);
-                }
-            }
-
-            // get and set route color
-            if (tokens.size() > 7) {
-                String routeColor = tokens.get(7);
-                if (!routeColor.isEmpty()) {
-                    route.setColor(hexToColor(routeColor));
-                }
-            }
-
-            // get and set route text color
-            if (tokens.size() > 8) {
-                String routeTextColor = tokens.get(8);
-                if (!routeTextColor.isEmpty()) {
-                    route.setTextColor(hexToColor(routeTextColor));
-                }
-            }
-
-            // add our routes to the routes list
-            routes.put(routeID, route);
+        // check if format contains route_id field
+        if(!format.contains("route_id")) {
+            throw new IOException();
 
         }
 
-        return routes;
+        // Check each line for proper information
+        for (int i = 1; i < lines.size(); i++) {
+            // tokenize current line
+            List<String> currentLine = tokenizeLine(lines.get(i));
 
+            // make sure all expected elements are there
+            if(currentLine.size() != format.size()) {
+                throw new IOException("Missing one or more required GTFS attributes in \"routes.txt\".");
+            }
+
+            // check if route id is present
+            int routeIdIndex = format.indexOf("route_id");
+            String routeID = currentLine.get(routeIdIndex);
+            if(routeID.isEmpty()) {
+                throw new IOException("ROUTE_ID IS MISSING \"routes.txt\".");
+            }
+
+            // check if route id already exists
+            if(RouteID.exists(routeID)) {
+                throw new IOException("One or more duplicate GTFS attributes in file \"routes.txt\".");
+            }
+            // looks for duplicate ID
+            if(routeIDS.contains(routeID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+            routeIDS.add(routeID);
+
+            //Checks if the color is in the correct format
+            int routeColorIndex = format.indexOf("route_color");
+            String routeColor = currentLine.get(routeColorIndex);
+            if(!routeColor.matches(COLOR_REGEX)){
+                throw new IOException("COLOR FORMAT IS INCORRECT \"stops.txt\".");
+            }
+
+
+        }
+
+
+
+        return true;
     }
 
     /**
-     * Parses trips from the GTFS trips file
-     *
-     * @param routes the list of routes that the trips should be linked to
-     * @return the list of trips
+     * Parse through stops file to check that all data is valid
+     * @param lines List of each line in the stops file
+     * @return True if the file is valid
+     * @throws IOException Thrown if there is invalid data in the file
      */
-    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes) throws IOException {
+    public static boolean validateStops(List<String> lines) throws IOException, NumberFormatException {
 
-        // get the name of the file for exceptions
-        String fileName = tripFile.getName();
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
 
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(tripFile.toPath());
-
-        // remove the first line because it contains a template
-        lines.remove(0);
-
-        // create a new list of trips
-        HashMap<String, Trip> trips = new HashMap<>();
-
-        // for each line in the file
-        for (String line : lines) {
-
-            // split the line into comma separated tokens
-            List<String> tokens = tokenizeLine(line);
-
-            if (tokens.size() < 3) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // extract required values
-            String routeID = tokens.get(0);
-            String tripID = tokens.get(2);
-
-            // throw an exception if the route ID is empty
-            if (routeID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if route ID does not exists
-            if (!RouteID.exists(routeID)) {
-                throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if the trip ID is empty
-            if (tripID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // throw an exception if trip ID already exists
-            if (TripID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
-            }
-
-            // create a trip and add it to the route
-            Trip trip = new Trip(feed, tripID);
-            Route route = routes.get(routeID);
-            route.addTrip(trip);
-
-            // extract extra values
-
-            // get and set service ID (ignored)
-            // String serviceID = tokens.get(1);
-
-            // get and set head sign
-            if (tokens.size() > 3) {
-                String headSign = tokens.get(3);
-                if (!headSign.isEmpty()) {
-                    trip.setHeadSign(headSign);
-                }
-            }
-
-            // get and set direction ID (ignored)
-            // String directionID = tokens.get(4);
-
-            // get and set block ID (ignored)
-            // String blockID = tokens.get(5);
-
-            // get and set shape ID (ignored)
-            // String shapeID = tokens.get(6);
-
-            // add trip to list of trips
-            trips.put(tripID, trip);
-
+        // check if format contains stop_id field
+        if(!format.contains("stop_id")) {
+            throw new IOException("Missing attribute \"stop_id\" in in \"stops.txt\"");
         }
 
-        return trips;
+        // check for stop latitude
+        if(!format.contains("stop_lat")) {
+            throw new IOException("Missing attribute \"stop_lat\" in in \"stops.txt\"");
+        }
 
+        // check for stop longitude
+        if(!format.contains("stop_lon")) {
+            throw new IOException("Missing attribute \"stop_lon\" in in \"stops.txt\"");
+        }
+
+        // create list of all stop ids in this file
+        ArrayList<String> stopIDS = new ArrayList<>();
+
+        // Check each line for proper information
+        for (int i = 1; i < lines.size(); i++) {
+            // tokenize current line
+            List<String> currentLine = tokenizeLine(lines.get(i));
+
+            // make sure all expected elements are there
+            if(currentLine.size() != format.size()) {
+                throw new IOException("Missing one or more required GTFS attributes in \"stops.txt\"");
+            }
+
+            // check if stop id is present
+            int stopIdIndex = format.indexOf("stop_id");
+            String stopID = currentLine.get(stopIdIndex);
+            if(stopID.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
+            }
+
+            // check if stop id already exists in file
+            if(stopIDS.contains(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+            stopIDS.add(stopID);
+
+            // check if stop id already exists in program
+            if(StopID.exists(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+
+            // check for stop latitude and longitude
+            String lat = currentLine.get(format.indexOf("stop_lat"));
+            String lon = currentLine.get(format.indexOf("stop_lon"));
+            if(lat.isEmpty() || lon.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
+            }
+            // check to make sure stop latitude and longitude are doubles
+            double stopLat = Double.parseDouble(lat);
+            double stopLon = Double.parseDouble(lon);
+        }
+
+        return true;
     }
 
     /**
-     * Parses stop times from the GTFS stop times file
-     *
-     * @param trips the list of trips that the stop times should be linked to
-     * @param stops the list of stops that the stop times should be linked to
-     * @return the list of stop times
+     * Parse through stop times file to check that all data is valid
+     * @param lines List of each line in the stop times file
+     * @return True if the file is valid
+     * @throws IOException Thrown if there is invalid data in the file
      */
-    private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops) throws IOException {
+    public static boolean validateStopTimes(List<String> lines) throws IOException {
 
-        // get the name of the file for exceptions
-        String fileName = stopTimesFile.getName();
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
 
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(stopTimesFile.toPath());
+        // check that all required fields are present in format line
+        if (
+                !format.contains("trip_id") ||
+                !format.contains("stop_id") ||
+                !format.contains("stop_sequence") ||
+                !format.contains("arrival_time") ||
+                !format.contains("departure_time")
+        ) {
+            throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+        }
 
-        // remove the first line because it contains a template
-        lines.remove(0);
+        for (int i = 1; i < lines.size(); i++) {
 
-        // create a new list of trips
-        HashMap<String, StopTime> stopTimes = new HashMap<>();
+            // tokenize line
+            List<String> line = tokenizeLine(lines.get(i));
 
-        // for each line in the file
-        for (String line : lines) {
-
-            // split the line into comma separated tokens
-            List<String> tokens = tokenizeLine(line);
-
-            // check to see if there are enough tokens to get required information
-            if (tokens.size() < 5) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            // throw an exception if there are more elements in the line than there are format elements
+            if (line.size() > format.size()) {
+                throw new IllegalArgumentException();
             }
 
-            // extract all values
-            String tripID = tokens.get(0);
-            String stopID = tokens.get(3);
-            String stopSequence = tokens.get(4);
-
-            // throw an exception if trip ID is empty
-            if (tripID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            // map fields into a hash map
+            Map<String, String> stopTimeFields = new HashMap<>();
+            for (int j = 0; j < line.size(); j++) {
+                stopTimeFields.put(format.get(j), line.get(j));
             }
 
-            // throw an exception if trip ID does not exist
-            if (!TripID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            // get all of the values from the hash map
+            String tripID = stopTimeFields.get("trip_id");
+            String stopID = stopTimeFields.get("stop_id");
+            String stopSequence = stopTimeFields.get("stop_sequence");
+            String arrivalTime = stopTimeFields.get("arrival_time");
+            String departureTime = stopTimeFields.get("departure_time");
+
+            // throw an exception if any required attributes are null
+            if (tripID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (stopID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (stopSequence == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (arrivalTime == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (departureTime == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
             }
 
-            // throw an exception if stop ID is empty
-            if (stopID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            // throw an exception if any required attributes are invalidly formatted
+            if (!tripID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
             }
-
-            // throw an exception if stop ID does not exist
-            if (!StopID.exists(stopID)) {
-                throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
+            if (!stopID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted stop ID in \"stop_times.txt\".");
             }
-
-            int sequence;
-            try {
-                sequence = Integer.parseInt(stopSequence);
-            } catch (NumberFormatException e) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            if (!stopSequence.matches(UNSIGNED_INT_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
-
-            // get stop object
-            Stop stop = stops.get(stopID);
-
-            // create a stop time
-            StopTime stopTime = new StopTime(feed, stop, sequence);
-
-
-            // add the stop time to the trip
-            trips.get(tripID).addStopTime(stopTime);
-
-            // extract extra values
-
-            // get and set arrival time
-            String arrivalTime = tokens.get(1);
-            if (!arrivalTime.isEmpty()) {
-                stopTime.setArrivalTime(timeStringToTime(arrivalTime));
+            if (!arrivalTime.matches(TIME_STAMP_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
             }
-
-            // get and set departure time
-            String departureTime = tokens.get(2);
-            if (!departureTime.isEmpty()) {
-                stopTime.setDepartureTime(timeStringToTime(departureTime));
+            if (!departureTime.matches(TIME_STAMP_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
             }
-
-            // get and set head sign
-            if (tokens.size() > 5) {
-                String headSign = tokens.get(5);
-                if (!headSign.isEmpty()) {
-                    stopTime.setHeadSign(headSign);
-                }
-            }
-
-            // get and set pickup type (ignored)
-            // String pickupType = tokens.get(6);
-
-            // get and set drop off time (ignored)
-            // String dropOffTime = tokens.get(7);
-
-            // get and set shape distance traveled (ignored)
-            // String shapeDistTraveled = tokens.get(8);
-
-            // get stop time id string
-            String stopTimeIDString = stopTime.getID().getIDString();
-
-            // add stop time to list of stop times
-            stopTimes.put(stopTimeIDString, stopTime);
 
         }
 
-        return stopTimes;
-
+        return true;
     }
 
     /**
-     * Parses stops from the GTFS stops file adn returns them as a list
-     *
-     * @return the list of stops
+     * Parse through Trips file to check that all data is valid
+     * @param lines List of each line in the stops file
+     * @return True if the file is valid
+     * @throws IOException Thrown if there is invalid data in the file
      */
-    private HashMap<String, Stop> parseStops() throws IOException {
+    public static boolean validateTrips(List<String> lines) throws IOException {
 
-        // get the name of the file for exceptions
-        String fileName = stopFile.getName();
+        // get format for file
+        List<String> format = tokenizeLine(lines.get(0));
 
-        // get all lines from the file
-        List<String> lines = Files.readAllLines(stopFile.toPath());
+        // check if format contains trip_id field and route_id field
+        if(!format.contains("trip_id") || !format.contains("route_id")) {
+            throw new IOException("Missing one or more required attributes in first line of \"trip.txt\".");
+        }
 
-        // remove the first line because it contains a template
-        lines.remove(0);
+        List<String> tripIDs = new ArrayList<>();
 
-        // create a new list of stops
-        HashMap<String, Stop> stops = new HashMap<>();
+        // Check each line for proper information
+        for (int i = 1; i < lines.size(); i++) {
 
-        // for each line in the file
-        for (String line : lines) {
+            // tokenize current line
+            List<String> line = tokenizeLine(lines.get(i));
 
-            // split the line into comma separated tokens
-            List<String> tokens = tokenizeLine(line);
-
-            // check to see if there are enough tokens to get required information
-            if (tokens.size() < 1) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"" + fileName + "\".");
+            // throw an exception if there are more elements in the line than there are format elements
+            if (line.size() > format.size()) {
+                throw new IllegalArgumentException("Too many elements in file \"trips.txt\".");
             }
 
-            // extract all values
-            String stopID = tokens.get(0);
-
-            // throw an exception if stop ID is empty
-            if (stopID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
+            // map fields into a hash map
+            Map<String, String> tripFields = new HashMap<>();
+            for (int j = 0; j < line.size(); j++) {
+                tripFields.put(format.get(j), line.get(j));
             }
 
-            // throw an exception if stop ID already exists
-            if (StopID.exists(stopID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"" + fileName + "\".");
+            // get all of the values from the hash map
+            String routeID = tripFields.get("route_id");
+            String tripID = tripFields.get("trip_id");
+
+            // throw an exception if any required attributes are null
+            if (routeID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (tripID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
             }
 
-            // create a new stop
-            Stop stop = new Stop(feed, stopID);
-
-            // get and set stop name
-            if (tokens.size() > 1) {
-                String stopName = tokens.get(1);
-                if (!stopName.isEmpty()) {
-                    stop.setName(stopName);
-                }
+            // throw an exception if any required attributes are invalidly formatted
+            if (!routeID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted route ID in \"stop_times.txt\".");
+            }
+            if (!tripID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
             }
 
-            // get and set stop description
-            if (tokens.size() > 2) {
-                String stopDesc = tokens.get(2);
-                if (!stopDesc.isEmpty()) {
-                    stop.setDesc(stopDesc);
-                }
+            // throw an exception if the trip ID already exists
+            if (tripIDs.contains(tripID)) {
+                throw new IllegalArgumentException("One or more IDs occur multiple times in \"stop_times.txt\".");
             }
 
-            // get and set location
-            if (tokens.size() > 3) {
-
-                String stopLat = tokens.get(3);
-
-                // if longitude also exists
-                if (tokens.size() > 4) {
-
-                    String stopLon = tokens.get(4);
-
-                    // if both are not empty
-                    if (!stopLat.isEmpty() && !stopLon.isEmpty()) {
-
-                        // parse both and set as location
-                        try {
-
-                            double lat = Double.parseDouble(stopLat);
-                            double lon = Double.parseDouble(stopLon);
-
-                            stop.setLocation(new Location(lon, lat));
-
-                        } catch (NumberFormatException e) {
-                            throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
-                        }
-                    } else {
-                        throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
-                    }
-                } else {
-                    throw new IOException("One or more missing dependent data in file \"" + fileName + "\".");
-                }
-            }
-
-            // get and set zone ID (ignored)
-            // String zoneID = tokens.get(5);
-
-            // get and set stop URL
-            if (tokens.size() > 6) {
-                String stopURL = tokens.get(6);
-                if (!stopURL.isEmpty()) {
-                    stop.setURL(stopURL);
-                }
-            }
-
-            // add our stops to the stops list
-            stops.put(stopID, stop);
+            // add the trip IDs
+            tripIDs.add(tripID);
 
         }
 
-        return stops;
+        return true;
 
     }
 
@@ -647,7 +516,7 @@ public class GTFSFile {
     private Date timeStringToTime(String timeString) {
 
         // throw an exception if the time string is improperly formatted
-        if (!timeString.matches("^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}")) {
+        if (!timeString.matches(TIME_STAMP_REGEX)) {
             throw new IllegalArgumentException("Time \"" + timeString + "\" is improperly formatted.");
         }
 
@@ -678,7 +547,245 @@ public class GTFSFile {
      * @param line the line to tokenize
      * @return a list of string tokens
      */
-    private List<String> tokenizeLine(String line) {
+    private static List<String> tokenizeLine(String line) {
         return Arrays.asList(line.split(",", -1));
+    }
+
+
+    /**
+     * Parses trips from the GTFS trips file
+     *
+     * @param routes the list of routes that the trips should be linked to
+     * @return the list of trips
+     */
+    private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes, List<String> lines) {
+        // Get the format of the attributes for the file
+        List<String> format = tokenizeLine(lines.get(0));
+
+        // Create hash map of trips to be returned
+        HashMap<String, Trip> trips = new HashMap<>();
+
+        for(int i = 1; i < lines.size(); i++) {
+
+            // Create new hash map to create a trip from this line
+            HashMap<String, String> tripFields = new HashMap<>();
+
+            // Get line in file
+            List<String> line = tokenizeLine(lines.get(i));
+
+            // Add each attribute in line to hash map
+            for(int j = 0; j < line.size(); j++) {
+                tripFields.put(format.get(j),line.get(j));
+            }
+
+            // Create new trip for this line
+            Trip trip;
+            String tripID;
+            tripID = tripFields.get("trip_id");
+            trip = new Trip(feed, tripID);
+
+
+            // Add trip to its route
+            if(tripFields.containsKey("route_id")) {
+                String routeID = tripFields.get("route_id");
+                Route route;
+                if (!routeID.isEmpty()) {
+                    route = routes.get(routeID);
+                    route.addTrip(trip);
+                }
+            }
+
+            // Set trip headsign
+            if(tripFields.containsKey("trip_headsign")) {
+                String headSign = tripFields.get("trip_headsign");
+                if (!headSign.isEmpty()) {
+                    trip.setHeadSign(headSign);
+                }
+            }
+
+            // Add trip to return hash map
+            trips.put(tripID,trip);
+        }
+
+        return trips;
+
+    }
+
+    /**
+     * Parses routes from the GTFS routes file
+     *
+     * @return the parsed routes as a list
+     */
+    private HashMap<String, Route> parseRoutes(List<String> lines) {
+        // get format of the file
+        List<String> format = tokenizeLine(lines.get(0));
+        lines.remove(0);
+
+        // create a new list of routes
+        HashMap<String, Route> routes = new HashMap<>();
+
+        for(int i = 0; i < lines.size(); i++) {
+            // create a new hash map for the attributes of the route for this line
+            HashMap<String, String> routeFields = new HashMap<>();
+
+            // get next line from file
+            List<String> line = tokenizeLine(lines.get(i));
+
+            // put all route attributes into hash map
+            for(int j = 0; j < line.size(); j++) {
+                routeFields.put(format.get(j),line.get(j));
+            }
+
+            // get route ID and route type
+            String routeID = routeFields.get("route_id");
+            String routeType = routeFields.get("route_type");
+            int routeTypeValue = Integer.parseInt(routeType);
+
+            // create new route
+            Route route = new Route(feed, routeID, RouteType.values()[routeTypeValue]);
+
+            // set route short name
+            String shortName = routeFields.get("route_short_name");
+            route.setShortName(shortName);
+
+            // set long name
+            String longName = routeFields.get("route_long_name");
+            route.setLongName(longName);
+
+            // set description
+            String description = routeFields.get("route_desc");
+            route.setDesc(description);
+
+            // set url
+            String url = routeFields.get("route_url");
+            route.setURL(url);
+
+            // set color
+            String color = routeFields.get("route_color");
+            route.setColor(hexToColor(color));
+
+            // add route to return hash map
+            routes.put(routeID, route);
+
+        }
+
+        return routes;
+
+    }
+
+    private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops, List<String> lines) {
+        // get format of the file
+        List<String> format = tokenizeLine(lines.get(0));
+        lines.remove(0);
+
+        // create a new list of stop times
+        HashMap<String, StopTime> stopTimes = new HashMap<>();
+
+        for(int i = 0; i < lines.size(); i++) {
+
+            // create a new hash map for the attributes of the route for this line
+            HashMap<String, String> stopTimeFields = new HashMap<>();
+
+            // get next line from file
+            List<String> line = tokenizeLine(lines.get(i));
+
+            // put all route attributes into hash map
+            for(int j = 0; j < line.size(); j++) {
+                stopTimeFields.put(format.get(j),line.get(j));
+            }
+
+            // Get required attributes for stop time
+            String stopID = stopTimeFields.get("stop_id");
+            int sequence = Integer.parseInt(stopTimeFields.get("stop_sequence"));
+            Stop stop = stops.get(stopID);
+
+            // create a new stop time
+            StopTime stopTime = new StopTime(feed, stop, sequence);
+
+            // Add stop time to its trip
+            Trip trip = trips.get(stopTimeFields.get("trip_id"));
+            trip.addStopTime(stopTime);
+
+            // set arrival time
+            String arrivalTime = stopTimeFields.get("arrival_time");
+            stopTime.setArrivalTime(timeStringToTime(arrivalTime));
+
+            // set departure time
+            String departureTime = stopTimeFields.get("departure_time");
+            stopTime.setDepartureTime(timeStringToTime(departureTime));
+
+            // set headsign
+            String headsign = stopTimeFields.get("stop_headsign");
+            stopTime.setHeadSign(headsign);
+
+            // get stop time id
+            String stopTimeID = stopTime.getID().getIDString();
+
+            // add stop time to return hash map
+            stopTimes.put(stopTimeID, stopTime);
+
+        }
+
+        return stopTimes;
+
+    }
+
+    /**
+     * Parses stops from the GTFS stops file adn returns them as a list
+     *
+     * @return the list of stops
+     */
+    private HashMap<String, Stop> parseStops(List<String> lines) {
+        // get format of the file
+        List<String> format = tokenizeLine(lines.get(0));
+        lines.remove(0);
+
+        // create a new list of stop times
+        HashMap<String, Stop> stops = new HashMap<>();
+
+        for(int i = 0; i < lines.size(); i++) {
+
+            // create a new hash map for the attributes of the stop for this line
+            HashMap<String, String> stopFields = new HashMap<>();
+
+            // get next line from file
+            List<String> line = tokenizeLine(lines.get(i));
+
+            // put all stop attributes into hash map
+            for(int j = 0; j < line.size(); j++) {
+                stopFields.put(format.get(j),line.get(j));
+            }
+
+            // get stop id and create new stop
+            String stopID = stopFields.get("stop_id");
+            Stop stop = new Stop(feed, stopID);
+
+            // set stop name
+            String stopName = stopFields.get("stop_name");
+            stop.setName(stopName);
+
+            // set stop description
+            String stopDesc = stopFields.get("stop_desc");
+            stop.setDesc(stopDesc);
+
+            // set stop location
+            String stopLat = stopFields.get("stop_lat");
+            String stopLon = stopFields.get("stop_lon");
+            if(!stopLat.isEmpty() && !stopLon.isEmpty()) {
+                double lat = Double.parseDouble(stopLat);
+                double lon = Double.parseDouble(stopLon);
+                // TODO - replace Point2D with Location on merge w/ master
+                stop.setLocation(new Point2D(lon, lat));
+            }
+
+            // set stop url
+            String url = stopFields.get("stop_url");
+            stop.setURL(url);
+
+            stops.put(stop.getID().getIDString(), stop);
+
+        }
+
+        return stops;
     }
 }
