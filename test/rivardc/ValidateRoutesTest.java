@@ -18,7 +18,7 @@ class ValidateRoutesTest {
     void validateTestFile(String fileName) throws IOException {
 
         // get the file path from the file name
-        Path path = Paths.get(TRIP_VALIDATION_PATH + fileName);
+        Path path = Paths.get(ROUTE_VALIDATION_PATH + fileName);
 
         // read all lines from the file
         List<String> lines = Files.readAllLines(path);
