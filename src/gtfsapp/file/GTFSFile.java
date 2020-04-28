@@ -228,7 +228,7 @@ public class GTFSFile {
      * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateStops(List<String> lines) throws IOException {
+    public static boolean validateStops(List<String> lines) throws IOException, NumberFormatException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -248,6 +248,8 @@ public class GTFSFile {
             throw new IOException("Missing attribute \"stop_lon\" in in \"stops.txt\"");
         }
 
+        ArrayList<String> stopIDS = new ArrayList<>();
+
         // Check each line for proper information
         for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
@@ -265,7 +267,13 @@ public class GTFSFile {
                 throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
             }
 
-            // check if stop id already exists
+            // check if stop id already exists in file
+            if(stopIDS.contains(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+            stopIDS.add(stopID);
+
+            // check if stop id already exists in program
             if(StopID.exists(stopID)) {
                 throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
             }
@@ -276,6 +284,9 @@ public class GTFSFile {
             if(lat.isEmpty() || lon.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
             }
+            // check to make sure stop latitude and longitude are doubles
+            double stopLat = Double.parseDouble(lat);
+            double stopLon = Double.parseDouble(lon);
         }
 
         return true;
