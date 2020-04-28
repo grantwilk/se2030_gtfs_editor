@@ -263,6 +263,7 @@ public class GTFSFile {
             throw new IOException("Missing attribute \"stop_lon\" in in \"stops.txt\"");
         }
 
+        // create list of all stop ids in this file
         ArrayList<String> stopIDS = new ArrayList<>();
 
         // Check each line for proper information
