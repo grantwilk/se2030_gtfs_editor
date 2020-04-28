@@ -1,6 +1,5 @@
 package gtfsapp.file;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.TripID;
@@ -49,6 +48,11 @@ public class GTFSFile {
      * Regular expression for a time stamp in HH:MM:SS form
      */
     private static final String TIME_STAMP_REGEX = "^([2][0-3]|[0-1]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
+
+    /**
+     * Regular expression for a hexadecimal color
+     */
+    private static final String COLOR_REGEX = "^[0-9a-fA-F]{6}";
 
     /**
      * The internal feed
@@ -431,7 +435,7 @@ public class GTFSFile {
         ArrayList<String> tripIDS = new ArrayList<>();
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size(); i++) {
+        for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
