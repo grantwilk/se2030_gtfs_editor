@@ -10,19 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-static final String ROUTE_VALIDATION_PATH = "samples/route-validation-samples/";
-
 class ValidateRoutesTest {
 
     static final String ROUTE_VALIDATION_PATH = "samples/route-validation-samples/";
-
-    Path path = Paths.get(ROUTE_VALIDATION_PATH + fileName);
-
-    // read all lines from the file
-    List<String> lines = Files.readAllLines(path);
-
-    // validate the stop times
-        GTFSFile.validateRoutes(lines);
 
     void validateTestFile(String fileName) throws IOException {
 
