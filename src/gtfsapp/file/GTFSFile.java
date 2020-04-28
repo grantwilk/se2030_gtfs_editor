@@ -533,12 +533,8 @@ public class GTFSFile {
         // calculate millis
         long millis = hours * MILLIS_IN_HOUR + minutes * MILLIS_IN_MINUTE + seconds * MILLIS_IN_SECOND;
 
-        // time zone offset
-        // TODO - find a better way to accommodate time zone offsets that works for other time zones
-        long timeZoneOffset = 6 * MILLIS_IN_HOUR;
-
         // return new date using millis and time zone offset
-        return new Date(millis + timeZoneOffset);
+        return new Date(millis);
 
     }
 
