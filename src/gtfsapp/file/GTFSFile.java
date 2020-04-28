@@ -65,7 +65,7 @@ public class GTFSFile {
     private File routeFile;
 
     /**
-     * The "stops.txt" file
+     * The "sunny-day-one.txt" file
      */
     private File stopFile;
 
@@ -97,7 +97,7 @@ public class GTFSFile {
         } else if (stopTimesFile == null) {
             throw new IOException("Required GTFS file \"stop_times.txt\" was not found.");
         } else if (stopFile == null) {
-            throw new IOException("Required GTFS file \"stops.txt\" was not found.");
+            throw new IOException("Required GTFS file \"sunny-day-one.txt\" was not found.");
         }
 
         // create a new GTFS feed
@@ -186,8 +186,8 @@ public class GTFSFile {
                     stopTimesFile = file;
                     break;
 
-                // if the file name is stops.txt
-                case "stops.txt":
+                // if the file name is sunny-day-one.txt
+                case "sunny-day-one.txt":
                     if (stopFile != null) {
                         throw new IOException("Found multiple \"" + fileName + "\" files.");
                     }
@@ -223,7 +223,7 @@ public class GTFSFile {
 
             // check if route id is present
             int routeIdIndex = format.indexOf("route_id");
-            String routeID = currentLine.get( routeIdIndex);
+            String routeID = currentLine.get(routeIdIndex);
             if(routeID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"routes.txt\".");
             }
@@ -243,15 +243,27 @@ public class GTFSFile {
      * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateStops(List<String> lines) throws IOException {
+    public static boolean validateStops(List<String> lines) throws IOException, NumberFormatException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
 
         // check if format contains stop_id field
-        if (!format.contains("stop_id")) {
-            throw new IOException();
+        if(!format.contains("stop_id")) {
+            throw new IOException("Missing attribute \"stop_id\" in in \"stops.txt\"");
         }
+
+        // check for stop latitude
+        if(!format.contains("stop_lat")) {
+            throw new IOException("Missing attribute \"stop_lat\" in in \"stops.txt\"");
+        }
+
+        // check for stop longitude
+        if(!format.contains("stop_lon")) {
+            throw new IOException("Missing attribute \"stop_lon\" in in \"stops.txt\"");
+        }
+
+        ArrayList<String> stopIDS = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size() - 1; i++) {
@@ -260,20 +272,36 @@ public class GTFSFile {
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"stops.txt\".");
+                throw new IOException("Missing one or more required GTFS attributes in \"stops.txt\"");
             }
 
             // check if stop id is present
             int stopIdIndex = format.indexOf("stop_id");
             String stopID = currentLine.get(stopIdIndex);
             if(stopID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"stops.txt\".");
+                throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
             }
 
-            // check if stop id already exists
-            if(StopID.exists(stopID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"stops.txt\".");
+            // check if stop id already exists in file
+            if(stopIDS.contains(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
             }
+            stopIDS.add(stopID);
+
+            // check if stop id already exists in program
+            if(StopID.exists(stopID)) {
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+
+            // check for stop latitude and longitude
+            String lat = currentLine.get(format.indexOf("stop_lat"));
+            String lon = currentLine.get(format.indexOf("stop_lon"));
+            if(lat.isEmpty() || lon.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
+            }
+            // check to make sure stop latitude and longitude are doubles
+            double stopLat = Double.parseDouble(lat);
+            double stopLon = Double.parseDouble(lon);
         }
 
         return true;
@@ -388,7 +416,7 @@ public class GTFSFile {
 
         return true;
     }
-    
+
     /**
      * Converts a hex color string to a Java FX color
      *
@@ -483,22 +511,32 @@ public class GTFSFile {
             }
 
             // Create new trip for this line
-            String tripID = tripFields.get("trip_id");
-            Trip trip = new Trip(feed, tripID);
+            Trip trip;
+            String tripID;
+            tripID = tripFields.get("trip_id");
+            trip = new Trip(feed, tripID);
+
 
             // Add trip to its route
-            Route route = routes.get(tripFields.get("route_id"));
-            route.addTrip(trip);
+            if(tripFields.containsKey("route_id")) {
+                String routeID = tripFields.get("route_id");
+                Route route;
+                if (!routeID.isEmpty()) {
+                    route = routes.get(routeID);
+                    route.addTrip(trip);
+                }
+            }
 
             // Set trip headsign
-            if(!tripFields.get("trip_headsign").isEmpty()) {
+            if(tripFields.containsKey("trip_headsign")) {
                 String headSign = tripFields.get("trip_headsign");
-                trip.setHeadSign(headSign);
+                if (!headSign.isEmpty()) {
+                    trip.setHeadSign(headSign);
+                }
             }
 
             // Add trip to return hash map
             trips.put(tripID,trip);
-
         }
 
         return trips;

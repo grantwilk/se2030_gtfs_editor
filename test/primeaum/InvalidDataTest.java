@@ -6,29 +6,33 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class LineMissingAttributeTest extends ValidateStopsTest {
+public class InvalidDataTest extends ValidateStopsTest {
 
 
     @Test
-    void validateLineMissingStopID() {
+    void nonDoubleLat() {
         try {
-            validateStops("line-missing-stopid.txt");
+            validateStops("invalid-data-lat.txt");
             fail("Did not throw exception when one was expected");
-        } catch(IOException e) { }
+        } catch(IOException e) {
+
+        } catch(NumberFormatException e) { }
     }
 
     @Test
-    void validateLineMissingStopLat() {
+    void nonDoubleLon() {
         try {
-            validateStops("line-missing-stop-lon.txt");
+            validateStops("invalid-data-lon.txt");
             fail("Did not throw exception when one was expected");
-        } catch(IOException e) { }
+        } catch(IOException e) {
+
+        } catch(NumberFormatException e) { }
     }
 
     @Test
-    void validateLineMissingStopLon() {
+    void duplicateStopID() {
         try {
-            validateStops("line-missing-stop-lon.txt");
+            validateStops("invalid-data-duplicate-id");
             fail("Did not throw exception when one was expected");
         } catch(IOException e) { }
     }
