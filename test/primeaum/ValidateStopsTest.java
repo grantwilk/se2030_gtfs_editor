@@ -8,39 +8,34 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 class ValidateStopsTest {
 
+    static final String STOPS_VALIDATION_ROOT = "samples/stop-validation-samples/";
 
-    @BeforeEach
-    void setUp() {
 
-    }
+    void validateStops(String fileName) throws IOException {
+        // get the file path from the file name
+        Path path = Paths.get(STOPS_VALIDATION_ROOT + fileName);
 
-    @AfterEach
-    void tearDown() {
+        // read all lines from the file
+        List<String> lines = Files.readAllLines(path);
+
+        // validate the stop times
+        GTFSFile.validateStops(lines);
     }
 
     @Test
-    void validateRoutes() {
-
+    void sunnyDayOne() throws IOException {
+        validateStops("sunny-day-one.txt");
     }
 
     @Test
-    void validateStops() {
-        File file = new File("samples/rainy-day-1/stops.txt");
-        List<File> files = new ArrayList<>();
-        files.add(file);
-        GTFSFile testFile;
-        try {
-            testFile = new GTFSFile(files);
-            List<String> lines = Files.readAllLines(file.toPath());
-            testFile.validateStops(lines);
-
-        } catch(IOException e) { }
-
-
+    void sunnyDayTwo() throws IOException {
+        validateStops("sunny-day-two.txt");
     }
 }
