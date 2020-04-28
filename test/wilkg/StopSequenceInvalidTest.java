@@ -37,8 +37,8 @@ public class StopSequenceInvalidTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the number format exception thrown by the invalid number
-        catch (NumberFormatException e) { }
+        // catch the illegal argument exception thrown by the invalid number
+        catch (IllegalArgumentException e) { }
 
     }
 

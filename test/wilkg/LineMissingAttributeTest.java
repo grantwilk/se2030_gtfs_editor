@@ -12,7 +12,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the trip ID attribute
      */
     @Test
-    void lineMissingTripID() {
+    void lineMissingTripID() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -20,8 +20,8 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        // catch the exception thrown by the missing attribute
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -29,7 +29,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the arrival time attribute
      */
     @Test
-    void lineMissingArrivalTime() {
+    void lineMissingArrivalTime() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -38,7 +38,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
         }
 
         // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -46,7 +46,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the departure time attribute
      */
     @Test
-    void lineMissingDepartureTime() {
+    void lineMissingDepartureTime() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -55,7 +55,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
         }
 
         // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -63,7 +63,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the stop ID attribute
      */
     @Test
-    void lineMissingStopID() {
+    void lineMissingStopID() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -72,7 +72,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
         }
 
         // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -80,7 +80,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that has one line missing the stop sequence attribute
      */
     @Test
-    void lineMissingStopSequence() {
+    void lineMissingStopSequence() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -89,7 +89,7 @@ public class LineMissingAttributeTest extends ValidateStopTimesTest {
         }
 
         // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        catch (IllegalArgumentException e) { }
 
     }
 

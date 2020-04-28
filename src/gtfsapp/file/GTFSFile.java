@@ -187,7 +187,7 @@ public class GTFSFile {
                     break;
 
                 // if the file name is sunny-day-one.txt
-                case "sunny-day-one.txt":
+                case "stops.txt":
                     if (stopFile != null) {
                         throw new IOException("Found multiple \"" + fileName + "\" files.");
                     }
@@ -327,7 +327,7 @@ public class GTFSFile {
                 !format.contains("arrival_time") ||
                 !format.contains("departure_time")
         ) {
-            throw new IOException("Missing one or more required attributes in \"stops_times.txt\".");
+            throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
         }
 
         for (int i = 1; i < lines.size() - 1; i++) {
