@@ -417,12 +417,16 @@ public class GTFSFile {
         List<String> format = tokenizeLine(lines.get(0));
 
         // check if format contains stop_id field
-        if(!format.contains("trip_id")) {
-            throw new IOException();
+        if(!format.contains("trip_id") || !format.contains("arrival_time") || !format.contains("departure_time")
+                || !format.contains("stop_id") || !format.contains("stop_sequence")) {
+            throw new IOException("Missing one or more required attributes in first line of \"trip.txt\"");
         }
 
+        ArrayList<String> sequenceList = new ArrayList<>();
+        ArrayList<String> tripIDS = new ArrayList<>();
+
         // Check each line for proper information
-        for (int i = 1; i < lines.size(); i++) {
+        for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
@@ -431,17 +435,38 @@ public class GTFSFile {
                 throw new IOException("Missing one or more required GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if stop id is present
+            // check if trip id is present
             int tripIdIndex = format.indexOf("trip_id");
             String tripID = currentLine.get(tripIdIndex);
+            int arriveTimeIndex = format.indexOf("arrival_time");
+            String arriveTime = currentLine.get(arriveTimeIndex);
+            int departTimeIndex = format.indexOf("departure_time");
+            String departTime = currentLine.get(departTimeIndex);
+            int stopIdIndex = format.indexOf("stop_id");
+            String stopId = currentLine.get(stopIdIndex);
+            int stopSeqIndex = format.indexOf("stop_sequence");
+            String stopSeq = currentLine.get(stopSeqIndex);
+
             if(tripID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
             }
 
-            // check if stop id already exists
-            if(StopID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"tripss.txt\".");
+            if(tripID.isEmpty() || arriveTime.isEmpty()|| departTime.isEmpty()|| stopId.isEmpty()|| stopSeq.isEmpty()){
+                throw new IOException("One or more required elements is missing in file \"trips.txt\".");
             }
+            if(sequenceList.contains(stopSeq) && tripIDS.contains(tripID)){
+                throw new IOException("One or more duplicate trip IDs in file \"trips.txt\"");
+            }
+            sequenceList.add(stopSeq);
+            tripIDS.add(tripID);
+        }
+
+        if(lines.size()==1){
+            throw new IOException("Missing data for one or more elements in file \"trips.txt\".");
+        }
+
+        if(lines.size()==2){
+            throw new IOException("Trip only has one stop in file \"trips.txt\".");
         }
 
         return true;
