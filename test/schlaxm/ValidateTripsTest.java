@@ -52,7 +52,7 @@ class ValidateTripsTest {
 
 
     /**
-     * Tests a trip file, missing the trip_id, should throw an exception
+     * Tests a trip file, missing the trip_id
      */
     @Test
     void validateMissingInformation() throws IOException {
@@ -67,14 +67,42 @@ class ValidateTripsTest {
     }
 
     /**
-     *
+     * Tests a trip file, missing data for the trip
+     */
+    @Test
+    void validateNoData() throws IOException {
+
+        // attempt to validate the test file
+        try {
+            validateTestFile("trips-no-data.txt");
+            fail("Exception not thrown");
+        }
+        catch (IOException e) {        }
+    }
+
+    /**
+     * Tests a trip file with a duplicate trip ID, done by seeing if the same trip has the same stop sequence number
      */
     @Test
     void validateDuplicate() throws IOException {
 
         // attempt to validate the test file
         try {
-            validateTestFile("trip-duplicate-id.txt");
+            validateTestFile("trips-duplicate-data.txt");
+            fail("Exception not thrown");
+        }
+        catch (IOException e) {        }
+    }
+
+    /**
+     * Tests a trip file to see if there is only one stop on it
+     */
+    @Test
+    void validateSingleStop() throws IOException {
+
+        // attempt to validate the test file
+        try {
+            validateTestFile("trips-one-stop.txt");
             fail("Exception not thrown");
         }
         catch (IOException e) {        }

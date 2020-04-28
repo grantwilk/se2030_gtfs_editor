@@ -1,5 +1,6 @@
 package gtfsapp.file;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.TripID;
@@ -393,6 +394,9 @@ public class GTFSFile {
             throw new IOException("Missing one or more required attributes in first line of \"trip.txt\"");
         }
 
+        ArrayList<String> sequenceList = new ArrayList<>();
+        ArrayList<String> tripIDS = new ArrayList<>();
+
         // Check each line for proper information
         for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
@@ -404,11 +408,17 @@ public class GTFSFile {
             }
 
             // check if trip id is present
-            String tripID = currentLine.get(format.indexOf("trip_id"));
-            String arriveTime = currentLine.get(format.indexOf("arrival_time"));
-            String departTime = currentLine.get(format.indexOf("departure_time"));
-            String stopId = currentLine.get(format.indexOf("stop_id"));
-            String stopSeq = currentLine.get(format.indexOf("stop_sequence"));
+            int tripIdIndex = format.indexOf("trip_id");
+            String tripID = currentLine.get(tripIdIndex);
+            int arriveTimeIndex = format.indexOf("arrival_time");
+            String arriveTime = currentLine.get(arriveTimeIndex);
+            int departTimeIndex = format.indexOf("departure_time");
+            String departTime = currentLine.get(departTimeIndex);
+            int stopIdIndex = format.indexOf("stop_id");
+            String stopId = currentLine.get(stopIdIndex);
+            int stopSeqIndex = format.indexOf("stop_sequence");
+            String stopSeq = currentLine.get(stopSeqIndex);
+
             if(tripID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
             }
@@ -416,8 +426,19 @@ public class GTFSFile {
             if(tripID.isEmpty() || arriveTime.isEmpty()|| departTime.isEmpty()|| stopId.isEmpty()|| stopSeq.isEmpty()){
                 throw new IOException("One or more required elements is missing in file \"trips.txt\".");
             }
+            if(sequenceList.contains(stopSeq) && tripIDS.contains(tripID)){
+                throw new IOException("One or more duplicate trip IDs in file \"trips.txt\"");
+            }
+            sequenceList.add(stopSeq);
+            tripIDS.add(tripID);
+        }
 
+        if(lines.size()==1){
+            throw new IOException("Missing data for one or more elements in file \"trips.txt\".");
+        }
 
+        if(lines.size()==2){
+            throw new IOException("Trip only has one stop in file \"trips.txt\".");
         }
 
         return true;
