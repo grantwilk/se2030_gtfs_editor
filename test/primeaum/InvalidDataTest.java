@@ -46,4 +46,15 @@ public class InvalidDataTest extends ValidateStopsTest {
         } catch(IOException e) { }
     }
 
+    /**
+     * Run validation test with stop_name in format line but attribute is missing in successive line
+     */
+    @Test
+    void expectedStopName() {
+        try {
+            validateStops("invalid-data-missing-stop-name");
+            fail("Did not throw exception when one was expected");
+        } catch(IOException e) { }
+    }
+
 }
