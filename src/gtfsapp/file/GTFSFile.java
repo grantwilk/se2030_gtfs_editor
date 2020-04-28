@@ -487,7 +487,7 @@ public class GTFSFile {
 
             // put all route attributes into hash map
             for(int j = 0; j < format.size(); j++) {
-                routeFields.put(format.get(i),currentLine.get(i));
+                routeFields.put(format.get(j),currentLine.get(j));
             }
 
             // get route ID and route type
@@ -500,45 +500,31 @@ public class GTFSFile {
 
             // set route short name
             String shortName = routeFields.get("route_short_name");
-            if(!shortName.isEmpty()) {
-                route.setShortName(shortName);
-            }
+            route.setShortName(shortName);
 
             // set long name
             String longName = routeFields.get("route_long_name");
-            if(!longName.isEmpty()) {
-                route.setLongName(longName);
-            }
+            route.setLongName(longName);
 
             // set description
             String description = routeFields.get("route_desc");
-            if(!description.isEmpty()) {
-                route.setDesc(description);
-            }
+            route.setDesc(description);
 
             // set url
             String url = routeFields.get("route_url");
-            if(!url.isEmpty()) {
-                route.setURL(url);
-            }
+            route.setURL(url);
 
             // set color
             String color = routeFields.get("route_color");
-            if(!color.isEmpty()) {
-                route.setColor(hexToColor(color));
-            }
-
-            // set text color
-            String textColor = routeFields.get("route_text_color");
-            if(!textColor.isEmpty()) {
-                route.setTextColor(hexToColor(textColor));
-            }
+            route.setColor(hexToColor(color));
 
             // add route to return hash map
             routes.put(routeID, route);
+
         }
 
         return routes;
+
     }
 
     private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops, List<String> lines) {
