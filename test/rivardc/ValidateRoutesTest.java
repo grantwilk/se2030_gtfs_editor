@@ -24,7 +24,18 @@ class ValidateRoutesTest {
     // validate the stop times
         GTFSFile.validateRoutes(lines);
 
+    void validateTestFile(String fileName) throws IOException {
 
+        // get the file path from the file name
+        Path path = Paths.get(TRIP_VALIDATION_PATH + fileName);
+
+        // read all lines from the file
+        List<String> lines = Files.readAllLines(path);
+
+        // validate the stop times
+        GTFSFile.validateTrips(lines);
+
+    }
     /**
     * tests to see if the routes file fully compiles
      **/
