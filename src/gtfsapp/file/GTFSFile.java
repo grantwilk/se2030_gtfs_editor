@@ -447,8 +447,7 @@ public class GTFSFile {
             Trip trip = new Trip(feed, tripID);
 
             // Add trip to its route
-            String routeID = tripFields.get("route_id");
-            Route route = routes.get(routeID);
+            Route route = routes.get(tripFields.get("route_id"));
             route.addTrip(trip);
 
             // Set trip headsign
@@ -537,6 +536,7 @@ public class GTFSFile {
         HashMap<String, StopTime> stopTimes = new HashMap<>();
 
         for(int i = 0; i < lines.size(); i++) {
+
             // create a new hash map for the attributes of the route for this line
             HashMap<String, String> stopTimeFields = new HashMap<>();
 
@@ -553,7 +553,12 @@ public class GTFSFile {
             int sequence = Integer.parseInt(stopTimeFields.get("stop_sequence"));
             Stop stop = stops.get(stopID);
 
+            // create a new stop time
             StopTime stopTime = new StopTime(feed, stop, sequence);
+
+            // Add stop time to its trip
+            Trip trip = trips.get(stopTimeFields.get("trip_id"));
+            trip.addStopTime(stopTime);
 
             // set arrival time
             String arrivalTime = stopTimeFields.get("arrival_time");
