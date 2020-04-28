@@ -12,7 +12,7 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that is missing the trip ID attribute
      */
     @Test
-    void fileMissingTripID() {
+    void fileMissingTripID() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -20,8 +20,8 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        // catch the exception thrown by the missing attribute
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -29,7 +29,7 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that is missing the arrival time attribute
      */
     @Test
-    void fileMissingArrivalTime() {
+    void fileMissingArrivalTime() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -37,8 +37,8 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        // catch the exception thrown by the missing attribute
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -46,7 +46,7 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that is missing the departure time attribute
      */
     @Test
-    void fileMissingDepartureTime() {
+    void fileMissingDepartureTime() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -54,8 +54,8 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        // catch the exception thrown by the missing attribute
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -63,7 +63,7 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that is missing the stop ID attribute
      */
     @Test
-    void fileMissingStopID() {
+    void fileMissingStopID() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -71,8 +71,8 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        // catch the exception thrown by the missing attribute
+        catch (IllegalArgumentException e) { }
 
     }
 
@@ -80,7 +80,7 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file that is missing the stop sequence attribute
      */
     @Test
-    void fileMissingStopSequence() {
+    void fileMissingStopSequence() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -88,8 +88,8 @@ public class FileMissingAttributeTest extends ValidateStopTimesTest {
             fail("Method did not throw expected exception.");
         }
 
-        // catch the IO exception thrown by the missing attribute
-        catch (IOException e) { }
+        // catch the exception thrown by the missing attribute
+        catch (IllegalArgumentException e) { }
 
     }
 
