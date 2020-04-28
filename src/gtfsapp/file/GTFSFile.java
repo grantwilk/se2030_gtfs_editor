@@ -223,7 +223,6 @@ public class GTFSFile {
         return true;
     }
 
-
     /**
      * Parse through stops file to check that all data is valid
      * @param lines List of each line in the stops file
@@ -312,10 +311,6 @@ public class GTFSFile {
 
         return true;
     }
-
-<<<<<<< HEAD
-=======
-
 
     /**
      * Parse through Trips file to check that all data is valid
