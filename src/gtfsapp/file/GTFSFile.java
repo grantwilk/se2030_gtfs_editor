@@ -233,8 +233,6 @@ public class GTFSFile {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
-        // remove format line
-        lines.remove(0);
 
         // check if format contains stop_id field
         if(!format.contains("stop_id")) {
@@ -277,8 +275,6 @@ public class GTFSFile {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
-        // remove format line
-        lines.remove(0);
 
         // check for required fields in format line
         if(!format.contains("trip_id") || !format.contains("stop_id") || !format.contains("stop_sequence")) {
@@ -322,8 +318,6 @@ public class GTFSFile {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
-        // remove format line
-        lines.remove(0);
 
         // check if format contains stop_id field
         if(!format.contains("trip_id")) {
@@ -440,8 +434,6 @@ public class GTFSFile {
             // Create new hash map to create a trip from this line
             HashMap<String, String> tripFields = new HashMap<>();
 
-
-
             // Get line in file
             List<String> currentLine = tokenizeLine(lines.get(i));
 
@@ -451,26 +443,32 @@ public class GTFSFile {
             }
 
             // Create new trip for this line
-            String tripID = tripFields.get("trip_id");
-            Trip trip = new Trip(feed, tripID);
+            Trip trip;
+            String tripID;
+            tripID = tripFields.get("trip_id");
+            trip = new Trip(feed, tripID);
+
 
             // Add trip to its route
-            String routeID = tripFields.get("route_id");
-            Route route;
-            if(!routeID.isEmpty()) {
-                route = routes.get(routeID);
-                route.addTrip(trip);
+            if(tripFields.containsKey("route_id")) {
+                String routeID = tripFields.get("route_id");
+                Route route;
+                if (!routeID.isEmpty()) {
+                    route = routes.get(routeID);
+                    route.addTrip(trip);
+                }
             }
 
             // Set trip headsign
-            String headSign = tripFields.get("trip_headsign");
-            if(!headSign.isEmpty()) {
-                trip.setHeadSign(headSign);
+            if(tripFields.containsKey("trip_headsign")) {
+                String headSign = tripFields.get("trip_headsign");
+                if (!headSign.isEmpty()) {
+                    trip.setHeadSign(headSign);
+                }
             }
 
             // Add trip to return hash map
             trips.put(tripID,trip);
-
         }
         return trips;
     }
