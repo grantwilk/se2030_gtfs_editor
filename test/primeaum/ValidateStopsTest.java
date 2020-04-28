@@ -1,46 +1,60 @@
 package primeaum;
 
 import gtfsapp.file.GTFSFile;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ValidateStopsTest {
 
+    static final String STOPS_VALIDATION_ROOT = "samples/stop-validation-samples/";
 
-    @BeforeEach
-    void setUp() {
 
+    /**
+     * Runs validateStops method with given file name
+     * @param fileName Test file to use for validation
+     * @throws IOException Exception thrown by validation method
+     */
+    void validateStops(String fileName) throws IOException {
+        // get the file path from the file name
+        Path path = Paths.get(STOPS_VALIDATION_ROOT + fileName);
+
+        // read all lines from the file
+        List<String> lines = Files.readAllLines(path);
+
+        // validate the stop times
+        GTFSFile.validateStops(lines);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
+    /**
+     * First sunny day scenario with a correctly formatted file
+     * @throws IOException Thrown if an error occured
+     */
     @Test
-    void validateRoutes() {
-
-    }
-
-    @Test
-    void validateStops() {
-        File file = new File("samples/rainy-day-1/stops.txt");
-        List<File> files = new ArrayList<>();
-        files.add(file);
-        GTFSFile testFile;
+    void sunnyDayOne() {
         try {
-            testFile = new GTFSFile(files);
-            List<String> lines = Files.readAllLines(file.toPath());
-            testFile.validateStops(lines);
+            validateStops("sunny-day-one.txt");
+        } catch(IOException e) {
+            fail("An exception was thrown when one was not expected.");
+        }
+    }
 
-        } catch(IOException e) { }
-
-
+    /**
+     * Second sunny day scenario with a correctly formatted file
+     * @throws IOException Thrown if an error occured
+     */
+    @Test
+    void sunnyDayTwo() {
+        try {
+            validateStops("sunny-day-two.txt");
+        } catch(IOException e) {
+            fail("An exception was thrown when one was not expected.");
+        }
     }
 }
