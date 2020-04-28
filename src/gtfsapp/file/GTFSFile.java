@@ -187,7 +187,7 @@ public class GTFSFile {
                     break;
 
                 // if the file name is sunny-day-one.txt
-                case "sunny-day-one.txt":
+                case "stops.txt":
                     if (stopFile != null) {
                         throw new IOException("Found multiple \"" + fileName + "\" files.");
                     }
