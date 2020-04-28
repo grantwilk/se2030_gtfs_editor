@@ -211,7 +211,7 @@ public class GTFSFile {
 
             // check if route id is present
             int routeIdIndex = format.indexOf("route_id");
-            String routeID = currentLine.get( routeIdIndex);
+            String routeID = currentLine.get(routeIdIndex);
             if(routeID.isEmpty()) {
                 throw new IOException("One or more invalid GTFS attributes in file \"" + fileName + "\".");
             }
