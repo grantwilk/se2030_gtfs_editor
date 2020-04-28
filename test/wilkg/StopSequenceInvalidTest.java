@@ -12,7 +12,7 @@ public class StopSequenceInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose stop sequence attribute is not a number
      */
     @Test
-    void validateStopSequenceTooSmall() throws IOException {
+    void stopSequenceTooSmall() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -29,7 +29,7 @@ public class StopSequenceInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose stop sequence attribute is not a number
      */
     @Test
-    void validateStopSequenceNaN() throws IOException {
+    void stopSequenceNaN() throws IOException {
 
         // attempt to validate the test file
         try {
