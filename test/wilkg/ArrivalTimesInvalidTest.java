@@ -12,7 +12,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time hours component is too large
      */
     @Test
-    void validateArrivalTimeHoursTooLarge() throws IOException {
+    void arrivalTimeHoursTooLarge() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -29,7 +29,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time hours component is too small
      */
     @Test
-    void validateArrivalTimeHoursTooSmall() throws IOException {
+    void arrivalTimeHoursTooSmall() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -46,7 +46,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time hours component is not a number
      */
     @Test
-    void validateArrivalTimeHoursNaN() throws IOException {
+    void arrivalTimeHoursNaN() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -63,7 +63,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time minutes component is too large
      */
     @Test
-    void validateArrivalTimeMinutesTooLarge() throws IOException {
+    void arrivalTimeMinutesTooLarge() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -80,7 +80,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time minutes component is too small
      */
     @Test
-    void validateArrivalTimeMinutesTooSmall() throws IOException {
+    void arrivalTimeMinutesTooSmall() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -97,7 +97,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time minutes component is not a number
      */
     @Test
-    void validateArrivalTimeMinutesNaN() throws IOException {
+    void arrivalTimeMinutesNaN() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -114,7 +114,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time seconds component is too large
      */
     @Test
-    void validateArrivalTimeSecondsTooLarge() throws IOException {
+    void arrivalTimeSecondsTooLarge() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -131,7 +131,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time seconds component is too small
      */
     @Test
-    void validateArrivalTimeSecondsTooSmall() throws IOException {
+    void arrivalTimeSecondsTooSmall() throws IOException {
 
         // attempt to validate the test file
         try {
@@ -148,7 +148,7 @@ public class ArrivalTimesInvalidTest extends ValidateStopTimesTest {
      * Tests an invalid stop times file with a stop time whose arrival time seconds component is not a number
      */
     @Test
-    void validateArrivalTimeSecondsNaN() throws IOException {
+    void arrivalTimeSecondsNaN() throws IOException {
 
         // attempt to validate the test file
         try {
