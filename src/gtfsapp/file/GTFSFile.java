@@ -236,12 +236,21 @@ public class GTFSFile {
             if(RouteID.exists(routeID)) {
                 throw new IOException("One or more duplicate GTFS attributes in file \"routes.txt\".");
             }
-
+            // looks for duplicate ID
             if(routeIDS.contains(routeID)) {
                 throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
             }
             routeIDS.add(routeID);
+
+            //Checks if the color is in the correct format
+            int routeColorIndex = format.indexOf("route_color");
+            String routeColor = currentLine.get(routeColorIndex);
+            colorString.matches(COLOR_REGEX);
+
+
         }
+
+
 
         return true;
     }
