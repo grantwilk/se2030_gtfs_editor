@@ -268,7 +268,7 @@ public class GTFSFile {
         ArrayList<String> stopIDS = new ArrayList<>();
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
@@ -331,43 +331,59 @@ public class GTFSFile {
             throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
         }
 
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
 
             // tokenize line
             List<String> line = tokenizeLine(lines.get(i));
 
+            // throw an exception if there are more elements in the line than there are format elements
+            if (line.size() > format.size()) {
+                throw new IllegalArgumentException();
+            }
+
             // map fields into a hash map
             Map<String, String> stopTimeFields = new HashMap<>();
-            for (int j = 0; j < format.size(); j++) {
+            for (int j = 0; j < line.size(); j++) {
                 stopTimeFields.put(format.get(j), line.get(j));
             }
 
-            // check to make sure stop IDs fit their regular expression
+            // get all of the values from the hash map
             String tripID = stopTimeFields.get("trip_id");
+            String stopID = stopTimeFields.get("stop_id");
+            String stopSequence = stopTimeFields.get("stop_sequence");
+            String arrivalTime = stopTimeFields.get("arrival_time");
+            String departureTime = stopTimeFields.get("departure_time");
+
+            // throw an exception if any required attributes are null
+            if (tripID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (stopID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (stopSequence == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (arrivalTime == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (departureTime == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+
+            // throw an exception if any required attributes are invalidly formatted
             if (!tripID.matches(ID_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
             }
-
-            // check to make sure stop IDs fit their regular expression
-            String stopID = stopTimeFields.get("stop_id");
             if (!stopID.matches(ID_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop ID in \"stop_times.txt\".");
             }
-
-            // check to make sure stop IDs fit their regular expression
-            String stopSequence = stopTimeFields.get("stop_sequence");
             if (!stopSequence.matches(UNSIGNED_INT_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
             }
-
-            // check to make sure arrival time fit their regular expression
-            String arrivalTime = stopTimeFields.get("arrival_time");
             if (!arrivalTime.matches(TIME_STAMP_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
             }
-
-            // check to make sure departure time its their regular expression
-            String departureTime = stopTimeFields.get("departure_time");
             if (!departureTime.matches(TIME_STAMP_REGEX)) {
                 throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
             }
@@ -398,7 +414,7 @@ public class GTFSFile {
         ArrayList<String> tripIDS = new ArrayList<>();
 
         // Check each line for proper information
-        for (int i = 1; i < lines.size() - 1; i++) {
+        for (int i = 1; i < lines.size(); i++) {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 

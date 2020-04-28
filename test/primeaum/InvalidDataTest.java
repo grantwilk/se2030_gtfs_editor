@@ -22,8 +22,28 @@ public class InvalidDataTest extends ValidateStopsTest {
         } catch(NumberFormatException e) { }
     }
 
+    @Test
+    void missingDoubleLat() {
+        try {
+            validateStops("invalid-data-missing-stop-lat.txt");
+            fail("Did not throw exception when one was expected");
+        } catch(IOException e) {
+
+        } catch(NumberFormatException e) { }
+    }
+
+    @Test
+    void missingDoubleLon() {
+        try {
+            validateStops("invalid-data-missing-stop-lon.txt");
+            fail("Did not throw exception when one was expected");
+        } catch(IOException e) {
+
+        } catch(NumberFormatException e) { }
+    }
+
     /**
-     * Run validation test with an invalud longitude
+     * Run validation test with an invalid longitude
      */
     @Test
     void nonDoubleLon() {
@@ -42,6 +62,17 @@ public class InvalidDataTest extends ValidateStopsTest {
     void duplicateStopID() {
         try {
             validateStops("invalid-data-duplicate-id");
+            fail("Did not throw exception when one was expected");
+        } catch(IOException e) { }
+    }
+
+    /**
+     * Run validation test with stop_name in format line but attribute is missing in successive line
+     */
+    @Test
+    void expectedStopName() {
+        try {
+            validateStops("invalid-data-missing-stop-name");
             fail("Did not throw exception when one was expected");
         } catch(IOException e) { }
     }

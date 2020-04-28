@@ -59,4 +59,15 @@ class ValidateStopTimesTest {
 
     }
 
+    /**
+     * Tests a valid stop times file that has extra format attributes
+     */
+    @Test
+    void extraFormatElement() throws IOException {
+
+        // attempt to validate the test file
+        validateTestFile("extra-format-element.txt");
+
+    }
+
 }
