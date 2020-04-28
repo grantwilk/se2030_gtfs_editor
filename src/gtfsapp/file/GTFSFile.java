@@ -236,7 +236,7 @@ public class GTFSFile {
 
         // check if format contains stop_id field
         if(!format.contains("stop_id")) {
-            throw new IOException();
+            throw new IOException("Missing attribute \"stop_id\"");
         }
 
         // Check each line for proper information
