@@ -1,1 +1,1 @@
-arrival_time,departure_time,stop_id,stop_sequence
+arrival_time,departure_time,stop_id,stop_sequence,service_id

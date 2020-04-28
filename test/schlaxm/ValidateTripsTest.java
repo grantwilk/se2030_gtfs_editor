@@ -107,4 +107,19 @@ class ValidateTripsTest {
         }
         catch (IOException e) {        }
     }
+
+    /**
+     * Tests a trip file to see if there is a service_id in it
+     */
+    @Test
+    void validateNoSerivceId() throws IOException {
+
+        // attempt to validate the test file
+        try {
+            validateTestFile("trips-no-service-id.txt");
+            fail("Exception not thrown");
+        }
+        catch (IOException e) {        }
+    }
+
 }

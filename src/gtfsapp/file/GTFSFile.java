@@ -429,7 +429,7 @@ public class GTFSFile {
         List<String> format = tokenizeLine(lines.get(0));
 
         // check if format contains trip_id field and route_id field
-        if(!format.contains("trip_id") || !format.contains("route_id")) {
+        if(!format.contains("trip_id") || !format.contains("route_id")||!format.contains("service_id")) {
             throw new IOException("Missing one or more required attributes in first line of \"trip.txt\".");
         }
 
