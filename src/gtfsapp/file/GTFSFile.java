@@ -97,6 +97,7 @@ public class GTFSFile {
         // validate files
         validateStops(stopLines);
         validateStopTimes(stopTimeLines);
+        validateTrips(tripLines);
         validateRoutes(routeLines);
 
         // parse the files (must be in this order!)
@@ -189,8 +190,6 @@ public class GTFSFile {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
-        // remove format line
-        lines.remove(0);
 
         // check if format contains route_id field
         if(!format.contains("route_id")) {
@@ -198,9 +197,9 @@ public class GTFSFile {
         }
 
         // Check each line for proper information
-        for(String line:lines) {
+        for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
-            List<String> currentLine = tokenizeLine(line);
+            List<String> currentLine = tokenizeLine(lines.get(i));
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
@@ -240,9 +239,9 @@ public class GTFSFile {
         }
 
         // Check each line for proper information
-        for(String line:lines) {
+        for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
-            List<String> currentLine = tokenizeLine(line);
+            List<String> currentLine = tokenizeLine(lines.get(i));
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
@@ -281,9 +280,9 @@ public class GTFSFile {
             throw new IOException("Missing one or more required attributes in first line of \"stops_times.txt\"");
         }
 
-        for(String line:lines) {
+        for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
-            List<String> currentLine = tokenizeLine(line);
+            List<String> currentLine = tokenizeLine(lines.get(i));
 
             // check if line has required number of elements
             if(currentLine.size() != format.size()) {
@@ -325,9 +324,9 @@ public class GTFSFile {
         }
 
         // Check each line for proper information
-        for(String line:lines) {
+        for (int i = 1; i < lines.size() - 1; i++) {
             // tokenize current line
-            List<String> currentLine = tokenizeLine(line);
+            List<String> currentLine = tokenizeLine(lines.get(i));
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {

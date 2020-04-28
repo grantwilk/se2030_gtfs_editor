@@ -26,6 +26,6 @@ class ValidateStopsTest {
         List<String> lines = Files.readAllLines(path);
 
         // validate the stop times
-        GTFSFile.validateStopTimes(lines);
+        GTFSFile.validateStops(lines);
     }
 }
