@@ -139,7 +139,7 @@ public class GTFSFile {
      */
     public void save(Path path) {
         // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Too many elements in file \"stop_times.txt\".");
     }
 
     /**
@@ -432,54 +432,57 @@ public class GTFSFile {
             throw new IOException("Missing one or more required attributes in first line of \"trip.txt\".");
         }
 
-        ArrayList<String> sequenceList = new ArrayList<>();
-        ArrayList<String> tripIDS = new ArrayList<>();
+        List<String> tripIDs = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size(); i++) {
+
             // tokenize current line
-            List<String> currentLine = tokenizeLine(lines.get(i));
+            List<String> line = tokenizeLine(lines.get(i));
 
-            // make sure all expected elements are there
-            if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"trips.txt\".");
+            // throw an exception if there are more elements in the line than there are format elements
+            if (line.size() > format.size()) {
+                throw new IllegalArgumentException("Too many elements in file \"trips.txt\".");
             }
 
-            // check if trip id is present
-            int tripIdIndex = format.indexOf("trip_id");
-            String tripID = currentLine.get(tripIdIndex);
-            int arriveTimeIndex = format.indexOf("arrival_time");
-            String arriveTime = currentLine.get(arriveTimeIndex);
-            int departTimeIndex = format.indexOf("departure_time");
-            String departTime = currentLine.get(departTimeIndex);
-            int stopIdIndex = format.indexOf("stop_id");
-            String stopId = currentLine.get(stopIdIndex);
-            int stopSeqIndex = format.indexOf("stop_sequence");
-            String stopSeq = currentLine.get(stopSeqIndex);
-
-            if(tripID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"trips.txt\".");
+            // map fields into a hash map
+            Map<String, String> tripFields = new HashMap<>();
+            for (int j = 0; j < line.size(); j++) {
+                tripFields.put(format.get(j), line.get(j));
             }
 
-            if(tripID.isEmpty() || arriveTime.isEmpty()|| departTime.isEmpty()|| stopId.isEmpty()|| stopSeq.isEmpty()){
-                throw new IOException("One or more required elements is missing in file \"trips.txt\".");
-            }
-            if(sequenceList.contains(stopSeq) && tripIDS.contains(tripID)){
-                throw new IOException("One or more duplicate trip IDs in file \"trips.txt\".");
-            }
-            sequenceList.add(stopSeq);
-            tripIDS.add(tripID);
-        }
+            // get all of the values from the hash map
+            String routeID = tripFields.get("route_id");
+            String tripID = tripFields.get("trip_id");
 
-        if(lines.size()==1){
-            throw new IOException("Missing data for one or more elements in file \"trips.txt\".");
-        }
+            // throw an exception if any required attributes are null
+            if (routeID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
+            if (tripID == null) {
+                throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
+            }
 
-        if(lines.size()==2){
-            throw new IOException("Trip only has one stop in file \"trips.txt\".");
+            // throw an exception if any required attributes are invalidly formatted
+            if (!routeID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted route ID in \"stop_times.txt\".");
+            }
+            if (!tripID.matches(ID_REGEX)) {
+                throw new IllegalArgumentException("Invalidly formatted trip ID in \"stop_times.txt\".");
+            }
+
+            // throw an exception if the trip ID already exists
+            if (tripIDs.contains(tripID)) {
+                throw new IllegalArgumentException("One or more IDs occur multiple times in \"stop_times.txt\".");
+            }
+
+            // add the trip IDs
+            tripIDs.add(tripID);
+
         }
 
         return true;
+
     }
 
     /**
@@ -568,11 +571,11 @@ public class GTFSFile {
             HashMap<String, String> tripFields = new HashMap<>();
 
             // Get line in file
-            List<String> currentLine = tokenizeLine(lines.get(i));
+            List<String> line = tokenizeLine(lines.get(i));
 
             // Add each attribute in line to hash map
-            for(int j = 0; j < format.size(); j++) {
-                tripFields.put(format.get(j),currentLine.get(j));
+            for(int j = 0; j < line.size(); j++) {
+                tripFields.put(format.get(j),line.get(j));
             }
 
             // Create new trip for this line
@@ -626,11 +629,11 @@ public class GTFSFile {
             HashMap<String, String> routeFields = new HashMap<>();
 
             // get next line from file
-            List<String> currentLine = tokenizeLine(lines.get(i));
+            List<String> line = tokenizeLine(lines.get(i));
 
             // put all route attributes into hash map
-            for(int j = 0; j < format.size(); j++) {
-                routeFields.put(format.get(j),currentLine.get(j));
+            for(int j = 0; j < line.size(); j++) {
+                routeFields.put(format.get(j),line.get(j));
             }
 
             // get route ID and route type
@@ -684,11 +687,11 @@ public class GTFSFile {
             HashMap<String, String> stopTimeFields = new HashMap<>();
 
             // get next line from file
-            List<String> currentLine = tokenizeLine(lines.get(i));
+            List<String> line = tokenizeLine(lines.get(i));
 
             // put all route attributes into hash map
-            for(int j = 0; j < format.size(); j++) {
-                stopTimeFields.put(format.get(j),currentLine.get(j));
+            for(int j = 0; j < line.size(); j++) {
+                stopTimeFields.put(format.get(j),line.get(j));
             }
 
             // Get required attributes for stop time
@@ -746,11 +749,11 @@ public class GTFSFile {
             HashMap<String, String> stopFields = new HashMap<>();
 
             // get next line from file
-            List<String> currentLine = tokenizeLine(lines.get(i));
+            List<String> line = tokenizeLine(lines.get(i));
 
             // put all stop attributes into hash map
-            for(int j = 0; j < format.size(); j++) {
-                stopFields.put(format.get(j),currentLine.get(j));
+            for(int j = 0; j < line.size(); j++) {
+                stopFields.put(format.get(j),line.get(j));
             }
 
             // get stop id and create new stop
