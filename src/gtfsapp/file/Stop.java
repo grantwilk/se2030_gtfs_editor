@@ -296,8 +296,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        // TODO - remove placeholder
-        return "Lorem ipsum dolor";
+        return name;
     }
 
     /**

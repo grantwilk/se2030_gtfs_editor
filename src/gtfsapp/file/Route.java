@@ -499,8 +499,13 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        // TODO - remove placeholder
-        return "Lorem ipsum dolor";
+        if (longName != null && !longName.equals("")) {
+            return getLongName();
+        } else if (shortName != null && !shortName.equals("")) {
+            return getShortName();
+        } else {
+            return "Unnamed Route";
+        }
     }
 
     /**

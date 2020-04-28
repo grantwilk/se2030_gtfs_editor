@@ -381,8 +381,11 @@ public class Trip extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        // TODO - remove placeholders
-        return "Lorem ipsum dolor";
+        if (headSign != null && !headSign.equals("")) {
+            return getHeadSign();
+        } else {
+            return "Unnamed Trip";
+        }
     }
 
     /**

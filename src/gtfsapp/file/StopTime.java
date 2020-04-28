@@ -250,8 +250,7 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
      */
     @Override
     public String getSubtitle() {
-        // TODO - remove placeholder
-        return "Lorem ipsum dolor";
+        return String.format("Arrives at %s", arrivalTime.toString());
     }
 
     /**
