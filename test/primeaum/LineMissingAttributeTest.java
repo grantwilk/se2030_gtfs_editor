@@ -10,8 +10,12 @@ public class LineMissingAttributeTest extends ValidateStopsTest {
 
 
     @Test
-    void validateLineMissingTripID() {
+    void validateLineMissingStopID() {
 
+    }
+
+    @Test
+    void validateLineMissing() {
 
     }
 

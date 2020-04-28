@@ -360,7 +360,7 @@ public class GTFSFile {
 
         return true;
     }
-    
+
     /**
      * Converts a hex color string to a Java FX color
      *
@@ -461,12 +461,15 @@ public class GTFSFile {
 
             // Add trip to its route
             String routeID = tripFields.get("route_id");
-            Route route = routes.get(routeID);
-            route.addTrip(trip);
+            Route route;
+            if(!routeID.isEmpty()) {
+                route = routes.get(routeID);
+                route.addTrip(trip);
+            }
 
             // Set trip headsign
-            if(!tripFields.get("trip_headsign").isEmpty()) {
-                String headSign = tripFields.get("trip_headsign");
+            String headSign = tripFields.get("trip_headsign");
+            if(!headSign.isEmpty()) {
                 trip.setHeadSign(headSign);
             }
 
