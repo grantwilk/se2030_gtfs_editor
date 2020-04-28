@@ -320,7 +320,7 @@ public class GTFSFile {
 
         // check if format contains stop_id field
         if(!format.contains("trip_id")) {
-            throw new IOException();
+            throw new IOException("Missing one or more required attributes in first line of \"stops_times.txt\"");
         }
 
         // Check each line for proper information
@@ -341,11 +341,7 @@ public class GTFSFile {
 
             // check if trip id already exists
             if(TripID.exists(tripID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"tripss.txt\".");
-            }
-
-            if(tripID.isEmpty()) {
-                throw new IOException("Missing attribute \"trip_id\" in line of \"stops_times.txt\"");
+                throw new IOException("One or more duplicate GTFS attributes in file \"trips.txt\".");
             }
 
         }

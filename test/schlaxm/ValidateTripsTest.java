@@ -21,6 +21,7 @@ class ValidateTripsTest {
 
     /**
      * Helper method for validating a singular test file
+     *
      * @param fileName - the name of the file to test
      * @throws IOException when the test file fails to load
      */
@@ -38,59 +39,16 @@ class ValidateTripsTest {
     }
 
     /**
-     * Tests a valid trip file with one trip
+     * Tests the google provided sunny day scenario
      */
     @Test
-    void validateSunnyDayOne() {
+    void validateSunnyDayOne() throws IOException {
 
         // attempt to validate the test file
-        try {
-            validateTestFile("trips-sunny-day-1.txt");
-        }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("Failed to load the test file.");
-        }
+        validateTestFile("trips-sunny-day-1.txt");
 
     }
 
-    /**
-     * Tests a valid trip file with multiple trips
-     */
-    @Test
-    void validateSunnyDayTwo() {
-
-        // attempt to validate the test file
-        try {
-            validateTestFile("trips-sunny-day-2.txt");
-        }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("Failed to load the test file.");
-        }
-
-    }
-
-    /**
-     * Tests a trip file with no trips
-     * should fail
-     */
-    @Test
-    void validateRainyDayOne() {
-
-        // attempt to validate the test file
-        try {
-            validateTestFile("trips-rainy-day.txt");
-        }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("No trip was designated in the file.");
-        }
-
-    }
 
     /**
      * Tests a trip file with valid tokens, but no included data
@@ -99,17 +57,7 @@ class ValidateTripsTest {
     void validateSunnyDayThree() {
 
         // attempt to validate the test file
-        try {
-            validateTestFile("trips-no-data.txt");
-        }
-
-        // catch IO exceptions
-        catch (IOException e) {
-            fail("Failed to load the test file.");
-        }
+        validateTestFile("trips-no-data.txt");
 
     }
-
-
-
 }
