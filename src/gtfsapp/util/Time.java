@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Stores a 24-hour time in hours, minutes, and seconds
  * @author Grant Wilk
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     /**
      * The number of hours
@@ -158,6 +158,14 @@ public class Time {
     }
 
     /**
+     * Gets the current time in milliseconds
+     * @return the current time in milliseconds
+     */
+    public long getMillis() {
+        return hours * MILLIS_IN_HOUR + minutes * MILLIS_IN_MINUTE + seconds * MILLIS_IN_SECOND;
+    }
+
+    /**
      * Gets the number of milliseconds in an hour
      * @return the number of milliseconds in an hour
      */
@@ -185,7 +193,42 @@ public class Time {
      * Gets the regular expression for properly formatted time stamps
      * @return the regular expression for properly formatted time stamps
      */
-    public static String getTimeStampRegex() {
+    public static String getRegex() {
         return TIME_STAMP_REGEX;
     }
+
+    /**
+     * Determines whether two objects are equal
+     * @param obj - the object to compare to
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        // return false if the object is not a time object
+        if (!(obj instanceof Time)) {
+            return false;
+        }
+
+        return this.getMillis() == ((Time) obj).getMillis();
+
+    }
+
+    /**
+     * Compares this time to another
+     * @param time - the time to compare to
+     */
+    @Override
+    public int compareTo(Time time) {
+        return Long.compare(this.getMillis(), time.getMillis());
+    }
+
+    /**
+     * Converts this time to a string
+     * @return this time as a string
+     */
+    @Override
+    public String toString() {
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
 }
