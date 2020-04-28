@@ -613,15 +613,15 @@ public class GTFSFile {
 
         for(int i = 0; i < lines.size(); i++) {
 
-            // create a new hash map for the attributes of the route for this line
+            // create a new hash map for the attributes of the stop for this line
             HashMap<String, String> stopFields = new HashMap<>();
 
             // get next line from file
             List<String> currentLine = tokenizeLine(lines.get(i));
 
-            // put all route attributes into hash map
+            // put all stop attributes into hash map
             for(int j = 0; j < format.size(); j++) {
-                stopFields.put(format.get(i),currentLine.get(i));
+                stopFields.put(format.get(j),currentLine.get(j));
             }
 
             // get stop id and create new stop
@@ -629,20 +629,12 @@ public class GTFSFile {
             Stop stop = new Stop(feed, stopID);
 
             // set stop name
-            if (stopFields.containsKey("stop_name")) {
-                String stopName = stopFields.get("stop_name");
-                if (!stopName.isEmpty()) {
-                    stop.setName(stopName);
-                }
-            }
+            String stopName = stopFields.get("stop_name");
+            stop.setName(stopName);
 
             // set stop description
-            if (stopFields.containsKey("stop_desc")) {
-                String stopDesc = stopFields.get("stop_desc");
-                if (!stopDesc.isEmpty()) {
-                    stop.setDesc(stopDesc);
-                }
-            }
+            String stopDesc = stopFields.get("stop_desc");
+            stop.setDesc(stopDesc);
 
             // set stop location
             String stopLat = stopFields.get("stop_lat");
@@ -655,12 +647,8 @@ public class GTFSFile {
             }
 
             // set stop url
-            if (stopFields.containsKey("stop_url")) {
-                String url = stopFields.get("stop_url");
-                if(!url.isEmpty()) {
-                    stop.setURL(url);
-                }
-            }
+            String url = stopFields.get("stop_url");
+            stop.setURL(url);
 
             stops.put(stop.getID().getIDString(), stop);
 
