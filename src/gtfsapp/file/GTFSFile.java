@@ -50,7 +50,7 @@ public class GTFSFile {
     private File routeFile;
 
     /**
-     * The "stops.txt" file
+     * The "sunny-day-one.txt" file
      */
     private File stopFile;
 
@@ -82,7 +82,7 @@ public class GTFSFile {
         } else if (stopTimesFile == null) {
             throw new IOException("Required GTFS file \"stop_times.txt\" was not found.");
         } else if (stopFile == null) {
-            throw new IOException("Required GTFS file \"stops.txt\" was not found.");
+            throw new IOException("Required GTFS file \"sunny-day-one.txt\" was not found.");
         }
 
         // create a new GTFS feed
@@ -171,8 +171,8 @@ public class GTFSFile {
                     stopTimesFile = file;
                     break;
 
-                // if the file name is stops.txt
-                case "stops.txt":
+                // if the file name is sunny-day-one.txt
+                case "sunny-day-one.txt":
                     if (stopFile != null) {
                         throw new IOException("Found multiple \"" + fileName + "\" files.");
                     }
@@ -235,7 +235,17 @@ public class GTFSFile {
 
         // check if format contains stop_id field
         if(!format.contains("stop_id")) {
-            throw new IOException("Missing attribute \"stop_id\"");
+            throw new IOException("Missing attribute \"stop_id\" in in \"stops.txt\"");
+        }
+
+        // check for stop latitude
+        if(!format.contains("stop_lat")) {
+            throw new IOException("Missing attribute \"stop_lat\" in in \"stops.txt\"");
+        }
+
+        // check for stop longitude
+        if(!format.contains("stop_lon")) {
+            throw new IOException("Missing attribute \"stop_lon\" in in \"stops.txt\"");
         }
 
         // Check each line for proper information
@@ -245,19 +255,26 @@ public class GTFSFile {
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
-                throw new IOException("Missing one or more required GTFS attributes in file \"stops.txt\".");
+                throw new IOException("Missing one or more required GTFS attributes in \"stops.txt\"");
             }
 
             // check if stop id is present
             int stopIdIndex = format.indexOf("stop_id");
             String stopID = currentLine.get(stopIdIndex);
             if(stopID.isEmpty()) {
-                throw new IOException("One or more invalid GTFS attributes in file \"stops.txt\".");
+                throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
             }
 
             // check if stop id already exists
             if(StopID.exists(stopID)) {
-                throw new IOException("One or more duplicate GTFS attributes in file \"stops.txt\".");
+                throw new IOException("One or more duplicate GTFS attributes in \"stops.txt\".");
+            }
+
+            // check for stop latitude and longitude
+            String lat = currentLine.get(format.indexOf("stop_lat"));
+            String lon = currentLine.get(format.indexOf("stop_lon"));
+            if(lat.isEmpty() || lon.isEmpty()) {
+                throw new IOException("One or more invalid GTFS attributes in \"stops.txt\".");
             }
         }
 

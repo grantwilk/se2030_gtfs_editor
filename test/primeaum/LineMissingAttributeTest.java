@@ -10,13 +10,15 @@ public class LineMissingAttributeTest extends ValidateStopsTest {
 
 
     @Test
-    void validateLineMissingStopID(String fileName) {
-
-
+    void validateLineMissingStopID() {
+        try {
+            validateStops("missing-stopid.txt");
+            fail("Did not throw exception when missing stop id");
+        } catch(IOException e) { }
     }
 
     @Test
-    void validateLineMissing() {
+    void validateLineMissingStopLat() {
 
     }
 

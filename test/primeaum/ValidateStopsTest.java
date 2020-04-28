@@ -17,7 +17,7 @@ class ValidateStopsTest {
 
     static final String STOPS_VALIDATION_ROOT = "samples/stop-validation-samples/";
 
-    @Test
+
     void validateStops(String fileName) throws IOException {
         // get the file path from the file name
         Path path = Paths.get(STOPS_VALIDATION_ROOT + fileName);
@@ -27,5 +27,15 @@ class ValidateStopsTest {
 
         // validate the stop times
         GTFSFile.validateStops(lines);
+    }
+
+    @Test
+    void sunnyDayOne() throws IOException {
+        validateStops("sunny-day-one.txt");
+    }
+
+    @Test
+    void sunnyDayTwo() throws IOException {
+        validateStops("sunny-day-two.txt");
     }
 }
