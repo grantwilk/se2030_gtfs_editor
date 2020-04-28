@@ -2,3 +2,4 @@ out/
 .github
 .idea/checkstyle-idea.xml
 .idea/shelf
+.ida/checkstyleidea-libs
