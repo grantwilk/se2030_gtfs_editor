@@ -50,6 +50,11 @@ public class GTFSFile {
     private static final String TIME_STAMP_REGEX = "^([2][0-3]|[0-1]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
 
     /**
+     * Regular expression for a hexadecimal color
+     */
+    private static final String COLOR_REGEX = "^[0-9a-fA-F]{6}";
+
+    /**
      * The internal feed
      */
     private Feed feed;
