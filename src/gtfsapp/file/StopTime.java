@@ -233,10 +233,9 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     @Override
     public HashMap<String, String> getAttributes() {
         HashMap<String, String> attributes = new HashMap<>();
-        // TODO - remove placeholders
-        attributes.put("Stop", "Lorem ipsum dolor");
-        attributes.put("Arrival Time", "Lorem ipsum dolor");
-        attributes.put("Departure Time", "Lorem ipsum dolor");
+        attributes.put("Stop", stop.getSubtitle());
+        attributes.put("Arrival Time", arrivalTime.toString());
+        attributes.put("Departure Time", arrivalTime.toString());
         return attributes;
     }
 
