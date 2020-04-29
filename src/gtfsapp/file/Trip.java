@@ -209,7 +209,13 @@ public class Trip extends GTFSElement {
      * @return
      */
     public StopTime getNextStopTime() {
-        // TODO - needs implementation eventually
+        Time currentTime = new Time(System.currentTimeMillis());
+        for(StopTime stopTime : stopTimes.values()){
+            Time nextArrival = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(nextArrival) < 0){
+                return stopTime;
+            }
+        }
         throw new UnsupportedOperationException();
     }
 
@@ -217,7 +223,13 @@ public class Trip extends GTFSElement {
      * @return
      */
     public StopTime getPreviousStopTime() {
-        // TODO - needs implementation eventually
+        Time currentTime = new Time(System.currentTimeMillis());
+        for(StopTime stopTime : stopTimes.values()){
+            Time nextArrival = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(nextArrival) > 0){
+                return stopTime;
+            }
+        }
         throw new UnsupportedOperationException();
     }
 
@@ -225,16 +237,14 @@ public class Trip extends GTFSElement {
      * @return
      */
     public Stop getNextStop() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return this.getNextStopTime().getStop();
     }
 
     /**
      * @return
      */
     public Stop getPreviousStop() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return this.getPreviousStopTime().getStop();
     }
 
     /**
