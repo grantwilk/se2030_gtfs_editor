@@ -5,6 +5,7 @@ import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 import gtfsapp.util.Location;
+import gtfsapp.util.Time;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -169,13 +170,20 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Not yet implemented
+     * Began implementation
      *
      * @return
      */
     public StopTime getNextStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        Time currentTime = new Time(System.currentTimeMillis());
+        ArrayList<StopTime> stopTimeList = (ArrayList)getContainingStopTimes();
+        for(int i=0; i< stopTimeList.size()-1; i++){
+            Time nextArrival = (stopTimeList.get(i).getArrivalTime());
+            if(currentTime.compareTo(nextArrival) < 0){
+                return stopTimeList.get(i);
+            }
+        }
+        return null;
     }
 
     /**
@@ -184,8 +192,13 @@ public class Stop extends GTFSElement {
      * @return
      */
     public Trip getNextTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        Time currentTime = new Time(System.currentTimeMillis());
+        ArrayList<Trip> tripList = (ArrayList)getContainingTrips();
+
+
+
+
+        return null;
     }
 
     /**
