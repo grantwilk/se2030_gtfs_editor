@@ -8,7 +8,7 @@
 .associations-tile {
     -fx-background-color: white;
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
     -fx-cursor: hand;
 }
 
