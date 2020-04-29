@@ -2,9 +2,9 @@ package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
+import gtfsapp.util.Colors;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
-import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,10 +28,6 @@ public class GTFSFile {
      * Regular expression for an unsigned integer
      */
     private static final String UNSIGNED_INT_REGEX = "^[0-9]+";
-    /**
-     * Regular expression for a hexadecimal color
-     */
-    private static final String COLOR_REGEX = "^[0-9a-fA-F]{6}";
 
     /**
      * The internal feed
@@ -228,10 +224,9 @@ public class GTFSFile {
             //Checks if the color is in the correct format
             int routeColorIndex = format.indexOf("route_color");
             String routeColor = currentLine.get(routeColorIndex);
-            if(!routeColor.matches(COLOR_REGEX)){
-                throw new IOException("COLOR FORMAT IS INCORRECT \"stops.txt\".");
+            if(!Colors.isValidString(routeColor)){
+                throw new IOException("Invalidly formatted color in \"stops.txt\".");
             }
-
 
         }
 
@@ -465,28 +460,6 @@ public class GTFSFile {
     }
 
     /**
-     * Converts a hex color string to a Java FX color
-     *
-     * @param hex the hex color string to parse
-     * @return the converted color
-     */
-    private Color hexToColor(String hex) {
-
-        // throw an exception if the hex color string is improperly formatted
-        if (!hex.matches("^[0-9a-fA-F]{6}")) {
-            throw new IllegalArgumentException("Color \"" + hex + "\" is improperly formatted.");
-        }
-
-        // parse colors and convert to doubles
-        double red = Integer.parseInt(hex.substring(0, 2), 16) / 255.0;
-        double green = Integer.parseInt(hex.substring(2, 4), 16) / 255.0;
-        double blue = Integer.parseInt(hex.substring(4, 6), 16) / 255.0;
-
-        // return new color
-        return new Color(red, green, blue, 1.0);
-    }
-
-    /**
      * Tokenizes a line from a CSV file using ',' as a delimiter
      *
      * @param line the line to tokenize
@@ -495,7 +468,6 @@ public class GTFSFile {
     private static List<String> tokenizeLine(String line) {
         return Arrays.asList(line.split(",", -1));
     }
-
 
     /**
      * Parses trips from the GTFS trips file
@@ -607,7 +579,7 @@ public class GTFSFile {
 
             // set color
             String color = routeFields.get("route_color");
-            route.setColor(hexToColor(color));
+            route.setColor(Colors.fromString(color));
 
             // add route to return hash map
             routes.put(routeID, route);

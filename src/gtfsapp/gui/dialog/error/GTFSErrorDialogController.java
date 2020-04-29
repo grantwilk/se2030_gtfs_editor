@@ -3,7 +3,6 @@ package gtfsapp.gui.dialog.error;
 import gtfsapp.gui.dialog.GTFSDialogController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 /**

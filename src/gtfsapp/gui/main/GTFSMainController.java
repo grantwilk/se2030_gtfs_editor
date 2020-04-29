@@ -17,7 +17,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -925,19 +924,6 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
     public void setSelectedElement(GTFSElement selectedElement) {
         this.selectedElement = selectedElement;
         updateInfoPanel();
-    }
-
-    /**
-     * Converts a JavaFX color to a hex string
-     *
-     * @param color the color to convert
-     * @return the color as a hex string
-     */
-    private String colorToHex(Color color) {
-        return String.format("#%02X%02X%02X",
-                (int) (color.getRed() * 255),
-                (int) (color.getGreen() * 255),
-                (int) (color.getBlue() * 255));
     }
 
 }
