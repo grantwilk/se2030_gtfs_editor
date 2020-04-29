@@ -20,15 +20,21 @@
     -fx-prompt-text-fill: #909090;
     -fx-padding: 0 0 0 20;
     -fx-background-color: white;
-    -fx-background-radius: 20 0 0 20;
-    -fx-border-radius: 20 0 0 20;
-    -fx-border-width: 2 0 2 2;
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-radius: 0 20 20 0;
+    -fx-border-width: 2 2 2 2;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
 }
 
 /* Search Type Selector */
 .search-type-selector {
-    -fx-background-radius: 0 20 20 0;
-    -fx-border-radius: 0 20 20 0;
-    -fx-border-width: 2;
+    -fx-text-fill: #909090;
+    -fx-background-radius: 20 0 0 20;
+    -fx-border-radius: 20 0 0 20;
+    -fx-padding: 0 0 0 10;
+    -fx-background-color: #F0F0F0;
+}
+
+.choice-box .arrow, .combo-box .arrow-button {
+    -fx-background-color: transparent;
 }

@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -114,6 +111,12 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     @FXML
     private TextField searchField;
+
+    /**
+     * The GTFS element type selector in the search panel
+     */
+    @FXML
+    private ChoiceBox<GTFSElementType> searchTypeSelector;
 
     /**
      * The root of the selected element panel on the info panel
@@ -222,7 +225,14 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     @FXML
     public void initialize() {
+
+        // add all of the GTFS element types to the type selector
+        searchTypeSelector.getItems().addAll(GTFSElementType.values());
+        searchTypeSelector.setValue(GTFSElementType.ROUTE);
+
+        // update the info panel
         updateInfoPanel();
+
     }
 
     /**

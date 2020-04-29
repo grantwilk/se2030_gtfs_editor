@@ -176,16 +176,18 @@
 
 /* Choice Box */
 .choice-box {
+    -fx-text-fill: #404040;
     -fx-background-color: white;
     -fx-background-radius: 5;
     -fx-background-insets: 1;
     -fx-border-color: #E0E0E0;
     -fx-border-radius: 5;
     -fx-border-width: 2;
+    -fx-padding: 2 2 0 0;
+    -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
 }
 
 .choice-box .arrow, .combo-box .arrow-button{
     -fx-background-color: #909090;
-    -fx-cursor: hand;
 }
