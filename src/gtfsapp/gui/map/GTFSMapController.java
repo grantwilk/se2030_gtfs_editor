@@ -25,8 +25,6 @@ public class GTFSMapController extends gtfsapp.gui.GTFSController {
         return mainController;
     }
 
-    // TODO - do we need a setMainController()?
-
     /**
      * Gets the map controller's selected element and returns it
      * @return the map controller's selected element

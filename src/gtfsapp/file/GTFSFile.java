@@ -114,7 +114,7 @@ public class GTFSFile {
      */
     public void save(Path path) {
         // TODO - needs implementation eventually
-        throw new UnsupportedOperationException("Too many elements in file \"stop_times.txt\".");
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -684,7 +684,6 @@ public class GTFSFile {
             if(!stopLat.isEmpty() && !stopLon.isEmpty()) {
                 double lat = Double.parseDouble(stopLat);
                 double lon = Double.parseDouble(stopLon);
-                // TODO - replace Point2D with Location on merge w/ master
                 stop.setLocation(new Location(lat, lon));
             }
 

@@ -64,7 +64,6 @@ public class Route extends GTFSElement {
      * @param routeType Route type for this specific route
      */
     public Route(Feed feed, String id, RouteType routeType) {
-        // TODO - this constructor is not fully implemented!
         super(new RouteID(id));
         this.feed = feed;
         this.routeType = routeType;
