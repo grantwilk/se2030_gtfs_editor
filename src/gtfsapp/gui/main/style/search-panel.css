@@ -9,33 +9,33 @@
 .search-panel {
     -fx-padding: 20;
     -fx-border-width: 0 0 1 0;
-    -fx-border-style: solid;
     -fx-border-color: #D0D0D0;
-    -fx-spacing: -3;
 }
 
 /* Search Field */
 .search-field {
-    -fx-font-size: 14px;
     -fx-prompt-text-fill: #909090;
     -fx-padding: 0 0 0 10;
     -fx-background-color: white;
     -fx-background-radius: 0 20 20 0;
     -fx-border-radius: 0 20 20 0;
-    -fx-border-width: 2 2 2 2;
+    -fx-border-width: 2 2 2 0;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
 }
 
 /* Search Type Selector */
 .search-type-selector {
+    -fx-background-color: #D0D0D0;
     -fx-background-radius: 20 0 0 20;
     -fx-border-radius: 20 0 0 20;
+    -fx-border-color: #A0A0A0;
+    -fx-border-width: 2;
     -fx-padding: 1 0 0 5;
     -fx-text-alignment: right;
 }
 
 .search-type-selector .label {
-    -fx-text-fill: #909090;
+    -fx-text-fill: #7A7A7A;
     -fx-alignment: center;
 }
 

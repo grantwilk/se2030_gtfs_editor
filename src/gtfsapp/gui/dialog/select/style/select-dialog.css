@@ -13,7 +13,7 @@
 .element-container {
     -fx-vbar-policy: as_needed;
     -fx-background-color: white;
-    -fx-border-color: #E0E0E0;
+    -fx-border-color: #D0D0D0;
     -fx-border-width: 2;
     -fx-border-radius: 5;
     -fx-background-radius: 5;

@@ -60,7 +60,7 @@
                <children>
                   <GridPane id="tile" fx:id="selectedElementTile" onMouseClicked="#invokeEditDialog">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="7.0" minWidth="7.0" prefWidth="7.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
                         <ColumnConstraints hgrow="SOMETIMES" />
                     </columnConstraints>
                     <rowConstraints>

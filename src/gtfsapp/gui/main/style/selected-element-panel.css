@@ -16,19 +16,27 @@
 /* Selected Element Tile */
 .selected-element-panel #tile {
     -fx-background-color: white;
-    -fx-background-radius: 7;
+    -fx-background-radius: 5;
+    -fx-background-insets: 1;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
 }
 
 /* Element Color */
 .selected-element-panel #element-color {
-    -fx-background-color: #C0C0C0;
-    -fx-background-radius: 7 0 0 7;
+    -fx-background-color: #D0D0D0;
+    -fx-background-radius: 5 0 0 5;
+    -fx-background-insets: 1;
+    -fx-border-color: #A0A0A0;
+    -fx-border-radius: 5 0 0 5;
+    -fx-border-width: 2;
 }
 
 /* Info Container */
 .selected-element-panel #element-info {
+    -fx-border-color: #D0D0D0;
+    -fx-border-radius: 0 5 5 0;
+    -fx-border-width: 2 2 2 0;
     -fx-padding: 15 20 15 20;
 }
 
