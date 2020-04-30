@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -229,6 +231,13 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         // add all of the GTFS element types to the type selector
         searchTypeSelector.getItems().addAll(GTFSElementType.values());
         searchTypeSelector.setValue(GTFSElementType.ROUTE);
+
+        // configure search on enter keypress
+        searchField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                searchForElement();
+            }
+        });
 
         // update the info panel
         updateInfoPanel();
@@ -484,8 +493,42 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      * search field
      */
     public void searchForElement() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+
+        // initialize a set of elements
+        Set<? extends GTFSElement> elements;
+
+        // get the element selector's type
+        GTFSElementType elementType = searchTypeSelector.getValue();
+
+        // switch on element type
+        switch (elementType) {
+            case ROUTE:
+                elements = gtfsFile.getFeed().getRoutes();
+                break;
+            case TRIP:
+                elements = gtfsFile.getFeed().getTrips();
+                break;
+            case TIME:
+                elements = gtfsFile.getFeed().getStopTimes();
+                break;
+            default:
+                elements = gtfsFile.getFeed().getStops();
+        }
+
+        // iterate through elements
+        for (GTFSElement element : elements) {
+
+            String idString = element.getID().getIDString();
+            String searchID = searchField.getText();
+
+            // if the ID string matches our search Id, update the selected element
+            if (searchID.equals(idString)) {
+                setSelectedElement(element);
+                break;
+            }
+
+        }
+
     }
 
     /**

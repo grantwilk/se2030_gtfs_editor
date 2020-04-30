@@ -18,7 +18,7 @@
 .search-field {
     -fx-font-size: 14px;
     -fx-prompt-text-fill: #909090;
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 0 0 0 10;
     -fx-background-color: white;
     -fx-background-radius: 0 20 20 0;
     -fx-border-radius: 0 20 20 0;
@@ -28,13 +28,18 @@
 
 /* Search Type Selector */
 .search-type-selector {
-    -fx-text-fill: #909090;
     -fx-background-radius: 20 0 0 20;
     -fx-border-radius: 20 0 0 20;
-    -fx-padding: 0 0 0 10;
-    -fx-background-color: #F0F0F0;
+    -fx-padding: 1 0 0 5;
+    -fx-text-alignment: right;
+}
+
+.search-type-selector .label {
+    -fx-text-fill: #909090;
+    -fx-alignment: center;
 }
 
 .choice-box .arrow, .combo-box .arrow-button {
     -fx-background-color: transparent;
+    -fx-padding: 0;
 }
