@@ -1,6 +1,7 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 
@@ -11,11 +12,13 @@ import java.util.HashMap;
  */
 public abstract class GTFSElement implements Comparable<GTFSElement> {
 
+    /**
+     * The element's unique ID
+     */
     private final GTFSID id;
 
     /**
      * Constructor for a GTFSElement that takes an id as its only parameter
-     *
      * @param id for the element
      */
     public GTFSElement(GTFSID id) {
@@ -24,7 +27,6 @@ public abstract class GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Getter for the id of a GTFSElement
-     *
      * @return The ID of the element
      */
     public GTFSID getID() {
@@ -66,23 +68,26 @@ public abstract class GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Gets the element's title to be displayed in the GUI
-     *
      * @return the element's title
      */
     public abstract String getTitle();
 
     /**
      * Gets the element's subtitle to be displayed in the GUI
-     *
      * @return the element's subtitle
      */
     public abstract String getSubtitle();
 
     /**
      * Gets the element's attributes to be displayed in the GUI
-     *
      * @return a HashMap<Attribute Title, Attribute Value> of the element's attributes
      */
     public abstract HashMap<String, String> getAttributes();
+
+    /**
+     * Gets the element's colors to be displayed in the GUI
+     * @return the element's color
+     */
+    public abstract Color getColor();
 
 }

@@ -3,6 +3,7 @@ package gtfsapp.file;
 import gtfsapp.id.*;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -362,7 +363,6 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's title to be displayed in the GUI
-     *
      * @return the trip's title
      */
     @Override
@@ -372,7 +372,6 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's subtitle to be displayed in the GUI
-     *
      * @return the trip's subtitle
      */
     @Override
@@ -386,7 +385,6 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's attributes to be displayed in the GUI
-     *
      * @return a HashMap<Attribute Title, Attribute Value> of the trip's attributes
      */
     @Override
@@ -396,6 +394,15 @@ public class Trip extends GTFSElement {
         attributes.put("Distance", String.format("%.02f miles", getDistance()));
         attributes.put("Duration", String.format("%.02f hours", getDuration() / (double) Time.getMillisInHour()));
         return attributes;
+    }
+
+    /**
+     * Gets the trip's color
+     * @return the trip's color
+     */
+    @Override
+    public Color getColor() {
+        return getRoute().getColor();
     }
 
 }

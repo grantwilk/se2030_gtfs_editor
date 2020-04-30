@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
  * A utility class for handling colors
  * @author Grant Wilk
  */
-public class Colors {
+public abstract class Colors {
 
     /**
      * The regular expression for a properly formatted color
@@ -50,7 +50,7 @@ public class Colors {
      * @param color - the color to convert
      * @return the color as a hex string
      */
-    private String toString(Color color) {
+    public static String toString(Color color) {
         return String.format(
                 "#%02X%02X%02X",
                 (int) (color.getRed() * EIGHT_BIT_MAX),

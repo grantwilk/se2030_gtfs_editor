@@ -1,6 +1,8 @@
 package gtfsapp.file;
 
 import gtfsapp.id.*;
+import gtfsapp.util.Colors;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 
@@ -10,6 +12,11 @@ import java.util.*;
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class Feed extends GTFSElement {
+
+    /**
+     * The default color of a feed
+     */
+    private static final Color DEFAULT_COLOR = Colors.fromString("#D0D0D0");
 
     /**
      * A map of all routes in the feed
@@ -330,4 +337,12 @@ public class Feed extends GTFSElement {
         return attributes;
     }
 
+    /**
+     * Get's the feed's color
+     * @return the feed's color
+     */
+    @Override
+    public Color getColor() {
+        return DEFAULT_COLOR;
+    }
 }

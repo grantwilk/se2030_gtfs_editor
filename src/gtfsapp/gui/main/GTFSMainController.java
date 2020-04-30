@@ -8,14 +8,15 @@ import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileControl
 import gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController;
 import gtfsapp.gui.map.GTFSMapController;
 import gtfsapp.id.GTFSID;
+import gtfsapp.util.Colors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -35,19 +36,24 @@ import java.util.stream.Collectors;
 public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
     /**
-     * The color displayed in the selected element panel if there is no selected element
+     * The background color displayed in the selected element panel if there is no selected element
      */
-    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
+    public static final String NULL_BACKGROUND_COLOR = "#D0D0D0";
+
+    /**
+     * The border color displayed in the selected element panel if there is no selected element
+     */
+    public static final String NULL_BORDER_COLOR = "#A0A0A0";
 
     /**
      * The title displayed in the selected element panel if there is no selected element
      */
-    private static final String NULL_SELECTED_ELEMENT_TITLE = "NULL";
+    private static final String NULL_TITLE = "NULL";
 
     /**
      * The subtitle displayed in the selected element panel if there is no selected element
      */
-    private static final String NULL_SELECTED_ELEMENT_SUBTITLE = "Nothing to see here!";
+    private static final String NULL_SUBTITLE = "Nothing to see here!";
 
     /**
      * List of all routes associated with the selected element
@@ -567,9 +573,12 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         if (selectedElement == null) {
 
             // set the title, subtitle, and color to the null color
-            selectedElementTitle.setText(NULL_SELECTED_ELEMENT_TITLE);
-            selectedElementSubtitle.setText(NULL_SELECTED_ELEMENT_SUBTITLE);
-            selectedElementColor.setStyle("-fx-background-color: " + NULL_SELECTED_ELEMENT_COLOR);
+            selectedElementTitle.setText(NULL_TITLE);
+            selectedElementSubtitle.setText(NULL_SUBTITLE);
+            selectedElementColor.setStyle(
+                    String.format("-fx-background-color: %s;", NULL_BACKGROUND_COLOR) +
+                    String.format("-fx-border-color: %s;", NULL_BORDER_COLOR)
+            );
 
             // hide the separator and the attributes container
             selectedElementAttributesSeparator.setVisible(false);
@@ -581,11 +590,21 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         // if there is a selected element
         else {
 
-            // set the title, subtitle, and color to the selected element's values
-            // TODO - get element color and display that instead of red
+            // get the color of the element
+            Color backgroundColor = selectedElement.getColor();
+            Color borderColor = backgroundColor.darker();
+            String backgroundColorString = Colors.toString(backgroundColor);
+            String borderColorString = Colors.toString(borderColor);
+
+            // update the color of the panel
+            selectedElementColor.setStyle(
+                    String.format("-fx-background-color: %s;", backgroundColorString) +
+                    String.format("-fx-border-color: %s;", borderColorString)
+            );
+
+            // update the title and subtitle
             selectedElementTitle.setText(selectedElement.getTitle().toUpperCase());
             selectedElementSubtitle.setText(selectedElement.getSubtitle());
-            selectedElementColor.setStyle("-fx-background-color: red");
 
             // show the separator and the attributes container
             selectedElementAttributesSeparator.setVisible(true);
@@ -757,8 +776,6 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             // configure controller attributes
             tileController.setMainController(this);
             tileController.setElement(element);
-            tileController.setTitle(element.getTitle());
-            tileController.setSubtitle(element.getSubtitle());
 
             // add the tile to the GUI
             container.getChildren().addAll(root);

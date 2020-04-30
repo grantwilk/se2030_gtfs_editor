@@ -17,7 +17,7 @@
     <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Pane id="color" />
+      <Pane id="color" fx:id="tileColor" />
       <VBox id="info-container" alignment="CENTER_LEFT" GridPane.columnIndex="1">
          <children>
             <Label id="title" fx:id="tileTitle" text="Route J15" />

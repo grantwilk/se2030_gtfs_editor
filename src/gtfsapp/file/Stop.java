@@ -4,8 +4,10 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
+import gtfsapp.util.Colors;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,6 +18,11 @@ import java.util.stream.Collectors;
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class Stop extends GTFSElement {
+
+    /**
+     * The default color of a stop
+     */
+    private static final Color DEFAULT_COLOR = Colors.fromString("#D0D0D0");
 
     /**
      * The feed that the stop belongs to
@@ -325,6 +332,23 @@ public class Stop extends GTFSElement {
         attributes.put("Next Trip", "Lorem ipsum dolor");
         attributes.put("Last Trip", "Lorem ipsum dolor");
         return attributes;
+    }
+
+    /**
+     * Gets the stop's color
+     * @return the stop's color
+     */
+    @Override
+    public Color getColor() {
+
+        List<Route> routes = new ArrayList<>(getContainingRoutes());
+
+        if (routes.size() == 1) {
+            return routes.get(0).getColor();
+        } else {
+            return DEFAULT_COLOR;
+        }
+
     }
 
 }

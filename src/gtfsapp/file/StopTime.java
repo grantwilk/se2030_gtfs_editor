@@ -5,6 +5,7 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 import gtfsapp.util.Time;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -253,6 +254,15 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
         } else {
             return super.compareTo(element);
         }
+    }
+
+    /**
+     * Gets the stop time's color
+     * @return the stop time's color
+     */
+    @Override
+    public Color getColor() {
+        return getTrip().getRoute().getColor();
     }
 
 }
