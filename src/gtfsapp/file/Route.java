@@ -7,9 +7,7 @@ import gtfsapp.id.TripID;
 import gtfsapp.util.Location;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -480,7 +478,6 @@ public class Route extends GTFSElement {
 
     /**
      * Gets the route's title to be displayed in the GUI
-     *
      * @return the route's title
      */
     @Override
@@ -490,7 +487,6 @@ public class Route extends GTFSElement {
 
     /**
      * Gets the route's subtitle to be displayed in the GUI
-     *
      * @return the route's subtitle
      */
     @Override
@@ -506,12 +502,11 @@ public class Route extends GTFSElement {
 
     /**
      * Gets the route's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the route's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the route's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
         // TODO - remove placeholders
         attributes.put("Next Stop", "Lorem ipsum dolor");
         attributes.put("Last Stop", "Lorem ipsum dolor");

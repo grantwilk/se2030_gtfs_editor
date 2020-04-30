@@ -7,8 +7,9 @@ import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -209,36 +210,42 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Gets the stop time's title to be displayed in the GUI
-     *
      * @return the stop time's title
      */
     @Override
     public String getTitle() {
-        return "Stop Time " + getID().getIDString();
+        return stop.getName();
     }
 
     /**
      * Gets the stop time's subtitle to be displayed in the GUI
-     *
      * @return the stop time's subtitle
      */
     @Override
     public String getSubtitle() {
-        return String.format("Arrives at %s", arrivalTime.toString());
+        return String.format("Arrives at %s | Departs at %s", arrivalTime.toString(), departureTime.toString());
     }
 
     /**
      * Gets the stop time's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the stop time's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the stop time's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
         attributes.put("Stop", stop.getSubtitle());
         attributes.put("Arrival Time", arrivalTime.toString());
         attributes.put("Departure Time", arrivalTime.toString());
         return attributes;
+    }
+
+    /**
+     * Gets the stop time's color
+     * @return the stop time's color
+     */
+    @Override
+    public Color getColor() {
+        return getTrip().getRoute().getColor();
     }
 
     /**
@@ -256,14 +263,4 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
             return super.compareTo(element);
         }
     }
-
-    /**
-     * Gets the stop time's color
-     * @return the stop time's color
-     */
-    @Override
-    public Color getColor() {
-        return getTrip().getRoute().getColor();
-    }
-
 }

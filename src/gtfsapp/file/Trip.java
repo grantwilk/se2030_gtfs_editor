@@ -8,9 +8,7 @@ import gtfsapp.util.Location;
 import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -389,14 +387,14 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's attributes to be displayed in the GUI
-     * @return a HashMap<Attribute Title, Attribute Value> of the trip's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the trip's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
-        attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
         attributes.put("Distance", String.format("%.02f miles", getDistance()));
         attributes.put("Duration", String.format("%.02f hours", getDuration() / (double) Time.getMillisInHour()));
+        attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
         return attributes;
     }
 

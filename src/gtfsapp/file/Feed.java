@@ -4,9 +4,7 @@ import gtfsapp.id.*;
 import gtfsapp.util.Colors;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Colton Rivard
@@ -302,7 +300,6 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets the feed's title to be displayed in the GUI
-     *
      * @return the feed's title
      */
     @Override
@@ -312,7 +309,6 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets the feed's subtitle to be displayed in the GUI
-     *
      * @return the feed's subtitle
      */
     @Override
@@ -323,12 +319,11 @@ public class Feed extends GTFSElement {
 
     /**
      * Gets the feed's attributes to be displayed in the GUI
-     *
      * @return a HashMap<Attribute Title, Attribute Value> of the feed's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
         // TODO - remove placeholders
         attributes.put("Total Routes", "Lorem ipsum dolor");
         attributes.put("Total Trips", "Lorem ipsum dolor");

@@ -9,10 +9,7 @@ import gtfsapp.util.Location;
 import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -300,7 +297,6 @@ public class Stop extends GTFSElement {
 
     /**
      * Gets the stop's title to be displayed in the GUI
-     *
      * @return the stop's title
      */
     @Override
@@ -310,7 +306,6 @@ public class Stop extends GTFSElement {
 
     /**
      * Gets the stop's subtitle to be displayed in the GUI
-     *
      * @return the stop's subtitle
      */
     @Override
@@ -320,13 +315,12 @@ public class Stop extends GTFSElement {
 
     /**
      * Gets the stop's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the stop's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the stop's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        // TODO - remove placeholders
-        HashMap<String, String> attributes = new HashMap<>();
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
+        // TODO - replace placeholders
         attributes.put("Location", "Lorem ipsum dolor");
         attributes.put("Next Trip", "Lorem ipsum dolor");
         attributes.put("Last Trip", "Lorem ipsum dolor");

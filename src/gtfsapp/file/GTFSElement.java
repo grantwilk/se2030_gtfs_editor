@@ -1,9 +1,9 @@
 package gtfsapp.file;
 
-import gtfsapp.id.*;
+import gtfsapp.id.GTFSID;
 import javafx.scene.paint.Color;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Mason Schlax
@@ -80,9 +80,9 @@ public abstract class GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Gets the element's attributes to be displayed in the GUI
-     * @return a HashMap<Attribute Title, Attribute Value> of the element's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the element's attributes
      */
-    public abstract HashMap<String, String> getAttributes();
+    public abstract Map<String, String> getAttributes();
 
     /**
      * Gets the element's colors to be displayed in the GUI

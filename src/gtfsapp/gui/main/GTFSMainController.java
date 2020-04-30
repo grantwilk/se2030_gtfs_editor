@@ -29,7 +29,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -636,7 +635,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         if (selectedElement != null) {
 
             // get the selected element's attributes
-            HashMap<String, String> attributes = selectedElement.getAttributes();
+            Map<String, String> attributes = selectedElement.getAttributes();
 
             // iterate through all attribute entries
             for (Map.Entry<String, String> entry : attributes.entrySet()) {
