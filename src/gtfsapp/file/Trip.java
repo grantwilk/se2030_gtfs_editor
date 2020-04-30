@@ -1,11 +1,16 @@
 package gtfsapp.file;
 
-import gtfsapp.id.*;
+import gtfsapp.id.RouteID;
+import gtfsapp.id.StopID;
+import gtfsapp.id.StopTimeID;
+import gtfsapp.id.TripID;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -148,11 +153,10 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets all of the stop time IDs contained within the trip
-     *
      * @return a list of stop time IDs contained within the trip
      */
-    public Set<StopTimeID> getStopTimeIDs() {
-        return stopTimes.keySet();
+    public List<StopTimeID> getStopTimeIDs() {
+        return new ArrayList<>(stopTimes.keySet());
     }
 
     /**
@@ -160,8 +164,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop times contained within the trip
      */
-    public Set<StopTime> getStopTimes() {
-        return new HashSet<>(stopTimes.values());
+    public List<StopTime> getStopTimes() {
+        return new ArrayList<>(stopTimes.values());
     }
 
     /**
@@ -185,8 +189,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop IDs contained within the trip
      */
-    public Set<StopID> getStopIDs() {
-        Set<StopID> stopIDs = new HashSet<>();
+    public List<StopID> getStopIDs() {
+        List<StopID> stopIDs = new ArrayList<>();
         for (StopTime stopTime : stopTimes.values()) {
             stopIDs.add((StopID) stopTime.getID());
         }
@@ -198,8 +202,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stops contained within the trip
      */
-    public Set<Stop> getStops() {
-        Set<Stop> stops = new HashSet<>();
+    public List<Stop> getStops() {
+        List<Stop> stops = new ArrayList<>();
         for (StopTime stopTime : stopTimes.values()) {
             stops.add(stopTime.getStop());
         }

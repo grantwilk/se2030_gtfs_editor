@@ -5,7 +5,6 @@ import gtfsapp.file.Stop;
 import gtfsapp.file.StopTime;
 import gtfsapp.file.Trip;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
-import gtfsapp.gui.dialog.error.GTFSErrorType;
 import gtfsapp.gui.main.GTFSMainController;
 import gtfsapp.util.LimitedTextField;
 import gtfsapp.util.Time;
@@ -13,10 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
 
@@ -120,7 +117,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         GTFSMainController mainController = (GTFSMainController) parentController;
 
         // get all of the stops in the feed
-        Set<Stop> stops = mainController.getGTFSFile().getFeed().getStops();
+        List<Stop> stops = mainController.getGTFSFile().getFeed().getStops();
 
         // clear the choice box's items and add all of our stops instead
         stopChoiceBox.getItems().clear();
@@ -130,7 +127,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         stopChoiceBox.setValue(element.getStop());
 
         // get all of the trips in the feed
-        Set<Trip> trips = mainController.getGTFSFile().getFeed().getTrips();
+        List<Trip> trips = mainController.getGTFSFile().getFeed().getTrips();
 
         // clear the choice box's items and add all of our stops instead
         tripChoiceBox.getItems().clear();
@@ -165,7 +162,7 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
     public List<GTFSElement> getSimilar() {
 
         // get the stop times from the parent controller
-        Set<StopTime> stopTimes = ((GTFSMainController) parentController).getGTFSFile().getFeed().getStopTimes();
+        List<StopTime> stopTimes = ((GTFSMainController) parentController).getGTFSFile().getFeed().getStopTimes();
 
         // get our dialog's element
         StopTime element = (StopTime) getElement();

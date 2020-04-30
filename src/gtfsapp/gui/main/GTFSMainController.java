@@ -15,7 +15,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -25,7 +28,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -58,22 +64,22 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
     /**
      * List of all routes associated with the selected element
      */
-    private Set<Route> associatedRoutes = new HashSet<>();
+    private List<Route> associatedRoutes = new ArrayList<>();
 
     /**
      * List of all trips associated with the selected element
      */
-    private Set<Trip> associatedTrips = new HashSet<>();
+    private List<Trip> associatedTrips = new ArrayList<>();
 
     /**
      * List of all stops associated with the selected element
      */
-    private Set<Stop> associatedStops = new HashSet<>();
+    private List<Stop> associatedStops = new ArrayList<>();
 
     /**
      * List of all stop times associated with the selected element
      */
-    private Set<StopTime> associatedStopTimes = new HashSet<>();
+    private List<StopTime> associatedStopTimes = new ArrayList<>();
 
     /**
      * The controller's GTFS file
@@ -501,7 +507,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
     public void searchForElement() {
 
         // initialize a set of elements
-        Set<? extends GTFSElement> elements;
+        List<? extends GTFSElement> elements;
 
         // get the element selector's type
         GTFSElementType elementType = searchTypeSelector.getValue();
@@ -675,10 +681,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
             // if there is no file loaded, reset all of the associations arrays
             if (gtfsFile == null) {
-                associatedRoutes = new HashSet<>();
-                associatedTrips = new HashSet<>();
-                associatedStopTimes = new HashSet<>();
-                associatedStops = new HashSet<>();
+                associatedRoutes = new ArrayList<>();
+                associatedTrips = new ArrayList<>();
+                associatedStopTimes = new ArrayList<>();
+                associatedStops = new ArrayList<>();
             }
 
             // if there is a feed loaded, get all of the associations arrays from it
@@ -751,7 +757,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      * @param container the container to place the tiles in
      * @throws IOException if the GUI fails to load an FXML file
      */
-    public void updateAssociationsTab(Set<? extends GTFSElement> elements, Pane container) throws IOException {
+    public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
 
         // get a sorted list of elements
         List<GTFSElement> sortedElements = elements.stream().sorted().collect(Collectors.toList());
@@ -788,14 +794,14 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of routes associated with the selected element
      */
-    private Set<Route> findAssociatedRoutes() {
+    private List<Route> findAssociatedRoutes() {
 
         // our new list of associations
-        Set<Route> associations;
+        List<Route> associations;
 
         // if the element is a trip
         if (selectedElement instanceof Trip) {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
             associations.add(((Trip) selectedElement).getRoute());
         }
 
@@ -811,7 +817,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -824,10 +830,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of trips associated with the selected element
      */
-    private Set<Trip> findAssociatedTrips() {
+    private List<Trip> findAssociatedTrips() {
 
         // our new list of associations
-        Set<Trip> associations;
+        List<Trip> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -836,7 +842,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
             associations.add(((StopTime) selectedElement).getTrip());
         }
 
@@ -847,7 +853,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -859,10 +865,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of stop times associated with the selected element
      */
-    private Set<StopTime> findAssociatedStopTimes() {
+    private List<StopTime> findAssociatedStopTimes() {
 
         // our new list of associations
-        Set<StopTime> associations;
+        List<StopTime> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -881,7 +887,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -893,10 +899,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of stops associated with the selected element
      */
-    private Set<Stop> findAssociatedStops() {
+    private List<Stop> findAssociatedStops() {
 
         // our new list of associations
-        Set<Stop> associations;
+        List<Stop> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -910,13 +916,13 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
             associations.add(((StopTime) selectedElement).getStop());
         }
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -928,7 +934,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated routes
      */
-    public Set<Route> getAssociatedRoutes() {
+    public List<Route> getAssociatedRoutes() {
         return associatedRoutes;
     }
 
@@ -937,7 +943,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated trips
      */
-    public Set<Trip> getAssociatedTrips() {
+    public List<Trip> getAssociatedTrips() {
         return associatedTrips;
     }
 
@@ -946,7 +952,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated stop times
      */
-    public Set<StopTime> getAssociatedStopTimes() {
+    public List<StopTime> getAssociatedStopTimes() {
         return associatedStopTimes;
     }
 
@@ -955,7 +961,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated stops
      */
-    public Set<Stop> getAssociatedStops() {
+    public List<Stop> getAssociatedStops() {
         return associatedStops;
     }
 

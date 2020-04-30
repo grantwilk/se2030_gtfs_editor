@@ -9,7 +9,10 @@ import gtfsapp.util.Location;
 import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -69,24 +72,22 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Gets a set of the IDs of all routes that contain this stop
-     *
-     * @return a set of the IDs of all routes that contain this stop
+     * Gets a list of the IDs of all routes that contain this stop
+     * @return a list of the IDs of all routes that contain this stop
      */
-    public Set<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
                 .map(e -> (RouteID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
-     * Gets a set of all routes that contain this stop
-     *
-     * @return a set of all routes that contain this stop
+     * Gets a list of all routes that contain this stop
+     * @return a list of all routes that contain this stop
      */
-    public Set<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
 
-        Set<Route> containingRoutes = new HashSet<>();
+        List<Route> containingRoutes = new ArrayList<>();
 
         // for each route in the feed
         for (Route route : feed.getRoutes()) {
@@ -105,24 +106,22 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Gets a set of the IDs of all stop times that contain this stop
-     *
-     * @return a set of the IDs of all stop times that contain this stop
+     * Gets a list of the IDs of all stop times that contain this stop
+     * @return a list of the IDs of all stop times that contain this stop
      */
-    public Set<StopTimeID> getContainingStopTimeIDs() {
+    public List<StopTimeID> getContainingStopTimeIDs() {
         return getContainingStopTimes().stream()
                 .map(e -> (StopTimeID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
-     * Gets a set of all stop times that contain this stop
-     *
-     * @return a set of all stop times that contain this stop
+     * Gets a list of all stop times that contain this stop
+     * @return a list of all stop times that contain this stop
      */
-    public Set<StopTime> getContainingStopTimes() {
+    public List<StopTime> getContainingStopTimes() {
 
-        Set<StopTime> containingStopTimes = new HashSet<>();
+        List<StopTime> containingStopTimes = new ArrayList<>();
 
         // for each stop time
         for (StopTime stopTime : feed.getStopTimes()) {
@@ -146,10 +145,10 @@ public class Stop extends GTFSElement {
      *
      * @return a set of the IDs of all trips that contain this stop
      */
-    public Set<TripID> getContainingTripIDs() {
+    public List<TripID> getContainingTripIDs() {
         return getContainingTrips().stream()
                 .map(e -> (TripID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
@@ -157,9 +156,9 @@ public class Stop extends GTFSElement {
      *
      * @return a set of all trips that contain this stop
      */
-    public Set<Trip> getContainingTrips() {
+    public List<Trip> getContainingTrips() {
 
-        Set<Trip> containingTrips = new HashSet<>();
+        List<Trip> containingTrips = new ArrayList<>();
 
         // for each trip in the feed
         for (Trip trip : feed.getTrips()) {

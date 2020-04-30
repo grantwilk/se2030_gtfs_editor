@@ -1,13 +1,14 @@
 package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
-
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -87,12 +88,12 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     }
 
     /**
-     * Gets a set of all routes that contain this stop time
-     * @return a set of all routes that contain this stop time
+     * Gets a list of all routes that contain this stop time
+     * @return a list of all routes that contain this stop time
      */
-    public Set<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
 
-        Set<Route> containingRoutes = new HashSet<>();
+        List<Route> containingRoutes = new ArrayList<>();
 
         // for each route in the feed
         for (Route route : feed.getRoutes()) {
@@ -111,13 +112,13 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     }
 
     /**
-     * Gets a set of the IDs of all routes that contain this stop time
-     * @return a set of the IDs of all routes that contain this stop time
+     * Gets a list of the IDs of all routes that contain this stop time
+     * @return a list of the IDs of all routes that contain this stop time
      */
-    public Set<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
                 .map(e -> (RouteID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
