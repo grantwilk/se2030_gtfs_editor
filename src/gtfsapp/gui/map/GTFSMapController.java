@@ -42,7 +42,7 @@ public class GTFSMapController extends gtfsapp.gui.GTFSController {
 
     /**
      *
-     * @param msg
+     * @param msg - the message to display
      */
     public void invokeErrorDialog(String msg) {
         throw new UnsupportedOperationException();

@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
-
+<?import java.net.URL?>
 <HBox fx:id="mainPanel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.GTFSMainController">
    <children>
       <VBox fx:id="infoPanel" prefWidth="400.0" HBox.hgrow="NEVER">
@@ -72,8 +60,8 @@
                            <children>
                               <VBox id="title-container">
                                  <children>
-                                    <Label id="element-title" fx:id="selectedElementTitle" focusTraversable="false" text="NULL" />
-                                    <Label id="element-subtitle" fx:id="selectedElementSubtitle" focusTraversable="false" text="Nothing to see here!" />
+                                    <Label id="element-title" fx:id="selectedElementTitle" text="NULL" />
+                                    <Label id="element-subtitle" fx:id="selectedElementSubtitle" text="Nothing to see here!" />
                                  </children>
                               </VBox>
                               <Line id="title-separator" fx:id="selectedElementAttributesSeparator" endX="150.0">

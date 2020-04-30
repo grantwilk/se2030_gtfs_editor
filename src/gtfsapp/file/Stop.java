@@ -179,7 +179,7 @@ public class Stop extends GTFSElement {
      */
     public StopTime getNextStopTime() {
         Time currentTime = new Time(System.currentTimeMillis());
-        ArrayList<StopTime> stopTimeList = (ArrayList)getContainingStopTimes();
+        List<StopTime> stopTimeList = getContainingStopTimes();
         for(int i=0; i< stopTimeList.size()-1; i++){
             Time nextArrival = (stopTimeList.get(i).getArrivalTime());
             if(currentTime.compareTo(nextArrival) < 0){
@@ -196,7 +196,7 @@ public class Stop extends GTFSElement {
      */
     public Trip getNextTrip() {
         Time currentTime = new Time(System.currentTimeMillis());
-        ArrayList<Trip> tripList = (ArrayList)getContainingTrips();
+        List<Trip> tripList = getContainingTrips();
 
 
 

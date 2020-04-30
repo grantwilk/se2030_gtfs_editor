@@ -101,8 +101,7 @@ public class LimitedTextField extends TextField {
      *
      * E.g. [0-9] only allows numeric values.
      *
-     * @param restrict
-     *            The regular expression.
+     * @param restrict the regular expression.
      */
     public void setRestrict(String restrict) {
         this.restrict.set(restrict);
@@ -112,8 +111,6 @@ public class LimitedTextField extends TextField {
      * Sets a predefined regular expression character class which restricts the
      * user input.
      *
-     * @Param setRestrict("[A-Za-z0-9._-]")
-     *
      */
     public void setStandardField() {
         this.setRestrict("[A-Za-z0-9._-]");
@@ -122,9 +119,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[A-Za-z0-9 ._-]")
-     *
      */
     public void setStandardFieldwSpace() {
         this.setRestrict("[A-Za-z0-9 ._-]");
@@ -133,9 +127,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[A-Za-z ._-]")
-     *
      */
     public void setCharsOnlyFieldwSpace() {
         this.setRestrict("[A-Za-z ._-]");
@@ -144,9 +135,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[A-Za-z._-]")
-     *
      */
     public void setCharsOnlyField() {
         this.setRestrict("[A-Za-z._-]");
@@ -155,9 +143,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[A-Za-z0-9@._-]")
-     *
      */
     public void setEmailField() {
         this.setRestrict("[A-Za-z0-9@._-]");
@@ -166,9 +151,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9.]")
-     *
      */
     public void setIntegerField() {
         this.setRestrict("[0-9]");
@@ -177,9 +159,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9.]")
-     *
      */
     public void setFloatField() {
         this.setRestrict("[0-9.]");
@@ -188,10 +167,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9-/]")
-     * @Param setMaxLength(10)
-     *
      */
     public void setDateField() {
         this.setRestrict("[0-9-/]");
@@ -201,11 +176,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9-]")
-     * @Param setMaxLength(9)
-     *
-     *
      */
     public void setSSNField() {
         this.setRestrict("[0-9]");
@@ -216,10 +186,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9]")
-     * @Param setMaxLength(3)
-     *
      */
     public void setPhoneCountryCodeField() {
         this.setRestrict("[0-9]");
@@ -229,10 +195,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9]")
-     * @Param setMaxLength(3)
-     *
      */
     public void setPhoneAreaCodeField() {
         this.setRestrict("[0-9]");
@@ -242,10 +204,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9]")
-     * @Param setMaxLength(7)
-     *
      */
     public void setPhoneNumberField() {
         this.setRestrict("[0-9]");
@@ -256,10 +214,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[A-Za-z0-9]")
-     * @Param setMaxLength(5)
-     *
      */
     public void setZipcodeField() {
         this.setRestrict("[A-Za-z0-9]");
@@ -269,10 +223,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9.]")
-     * @Param setMaxLength(15)
-     *
      */
     public void setIPAddressField() {
         this.setRestrict("[0-9.]");
@@ -282,10 +232,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9]")
-     * @Param setMaxLength(4)
-     *
      */
     public void setLogonField() {
         this.setRestrict("[0-9]");
@@ -295,10 +241,6 @@ public class LimitedTextField extends TextField {
     /**
      * Sets a predefined regular expression character class which restricts the
      * user input.
-     *
-     * @Param setRestrict("[0-9]")
-     * @Param setMaxLength(13)
-     *
      */
     public void setUPCField() {
         this.setRestrict("[0-9]");

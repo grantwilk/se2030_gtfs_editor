@@ -347,11 +347,9 @@ public class Trip extends GTFSElement {
         double tripStart = (double) FirstDepartTime.getDepartureTime().getMillis();
         //Gets the time value for the second StopTime
         double tripEnd = (double) LastArriveTime.getDepartureTime().getMillis();
-        if (System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart;
+
     }
 
     /**
