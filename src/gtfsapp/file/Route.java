@@ -482,7 +482,7 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getTitle() {
-        return "Route " + getID().getIDString();
+        return getID().getIDString();
     }
 
     /**

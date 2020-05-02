@@ -216,3 +216,36 @@
 .choice-box .arrow, .combo-box .arrow-button{
     -fx-background-color: #909090;
 }
+
+/* List View */
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #D0D0D0;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-insets: 2;
+    -fx-padding: 5;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
+}
+
+.list-view .list-cell {
+   -fx-background-radius: 5;
+}
+
+.list-view .list-cell .label {
+    -fx-max-width: 50;
+}
+
+.list-view .list-cell:focused {
+    -fx-background-color: #4C8BF5;
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #4C8BF5;
+    -fx-text-fill: white;
+}

@@ -10,17 +10,11 @@
     -fx-spacing: 5;
 }
 
-.element-container {
-    -fx-vbar-policy: as_needed;
-    -fx-background-color: white;
-    -fx-border-color: #D0D0D0;
-    -fx-border-width: 2;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-    -fx-background-insets: 2;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
+.element-container .scroll-bar:horizontal .increment-arrow,
+.element-container .scroll-bar:horizontal .decrement-arrow,
+.element-container .scroll-bar:horizontal .increment-button,
+.element-container .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
 }
 
 .apply-button-container {

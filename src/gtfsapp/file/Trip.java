@@ -367,7 +367,7 @@ public class Trip extends GTFSElement {
      */
     @Override
     public String getTitle() {
-        return "Trip " + getID().getIDString();
+        return getID().getIDString();
     }
 
     /**

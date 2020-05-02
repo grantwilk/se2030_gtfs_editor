@@ -301,7 +301,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public String getTitle() {
-        return "Stop " + getID().getIDString();
+        return getID().getIDString();
     }
 
     /**

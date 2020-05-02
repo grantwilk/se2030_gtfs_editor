@@ -214,7 +214,9 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
      */
     @Override
     public String getTitle() {
-        return stop.getName();
+        String tripID = getTrip().getID().getIDString();
+        String stopID = getStop().getID().getIDString();
+        return String.format("%s at %s", tripID, stopID);
     }
 
     /**

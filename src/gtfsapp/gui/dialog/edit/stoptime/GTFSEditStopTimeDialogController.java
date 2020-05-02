@@ -235,7 +235,6 @@ public class GTFSEditStopTimeDialogController extends GTFSEditDialogController {
         // update the head sign
         stopTime.setHeadSign(headSignField.getText());
 
-
     }
 
 }
