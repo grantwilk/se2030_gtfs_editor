@@ -35,8 +35,8 @@
             </HBox>
             <HBox styleClass="search-panel" stylesheets="@../style/search-panel.css">
                <children>
-                  <ChoiceBox fx:id="searchTypeSelector" maxHeight="40.0" maxWidth="85.0" minHeight="40.0" minWidth="85.0" styleClass="search-type-selector" />
                   <TextField fx:id="searchField" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" promptText="Search GTFS Elements" styleClass="search-field" HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="searchTypeSelector" maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="90.0" styleClass="search-type-selector" />
                </children>
             </HBox>
             <VBox fx:id="selectedElementPanel" alignment="CENTER" styleClass="selected-element-panel" stylesheets="@../style/selected-element-panel.css">

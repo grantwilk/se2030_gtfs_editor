@@ -282,7 +282,8 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // get file from the chooser
         // TODO - implement opening a single .zip file of all GTFS files instead of selecting multiple
-        List<File> files = fileChooser.showOpenMultipleDialog(new Stage());
+        List<File> files = fileChooser.showOpenMultipleDialog(getStage());
+
 
         // if at least one file was selected
         if (!(files == null || files.isEmpty())) {
@@ -538,11 +539,11 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         // iterate through elements
         for (GTFSElement element : elements) {
 
-            String idString = element.getID().getIDString();
-            String searchID = searchField.getText();
+            String idString = element.getID().getIDString().toUpperCase();
+            String searchID = searchField.getText().toUpperCase();
 
-            // if the ID string matches our search Id, update the selected element
-            if (searchID.equals(idString)) {
+            // if the ID string contains our search ID, set it as the selected element
+            if (idString.contains(searchID)) {
                 setSelectedElement(element);
                 break;
             }
