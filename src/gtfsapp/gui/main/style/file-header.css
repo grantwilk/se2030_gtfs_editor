@@ -8,6 +8,8 @@
 /* File Panel */
 .file-header {
     -fx-background-color: #4C8BF5;
+    -fx-border-color: #3C6FC7;
+    -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
 }
 
@@ -27,12 +29,12 @@
 
 .file-header #button {
     -fx-background-radius: 20;
-    -fx-background-insets: 4;
+    -fx-background-insets: 3;
     -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-cursor: hand;
 }
 
 .file-header #button:hover {
-    -fx-background-color: #5d99fc;
+    -fx-background-color: #5D99FC;
 }

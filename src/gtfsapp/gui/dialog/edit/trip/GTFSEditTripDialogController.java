@@ -58,21 +58,8 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
      */
     @Override
     public List<GTFSElement> getSimilar() {
-
-        GTFSMainController mainController = (GTFSMainController) parentController;
-        List<Trip> trips = mainController.getGTFSFile().getFeed().getTrips();
-        Trip element = (Trip) getElement();
-
-        List<GTFSElement> similar = new ArrayList<>();
-
-        // add all trips with the same stops as our current trip to our list
-        for (Trip trip : trips) {
-            if (trip.getStops().equals(element.getStops())) {
-                similar.add(trip);
-            }
-        }
-
-        return similar;
+        Trip trip = (Trip) getElement();
+        return new ArrayList<>(trip.getRoute().getTrips());
 
     }
 

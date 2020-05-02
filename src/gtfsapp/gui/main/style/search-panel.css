@@ -14,8 +14,9 @@
 
 /* Search Field */
 .search-field {
+    -fx-font-size: 15px;
     -fx-prompt-text-fill: #909090;
-    -fx-padding: 0 0 0 10;
+    -fx-padding: 0 0 0 12;
     -fx-background-color: white;
     -fx-background-radius: 0 20 20 0;
     -fx-border-radius: 0 20 20 0;

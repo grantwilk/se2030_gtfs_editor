@@ -174,6 +174,12 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
     private VBox selectedElementAttributesContainer;
 
     /**
+     * The button for editing the currently selected element
+     */
+    @FXML
+    private Button selectedElementEditButton;
+
+    /**
      * The root of the associations panel on the info panel
      */
     @FXML
@@ -282,6 +288,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         if (!(files == null || files.isEmpty())) {
             try {
 
+                // set the GTFS file to null (required for deselectElement())
+                gtfsFile = null;
+
                 // deselect the selected element
                 deselectElement();
 
@@ -339,7 +348,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a route
-                    windowTitle = "Edit Route";
+                    windowTitle = "Edit Route Attributes";
 
                 }
 
@@ -351,7 +360,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a trip
-                    windowTitle = "Edit Trip";
+                    windowTitle = "Edit Trip Attributes";
 
                 }
 
@@ -363,7 +372,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop time
-                    windowTitle = "Edit Stop Time";
+                    windowTitle = "Edit Stop Time Attributes";
 
                 }
 
@@ -375,7 +384,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop
-                    windowTitle = "Edit Stop";
+                    windowTitle = "Edit Stop Attributes";
 
                 }
 
@@ -590,6 +599,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             selectedElementAttributesContainer.setVisible(false);
             selectedElementAttributesContainer.setManaged(false);
 
+            // hide the edit button
+            selectedElementEditButton.setVisible(false);
+
         }
 
         // if there is a selected element
@@ -615,6 +627,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             selectedElementAttributesSeparator.setVisible(true);
             selectedElementAttributesContainer.setVisible(true);
             selectedElementAttributesContainer.setManaged(true);
+
+            // show the edit button
+            selectedElementEditButton.setVisible(true);
 
         }
 
