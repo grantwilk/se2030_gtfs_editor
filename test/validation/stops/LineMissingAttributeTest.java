@@ -1,4 +1,4 @@
-package primeaum;
+package validation.stops;
 
 import org.junit.jupiter.api.Test;
 

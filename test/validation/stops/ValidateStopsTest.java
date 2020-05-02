@@ -1,4 +1,4 @@
-package primeaum;
+package validation.stops;
 
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;

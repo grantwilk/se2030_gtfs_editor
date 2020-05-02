@@ -1,4 +1,4 @@
-package wilkg;
+package validation.stoptimes;
 
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 class ValidateStopTimesTest {
 

@@ -1,4 +1,4 @@
-package rivardc;
+package validation.routes;
 
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ValidateRoutesTest {
 
