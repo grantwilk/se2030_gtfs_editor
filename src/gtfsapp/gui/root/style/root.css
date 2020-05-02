@@ -184,6 +184,35 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
 }
 
+.choice-box .context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: #D0D0D0;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
+}
+
+.choice-box .menu-item {
+    -fx-background-radius: 5;
+    -fx-mark-color: #404040;
+    -fx-cursor: hand;
+}
+
+.choice-box .menu-item .label {
+    -fx-text-fill: #404040;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #4C8BF5;
+    -fx-focused-mark-color: white;
+}
+
+.choice-box .menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
 .choice-box .arrow, .combo-box .arrow-button{
     -fx-background-color: #909090;
 }

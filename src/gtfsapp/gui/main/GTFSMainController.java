@@ -349,7 +349,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a route
-                    windowTitle = "Edit Route Attributes";
+                    windowTitle = "Route Attributes";
 
                 }
 
@@ -361,7 +361,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a trip
-                    windowTitle = "Edit Trip Attributes";
+                    windowTitle = "Trip Attributes";
 
                 }
 
@@ -373,7 +373,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop time
-                    windowTitle = "Edit Stop Time Attributes";
+                    windowTitle = "Stop Time Attributes";
 
                 }
 
@@ -385,7 +385,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop
-                    windowTitle = "Edit Stop Attributes";
+                    windowTitle = "Stop Attributes";
 
                 }
 

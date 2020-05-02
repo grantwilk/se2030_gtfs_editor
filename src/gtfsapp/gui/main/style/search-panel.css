@@ -27,7 +27,7 @@
 
 /* Search Type Selector */
 .search-type-selector {
-    -fx-background-color: #F0F0F0;
+    -fx-background-color: white;
     -fx-background-radius: 0 5 5 0;
     -fx-border-radius: 0 5 5 0;
     -fx-border-color: #D0D0D0;
@@ -37,12 +37,12 @@
 }
 
 .search-type-selector .label {
-    -fx-text-fill: #B0B0B0;
+    -fx-text-fill: #909090;
     -fx-font-weight: bold;
     -fx-alignment: center;
 }
 
-.choice-box .arrow, .combo-box .arrow-button {
+.search-type-selector .arrow, .combo-box .arrow-button {
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
