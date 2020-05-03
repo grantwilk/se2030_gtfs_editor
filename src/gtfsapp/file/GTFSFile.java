@@ -35,6 +35,11 @@ public class GTFSFile {
     private static ArrayList<String> stopIDS;
 
     /**
+     * List of tripIDS from trips.txt
+     */
+    private static List<String> tripIDs;
+
+    /**
      * The internal feed
      */
     private Feed feed;
@@ -395,6 +400,9 @@ public class GTFSFile {
             if(!stopIDS.contains(stopID)) {
                 throw new IllegalArgumentException("Stop time includes stop_id that is never referenced in \"stops.txt\".");
             }
+            if(!tripIDs.contains(tripID)) {
+                throw new IllegalArgumentException("Stop time includes trip_id that is never referenced in \"trips.txt\".");
+            }
 
             // check if arrival time is before departure time
             Time arrival = new Time(arrivalTime);
@@ -465,7 +473,7 @@ public class GTFSFile {
             throw new IOException("Missing one or more required attributes in first line of \"trip.txt\".");
         }
 
-        List<String> tripIDs = new ArrayList<>();
+        tripIDs = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size(); i++) {
