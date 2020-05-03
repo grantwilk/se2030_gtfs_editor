@@ -30,6 +30,11 @@ public class GTFSFile {
     private static final String UNSIGNED_INT_REGEX = "^[0-9]+";
 
     /**
+     * List of stopIDS from stops.txt
+     */
+    private static ArrayList<String> stopIDS;
+
+    /**
      * The internal feed
      */
     private Feed feed;
@@ -262,7 +267,7 @@ public class GTFSFile {
         }
 
         // create list of all stop ids in this file
-        ArrayList<String> stopIDS = new ArrayList<>();
+        stopIDS = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size(); i++) {
@@ -386,6 +391,9 @@ public class GTFSFile {
             }
             if (!departureTime.matches(Time.getRegex())) {
                 throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
+            }
+            if(!stopIDS.contains(stopID)) {
+                throw new IllegalArgumentException("Stop time includes stop_id that is never referenced in \"stops.txt\".");
             }
 
             // check if arrival time is before departure time
