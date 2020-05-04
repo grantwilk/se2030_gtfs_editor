@@ -196,7 +196,14 @@ public class Stop extends GTFSElement {
      */
     public Trip getNextTrip() {
         Time currentTime = new Time(System.currentTimeMillis());
+        StopID currentStop = (StopID)this.getID();
         List<Trip> tripList = getContainingTrips();
+        for(int i=0; i< tripList.size()-1; i++){
+            //gets an array list of the stopTimes on the trip
+            ArrayList<StopTime> tripStopTimes = (ArrayList)tripList.get(i).getStopTimes();
+
+
+        }
 
 
 
