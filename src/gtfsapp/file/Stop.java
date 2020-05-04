@@ -173,9 +173,10 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Began implementation
+     * Gets a list of the stop times for this stop, and compares them to the current time
+     * It takes the closest value to the current time and returns that value
      *
-     * @return
+     * @return the StopTime for the next closest stop
      */
     public StopTime getNextStopTime() {
         Time currentTime = new Time(System.currentTimeMillis());
