@@ -101,8 +101,8 @@ public class GTFSFile {
 
         // validate files
         validateStops(stopLines);
-        validateStopTimes(stopTimeLines);
         validateTrips(tripLines);
+        validateStopTimes(stopTimeLines);
         validateRoutes(routeLines);
 
         // parse the files (must be in this order!)
