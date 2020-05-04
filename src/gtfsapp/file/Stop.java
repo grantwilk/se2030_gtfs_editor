@@ -180,13 +180,19 @@ public class Stop extends GTFSElement {
     public StopTime getNextStopTime() {
         Time currentTime = new Time(System.currentTimeMillis());
         List<StopTime> stopTimeList = getContainingStopTimes();
+        StopTime nextStopTime = null;
+        int timeDiff = 0;
+        int lowDiff = -100000000;
         for(int i=0; i< stopTimeList.size()-1; i++){
             Time nextArrival = (stopTimeList.get(i).getArrivalTime());
             if(currentTime.compareTo(nextArrival) < 0){
-                return stopTimeList.get(i);
+                timeDiff = currentTime.compareTo(nextArrival);
+            }
+            if(timeDiff > lowDiff){
+                nextStopTime = stopTimeList.get(i);
             }
         }
-        return null;
+        return nextStopTime;
     }
 
     /**
@@ -197,19 +203,31 @@ public class Stop extends GTFSElement {
      * @return the next trip to go to this stop
      */
     public Trip getNextTrip() {
+        //current system time
         Time currentTime = new Time(System.currentTimeMillis());
+        //comparison values
+        int timeDiff = 0;
+        int lowDiff = -100000000;
+        //next trip to be returned
+        Trip nextTrip = null;
+        //list of all the trips the stop is on
         List<Trip> tripList = getContainingTrips();
         for(int i=0; i< tripList.size()-1; i++){
+            //if the next stop on the trip has the same ID as this stop
             if(tripList.get(i).getNextStop().getID() == this.getID()){
-                if(tripList.get(i).getNextStopTime())
+                //if the current time is less than the arrival of the next stop
+                if(currentTime.compareTo(tripList.get(i).getNextStop().getNextStopTime().getArrivalTime())<0){
+                    //get the difference in the time values
+                    timeDiff = currentTime.compareTo(tripList.get(i).getNextStop().getNextStopTime().getArrivalTime());
+                }
+                //if the timeDiff is closer to 0 (the current time and stop time are closer together)
+                //set the nextTrip to the currently checked trip in the list
+                if(timeDiff > lowDiff){
+                    nextTrip = tripList.get(i);
+                }
             }
-            return null;
         }
-
-
-
-
-        return null;
+        return nextTrip;
     }
 
     /**

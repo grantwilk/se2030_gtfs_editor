@@ -260,7 +260,7 @@ public class Trip extends GTFSElement {
         Stop nextStop = null;
         //comparison values
         int timeDiff = 0;
-        int lowDiff = -1000;
+        int lowDiff = -100000000;
         for(int i =0; i< stopTimeList.size()-1; i++){
             //checks if the stop time is less than the current time, if so, do nothing
             if(currentTime.compareTo(stopTimeList.get(i).getArrivalTime())>0){
