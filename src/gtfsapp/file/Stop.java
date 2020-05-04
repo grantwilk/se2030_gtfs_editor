@@ -348,8 +348,8 @@ public class Stop extends GTFSElement {
     public Map<String, String> getAttributes() {
         Map<String, String> attributes = new LinkedHashMap<>();
         // TODO - replace placeholders
-        attributes.put("Location", "Lorem ipsum dolor");
-        attributes.put("Next Trip", "Lorem ipsum dolor");
+        attributes.put("Location", getLocation().toString());
+        attributes.put("Next Trip", getNextTrip().getID().getIDString());
         attributes.put("Last Trip", "Lorem ipsum dolor");
         return attributes;
     }
