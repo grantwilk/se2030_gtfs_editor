@@ -197,38 +197,12 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Gets a list of all the trips the stop is a part of, then go through those trips,
-     * seeing if the next stop on the trip, is this stop.  It then returns the trip who visits this stop
-     * next
+     * Takes the next stopTime and finds the trip associated with that stop time
      *
      * @return the next trip to go to this stop
      */
     public Trip getNextTrip() {
-        //current system time
-        Time currentTime = new Time(System.currentTimeMillis());
-        //comparison values
-        int timeDiff = 0;
-        int lowDiff = -100000000;
-        //next trip to be returned
-        Trip nextTrip = null;
-        //list of all the trips the stop is on
-        List<Trip> tripList = getContainingTrips();
-        for(int i=0; i< tripList.size()-1; i++){
-            //if the next stop on the trip has the same ID as this stop
-            if(tripList.get(i).getNextStop().getID() == this.getID()){
-                //if the current time is less than the arrival of the next stop
-                if(currentTime.compareTo(tripList.get(i).getNextStop().getNextStopTime().getArrivalTime())<0){
-                    //get the difference in the time values
-                    timeDiff = currentTime.compareTo(tripList.get(i).getNextStop().getNextStopTime().getArrivalTime());
-                }
-                //if the timeDiff is closer to 0 (the current time and stop time are closer together)
-                //set the nextTrip to the currently checked trip in the list
-                if(timeDiff > lowDiff){
-                    nextTrip = tripList.get(i);
-                }
-            }
-        }
-        return nextTrip;
+        return getNextStopTime().getTrip();
     }
 
     /**

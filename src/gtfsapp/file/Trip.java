@@ -248,34 +248,11 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Finds the next stop on the trip by using a list of stop times and the system clock
+     * Gets the next stopTime and finds the stop associated with that stopTime
      * @return the next stop on the trip
      */
     public Stop getNextStop() {
-        //current time of the system in milliseconds
-        Time currentTime = new Time(System.currentTimeMillis());
-        //List of the stop times on the trip
-        ArrayList<StopTime> stopTimeList = (ArrayList)getStopTimes();
-        //the next stop to be returned
-        Stop nextStop = null;
-        //comparison values
-        int timeDiff = 0;
-        int lowDiff = -100000000;
-        for(int i =0; i< stopTimeList.size()-1; i++){
-            //checks if the stop time is less than the current time, if so, do nothing
-            if(currentTime.compareTo(stopTimeList.get(i).getArrivalTime())>0){
-                nextStop =nextStop;
-            } else {
-                //if the stop time is after the current time, set the difference to that value
-                timeDiff = currentTime.compareTo(stopTimeList.get(i).getArrivalTime());
-            }
-            //If the timeDiff is greater than the low difference (closer to 0/the current time)
-            //set the next stop to the stop associated with the time diff
-            if(timeDiff > lowDiff){
-                nextStop = stopTimeList.get(i).getStop();
-            }
-        }
-        return nextStop;
+        return getNextStopTime().getStop();
     }
 
     /**
