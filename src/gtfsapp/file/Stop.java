@@ -190,19 +190,20 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Not yet implemented
+     * Gets a list of all the trips the stop is a part of, then go through those trips,
+     * seeing if the next stop on the trip, is this stop.  It then returns the trip who visits this stop
+     * next
      *
-     * @return
+     * @return the next trip to go to this stop
      */
     public Trip getNextTrip() {
         Time currentTime = new Time(System.currentTimeMillis());
-        StopID currentStop = (StopID)this.getID();
         List<Trip> tripList = getContainingTrips();
         for(int i=0; i< tripList.size()-1; i++){
-            //gets an array list of the stopTimes on the trip
-            ArrayList<StopTime> tripStopTimes = (ArrayList)tripList.get(i).getStopTimes();
-
-
+            if(tripList.get(i).getNextStop().getID() == this.getID()){
+                if(tripList.get(i).getNextStopTime())
+            }
+            return null;
         }
 
 
