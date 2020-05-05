@@ -25,6 +25,11 @@ public class Stop extends GTFSElement {
     private static final Color DEFAULT_COLOR = Colors.fromString("#D0D0D0");
 
     /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long NEXT_STOP_MAX_TIME = 1000000000;
+
+    /**
      * The feed that the stop belongs to
      */
     private final Feed feed;
@@ -182,14 +187,14 @@ public class Stop extends GTFSElement {
         Time currentTime = new Time(System.currentTimeMillis());
         List<StopTime> stopTimeList = getContainingStopTimes();
         StopTime nextStopTime = null;
-        int timeDiff = 0;
-        int lowDiff = -100000000;
+        long timeDiff = 0;
+        long lowDiff = NEXT_STOP_MAX_TIME;
         for(int i=0; i< stopTimeList.size()-1; i++){
             Time nextArrival = (stopTimeList.get(i).getArrivalTime());
             if(currentTime.compareTo(nextArrival) < 0){
-                timeDiff = currentTime.compareTo(nextArrival);
+                timeDiff = nextArrival.getMillis() - currentTime.getMillis();
             }
-            if(timeDiff > lowDiff){
+            if(timeDiff < lowDiff){
                 nextStopTime = stopTimeList.get(i);
             }
         }

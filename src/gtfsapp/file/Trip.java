@@ -37,6 +37,7 @@ public class Trip extends GTFSElement {
      * Initial value for the difference in time for the next stop
      */
     private static final long NEXT_STOP_MAX_TIME = 1000000000;
+
     /**
      * Constructor for the trip object with an id and feed as parameters
      *
