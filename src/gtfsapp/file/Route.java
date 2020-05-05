@@ -220,7 +220,6 @@ public class Route extends GTFSElement {
 
     /**
      * Get specific stop from this route
-     *
      * @param id Stop id to check for
      */
     public Stop getStopByID(StopID id) {
@@ -244,9 +243,7 @@ public class Route extends GTFSElement {
      * @return a list of all stop ids in this route
      */
     public List<StopID> getStopIDs() {
-        return getStops().stream()
-                         .map(e -> (StopID) e.getID())
-                         .collect(Collectors.toList());
+        return getStops().stream().map(e -> (StopID) e.getID()).collect(Collectors.toList());
     }
 
     /**
@@ -263,7 +260,7 @@ public class Route extends GTFSElement {
             stops.addAll(trip.getStops());
         }
 
-        return stops;
+        return stops.stream().distinct().collect(Collectors.toList());
 
     }
 
