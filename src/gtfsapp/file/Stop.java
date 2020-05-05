@@ -189,13 +189,13 @@ public class Stop extends GTFSElement {
         StopTime nextStopTime = null;
         long timeDiff = 0;
         long lowDiff = NEXT_STOP_MAX_TIME;
-        for(int i=0; i< stopTimeList.size()-1; i++){
-            Time nextArrival = (stopTimeList.get(i).getArrivalTime());
+        for(StopTime stopTime: stopTimeList){
+            Time nextArrival = (stopTime.getArrivalTime());
             if(currentTime.compareTo(nextArrival) < 0){
                 timeDiff = nextArrival.getMillis() - currentTime.getMillis();
             }
             if(timeDiff < lowDiff){
-                nextStopTime = stopTimeList.get(i);
+                nextStopTime = stopTime;
             }
         }
         return nextStopTime;
