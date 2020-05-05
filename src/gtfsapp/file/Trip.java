@@ -1,9 +1,6 @@
 package gtfsapp.file;
 
-import gtfsapp.id.RouteID;
-import gtfsapp.id.StopID;
-import gtfsapp.id.StopTimeID;
-import gtfsapp.id.TripID;
+import gtfsapp.id.*;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
 import javafx.scene.paint.Color;
@@ -32,11 +29,10 @@ public class Trip extends GTFSElement {
      * The head sign for this trip
      */
     private String headSign;
-
     /**
-     * Initial value for the difference in time for the next stop
+     * difference in time for the next stop
      */
-    private static final long NEXT_STOP_MAX_TIME = 1000000000;
+    private static final long STOP_MAX_DIFFERENCE = 1000000000;
 
     /**
      * Constructor for the trip object with an id and feed as parameters
@@ -214,58 +210,66 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * Finds the next stopTime on the trip by using a list of stoptimes and the system clock
-     * @return the next stopTime on the trip
+     * gets the next StopTime for trip
+     *
+     * @return the next stop time
      */
     public StopTime getNextStopTime() {
-        //current time of the system in milliseconds
-        Time currentTime = new Time(System.currentTimeMillis());
-        //List of the stop times on the trip
-        ArrayList<StopTime> stopTimeList = (ArrayList)getStopTimes();
-        //the next stop to be returned
         StopTime nextStopTime = null;
-        //comparison values
+        Time currentTime = new Time(System.currentTimeMillis());
         long timeDiff = 0;
-        long lowDiff = NEXT_STOP_MAX_TIME;
-        for(int i =0; i< stopTimeList.size()-1; i++){
-            //checks if the stop time is less than the current time, if so, do nothing
-            if(currentTime.compareTo(stopTimeList.get(i).getArrivalTime())>0){
-                nextStopTime =nextStopTime;
-            } else {
-                //if the stop time is after the current time, set the difference to that value
-                timeDiff = stopTimeList.get(i).getArrivalTime().getMillis() - System.currentTimeMillis();
+        long nextDiff = STOP_MAX_DIFFERENCE;
+        for(StopTime stopTime : stopTimes.values()){
+            Time nextArrival = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(nextArrival) < 0){
+                timeDiff = nextArrival.getMillis() - currentTime.getMillis();
             }
-            //If the timeDiff is less than the low difference (closer to 0/the current time)
-            //set the next stop to the stop associated with the time diff
-            if(timeDiff < lowDiff){
-                nextStopTime = stopTimeList.get(i);
+            if(timeDiff < nextDiff) {
+                nextStopTime = stopTime;
             }
         }
         return nextStopTime;
     }
 
     /**
-     * @return
+     * gets the previous Stop time
+     *
+     * @return the previous Stop time
      */
     public StopTime getPreviousStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        StopTime prevStopTime = null;
+        long timeDiff = 0;
+        long nextDiff = STOP_MAX_DIFFERENCE;
+        Time currentTime = new Time(System.currentTimeMillis());
+        for(StopTime stopTime : stopTimes.values()){
+            Time previousStop = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(previousStop) > 0){
+                timeDiff = currentTime.getMillis() - previousStop.getMillis();
+            }
+            if(timeDiff < nextDiff){
+                prevStopTime = stopTime;
+            }
+        }
+        return prevStopTime;
+
     }
 
     /**
-     * Gets the next stopTime and finds the stop associated with that stopTime
-     * @return the next stop on the trip
+     * gets next stop with the associated stopTime
+     *
+     * @return the next stop
      */
     public Stop getNextStop() {
-        return getNextStopTime().getStop();
+        return this.getNextStopTime().getStop();
     }
 
     /**
-     * @return
+     * gets previous stop with the associated stopTime
+     *
+     * @return the previous stop
      */
     public Stop getPreviousStop() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return this.getPreviousStopTime().getStop();
     }
 
     /**
@@ -391,6 +395,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's title to be displayed in the GUI
+     *
      * @return the trip's title
      */
     @Override
@@ -400,6 +405,7 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's subtitle to be displayed in the GUI
+     *
      * @return the trip's subtitle
      */
     @Override
