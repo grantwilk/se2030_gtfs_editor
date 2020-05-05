@@ -515,37 +515,42 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     public void searchForElement() {
 
-        // initialize a set of elements
-        List<? extends GTFSElement> elements;
+        // only search if there is text in the search box
+        if (!searchField.getText().isEmpty()) {
 
-        // get the element selector's type
-        GTFSElementType elementType = searchTypeSelector.getValue();
+            // initialize a set of elements
+            List<? extends GTFSElement> elements;
 
-        // switch on element type
-        switch (elementType) {
-            case ROUTE:
-                elements = gtfsFile.getFeed().getRoutes();
-                break;
-            case TRIP:
-                elements = gtfsFile.getFeed().getTrips();
-                break;
-            case TIME:
-                elements = gtfsFile.getFeed().getStopTimes();
-                break;
-            default:
-                elements = gtfsFile.getFeed().getStops();
-        }
+            // get the element selector's type
+            GTFSElementType elementType = searchTypeSelector.getValue();
 
-        // iterate through elements
-        for (GTFSElement element : elements) {
+            // switch on element type
+            switch (elementType) {
+                case ROUTE:
+                    elements = gtfsFile.getFeed().getRoutes();
+                    break;
+                case TRIP:
+                    elements = gtfsFile.getFeed().getTrips();
+                    break;
+                case TIME:
+                    elements = gtfsFile.getFeed().getStopTimes();
+                    break;
+                default:
+                    elements = gtfsFile.getFeed().getStops();
+            }
 
-            String idString = element.getID().getIDString().toUpperCase();
-            String searchID = searchField.getText().toUpperCase();
+            // iterate through elements
+            for (GTFSElement element : elements) {
 
-            // if the ID string contains our search ID, set it as the selected element
-            if (idString.contains(searchID)) {
-                setSelectedElement(element);
-                break;
+                String idString = element.getID().getIDString().toUpperCase();
+                String searchID = searchField.getText().toUpperCase();
+
+                // if the ID string contains our search ID, set it as the selected element
+                if (idString.contains(searchID)) {
+                    setSelectedElement(element);
+                    break;
+                }
+
             }
 
         }
