@@ -34,6 +34,10 @@ public class Trip extends GTFSElement {
     private String headSign;
 
     /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long NEXT_STOP_MAX_TIME = 1000000000;
+    /**
      * Constructor for the trip object with an id and feed as parameters
      *
      * @param idString for the trip
@@ -220,19 +224,19 @@ public class Trip extends GTFSElement {
         //the next stop to be returned
         StopTime nextStopTime = null;
         //comparison values
-        int timeDiff = 0;
-        int lowDiff = -1000;
+        long timeDiff = 0;
+        long lowDiff = NEXT_STOP_MAX_TIME;
         for(int i =0; i< stopTimeList.size()-1; i++){
             //checks if the stop time is less than the current time, if so, do nothing
             if(currentTime.compareTo(stopTimeList.get(i).getArrivalTime())>0){
                 nextStopTime =nextStopTime;
             } else {
                 //if the stop time is after the current time, set the difference to that value
-                timeDiff = currentTime.compareTo(stopTimeList.get(i).getArrivalTime());
+                timeDiff = stopTimeList.get(i).getArrivalTime().getMillis() - System.currentTimeMillis();
             }
-            //If the timeDiff is greater than the low difference (closer to 0/the current time)
+            //If the timeDiff is less than the low difference (closer to 0/the current time)
             //set the next stop to the stop associated with the time diff
-            if(timeDiff > lowDiff){
+            if(timeDiff < lowDiff){
                 nextStopTime = stopTimeList.get(i);
             }
         }
