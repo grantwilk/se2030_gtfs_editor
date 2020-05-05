@@ -28,6 +28,10 @@ public class Trip extends GTFSElement {
      * The head sign for this trip
      */
     private String headSign;
+    /**
+     * difference in time for the next stop
+     */
+    private static final long STOP_MAX_DIFFERENCE = 1000000000;
 
     /**
      * Constructor for the trip object with an id and feed as parameters
@@ -206,42 +210,63 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * gets the next StopTime for trip
+     *
+     * @return the next stop time
      */
     public StopTime getNextStopTime() {
+        StopTime nextStopTime = null;
         Time currentTime = new Time(System.currentTimeMillis());
+        long timeDiff = 0;
+        long nextDiff = STOP_MAX_DIFFERENCE;
         for(StopTime stopTime : stopTimes.values()){
             Time nextArrival = (stopTime.getArrivalTime());
             if(currentTime.compareTo(nextArrival) < 0){
-                return stopTime;
+                timeDiff = nextArrival.getMillis() - currentTime.getMillis();
+            }
+            if(timeDiff < nextDiff) {
+                nextStopTime = stopTime;
             }
         }
-        throw new UnsupportedOperationException();
+        return nextStopTime;
     }
 
     /**
-     * @return
+     * gets the previous Stop time
+     *
+     * @return the previous Stop time
      */
     public StopTime getPreviousStopTime() {
+        StopTime prevStopTime = null;
+        long timeDiff = 0;
+        long nextDiff = STOP_MAX_DIFFERENCE;
         Time currentTime = new Time(System.currentTimeMillis());
         for(StopTime stopTime : stopTimes.values()){
-            Time nextArrival = (stopTime.getArrivalTime());
-            if(currentTime.compareTo(nextArrival) > 0){
-                return stopTime;
+            Time previousStop = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(previousStop) > 0){
+                timeDiff = currentTime.getMillis() - previousStop.getMillis();
+            }
+            if(timeDiff < nextDiff){
+                prevStopTime = stopTime;
             }
         }
-        throw new UnsupportedOperationException();
+        return prevStopTime;
+
     }
 
     /**
-     * @return
+     * gets next stop with the associated stopTime
+     *
+     * @return the next stop
      */
     public Stop getNextStop() {
         return this.getNextStopTime().getStop();
     }
 
     /**
-     * @return
+     * gets previous stop with the associated stopTime
+     *
+     * @return the previous stop
      */
     public Stop getPreviousStop() {
         return this.getPreviousStopTime().getStop();
