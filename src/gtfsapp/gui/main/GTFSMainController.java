@@ -517,8 +517,8 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     public void searchForElement() {
 
-        // only search if there is text in the search box
-        if (!searchField.getText().isEmpty()) {
+        // only search if there is text in the search box and a file is loaded
+        if (!searchField.getText().isEmpty() && gtfsFile != null && gtfsFile.getFeed() != null) {
 
             // initialize a set of elements
             List<? extends GTFSElement> elements;
