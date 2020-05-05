@@ -1,12 +1,15 @@
 package gtfsapp.file;
 
 import gtfsapp.id.RouteID;
-
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
 import gtfsapp.util.Time;
+import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -86,12 +89,12 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     }
 
     /**
-     * Gets a set of all routes that contain this stop time
-     * @return a set of all routes that contain this stop time
+     * Gets a list of all routes that contain this stop time
+     * @return a list of all routes that contain this stop time
      */
-    public Set<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
 
-        Set<Route> containingRoutes = new HashSet<>();
+        List<Route> containingRoutes = new ArrayList<>();
 
         // for each route in the feed
         for (Route route : feed.getRoutes()) {
@@ -110,13 +113,13 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     }
 
     /**
-     * Gets a set of the IDs of all routes that contain this stop time
-     * @return a set of the IDs of all routes that contain this stop time
+     * Gets a list of the IDs of all routes that contain this stop time
+     * @return a list of the IDs of all routes that contain this stop time
      */
-    public Set<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
                 .map(e -> (RouteID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
@@ -207,37 +210,44 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
 
     /**
      * Gets the stop time's title to be displayed in the GUI
-     *
      * @return the stop time's title
      */
     @Override
     public String getTitle() {
-        return "Stop Time " + getID().getIDString();
+        String tripID = getTrip().getID().getIDString();
+        String stopID = getStop().getID().getIDString();
+        return String.format("%s at %s", tripID, stopID);
     }
 
     /**
      * Gets the stop time's subtitle to be displayed in the GUI
-     *
      * @return the stop time's subtitle
      */
     @Override
     public String getSubtitle() {
-        return String.format("Arrives at %s", arrivalTime.toString());
+        return String.format("Arrives at %s | Departs at %s", arrivalTime.toString(), departureTime.toString());
     }
 
     /**
      * Gets the stop time's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the stop time's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the stop time's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
-        // TODO - remove placeholders
-        attributes.put("Stop", "Lorem ipsum dolor");
-        attributes.put("Arrival Time", "Lorem ipsum dolor");
-        attributes.put("Departure Time", "Lorem ipsum dolor");
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
+        attributes.put("Stop", stop.getSubtitle());
+        attributes.put("Arrival Time", arrivalTime.toString());
+        attributes.put("Departure Time", arrivalTime.toString());
         return attributes;
+    }
+
+    /**
+     * Gets the stop time's color
+     * @return the stop time's color
+     */
+    @Override
+    public Color getColor() {
+        return getTrip().getRoute().getColor();
     }
 
     /**
@@ -255,5 +265,4 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
             return super.compareTo(element);
         }
     }
-
 }

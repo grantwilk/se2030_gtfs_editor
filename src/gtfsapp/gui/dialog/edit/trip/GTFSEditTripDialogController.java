@@ -1,6 +1,8 @@
 package gtfsapp.gui.dialog.edit.trip;
 
-import gtfsapp.file.*;
+import gtfsapp.file.GTFSElement;
+import gtfsapp.file.Route;
+import gtfsapp.file.Trip;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
 import gtfsapp.gui.main.GTFSMainController;
 import javafx.fxml.FXML;
@@ -9,7 +11,6 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class GTFSEditTripDialogController extends GTFSEditDialogController {
 
@@ -39,7 +40,7 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
         GTFSMainController mainController = (GTFSMainController) parentController;
 
         // get all of the routes in the feed
-        Set<Route> routes = mainController.getGTFSFile().getFeed().getRoutes();
+        List<Route> routes = mainController.getGTFSFile().getFeed().getRoutes();
 
         // clear the choice box's items and add all of our stops instead
         routeChoiceBox.getItems().clear();
@@ -57,28 +58,15 @@ public class GTFSEditTripDialogController extends GTFSEditDialogController {
      */
     @Override
     public List<GTFSElement> getSimilar() {
-
-        GTFSMainController mainController = (GTFSMainController) parentController;
-        Set<Trip> trips = mainController.getGTFSFile().getFeed().getTrips();
-        Trip element = (Trip) getElement();
-
-        List<GTFSElement> similar = new ArrayList<>();
-
-        // add all trips with the same stops as our current trip to our list
-        for (Trip trip : trips) {
-            if (trip.getStops().equals(element.getStops())) {
-                similar.add(trip);
-            }
-        }
-
-        return similar;
+        Trip trip = (Trip) getElement();
+        return new ArrayList<>(trip.getRoute().getTrips());
 
     }
 
     /**
      * Applies the new attributes in the edit dialog to one element
      *
-     * @param element
+     * @param element - the element to apply attributes to
      */
     @Override
     public void applyOne(GTFSElement element) {

@@ -4,7 +4,7 @@
 }
 
 .error-dialog-root #error-type-indicator {
-    -fx-fill: #C0C0C0;
+    -fx-fill: #D0D0D0;
 }
 
 .error-info-container {

@@ -1,17 +1,15 @@
-package schlaxm;
+package validation.trips;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ValidateTripsTest {
     /**

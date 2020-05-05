@@ -4,7 +4,6 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
-
 import gtfsapp.util.Location;
 import javafx.scene.paint.Color;
 
@@ -63,7 +62,6 @@ public class Route extends GTFSElement {
      * @param routeType Route type for this specific route
      */
     public Route(Feed feed, String id, RouteType routeType) {
-        // TODO - this constructor is not fully implemented!
         super(new RouteID(id));
         this.feed = feed;
         this.routeType = routeType;
@@ -222,7 +220,6 @@ public class Route extends GTFSElement {
 
     /**
      * Get specific stop from this route
-     *
      * @param id Stop id to check for
      */
     public Stop getStopByID(StopID id) {
@@ -243,30 +240,27 @@ public class Route extends GTFSElement {
 
     /**
      * Get a list of the stop ids contained within the route
-     *
-     * @return List of all stop ids in this route
+     * @return a list of all stop ids in this route
      */
-    public Set<StopID> getStopIDs() {
-        return getStops().stream()
-                         .map(e -> (StopID) e.getID())
-                         .collect(Collectors.toSet());
+    public List<StopID> getStopIDs() {
+        return getStops().stream().map(e -> (StopID) e.getID()).collect(Collectors.toList());
     }
 
     /**
      * Get a list of stops contained within the route
      *
-     * @return List of all stops in this route
+     * @return list of all stops in this route
      */
-    public Set<Stop> getStops() {
+    public List<Stop> getStops() {
 
-        Set<Stop> stops = new HashSet<>();
+        List<Stop> stops = new ArrayList<>();
 
-        // iterate through all trips and add all distinct stops to the set
+        // iterate through all trips and add all distinct stops to the list
         for (Trip trip : trips.values()) {
             stops.addAll(trip.getStops());
         }
 
-        return stops;
+        return stops.stream().distinct().collect(Collectors.toList());
 
     }
 
@@ -292,26 +286,24 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * Returns the id of all stop_times contained in this route
-     *
-     * @return List of all stop_time ids in this route
+     * Returns the id of all stop times contained in this route
+     * @return list of all stop time ids in this route
      */
-    public Set<StopTimeID> getStopTimeIDs() {
+    public List<StopTimeID> getStopTimeIDs() {
         return getStopTimes().stream()
                              .map(e -> (StopTimeID) e.getID())
-                             .collect(Collectors.toSet());
+                             .collect(Collectors.toList());
     }
 
     /**
-     * Gets a set of all stop times contained within the route
-     *
-     * @return a set of all stop times contained within this route
+     * Gets a list of all stop times contained within the route
+     * @return a list of all stop times contained within this route
      */
-    public Set<StopTime> getStopTimes() {
+    public List<StopTime> getStopTimes() {
 
-        Set<StopTime> stopTimes = new HashSet<>();
+        List<StopTime> stopTimes = new ArrayList<>();
 
-        // iterate through all trips and add all distinct stop times to the set
+        // iterate through all trips and add all distinct stop times to the list
         for (Trip trip : trips.values()) {
             stopTimes.addAll(trip.getStopTimes());
         }
@@ -331,21 +323,20 @@ public class Route extends GTFSElement {
 
     /**
      * Get a list of trip ids contained in this route
-     *
-     * @return List of trip ids in this route
+     * @return a list of trip ids in this route
      */
-    public Set<TripID> getTripIDs() {
-        return trips.keySet();
+    public List<TripID> getTripIDs() {
+        return new ArrayList<>(trips.keySet());
 
     }
 
     /**
      * Get a list of all trips contained in this route
      *
-     * @return List of all trips in this route
+     * @return a list of all trips in this route
      */
-    public Set<Trip> getTrips() {
-        return new HashSet<>(trips.values());
+    public List<Trip> getTrips() {
+        return new ArrayList<>(trips.values());
     }
 
     /**
@@ -484,17 +475,15 @@ public class Route extends GTFSElement {
 
     /**
      * Gets the route's title to be displayed in the GUI
-     *
      * @return the route's title
      */
     @Override
     public String getTitle() {
-        return "Route " + getID().getIDString();
+        return getID().getIDString();
     }
 
     /**
      * Gets the route's subtitle to be displayed in the GUI
-     *
      * @return the route's subtitle
      */
     @Override
@@ -510,12 +499,11 @@ public class Route extends GTFSElement {
 
     /**
      * Gets the route's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the route's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the route's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
         // TODO - remove placeholders
         attributes.put("Next Stop", "Lorem ipsum dolor");
         attributes.put("Last Stop", "Lorem ipsum dolor");

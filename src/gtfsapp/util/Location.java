@@ -96,7 +96,11 @@ public class Location {
      */
     @Override
     public String toString() {
-        return "(" + latitude + ", " + longitude + ")";
+
+        String latString = String.format("%.4f%s", Math.abs(latitude), latitude >= 0 ? "°N" : "°S");
+        String lonString = String.format("%.4f%s", Math.abs(longitude), longitude >= 0 ? "°E" : "°W");
+
+        return latString + ", " + lonString;
     }
 
 }

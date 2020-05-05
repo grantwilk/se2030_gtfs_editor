@@ -27,7 +27,7 @@ public class GTFSEditRouteDialogController extends GTFSEditDialogController {
     /**
      * Applies the new attributes in the edit dialog to one element
      *
-     * @param element
+     * @param element - the element to apply attributes to
      */
     @Override
     public void applyOne(GTFSElement element) {

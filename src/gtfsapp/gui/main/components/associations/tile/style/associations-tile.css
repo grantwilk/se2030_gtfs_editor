@@ -7,17 +7,25 @@
 
 .associations-tile {
     -fx-background-color: white;
-    -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 3, 3);
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
     -fx-cursor: hand;
 }
 
 .associations-tile #color {
-    -fx-background-color: #C0C0C0;
-    -fx-background-radius: 7 0 0 7;
+    -fx-background-color: #D0D0D0;
+    -fx-background-radius: 5 0 0 5;
+    -fx-background-insets: 1;
+    -fx-border-color: #A0A0A0;
+    -fx-border-radius: 5 0 0 5;
+    -fx-border-width: 2;
 }
 
 .associations-tile #info-container {
+    -fx-background-insets: 1;
+    -fx-border-color: #D0D0D0;
+    -fx-border-radius: 0 5 5 0;
+    -fx-border-width: 2 2 2 0;
     -fx-padding: 15;
     -fx-spacing: -1;
 }
@@ -28,14 +36,4 @@
 
 .associations-tile #subtitle {
     -fx-text-fill: #909090;
-}
-
-.associations-tile:pressed,
-.associations-tile:pressed #color {
-    -fx-background-color: #4C8BF5;
-}
-
-.associations-tile:pressed #title,
-.associations-tile:pressed #subtitle {
-    -fx-text-fill: white;
 }

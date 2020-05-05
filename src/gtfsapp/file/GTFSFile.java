@@ -30,6 +30,16 @@ public class GTFSFile {
     private static final String UNSIGNED_INT_REGEX = "^[0-9]+";
 
     /**
+     * List of stopIDS from stops.txt
+     */
+    private static ArrayList<String> stopIDS;
+
+    /**
+     * List of tripIDS from trips.txt
+     */
+    private static List<String> tripIDs;
+
+    /**
      * The internal feed
      */
     private Feed feed;
@@ -91,8 +101,8 @@ public class GTFSFile {
 
         // validate files
         validateStops(stopLines);
-        validateStopTimes(stopTimeLines);
         validateTrips(tripLines);
+        validateStopTimes(stopTimeLines);
         validateRoutes(routeLines);
 
         // parse the files (must be in this order!)
@@ -114,7 +124,7 @@ public class GTFSFile {
      */
     public void save(Path path) {
         // TODO - needs implementation eventually
-        throw new UnsupportedOperationException("Too many elements in file \"stop_times.txt\".");
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -181,7 +191,7 @@ public class GTFSFile {
         }
     }
 
-    public static boolean validateRoutes(List<String> lines) throws  IOException {
+    public static void validateRoutes(List<String> lines) throws  IOException {
 
         ArrayList<String> routeIDS = new ArrayList<>();
 
@@ -230,18 +240,14 @@ public class GTFSFile {
 
         }
 
-
-
-        return true;
     }
 
     /**
      * Parse through stops file to check that all data is valid
      * @param lines List of each line in the stops file
-     * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateStops(List<String> lines) throws IOException, NumberFormatException {
+    public static void validateStops(List<String> lines) throws IOException, NumberFormatException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -262,7 +268,7 @@ public class GTFSFile {
         }
 
         // create list of all stop ids in this file
-        ArrayList<String> stopIDS = new ArrayList<>();
+        stopIDS = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size(); i++) {
@@ -302,17 +308,13 @@ public class GTFSFile {
             double stopLat = Double.parseDouble(lat);
             double stopLon = Double.parseDouble(lon);
         }
-
-        return true;
     }
 
     /**
      * Parse through stop times file to check that all data is valid
      * @param lines List of each line in the stop times file
-     * @return True if the file is valid
-     * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateStopTimes(List<String> lines) throws IOException {
+    public static void validateStopTimes(List<String> lines) {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -327,6 +329,9 @@ public class GTFSFile {
         ) {
             throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
         }
+
+        // keep track of all currently validated stop times
+        ArrayList<Map<String, String>> stopTimes = new ArrayList<>();
 
         for (int i = 1; i < lines.size(); i++) {
 
@@ -384,10 +389,63 @@ public class GTFSFile {
             if (!departureTime.matches(Time.getRegex())) {
                 throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
             }
+            if(!stopIDS.contains(stopID)) {
+                throw new IllegalArgumentException("Stop time includes stop_id that is never referenced in \"stops.txt\".");
+            }
+            if(!tripIDs.contains(tripID)) {
+                throw new IllegalArgumentException("Stop time includes trip_id that is never referenced in \"trips.txt\".");
+            }
+
+            // check if arrival time is before departure time
+            Time arrival = new Time(arrivalTime);
+            Time departure = new Time(departureTime);
+            if(arrival.getMillis() > departure.getMillis()) {
+                throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+            }
+
+            // check if trip id already exists in file
+            ArrayList<Map<String, String>> trip = new ArrayList<>();
+            for(Map<String, String> stopTime:stopTimes) {
+                if(stopTime.get("trip_id").equals(tripID)) {
+                    // if it does already exist get all stop times with same trip id
+                    trip.add(stopTime);
+                }
+            }
+
+            // compare arrival time of current stop time with all associated stop times
+            for(Map<String, String> compareTrip:trip) {
+                Time compareArrivalTime = new Time(compareTrip.get("arrival_time"));
+                Time currentArrivalTime = new Time(stopTimeFields.get("arrival_time"));
+                Time compareDepartureTime = new Time(compareTrip.get("departure_time"));
+                Time currentDepartureTime = new Time(stopTimeFields.get("departure_time"));
+                int compareSequence = Integer.parseInt(compareTrip.get("stop_sequence"));
+                int currentSequence = Integer.parseInt(stopTimeFields.get("stop_sequence"));
+
+                // check sequences and arrival and departure times for correct ordering
+                if(compareSequence < currentSequence) {
+                    if(!(compareArrivalTime.getMillis() < currentArrivalTime.getMillis())) {
+                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+                    }
+                    if(!(compareDepartureTime.getMillis() < currentDepartureTime.getMillis())) {
+                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+                    }
+                } else if(compareSequence > currentSequence) {
+                    if(!(compareArrivalTime.getMillis() > currentArrivalTime.getMillis())) {
+                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+                    }
+                    if(!(compareDepartureTime.getMillis() > currentDepartureTime.getMillis())) {
+                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+                    }
+                } else {
+                    throw new IllegalArgumentException("Duplicate stop sequences for a trip in \"stop_time.txt\"");
+                }
+            }
+
+            // add stop time to current line to list of all validated stop times
+            stopTimes.add(stopTimeFields);
 
         }
 
-        return true;
     }
 
     /**
@@ -396,7 +454,7 @@ public class GTFSFile {
      * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateTrips(List<String> lines) throws IOException {
+    public static void validateTrips(List<String> lines) throws IOException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -406,7 +464,7 @@ public class GTFSFile {
             throw new IOException("Missing one or more required attributes in first line of \"trip.txt\".");
         }
 
-        List<String> tripIDs = new ArrayList<>();
+        tripIDs = new ArrayList<>();
 
         // Check each line for proper information
         for (int i = 1; i < lines.size(); i++) {
@@ -454,8 +512,6 @@ public class GTFSFile {
             tripIDs.add(tripID);
 
         }
-
-        return true;
 
     }
 
@@ -684,7 +740,6 @@ public class GTFSFile {
             if(!stopLat.isEmpty() && !stopLon.isEmpty()) {
                 double lat = Double.parseDouble(stopLat);
                 double lon = Double.parseDouble(stopLon);
-                // TODO - replace Point2D with Location on merge w/ master
                 stop.setLocation(new Location(lat, lon));
             }
 

@@ -25,8 +25,6 @@ public class GTFSMapController extends gtfsapp.gui.GTFSController {
         return mainController;
     }
 
-    // TODO - do we need a setMainController()?
-
     /**
      * Gets the map controller's selected element and returns it
      * @return the map controller's selected element
@@ -44,7 +42,7 @@ public class GTFSMapController extends gtfsapp.gui.GTFSController {
 
     /**
      *
-     * @param msg
+     * @param msg - the message to display
      */
     public void invokeErrorDialog(String msg) {
         throw new UnsupportedOperationException();
