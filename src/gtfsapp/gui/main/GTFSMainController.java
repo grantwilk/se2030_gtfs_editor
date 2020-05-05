@@ -414,7 +414,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 editStage.setTitle(windowTitle);
                 editStage.setResizable(false);
                 editStage.initModality(Modality.APPLICATION_MODAL);
-                editStage.initOwner(getScene().getWindow());
+                editStage.initOwner(getStage());
 
                 // show the stage
                 editStage.showAndWait();
@@ -488,6 +488,8 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             errorStage.setScene(errorScene);
             errorStage.setTitle(errorTitle);
             errorStage.setResizable(false);
+            errorStage.initOwner(getStage());
+            errorStage.initModality(Modality.WINDOW_MODAL);
 
             // show the stage
             errorStage.showAndWait();
