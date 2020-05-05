@@ -2,9 +2,12 @@ package gtfsapp.gui.main.components.associations.tile;
 
 import gtfsapp.file.GTFSElement;
 import gtfsapp.gui.main.GTFSMainController;
+import gtfsapp.util.Colors;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * @author Grant Wilk
@@ -30,6 +33,12 @@ public class GTFSAssociationsTileController {
     private GridPane associationsTile;
 
     /**
+     * The color pane of the associations tile
+     */
+    @FXML
+    private Pane tileColor;
+
+    /**
      * The title of the associations tile
      */
     @FXML
@@ -50,7 +59,6 @@ public class GTFSAssociationsTileController {
 
     /**
      * Gets the tile's GTFS element
-     *
      * @return the tile's GTFS element
      */
     public GTFSElement getElement() {
@@ -59,61 +67,62 @@ public class GTFSAssociationsTileController {
 
     /**
      * Sets the tile's GTFS element
-     *
      * @param element the element
      */
     public void setElement(GTFSElement element) {
+
+        // set the selected element
         this.element = element;
+
+        // update the tile's appearance
+        updateTile();
+
     }
 
     /**
-     * Gets the title of the tile
-     *
-     * @return the title of the tile
+     * Updates the appearance of the tile based on the currently selected element
      */
-    public String getTitle() {
-        return tileTitle.getText();
+    private void updateTile() {
+        updateColor();
+        updateTitle();
+        updateSubtitle();
     }
 
     /**
-     * Sets the title of the tile
-     *
-     * @param title the title of the tile
+     * Updates the title of the tile based on the element
      */
-    public void setTitle(String title) {
-        tileTitle.setText(title.toUpperCase());
+    private void updateTitle() {
+        tileTitle.setText(element.getTitle());
     }
 
     /**
-     * Gets the subtitle of the tile
-     *
-     * @return the subtitle of the tile
+     * Updates the subtitle of the tile based on the element
      */
-    public String getSubtitle() {
-        return tileSubtitle.getText();
+    private void updateSubtitle() {
+        tileSubtitle.setText(element.getSubtitle());
     }
 
     /**
-     * Sets the subtitle of the tile
-     *
-     * @param subtitle the of of the tile
+     * Updates the color of the tile based on the element
      */
-    public void setSubtitle(String subtitle) {
-        tileSubtitle.setText(subtitle);
-    }
+    private void updateColor() {
 
-    /**
-     * Gets the associations tile's main controller
-     *
-     * @return the associations tile's main controller
-     */
-    public GTFSMainController getMainController() {
-        return mainController;
+        // get the color of the element
+        Color backgroundColor = element.getColor();
+        Color borderColor = backgroundColor.darker();
+        String backgroundColorString = Colors.toString(backgroundColor);
+        String borderColorString = Colors.toString(borderColor);
+
+        // update the color of the pane
+        tileColor.setStyle(
+                String.format("-fx-background-color: %s;", backgroundColorString) +
+                        String.format("-fx-border-color: %s;", borderColorString)
+        );
+
     }
 
     /**
      * Sets the main controller for the associations tile
-     *
      * @param mainController the main controller
      */
     public void setMainController(GTFSMainController mainController) {

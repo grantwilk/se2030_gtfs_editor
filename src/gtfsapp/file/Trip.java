@@ -1,8 +1,12 @@
 package gtfsapp.file;
 
-import gtfsapp.id.*;
+import gtfsapp.id.RouteID;
+import gtfsapp.id.StopID;
+import gtfsapp.id.StopTimeID;
+import gtfsapp.id.TripID;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +32,11 @@ public class Trip extends GTFSElement {
      * The head sign for this trip
      */
     private String headSign;
+
+    /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long NEXT_STOP_MAX_TIME = 1000000000;
 
     /**
      * Constructor for the trip object with an id and feed as parameters
@@ -147,11 +156,10 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets all of the stop time IDs contained within the trip
-     *
      * @return a list of stop time IDs contained within the trip
      */
-    public Set<StopTimeID> getStopTimeIDs() {
-        return stopTimes.keySet();
+    public List<StopTimeID> getStopTimeIDs() {
+        return new ArrayList<>(stopTimes.keySet());
     }
 
     /**
@@ -159,8 +167,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop times contained within the trip
      */
-    public Set<StopTime> getStopTimes() {
-        return new HashSet<>(stopTimes.values());
+    public List<StopTime> getStopTimes() {
+        return new ArrayList<>(stopTimes.values());
     }
 
     /**
@@ -184,8 +192,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stop IDs contained within the trip
      */
-    public Set<StopID> getStopIDs() {
-        Set<StopID> stopIDs = new HashSet<>();
+    public List<StopID> getStopIDs() {
+        List<StopID> stopIDs = new ArrayList<>();
         for (StopTime stopTime : stopTimes.values()) {
             stopIDs.add((StopID) stopTime.getID());
         }
@@ -197,8 +205,8 @@ public class Trip extends GTFSElement {
      *
      * @return a list of stops contained within the trip
      */
-    public Set<Stop> getStops() {
-        Set<Stop> stops = new HashSet<>();
+    public List<Stop> getStops() {
+        List<Stop> stops = new ArrayList<>();
         for (StopTime stopTime : stopTimes.values()) {
             stops.add(stopTime.getStop());
         }
@@ -206,11 +214,34 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Finds the next stopTime on the trip by using a list of stoptimes and the system clock
+     * @return the next stopTime on the trip
      */
     public StopTime getNextStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        //current time of the system in milliseconds
+        Time currentTime = new Time(System.currentTimeMillis());
+        //List of the stop times on the trip
+        ArrayList<StopTime> stopTimeList = (ArrayList)getStopTimes();
+        //the next stop to be returned
+        StopTime nextStopTime = null;
+        //comparison values
+        long timeDiff = 0;
+        long lowDiff = NEXT_STOP_MAX_TIME;
+        for(int i =0; i< stopTimeList.size()-1; i++){
+            //checks if the stop time is less than the current time, if so, do nothing
+            if(currentTime.compareTo(stopTimeList.get(i).getArrivalTime())>0){
+                nextStopTime =nextStopTime;
+            } else {
+                //if the stop time is after the current time, set the difference to that value
+                timeDiff = stopTimeList.get(i).getArrivalTime().getMillis() - System.currentTimeMillis();
+            }
+            //If the timeDiff is less than the low difference (closer to 0/the current time)
+            //set the next stop to the stop associated with the time diff
+            if(timeDiff < lowDiff){
+                nextStopTime = stopTimeList.get(i);
+            }
+        }
+        return nextStopTime;
     }
 
     /**
@@ -222,11 +253,11 @@ public class Trip extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets the next stopTime and finds the stop associated with that stopTime
+     * @return the next stop on the trip
      */
     public Stop getNextStop() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return getNextStopTime().getStop();
     }
 
     /**
@@ -344,11 +375,9 @@ public class Trip extends GTFSElement {
         double tripStart = (double) FirstDepartTime.getDepartureTime().getMillis();
         //Gets the time value for the second StopTime
         double tripEnd = (double) LastArriveTime.getDepartureTime().getMillis();
-        if (System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return System.currentTimeMillis() < tripEnd && System.currentTimeMillis() > tripStart;
+
     }
 
     /**
@@ -362,17 +391,15 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's title to be displayed in the GUI
-     *
      * @return the trip's title
      */
     @Override
     public String getTitle() {
-        return "Trip " + getID().getIDString();
+        return getID().getIDString();
     }
 
     /**
      * Gets the trip's subtitle to be displayed in the GUI
-     *
      * @return the trip's subtitle
      */
     @Override
@@ -386,16 +413,24 @@ public class Trip extends GTFSElement {
 
     /**
      * Gets the trip's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the trip's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the trip's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        HashMap<String, String> attributes = new HashMap<>();
-        attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
         attributes.put("Distance", String.format("%.02f miles", getDistance()));
         attributes.put("Duration", String.format("%.02f hours", getDuration() / (double) Time.getMillisInHour()));
+        attributes.put("Average Speed", String.format("%.02f mph", getAvgSpeed()));
         return attributes;
+    }
+
+    /**
+     * Gets the trip's color
+     * @return the trip's color
+     */
+    @Override
+    public Color getColor() {
+        return getRoute().getColor();
     }
 
 }

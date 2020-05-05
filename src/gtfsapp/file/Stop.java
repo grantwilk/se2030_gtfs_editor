@@ -4,7 +4,10 @@ import gtfsapp.id.RouteID;
 import gtfsapp.id.StopID;
 import gtfsapp.id.StopTimeID;
 import gtfsapp.id.TripID;
+import gtfsapp.util.Colors;
 import gtfsapp.util.Location;
+import gtfsapp.util.Time;
+import javafx.scene.paint.Color;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,6 +18,16 @@ import java.util.stream.Collectors;
  * @created 15-Apr-2020 1:20:18 PM
  */
 public class Stop extends GTFSElement {
+
+    /**
+     * The default color of a stop
+     */
+    private static final Color DEFAULT_COLOR = Colors.fromString("#D0D0D0");
+
+    /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long NEXT_STOP_MAX_TIME = 1000000000;
 
     /**
      * The feed that the stop belongs to
@@ -61,24 +74,22 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Gets a set of the IDs of all routes that contain this stop
-     *
-     * @return a set of the IDs of all routes that contain this stop
+     * Gets a list of the IDs of all routes that contain this stop
+     * @return a list of the IDs of all routes that contain this stop
      */
-    public Set<RouteID> getContainingRouteIDs() {
+    public List<RouteID> getContainingRouteIDs() {
         return getContainingRoutes().stream()
                 .map(e -> (RouteID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
-     * Gets a set of all routes that contain this stop
-     *
-     * @return a set of all routes that contain this stop
+     * Gets a list of all routes that contain this stop
+     * @return a list of all routes that contain this stop
      */
-    public Set<Route> getContainingRoutes() {
+    public List<Route> getContainingRoutes() {
 
-        Set<Route> containingRoutes = new HashSet<>();
+        List<Route> containingRoutes = new ArrayList<>();
 
         // for each route in the feed
         for (Route route : feed.getRoutes()) {
@@ -97,24 +108,22 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Gets a set of the IDs of all stop times that contain this stop
-     *
-     * @return a set of the IDs of all stop times that contain this stop
+     * Gets a list of the IDs of all stop times that contain this stop
+     * @return a list of the IDs of all stop times that contain this stop
      */
-    public Set<StopTimeID> getContainingStopTimeIDs() {
+    public List<StopTimeID> getContainingStopTimeIDs() {
         return getContainingStopTimes().stream()
                 .map(e -> (StopTimeID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
-     * Gets a set of all stop times that contain this stop
-     *
-     * @return a set of all stop times that contain this stop
+     * Gets a list of all stop times that contain this stop
+     * @return a list of all stop times that contain this stop
      */
-    public Set<StopTime> getContainingStopTimes() {
+    public List<StopTime> getContainingStopTimes() {
 
-        Set<StopTime> containingStopTimes = new HashSet<>();
+        List<StopTime> containingStopTimes = new ArrayList<>();
 
         // for each stop time
         for (StopTime stopTime : feed.getStopTimes()) {
@@ -138,10 +147,10 @@ public class Stop extends GTFSElement {
      *
      * @return a set of the IDs of all trips that contain this stop
      */
-    public Set<TripID> getContainingTripIDs() {
+    public List<TripID> getContainingTripIDs() {
         return getContainingTrips().stream()
                 .map(e -> (TripID) e.getID())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
@@ -149,9 +158,9 @@ public class Stop extends GTFSElement {
      *
      * @return a set of all trips that contain this stop
      */
-    public Set<Trip> getContainingTrips() {
+    public List<Trip> getContainingTrips() {
 
-        Set<Trip> containingTrips = new HashSet<>();
+        List<Trip> containingTrips = new ArrayList<>();
 
         // for each trip in the feed
         for (Trip trip : feed.getTrips()) {
@@ -169,23 +178,36 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * Not yet implemented
+     * Gets a list of the stop times for this stop, and compares them to the current time
+     * It takes the closest value to the current time and returns that value
      *
-     * @return
+     * @return the StopTime for the next closest stop
      */
     public StopTime getNextStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        Time currentTime = new Time(System.currentTimeMillis());
+        List<StopTime> stopTimeList = getContainingStopTimes();
+        StopTime nextStopTime = null;
+        long timeDiff = 0;
+        long lowDiff = NEXT_STOP_MAX_TIME;
+        for(StopTime stopTime: stopTimeList){
+            Time nextArrival = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(nextArrival) < 0){
+                timeDiff = nextArrival.getMillis() - currentTime.getMillis();
+            }
+            if(timeDiff < lowDiff){
+                nextStopTime = stopTime;
+            }
+        }
+        return nextStopTime;
     }
 
     /**
-     * Not yet implemented
+     * Takes the next stopTime and finds the trip associated with that stop time
      *
-     * @return
+     * @return the next trip to go to this stop
      */
     public Trip getNextTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return getNextStopTime().getTrip();
     }
 
     /**
@@ -281,17 +303,15 @@ public class Stop extends GTFSElement {
 
     /**
      * Gets the stop's title to be displayed in the GUI
-     *
      * @return the stop's title
      */
     @Override
     public String getTitle() {
-        return "Stop " + getID().getIDString();
+        return getID().getIDString();
     }
 
     /**
      * Gets the stop's subtitle to be displayed in the GUI
-     *
      * @return the stop's subtitle
      */
     @Override
@@ -301,17 +321,32 @@ public class Stop extends GTFSElement {
 
     /**
      * Gets the stop's attributes to be displayed in the GUI
-     *
-     * @return a HashMap<Attribute Title, Attribute Value> of the stop's attributes
+     * @return a Map<Attribute Title, Attribute Value> of the stop's attributes
      */
     @Override
-    public HashMap<String, String> getAttributes() {
-        // TODO - remove placeholders
-        HashMap<String, String> attributes = new HashMap<>();
-        attributes.put("Location", "Lorem ipsum dolor");
-        attributes.put("Next Trip", "Lorem ipsum dolor");
-        attributes.put("Last Trip", "Lorem ipsum dolor");
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
+        attributes.put("Location", getLocation().toString());
+        attributes.put("Next Trip", getNextTrip().getID().getIDString());
+        attributes.put("Last Trip", getPreviousTrip().getID().getIDString());
         return attributes;
+    }
+
+    /**
+     * Gets the stop's color
+     * @return the stop's color
+     */
+    @Override
+    public Color getColor() {
+
+        List<Route> routes = new ArrayList<>(getContainingRoutes());
+
+        if (routes.size() == 1) {
+            return routes.get(0).getColor();
+        } else {
+            return DEFAULT_COLOR;
+        }
+
     }
 
 }

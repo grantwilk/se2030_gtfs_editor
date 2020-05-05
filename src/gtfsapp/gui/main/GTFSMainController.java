@@ -8,15 +8,18 @@ import gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileControl
 import gtfsapp.gui.main.components.selectedelement.attribute.GTFSSelectedElementAttributeController;
 import gtfsapp.gui.map.GTFSMapController;
 import gtfsapp.id.GTFSID;
+import gtfsapp.util.Colors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -25,7 +28,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -36,39 +41,44 @@ import java.util.stream.Collectors;
 public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
     /**
-     * The color displayed in the selected element panel if there is no selected element
+     * The background color displayed in the selected element panel if there is no selected element
      */
-    public static final String NULL_SELECTED_ELEMENT_COLOR = "#C0C0C0";
+    public static final String NULL_BACKGROUND_COLOR = "#D0D0D0";
+
+    /**
+     * The border color displayed in the selected element panel if there is no selected element
+     */
+    public static final String NULL_BORDER_COLOR = "#A0A0A0";
 
     /**
      * The title displayed in the selected element panel if there is no selected element
      */
-    private static final String NULL_SELECTED_ELEMENT_TITLE = "NULL";
+    private static final String NULL_TITLE = "NULL";
 
     /**
      * The subtitle displayed in the selected element panel if there is no selected element
      */
-    private static final String NULL_SELECTED_ELEMENT_SUBTITLE = "Nothing to see here!";
+    private static final String NULL_SUBTITLE = "Nothing to see here!";
 
     /**
      * List of all routes associated with the selected element
      */
-    private Set<Route> associatedRoutes = new HashSet<>();
+    private List<Route> associatedRoutes = new ArrayList<>();
 
     /**
      * List of all trips associated with the selected element
      */
-    private Set<Trip> associatedTrips = new HashSet<>();
+    private List<Trip> associatedTrips = new ArrayList<>();
 
     /**
      * List of all stops associated with the selected element
      */
-    private Set<Stop> associatedStops = new HashSet<>();
+    private List<Stop> associatedStops = new ArrayList<>();
 
     /**
      * List of all stop times associated with the selected element
      */
-    private Set<StopTime> associatedStopTimes = new HashSet<>();
+    private List<StopTime> associatedStopTimes = new ArrayList<>();
 
     /**
      * The controller's GTFS file
@@ -116,6 +126,12 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
     private TextField searchField;
 
     /**
+     * The GTFS element type selector in the search panel
+     */
+    @FXML
+    private ChoiceBox<GTFSElementType> searchTypeSelector;
+
+    /**
      * The root of the selected element panel on the info panel
      */
     @FXML
@@ -156,6 +172,12 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     @FXML
     private VBox selectedElementAttributesContainer;
+
+    /**
+     * The button for editing the currently selected element
+     */
+    @FXML
+    private Button selectedElementEditButton;
 
     /**
      * The root of the associations panel on the info panel
@@ -222,7 +244,21 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     @FXML
     public void initialize() {
+
+        // add all of the GTFS element types to the type selector
+        searchTypeSelector.getItems().addAll(GTFSElementType.values());
+        searchTypeSelector.setValue(GTFSElementType.ROUTE);
+
+        // configure search on enter keypress
+        searchField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                searchForElement();
+            }
+        });
+
+        // update the info panel
         updateInfoPanel();
+
     }
 
     /**
@@ -246,11 +282,15 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // get file from the chooser
         // TODO - implement opening a single .zip file of all GTFS files instead of selecting multiple
-        List<File> files = fileChooser.showOpenMultipleDialog(new Stage());
+        List<File> files = fileChooser.showOpenMultipleDialog(getStage());
+
 
         // if at least one file was selected
         if (!(files == null || files.isEmpty())) {
             try {
+
+                // set the GTFS file to null (required for deselectElement())
+                gtfsFile = null;
 
                 // deselect the selected element
                 deselectElement();
@@ -309,7 +349,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a route
-                    windowTitle = "Edit Route";
+                    windowTitle = "Route Attributes";
 
                 }
 
@@ -321,7 +361,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a trip
-                    windowTitle = "Edit Trip";
+                    windowTitle = "Trip Attributes";
 
                 }
 
@@ -333,7 +373,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop time
-                    windowTitle = "Edit Stop Time";
+                    windowTitle = "Stop Time Attributes";
 
                 }
 
@@ -345,7 +385,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                     );
 
                     // get the selected elements title as a stop
-                    windowTitle = "Edit Stop";
+                    windowTitle = "Stop Attributes";
 
                 }
 
@@ -474,8 +514,42 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      * search field
      */
     public void searchForElement() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+
+        // initialize a set of elements
+        List<? extends GTFSElement> elements;
+
+        // get the element selector's type
+        GTFSElementType elementType = searchTypeSelector.getValue();
+
+        // switch on element type
+        switch (elementType) {
+            case ROUTE:
+                elements = gtfsFile.getFeed().getRoutes();
+                break;
+            case TRIP:
+                elements = gtfsFile.getFeed().getTrips();
+                break;
+            case TIME:
+                elements = gtfsFile.getFeed().getStopTimes();
+                break;
+            default:
+                elements = gtfsFile.getFeed().getStops();
+        }
+
+        // iterate through elements
+        for (GTFSElement element : elements) {
+
+            String idString = element.getID().getIDString().toUpperCase();
+            String searchID = searchField.getText().toUpperCase();
+
+            // if the ID string contains our search ID, set it as the selected element
+            if (idString.contains(searchID)) {
+                setSelectedElement(element);
+                break;
+            }
+
+        }
+
     }
 
     /**
@@ -514,30 +588,49 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         if (selectedElement == null) {
 
             // set the title, subtitle, and color to the null color
-            selectedElementTitle.setText(NULL_SELECTED_ELEMENT_TITLE);
-            selectedElementSubtitle.setText(NULL_SELECTED_ELEMENT_SUBTITLE);
-            selectedElementColor.setStyle("-fx-background-color: " + NULL_SELECTED_ELEMENT_COLOR);
+            selectedElementTitle.setText(NULL_TITLE);
+            selectedElementSubtitle.setText(NULL_SUBTITLE);
+            selectedElementColor.setStyle(
+                    String.format("-fx-background-color: %s;", NULL_BACKGROUND_COLOR) +
+                    String.format("-fx-border-color: %s;", NULL_BORDER_COLOR)
+            );
 
             // hide the separator and the attributes container
             selectedElementAttributesSeparator.setVisible(false);
             selectedElementAttributesContainer.setVisible(false);
             selectedElementAttributesContainer.setManaged(false);
 
+            // hide the edit button
+            selectedElementEditButton.setVisible(false);
+
         }
 
         // if there is a selected element
         else {
 
-            // set the title, subtitle, and color to the selected element's values
-            // TODO - get element color and display that instead of red
+            // get the color of the element
+            Color backgroundColor = selectedElement.getColor();
+            Color borderColor = backgroundColor.darker();
+            String backgroundColorString = Colors.toString(backgroundColor);
+            String borderColorString = Colors.toString(borderColor);
+
+            // update the color of the panel
+            selectedElementColor.setStyle(
+                    String.format("-fx-background-color: %s;", backgroundColorString) +
+                    String.format("-fx-border-color: %s;", borderColorString)
+            );
+
+            // update the title and subtitle
             selectedElementTitle.setText(selectedElement.getTitle().toUpperCase());
             selectedElementSubtitle.setText(selectedElement.getSubtitle());
-            selectedElementColor.setStyle("-fx-background-color: red");
 
             // show the separator and the attributes container
             selectedElementAttributesSeparator.setVisible(true);
             selectedElementAttributesContainer.setVisible(true);
             selectedElementAttributesContainer.setManaged(true);
+
+            // show the edit button
+            selectedElementEditButton.setVisible(true);
 
         }
 
@@ -558,7 +651,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         if (selectedElement != null) {
 
             // get the selected element's attributes
-            HashMap<String, String> attributes = selectedElement.getAttributes();
+            Map<String, String> attributes = selectedElement.getAttributes();
 
             // iterate through all attribute entries
             for (Map.Entry<String, String> entry : attributes.entrySet()) {
@@ -603,10 +696,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
             // if there is no file loaded, reset all of the associations arrays
             if (gtfsFile == null) {
-                associatedRoutes = new HashSet<>();
-                associatedTrips = new HashSet<>();
-                associatedStopTimes = new HashSet<>();
-                associatedStops = new HashSet<>();
+                associatedRoutes = new ArrayList<>();
+                associatedTrips = new ArrayList<>();
+                associatedStopTimes = new ArrayList<>();
+                associatedStops = new ArrayList<>();
             }
 
             // if there is a feed loaded, get all of the associations arrays from it
@@ -622,19 +715,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise, find associations and update the class variables
         else {
-
-            // TODO - remove and replace with code below for proper associations
-            Feed feed = gtfsFile.getFeed();
-            associatedRoutes = feed.getRoutes();
-            associatedTrips = feed.getTrips();
-            associatedStopTimes = feed.getStopTimes();
-            associatedStops = feed.getStops();
-
-            // associatedRoutes = findAssociatedRoutes();
-            // associatedTrips = findAssociatedTrips();
-            // associatedStopTimes = findAssociatedStopTimes();
-            // associatedStops = findAssociatedStops();
-
+            associatedRoutes = findAssociatedRoutes();
+            associatedTrips = findAssociatedTrips();
+            associatedStopTimes = findAssociatedStopTimes();
+            associatedStops = findAssociatedStops();
         }
 
     }
@@ -679,7 +763,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      * @param container the container to place the tiles in
      * @throws IOException if the GUI fails to load an FXML file
      */
-    public void updateAssociationsTab(Set<? extends GTFSElement> elements, Pane container) throws IOException {
+    public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
 
         // get a sorted list of elements
         List<GTFSElement> sortedElements = elements.stream().sorted().collect(Collectors.toList());
@@ -704,8 +788,6 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             // configure controller attributes
             tileController.setMainController(this);
             tileController.setElement(element);
-            tileController.setTitle(element.getTitle());
-            tileController.setSubtitle(element.getSubtitle());
 
             // add the tile to the GUI
             container.getChildren().addAll(root);
@@ -718,14 +800,14 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of routes associated with the selected element
      */
-    private Set<Route> findAssociatedRoutes() {
+    private List<Route> findAssociatedRoutes() {
 
         // our new list of associations
-        Set<Route> associations;
+        List<Route> associations;
 
         // if the element is a trip
         if (selectedElement instanceof Trip) {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
             associations.add(((Trip) selectedElement).getRoute());
         }
 
@@ -741,7 +823,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -754,10 +836,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of trips associated with the selected element
      */
-    private Set<Trip> findAssociatedTrips() {
+    private List<Trip> findAssociatedTrips() {
 
         // our new list of associations
-        Set<Trip> associations;
+        List<Trip> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -766,7 +848,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
             associations.add(((StopTime) selectedElement).getTrip());
         }
 
@@ -777,7 +859,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -789,10 +871,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of stop times associated with the selected element
      */
-    private Set<StopTime> findAssociatedStopTimes() {
+    private List<StopTime> findAssociatedStopTimes() {
 
         // our new list of associations
-        Set<StopTime> associations;
+        List<StopTime> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -811,7 +893,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -823,10 +905,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return an array list of stops associated with the selected element
      */
-    private Set<Stop> findAssociatedStops() {
+    private List<Stop> findAssociatedStops() {
 
         // our new list of associations
-        Set<Stop> associations;
+        List<Stop> associations;
 
         // if the element is a route
         if (selectedElement instanceof Route) {
@@ -840,13 +922,13 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
         // if the element is a stop time
         else if (selectedElement instanceof StopTime) {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
             associations.add(((StopTime) selectedElement).getStop());
         }
 
         // otherwise return empty array list
         else {
-            associations = new HashSet<>();
+            associations = new ArrayList<>();
         }
 
         return associations;
@@ -858,7 +940,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated routes
      */
-    public Set<Route> getAssociatedRoutes() {
+    public List<Route> getAssociatedRoutes() {
         return associatedRoutes;
     }
 
@@ -867,7 +949,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated trips
      */
-    public Set<Trip> getAssociatedTrips() {
+    public List<Trip> getAssociatedTrips() {
         return associatedTrips;
     }
 
@@ -876,7 +958,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated stop times
      */
-    public Set<StopTime> getAssociatedStopTimes() {
+    public List<StopTime> getAssociatedStopTimes() {
         return associatedStopTimes;
     }
 
@@ -885,7 +967,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      *
      * @return the selected element's associated stops
      */
-    public Set<Stop> getAssociatedStops() {
+    public List<Stop> getAssociatedStops() {
         return associatedStops;
     }
 

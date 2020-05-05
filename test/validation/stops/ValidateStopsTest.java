@@ -1,4 +1,4 @@
-package primeaum;
+package validation.stops;
 
 import gtfsapp.file.GTFSFile;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,6 @@ class ValidateStopsTest {
 
     /**
      * First sunny day scenario with a correctly formatted file
-     * @throws IOException Thrown if an error occured
      */
     @Test
     void sunnyDayOne() {
@@ -47,7 +46,6 @@ class ValidateStopsTest {
 
     /**
      * Second sunny day scenario with a correctly formatted file
-     * @throws IOException Thrown if an error occured
      */
     @Test
     void sunnyDayTwo() {

@@ -10,14 +10,14 @@
 
 <GridPane fx:id="associationsTile" onMouseClicked="#setAsSelectedElement" styleClass="associations-tile" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.components.associations.tile.GTFSAssociationsTileController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
     <ColumnConstraints hgrow="SOMETIMES" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Pane id="color" />
+      <Pane id="color" fx:id="tileColor" />
       <VBox id="info-container" alignment="CENTER_LEFT" GridPane.columnIndex="1">
          <children>
             <Label id="title" fx:id="tileTitle" text="Route J15" />

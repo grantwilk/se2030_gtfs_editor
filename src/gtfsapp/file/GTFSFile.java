@@ -124,7 +124,7 @@ public class GTFSFile {
      */
     public void save(Path path) {
         // TODO - needs implementation eventually
-        throw new UnsupportedOperationException("Too many elements in file \"stop_times.txt\".");
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -191,7 +191,7 @@ public class GTFSFile {
         }
     }
 
-    public static boolean validateRoutes(List<String> lines) throws  IOException {
+    public static void validateRoutes(List<String> lines) throws  IOException {
 
         ArrayList<String> routeIDS = new ArrayList<>();
 
@@ -240,18 +240,14 @@ public class GTFSFile {
 
         }
 
-
-
-        return true;
     }
 
     /**
      * Parse through stops file to check that all data is valid
      * @param lines List of each line in the stops file
-     * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateStops(List<String> lines) throws IOException, NumberFormatException {
+    public static void validateStops(List<String> lines) throws IOException, NumberFormatException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -312,17 +308,13 @@ public class GTFSFile {
             double stopLat = Double.parseDouble(lat);
             double stopLon = Double.parseDouble(lon);
         }
-
-        return true;
     }
 
     /**
      * Parse through stop times file to check that all data is valid
      * @param lines List of each line in the stop times file
-     * @return True if the file is valid
-     * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateStopTimes(List<String> lines) throws IOException {
+    public static void validateStopTimes(List<String> lines) {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -454,7 +446,6 @@ public class GTFSFile {
 
         }
 
-        return true;
     }
 
     /**
@@ -463,7 +454,7 @@ public class GTFSFile {
      * @return True if the file is valid
      * @throws IOException Thrown if there is invalid data in the file
      */
-    public static boolean validateTrips(List<String> lines) throws IOException {
+    public static void validateTrips(List<String> lines) throws IOException {
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -521,8 +512,6 @@ public class GTFSFile {
             tripIDs.add(tripID);
 
         }
-
-        return true;
 
     }
 
@@ -751,7 +740,6 @@ public class GTFSFile {
             if(!stopLat.isEmpty() && !stopLon.isEmpty()) {
                 double lat = Double.parseDouble(stopLat);
                 double lon = Double.parseDouble(stopLon);
-                // TODO - replace Point2D with Location on merge w/ master
                 stop.setLocation(new Location(lat, lon));
             }
 

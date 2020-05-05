@@ -1,4 +1,4 @@
-package wilkg;
+package validation.stoptimes;
 
 import org.junit.jupiter.api.Test;
 
