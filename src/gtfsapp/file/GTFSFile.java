@@ -8,6 +8,7 @@ import gtfsapp.util.Time;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -522,8 +523,22 @@ public class GTFSFile {
      * @return a list of string tokens
      */
     private static List<String> tokenizeLine(String line) {
-        //comment
-        return Arrays.asList(line.split(",", -1));
+        List<String> tokens = Arrays.asList(line.split(",", -1));
+        ArrayList<String> returnList = new ArrayList<>();
+        for(int i = 0; i < tokens.size(); i++) {
+            if(tokens.get(i).indexOf("\"") == 0 && tokens.get(i).lastIndexOf("\"") == 0) {
+                String concatenatedString = tokens.get(i);
+                int j = i;
+                while (tokens.get(j).indexOf("\"") != (tokens.get(j).length() - 1)) {
+                    concatenatedString = concatenatedString + tokens.get(j);
+                }
+                returnList.add(concatenatedString);
+                i = j;
+            } else {
+                returnList.add(tokens.get(i));
+            }
+        }
+        return returnList;
     }
 
     /**
