@@ -522,6 +522,7 @@ public class GTFSFile {
      * @return a list of string tokens
      */
     private static List<String> tokenizeLine(String line) {
+        //comment
         return Arrays.asList(line.split(",", -1));
     }
 
