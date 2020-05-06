@@ -73,15 +73,29 @@ public class Time implements Comparable<Time> {
      */
     public Time(String timeString) {
 
-        // check to make sure the time string is properly formatted
-        if (!timeString.matches(TIME_STAMP_REGEX)) {
-            throw new IllegalArgumentException("Invalidly formatted time string.");
+        try {
+
+            // throw an exception if there are no colons
+            if (timeString.charAt(2) != ':' || timeString.charAt(5) != ':') {
+                throw new IllegalArgumentException("Invalidly formatted time string.");
+            }
+
+            // parse hours minutes and seconds
+            hours = Integer.parseInt(timeString.substring(0, 2));
+            minutes = Integer.parseInt(timeString.substring(3, 5));
+            seconds = Integer.parseInt(timeString.substring(6, 8));
+
+            // throw an exception if there are an invalid number of hours, minutes, or seconds
+            if (hours > 48 || minutes > 59 || seconds > 59) {
+                throw new IllegalArgumentException("Invalidly formatted time string.");
+            }
+
         }
 
-        // get hours, minutes, and seconds from time string
-        this.hours = Integer.parseInt(timeString.substring(0, 2));
-        this.minutes = Integer.parseInt(timeString.substring(3, 5));
-        this.seconds = Integer.parseInt(timeString.substring(6, 8));
+        // throw illegal argument exception if an exception occurred while parsing hours, minutes, and seconds
+        catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalidly formatted time string.");
+        }
 
     }
 
