@@ -414,30 +414,25 @@ public class GTFSFile {
             if (stopID.isEmpty()) {
                 throw new IllegalArgumentException("Invalidly formatted stop ID in \"stop_times.txt\".");
             }
-            try {
-                Integer.parseInt(stopSequence);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
-            }
-            if (!arrivalTime.matches(Time.getRegex())) {
-                throw new IllegalArgumentException("Invalidly formatted arrival time in \"stop_times.txt\".");
-            }
-            if (!departureTime.matches(Time.getRegex())) {
-                throw new IllegalArgumentException("Invalidly formatted departure time in \"stop_times.txt\".");
-            }
             if(!stops.contains(stopID)) {
                 throw new IllegalArgumentException("Stop time includes stop_id that is never referenced in \"stops.txt\".");
             }
             if(!trips.containsKey(tripID)) {
                 throw new IllegalArgumentException("Stop time includes trip_id that is never referenced in \"trips.txt\".");
             }
+            try {
+                Integer.parseInt(stopSequence);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalidly formatted stop sequence in \"stop_times.txt\".");
+            }
 
-//            // check if arrival time is before departure time
-//            Time arrival = new Time(arrivalTime);
-//            Time departure = new Time(departureTime);
-//            if(arrival.getMillis() > departure.getMillis()) {
-//                throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
-//            }
+            // create variables for the arrival time and departure time of this stop time
+            Time arrival = new Time(arrivalTime);
+            Time departure = new Time(departureTime);
+
+            if (arrival.getMillis() > departure.getMillis()) {
+                throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+            }
 
 //            // check if trip id already exists in file
 //            ArrayList<Map<String, String>> trip = new ArrayList<>();

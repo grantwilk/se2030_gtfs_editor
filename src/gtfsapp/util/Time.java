@@ -1,7 +1,5 @@
 package gtfsapp.util;
 
-import java.util.Scanner;
-
 /**
  * Stores a 24-hour time in hours, minutes, and seconds
  * @author Grant Wilk
@@ -77,33 +75,13 @@ public class Time implements Comparable<Time> {
 
         // check to make sure the time string is properly formatted
         if (!timeString.matches(TIME_STAMP_REGEX)) {
-            throw new IllegalArgumentException("Time string is not formatted correctly");
+            throw new IllegalArgumentException("Invalidly formatted time string.");
         }
-
-        // create scanner
-        Scanner timeScanner = new Scanner(timeString);
-        timeScanner.useDelimiter(":");
 
         // get hours, minutes, and seconds from time string
-        int hours = timeScanner.nextInt();
-        int minutes = timeScanner.nextInt();
-        int seconds = timeScanner.nextInt();
-
-        // validate that parameters fit 24 hour time w/ 24 hours of overrun
-        if (hours > 48 || hours < 0) {
-            throw new IllegalArgumentException("Invalid number of hours.");
-        }
-        if (minutes > 59 || minutes < 0) {
-            throw new IllegalArgumentException("Invalid number of minutes.");
-        }
-        if (seconds > 59 || seconds < 0) {
-            throw new IllegalArgumentException("Invalid number of seconds.");
-        }
-
-        // set attributes
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
+        this.hours = Integer.parseInt(timeString.substring(0, 2));
+        this.minutes = Integer.parseInt(timeString.substring(3, 5));
+        this.seconds = Integer.parseInt(timeString.substring(6, 8));
 
     }
 
