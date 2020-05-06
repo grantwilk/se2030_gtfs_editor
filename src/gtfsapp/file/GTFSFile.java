@@ -530,7 +530,8 @@ public class GTFSFile {
                 String concatenatedString = tokens.get(i);
                 int j = i;
                 while (tokens.get(j).indexOf("\"") != (tokens.get(j).length() - 1)) {
-                    concatenatedString = concatenatedString + tokens.get(j);
+                    j++;
+                    concatenatedString = concatenatedString + "," + tokens.get(j);
                 }
                 returnList.add(concatenatedString);
                 i = j;
