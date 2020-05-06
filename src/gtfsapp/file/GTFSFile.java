@@ -95,21 +95,33 @@ public class GTFSFile {
 
         // get list of lines for each file
         List<String> stopLines = Files.readAllLines(stopFile.toPath());
+        System.out.println("Read all lines from stops.txt.");
         List<String> stopTimeLines = Files.readAllLines(stopTimesFile.toPath());
+        System.out.println("Read all lines from stop_times.txt.");
         List<String> routeLines = Files.readAllLines(routeFile.toPath());
+        System.out.println("Read all lines from routes.txt.");
         List<String> tripLines = Files.readAllLines(tripFile.toPath());
+        System.out.println("Read all lines from trips.txt.");
 
         // validate files
         validateStops(stopLines);
+        System.out.println("Stops validated.");
         validateTrips(tripLines);
+        System.out.println("Trips validated.");
         validateStopTimes(stopTimeLines);
+        System.out.println("Stop times validated.");
         validateRoutes(routeLines);
+        System.out.println("Routes validated.");
 
         // parse the files (must be in this order!)
         HashMap<String, Stop> stops = parseStops(stopLines);
+        System.out.println("Stops parsed.");
         HashMap<String, Route> routes = parseRoutes(routeLines);
+        System.out.println("Routes parsed.");
         HashMap<String, Trip> trips = parseTrips(routes,tripLines);
+        System.out.println("Trips parsed.");
         HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops,stopTimeLines);
+        System.out.println("Stop time parsed.");
 
         // add our GTFS elements to our feed
         feed.addAllRoutes(new ArrayList<>(routes.values()));
@@ -423,18 +435,12 @@ public class GTFSFile {
 
                 // check sequences and arrival and departure times for correct ordering
                 if(compareSequence < currentSequence) {
-                    if(!(compareArrivalTime.getMillis() < currentArrivalTime.getMillis())) {
-                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
-                    }
-                    if(!(compareDepartureTime.getMillis() < currentDepartureTime.getMillis())) {
-                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+                    if(compareDepartureTime.getMillis() > currentArrivalTime.getMillis()) {
+                        throw new IllegalArgumentException("Invalid arrival and departure time in \"stop_time.txt\"");
                     }
                 } else if(compareSequence > currentSequence) {
-                    if(!(compareArrivalTime.getMillis() > currentArrivalTime.getMillis())) {
-                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
-                    }
-                    if(!(compareDepartureTime.getMillis() > currentDepartureTime.getMillis())) {
-                        throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
+                    if(currentDepartureTime.getMillis() > compareArrivalTime.getMillis()) {
+                        throw new IllegalArgumentException("Invalid arrival and departure time in \"stop_time.txt\"");
                     }
                 } else {
                     throw new IllegalArgumentException("Duplicate stop sequences for a trip in \"stop_time.txt\"");
