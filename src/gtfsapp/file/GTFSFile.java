@@ -365,6 +365,9 @@ public class GTFSFile {
             throw new IllegalArgumentException("Missing one or more required attributes in \"stops_times.txt\".");
         }
 
+        // initialize the trip map
+        HashMap<String, HashSet<HashMap<String, String>>> tripMap = new HashMap<>();
+
         for (int i = 1; i < lines.size(); i++) {
 
             // tokenize line
@@ -427,51 +430,64 @@ public class GTFSFile {
             }
 
             // create variables for the arrival time and departure time of this stop time
-            Time arrival = new Time(arrivalTime);
-            Time departure = new Time(departureTime);
-
-            if (arrival.getMillis() > departure.getMillis()) {
+            Time thisArrivalTime = new Time(arrivalTime);
+            Time thisDepartureTime = new Time(departureTime);
+            if (thisArrivalTime.getMillis() > thisDepartureTime.getMillis()) {
                 throw new IllegalArgumentException("Invalidly formatted arrival and departure time in \"stop_time.txt\"");
             }
 
-//            // check if trip id already exists in file
-//            ArrayList<Map<String, String>> trip = new ArrayList<>();
-//            for(Map<String, String> stopTime:stopTimes) {
-//                if(stopTime.get("trip_id").equals(tripID)) {
-//                    // if it does already exist get all stop times with same trip id
-//                    trip.add(stopTime);
-//                }
-//            }
-//
-//            // compare arrival time of current stop time with all associated stop times
-//            for(Map<String, String> compareTrip:trip) {
-//                Time compareArrivalTime = new Time(compareTrip.get("arrival_time"));
-//                Time currentArrivalTime = new Time(stopTimeFields.get("arrival_time"));
-//                Time compareDepartureTime = new Time(compareTrip.get("departure_time"));
-//                Time currentDepartureTime = new Time(stopTimeFields.get("departure_time"));
-//                int compareSequence = Integer.parseInt(compareTrip.get("stop_sequence"));
-//                int currentSequence = Integer.parseInt(stopTimeFields.get("stop_sequence"));
-//
-//                // check sequences and arrival and departure times for correct ordering
-//                if(compareSequence < currentSequence) {
-//                    if(compareDepartureTime.getMillis() > currentArrivalTime.getMillis()) {
-//                        throw new IllegalArgumentException("Invalid arrival and departure time in \"stop_time.txt\"");
-//                    }
-//                } else if(compareSequence > currentSequence) {
-//                    if(currentDepartureTime.getMillis() > compareArrivalTime.getMillis()) {
-//                        throw new IllegalArgumentException("Invalid arrival and departure time in \"stop_time.txt\"");
-//                    }
-//                } else {
-//                    throw new IllegalArgumentException("Duplicate stop sequences for a trip in \"stop_time.txt\"");
-//                }
-//            }
+            // create a new entry in our trip if it doesnt already exist
+            if (!tripMap.containsKey(tripID)) {
+                tripMap.put(tripID, new HashSet<>());
+            }
+
+            // for each stop time in our trip
+            for (HashMap<String, String> thatStopTime : tripMap.get(tripID)) {
+
+                // get the sequences
+                int thisSequence = Integer.parseInt(stopSequence);
+                int thatSequence = Integer.parseInt(thatStopTime.get("stop_sequence"));
+
+                // if this is after that
+                if (thatSequence < thisSequence) {
+
+                    // get that departure time
+                    Time thatDepartureTime = new Time(thatStopTime.get("departure_time"));
+
+                    // throw an exception if that departs after this arrives
+                    if (thatDepartureTime.getMillis() > thisArrivalTime.getMillis()) {
+                        throw new IllegalArgumentException("Invalid arrival time and departure time in \"stop_times.txt\".");
+                    }
+
+                }
+
+                // if that is after this
+                else if (thisSequence < thatSequence) {
+
+                    // get that arrival time
+                    Time thatArrivalTime = new Time(thatStopTime.get("arrival_time"));
+
+                    // throw an exception if this departs after that arrives
+                    if (thisDepartureTime.getMillis() > thatArrivalTime.getMillis()) {
+                        throw new IllegalArgumentException("Invalid arrival time and departure time in \"stop_times.txt\".");
+                    }
+
+                }
+
+                // if the two occur simultaneously
+                else {
+                    throw new IllegalArgumentException("Invalid arrival time and departure time in \"stop_times.txt\".");
+                }
+
+            }
+
+            // add our stop time to the trip map
+            tripMap.get(tripID).add(stopTime);
 
             // add stop time to current line to list of all validated stop times
             stopTimes.add(stopTime);
 
         }
-
-        System.out.println(String.format("Validated in %dms.", System.currentTimeMillis() - currentTime));
 
     }
 
