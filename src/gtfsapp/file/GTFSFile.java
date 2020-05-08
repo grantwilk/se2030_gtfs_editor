@@ -24,19 +24,9 @@ public class GTFSFile {
     private static final String ID_REGEX = "^.+";
 
     /**
-     * Map of routes from routes.txt
-     */
-    private static HashSet<String> routes;
-
-    /**
      * Map of trips from trips.txt
      */
     private static HashMap<String, HashMap<String, String>> trips;
-
-    /**
-     * Map of stop times from stop_times.txt
-     */
-    private static HashSet<HashMap<String, String>> stopTimes;
 
     /**
      * Map of stops from stops.txt
@@ -210,7 +200,10 @@ public class GTFSFile {
     public static void validateRoutes(List<String> lines) throws  IOException {
 
         // initialize routes
-        routes = new HashSet<>();
+        /**
+         * Map of routes from routes.txt
+         */
+        HashSet<String> routes = new HashSet<>();
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
@@ -349,7 +342,10 @@ public class GTFSFile {
         long currentTime = System.currentTimeMillis();
 
         // initialize stop times
-        stopTimes = new HashSet<>();
+        /**
+         * Map of stop times from stop_times.txt
+         */
+        HashSet<HashMap<String, String>> stopTimes = new HashSet<>();
 
         // get format for file
         List<String> format = tokenizeLine(lines.get(0));
