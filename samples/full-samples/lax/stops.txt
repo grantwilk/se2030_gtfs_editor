@@ -1,0 +1,434 @@
+stop_id,stop_name,stop_desc,stop_lat,stop_lon
+0,Grand River Station,Transit Center,43.81055575,-91.25296378
+1,Clinton & Caledonia Transfer Point,,43.84147898,-91.24719616
+2,3rd & Division,,43.80662758,-91.2532199
+3,Division & 6th,Near Our Savior's Lutheran Church,43.80665708,-91.24857055
+4,Division & 7th,,43.80665972,-91.24747884
+5,7th & Market,,43.80475769,-91.24744814
+6,Market & 9th,,43.80457109,-91.24474189
+7,Market & 10th,,43.80456746,-91.2425837
+8,Mayo Clinic Health System,,43.80371043,-91.24106928
+9,11th & Mississippi,,43.80266481,-91.2410275
+10,11th & Jackson,,43.80163933,-91.24104871
+11,Viterbo,Jackson & 9th,43.80154683,-91.24446191
+12,7th & Jackson,,43.8013785,-91.24747222
+13,7th& Adams,,43.79958225,-91.24751403
+14,7th & Farnam,South of Intersection,43.79747909,-91.24763664
+16,Gundersen Lutheran,On 7th St,43.79409707,-91.24847106
+20,Green Bay between 9th & 10th,Near Riverfront Inc,43.79412733,-91.24312439
+21,Green Bay & West,,43.79412853,-91.24001005
+22,West & Travis,Near Pepsi Bottling Company,43.79264564,-91.23988229
+23,West & South,Near Pleasoning Seasonings,43.79027349,-91.23940734
+24,South & Bennett,Near Kwik Trip,43.78885207,-91.23740574
+25,South & Chase,,43.78703902,-91.23484374
+26,South Ave,Near Riverfront Inc,43.78447653,-91.23126724
+27,Ward Ave,Near Moka Coffee,43.78326945,-91.22850755
+28,Ward Ave,Near Pizza Hut,43.78327816,-91.22590414
+29,Ward & 21st Pl South,Near Marcus Theater,43.78324273,-91.22439913
+30,Ward & Losey,,43.78320127,-91.2196908
+31,Losey & Garden,,43.78100539,-91.21941767
+32,Losey & Victory,,43.77959672,-91.21947602
+33,Losey & Haas,,43.77822427,-91.21953246
+34,Losey & Mormon Coulee,Near Walgreens,43.77581626,-91.21973547
+35,Losey & Fiesta,,43.77502035,-91.22103285
+36,East & Losey,Near Seminary,43.77313574,-91.22230949
+37,East & Birch,,43.77175938,-91.21914216
+38,Shelby Mall,,43.77044244,-91.21665454
+40,Mormon Coulee Walmart,,43.76680284,-91.21176936
+44,Mormon Coulee Rd,Near All Star Lanes,43.76514073,-91.21008863
+46,Shelby & East,,43.76877939,-91.21662739
+47,East & Birch,Near China Star,43.77159052,-91.21871543
+48,East  & Losey,,43.77331419,-91.22237095
+49,Losey & Mormon Coulee,,43.7751207,-91.22037487
+50,Losey & Haas,,43.77820673,-91.21929305
+51,Losey & Hewitt,,43.77927324,-91.21925648
+52,Losey & Garden,,43.78106875,-91.21919279
+53,Ward & Losey,Near Trane Corporation,43.78339565,-91.22004713
+54,Ward & 21st Pl S,,43.78341496,-91.22415015
+55,Ward Ave,Near Living Word Church,43.78339223,-91.22592749
+56,South & Ward,Near Hmong Memorial Center,43.78340612,-91.22909154
+57,South Ave,,43.78555982,-91.23241495
+58,South & Chase,,43.78693193,-91.2343471
+59,South & 13th Pl S,,43.7888432,-91.23698999
+60,South & West,,43.7905934,-91.23954558
+61,West & Travis,,43.79253594,-91.23963016
+62,Green Bay & West,,43.79426869,-91.24044168
+63,Green Bay & 10th St S,,43.79426112,-91.24220388
+64,Green Bay & 9th,,43.79426464,-91.24417147
+66,7th & Tyler,,43.79735341,-91.24736606
+67,7th & Adams,Near Salzer Square,43.79938329,-91.24730276
+68,7th & Jackson,,43.80132052,-91.24730562
+69,Jackson & 9th,Near Viterbo,43.80140672,-91.24475497
+70,11th & Mississippi,Near Walgreens,43.80246442,-91.24086779
+71,Mayo Clinic Health System,11th St S at parking lot,43.80322622,-91.24087667
+72,Market & 10th,,43.80471221,-91.24222305
+73,Market & 9th,,43.80470352,-91.24438944
+74,7th & Market,,43.80475563,-91.24727082
+75,7th & Division,,43.80663464,-91.247248
+76,Division & 6th,,43.80678829,-91.24858233
+77,Division & 5th,Near Firefighters Credit Union,43.80674525,-91.25040152
+78,King & 6th,,43.80995574,-91.24835583
+79,King & 7th,Near Pizza Doctors,43.80997497,-91.24693282
+80,Cass & 8th,,43.80866944,-91.24608762
+81,Cass & 10th,,43.80866699,-91.24261202
+82,Cass & 11th,,43.80865175,-91.24119886
+83,Cass & 13th,,43.80865348,-91.23785226
+84,Cass & 14th,,43.80864076,-91.23602083
+85,Cass & 16th,Near Weigent Park,43.80863323,-91.23281349
+86,16th & Madison,Near Weigent Park,43.80698203,-91.23274558
+87,16th & Market,,43.80475251,-91.2327711
+88,16th & Jackson,,43.8015698,-91.23284555
+89,16th & Farnam,,43.79794178,-91.23286882
+90,16th& Denton,,43.79616649,-91.23246695
+91,16th & Green Bay,,43.79430778,-91.23238168
+92,16th & Travis,,43.79249065,-91.23232882
+93,16th & Weston,,43.79069086,-91.23225791
+94,Weston & East,,43.79049391,-91.22982884
+95,Weston & 20th,,43.7905245,-91.22696254
+96,Weston & 21st,,43.79053814,-91.22460879
+97,Weston & 22nd,,43.79054869,-91.22218132
+98,Weston & Losey,,43.79057453,-91.21992513
+99,Central High School,,43.793535,-91.21960616
+100,Losey  & Redfield,Near Village Shopping Center,43.79502962,-91.21970736
+101,Losey & State Rd,,43.79653231,-91.21976664
+102,State Rd & 26th,Near Village Shopping Center,43.79559615,-91.21766707
+103,State Rd & 30th,,43.79285993,-91.21208565
+104,Losey & Farnam,Near Kmart,43.79758352,-91.21981681
+105,25th & Farnam,,43.79790508,-91.21823973
+106,27th & Farnam,,43.79792267,-91.21549382
+107,29th & Farnam,,43.79793539,-91.21356591
+108,31st & Farnam,,43.79795999,-91.2112305
+109,31st & Denton,,43.79662254,-91.21117677
+110,31st & Green Bay,,43.79447195,-91.21112575
+111,31st & State Rd,,43.79272877,-91.21110658
+112,State Road & 32nd,,43.79158246,-91.20958962
+113,32nd & Fairchild,,43.78810965,-91.20934912
+114,32nd & Lincoln,,43.78432862,-91.20924713
+115,33rd St S,Near parking lot to Trane Corp,43.78284495,-91.20646659
+116,Hillview Healthcare Center - Nursing Home,,43.78224039,-91.20633881
+117,Hillview Healthcare Center - Carroll Heights,,43.78172551,-91.20638112
+118,Hillview Healthcare Center,Park Lane Dr & Maple Dr,43.77990982,-91.20618971
+119,Maple & Easter,,43.77839168,-91.20614888
+120,Elm Dr,Near Hess Park,43.77740236,-91.20510095
+121,Elm & Robinsdale,,43.77481607,-91.20498888
+122,Elm & Birch,,43.77299753,-91.20488688
+123,Elm & Kenton,,43.77158977,-91.20485881
+124,Kenton & 33rd,,43.77159386,-91.20810353
+125,33rd St S,Between Peace St & Greenhills Pl,43.76895528,-91.20825323
+126,33rd & Solaris,,43.76420951,-91.20657565
+127,33rd & Juniper,,43.76179939,-91.2056521
+128,33rd & Raintree,,43.76003845,-91.20496238
+129,33rd & Mormon Coulee,,43.75677545,-91.20406007
+130,33rd & Mormon Coulee,At Apartments,43.75674782,-91.20369544
+131,33rd & Raintree,,43.76003943,-91.20468636
+132,33rd & Juniper,,43.76163965,-91.20544122
+133,33rd & Solaris,,43.76423694,-91.20632118
+134,33rd St S,Between Peace St & Greenhills Pl,43.76895705,-91.20808499
+135,33rd & Kenton,,43.77136877,-91.20812796
+136,33rd & Leonard,,43.7737839,-91.20845859
+137,33rd & Meadow Lane Pl,,43.77549791,-91.20853494
+138,33rd St S,Bluffview Townhomes,43.77808958,-91.2074087
+139,33rd & Park Lane,,43.77969564,-91.2085111
+140,33rd St S,Near road to Hillview Healthcare Center,43.78279107,-91.20840208
+141,32nd & Ward,,43.78374652,-91.20905582
+142,32nd & Fairchild,,43.78746614,-91.20912057
+143,32nd St S,Between State Rd & Shorewood Dr,43.79082209,-91.20924035
+144,State Rd & 30th,,43.79296854,-91.21190371
+145,State Rd & 29th,,43.79363042,-91.21328213
+146,State Rd & 26th,,43.79540412,-91.21690827
+147,Losey & Redfield,Coulee State Bank,43.79544089,-91.22009445
+148,Losey & Green Bay,,43.79441499,-91.21999218
+149,Green Bay & 22nd,,43.79433645,-91.22203083
+150,Green Bay & 21st,,43.79431476,-91.22532624
+151,Green Bay & 19th,,43.79427023,-91.22825293
+152,Green Bay & 16th,,43.79425735,-91.23210972
+153,16th & Denton,,43.79587916,-91.23225329
+154,16th St S,South Branch Library,43.79740854,-91.23231079
+155,16th & Jackson,,43.80133749,-91.23265403
+156,16th & Market,,43.80447982,-91.23261426
+157,16th & Madison,,43.80677432,-91.23257033
+158,16th & Cass,,43.80858646,-91.2325547
+159,Cass & 14th,,43.80876371,-91.23574972
+160,Cass St,Bethany on Cass,43.80877511,-91.2373496
+161,Cass & 11th,,43.80879956,-91.24127293
+162,Cass & 9th,,43.80880376,-91.24370933
+163,Cass & 7th,,43.80882606,-91.24658022
+164,Cass & 5th,,43.80882379,-91.24995313
+165,5th St S,Between State St and Main,43.8125507,-91.24937732
+166,7th St S,Between State St and Vine,43.81311834,-91.24664423
+167,7th St S,Western Technical College,43.81507517,-91.2466399
+168,7th & La Crosse,,43.81683318,-91.24669725
+169,La Crosse & 9th,,43.81720812,-91.24409204
+170,La Crosse & 11th,,43.81722176,-91.24118717
+171,La Crosse & West,,43.81721222,-91.23931081
+172,La Crosse & Oakland,,43.81761328,-91.2372055
+173,Oakland & Badger,,43.81631361,-91.23674795
+177,East Ave,Cowley Hall,43.81542207,-91.22905136
+179,Pine & Campbell,,43.81508227,-91.22597011
+180,Campbell & State,,43.8130035,-91.22879535
+181,State St & 17th,,43.81285768,-91.23056433
+182,Main & 17th,,43.81192987,-91.23109042
+183,Main & 19th,,43.81164198,-91.22833493
+184,Main & 21st,,43.81165728,-91.22541035
+185,23rd & Main,,43.81150406,-91.22191272
+186,23rd & Cass,,43.8088399,-91.22179308
+187,23rd & Madison,,43.80704396,-91.22171293
+188,23rd & Market,,43.80480414,-91.22159916
+189,23rd & Mississippi,,43.80279033,-91.22151192
+190,Losey & Cottage Grove,,43.79985488,-91.22001098
+191,Losey & Farnam,,43.79799604,-91.22011811
+192,Losey & Travis,,43.79253933,-91.21992108
+193,Losey & Weston,,43.79073939,-91.21986368
+194,Losey Blvd,Between Weston & Chase at crosswalk,43.78809799,-91.21973933
+195,Losey & Thompson,Near Erickson Pool,43.7861533,-91.21967639
+196,21st Pl & Mormon Coulee,,43.78015914,-91.22469391
+197,Victory Street,Between Mormon Coulee & East Ave,43.77971888,-91.22756717
+198,Victory & East,,43.77965368,-91.23046118
+199,East Ave,Near Dairyland Power Co-opDairyland Power Co-op,43.77651533,-91.2276283
+200,East Ave & Bayside Ct,Near Bayside Condos,43.77498945,-91.22599065
+201,Broadview & Church,,43.77029946,-91.21259113
+202,Mesa Grande Pl & 28th,,43.7711599,-91.21429119
+203,28th & Birch,,43.77273788,-91.2144386
+204,28th & Robinsdale,,43.77477361,-91.21436119
+205,28th & James,,43.77646043,-91.21430569
+206,28th & Haas,,43.77811111,-91.2142442
+207,Haas & 26th,,43.77829823,-91.21673299
+208,Haas & Losey,,43.77836149,-91.21921667
+209,Losey & Ward,Near Altra Federal Credit Union,43.78372619,-91.21928813
+210,Losey & Glendale,,43.78593357,-91.21937476
+211,Losey Blvd,Between Weston & Chase at crosswalk,43.7878705,-91.21945069
+212,Losey & Weston,,43.79052747,-91.21954378
+213,Losey & Cottage Grove,,43.79967305,-91.21972846
+214,Jackson & 23rd,,43.80161038,-91.22120394
+215,23rd & Mississippi,,43.80261504,-91.22133212
+216,23rd & Market,,43.80458002,-91.2214139
+217,23rd & Madison,,43.8068218,-91.22153044
+218,23rd & Cass,,43.80864167,-91.22159738
+219,23rd & Main,,43.81156931,-91.22174424
+220,Main & 21st,,43.81181424,-91.22501095
+221,Main & 19th,,43.81180186,-91.22803419
+222,17th St S,Near Family and Children's Center,43.8121856,-91.23091488
+223,State & Campbell,Near Roncalli Newman Center,43.81274515,-91.22921733
+224,Pine & Campbell,,43.8152175,-91.22593452
+225,Pine St,Near Veterans Memorial Stadium,43.81519885,-91.22861545
+229,Badger & 13th,,43.81622725,-91.2376389
+230,La Crosse & 11th,,43.81737143,-91.24091635
+231,La Crosse & 9th,,43.81735628,-91.24379192
+232,7th & Badger,,43.81623685,-91.24686913
+233,7th St S,Western Technical College,43.81494481,-91.24688981
+234,7th St S,Between State & Vine,43.8131145,-91.24682307
+235,5th & State,,43.81260685,-91.24953585
+236,State & 5th,,43.812897,-91.249676
+237,State & 8th,,43.81266884,-91.24547064
+238,State & 9th,,43.81266879,-91.2440656
+239,State & 10th,,43.81268046,-91.24263184
+240,State & West,,43.81268425,-91.23927454
+241,13th & Vine,,43.8138182,-91.23747701
+242,Allied Health Center,13th & Badger,43.81597163,-91.23752904
+243,West & La Crosse,,43.81717451,-91.23888912
+244,Lang Dr,Across from Menard's,43.83074023,-91.23937514
+245,George & Island,,43.83235593,-91.23937673
+246,George & Saint Andrew,,43.83440302,-91.23930559
+247,George & Clinton,,43.84168461,-91.23953409
+248,George & Sill,,43.84464101,-91.23959481
+249,Gillette & George,,43.84637005,-91.23933284
+250,Gillette & Loomis,,43.84637902,-91.23707949
+251,Gillette & Ranger,Near Logan High School,43.84624412,-91.23420188
+252,Gillette & River Valley Dr,,43.84756494,-91.22242747
+253,Gillette & State Hwy 16,,43.84773132,-91.21407994
+254,State Hwy 16 & County Road B,,43.85741217,-91.20755241
+255,Valley View Mall,,43.86731853,-91.19688999
+256,Park & Ride Lot at Valley View Mall,,43.87094637,-91.1944863
+260,Kinney Coulee Rd & Gundersen Dr,,43.87452764,-91.18606306
+261,Gundersen Lutheran Clinic - Onalaska Campus,,43.87477676,-91.18337484
+262,Kinney Coulee Rd & Gundersen Dr,,43.87460162,-91.18628049
+263,County Hwy PH,Near Slumberland Furniture,43.87233939,-91.19652739
+264,Shopko,,43.87091255,-91.19843222
+265,Old Navy,,43.86792977,-91.20310022
+266,APAC Customer Service,,43.86553303,-91.2054594
+267,Gillette & State Hwy 16,,43.84793103,-91.21411292
+268,Gillette St & River Valley Dr,,43.84754713,-91.22284834
+269,Logan High School,,43.84646643,-91.23425908
+270,Gillette & Loomis,,43.84649187,-91.23721606
+271,George & Sill,,43.84485229,-91.23979133
+272,George & Clinton,,43.8417336,-91.23976149
+273,George & Saint Andrew,,43.83435086,-91.23972566
+274,Lang & Island,,43.83266721,-91.23966476
+275,Lang Dr,Near Menard's,43.83075225,-91.23967543
+276,Lang & La Crosse,,43.81755862,-91.23920946
+277,West & Pine,,43.81514414,-91.23908822
+278,West & State,,43.81282714,-91.23909856
+279,State & 10th,,43.81282783,-91.24230598
+280,State & 8th,,43.81281201,-91.24518154
+281,6th & Main,,43.81175734,-91.24826716
+282,6th & King,,43.81014157,-91.24827059
+283,4th St N,Near La Crosse County Adminstration Building,43.81517162,-91.24915345
+284,4th & La Crosse,Near City of La Crosse City Hall,43.81693997,-91.24893758
+285,Copeland & River Bend Rd,Near Festival Foods,43.82172665,-91.24907758
+286,Copeland & Causeway Blvd,,43.82448101,-91.2491842
+287,Rose & Monitor,,43.82877314,-91.24801517
+288,Rose & Gould,,43.83108901,-91.24802253
+289,Rose & Hagar,,43.83447581,-91.24805895
+290,Saint Cloud & Rose,,43.83570616,-91.24765847
+291,Caledonia & Saint James,,43.83680994,-91.24664818
+292,Caledonia & Wall,,43.8379198,-91.24665298
+293,Wall & Liberty,,43.83796811,-91.2440041
+294,Liberty & Windsor,,43.83904116,-91.24377247
+295,Liberty & Saint Paul,,43.84016271,-91.24378652
+296,Saint Paul & Caledonia,,43.84034232,-91.24659064
+297,Caledonia & Sill,,43.84462599,-91.24670632
+298,Sill & Liberty,,43.8446785,-91.24413976
+299,Liberty & Gillette,,43.84632224,-91.24385003
+300,Gillette & Kane,,43.84638235,-91.24131795
+301,Onalaska & Gillette,,43.8467172,-91.23466355
+302,Onalaska & Rublee,,43.84806818,-91.2346643
+303,Harry J Olson Center,,43.85026877,-91.23468213
+304,Onalaska & Livingston,,43.85127864,-91.23471186
+305,Livingston & Loomis,,43.85153809,-91.23682014
+306,Livingston & George,,43.85152748,-91.23963899
+307,Livingston & Charles,,43.85150424,-91.242405
+308,Livingston & Liberty,,43.85149525,-91.24384698
+309,Rose Court Motels,Rose Ct & Livingston,43.85146575,-91.24718212
+310,Bridgeview Service Rd & Moore St,,43.85298064,-91.24684351
+311,Bridgeview Service Rd,Between Palace St & Moore St,43.8546808,-91.24583443
+312,Bridgeview Plaza,,43.85669087,-91.24308383
+313,Bridgeview Plaza Access Rd & W George St,,43.858813,-91.24106875
+314,George & Salem,,43.85870732,-91.23930785
+315,George  & Stoddard,,43.8602932,-91.23774393
+316,George & Interchange Pl,,43.86147549,-91.23649894
+317,George & Onalaska,,43.8626978,-91.23500813
+318,Taylor & Hamilton,,43.86287765,-91.23230101
+319,Hamilton & Salem,,43.86020693,-91.23219029
+320,Salem & Onalaska,,43.85919076,-91.23466437
+321,Salem & Loomis,,43.85905477,-91.23694613
+322,Loomis & Cunningham,,43.85672801,-91.23713412
+323,Loomis & Hayes,,43.85418641,-91.23710921
+324,Hayes & George,,43.85411304,-91.2396631
+325,Palace & Charles,BENCH,43.85540959,-91.24230956
+326,Palace & Bridgeview Plaza Access Rd,,43.85547357,-91.24410123
+327,Bridgeview Service Rd,Between Palace St & Moore St,43.85477419,-91.24592524
+328,Bridgeview Service Rd & Moore St,,43.85300893,-91.24702874
+329,Rose Court Motels,Rose Ct & Livingston,43.85150499,-91.24779932
+330,Livingston & Liberty,,43.85137416,-91.24412549
+331,Livingston & Charles,,43.85137573,-91.24276494
+332,Livingston & George,,43.85139686,-91.23995943
+333,Livingston & Loomis,,43.8513904,-91.23713437
+334,Livingston & Onalaska,,43.85142039,-91.23495044
+335,Harry J Olson Center,,43.85043763,-91.23483968
+336,Onalaska & Rublee,,43.84816322,-91.23480407
+337,Onalaska & Gillette,,43.84661602,-91.23483399
+338,Gillette & George,,43.84650565,-91.24022377
+339,Gillette & Charles,,43.8465017,-91.24241712
+340,Liberty & Sill,,43.84487062,-91.24402857
+341,Caledonia & Sill,,43.84481884,-91.24659691
+342,Saint Paul & Caledonia,,43.84020037,-91.24660174
+343,Saint Paul & Liberty,,43.84020514,-91.24403754
+344,Liberty & Windsor,Near Sauber Manor,43.83882982,-91.24399237
+345,Wall & Avon,,43.83807579,-91.24515093
+346,Wall & Caledonia,,43.83807689,-91.24660777
+347,Caledonia & Saint James,,43.83700287,-91.24685499
+348,Saint James & Copeland,,43.83694445,-91.24935827
+349,Copeland & Hagar,,43.83474806,-91.24964872
+350,Copeland & Saint Andrew,,43.83365964,-91.24966943
+351,Copeland & Monitor,,43.82859777,-91.24956463
+352,Copeland & Causeway Blvd,,43.8252257,-91.24947143
+353,Copeland & River Bend Rd,Near Festival Foods,43.8221301,-91.24941642
+354,Copeland & La Crosse,,43.81752002,-91.24928478
+355,3rd & Pine,,43.81567482,-91.25066889
+356,3rd & Main,,43.81301007,-91.25256875
+357,Clinton & Nakomis,,43.84141986,-91.25405889
+358,Clinton & Brainbridge,,43.84153361,-91.26092406
+359,Goddard & La Crescent,,43.84560895,-91.26370759
+360,Lakeshore Dr,Near Summit Elementary,43.85179605,-91.26774175
+361,Hinkley & Lakeshore,,43.85436619,-91.26737855
+362,Hinkley & Bainbridge,,43.85466581,-91.26087907
+363,Dawson & Fanta Reed,,43.86582452,-91.25502262
+364,Fanta Reed & 1st Ave,,43.86590633,-91.25876681
+365,Airport Rd,Near The Company Store,43.8732373,-91.2664709
+366,Airport Industrial Park,,43.87676478,-91.26655801
+367,Airport Rd,Near Inland Marketing Services,43.87984163,-91.26652777
+368,Airport Rd & Lakeshore Dr,,43.88335495,-91.2697878
+369,Lakeshore & Lancaster,,43.8797763,-91.27006462
+370,Lakeshore & Breezy Point,,43.87580401,-91.2700201
+371,Lakeshore & Plainview,,43.86886516,-91.26992617
+372,Lakeshore & Callaway,,43.86251711,-91.26989686
+373,Sky Harbor Center,,43.8591862,-91.2632553
+374,Bainbridge & Olivet,,43.85819717,-91.2600089
+375,La Crescent & Telin,,43.85191912,-91.26358031
+376,La Crescent & Elm,,43.8484637,-91.26371653
+377,Bainbridge & Goddard,,43.8453517,-91.2613558
+378,Bainbridge & Clinton,,43.84187389,-91.26172629
+379,Clinton & Nakomis,,43.84119348,-91.25405419
+380,Kwik Trip Way & Kramer Rd,,43.85203736,-91.22608295
+381,Kwik Trip Way & Oak St,,43.8521011,-91.22932358
+382,Commerce St,1st Stop North of Palace St,43.85705207,-91.22781689
+383,Northeast Industrial Park - ORC,,43.86042886,-91.22760333
+384,Enterprise Ave,,43.86628283,-91.2227185
+385,12th Ave S & Crossing Meadows,,43.8694388,-91.21705741
+386,Crossing Meadows - Sam's Club,,43.86995296,-91.21565478
+387,Crossing Meadows,,43.8696605,-91.21106883
+388,Enterprise Ave,,43.86638122,-91.22285854
+389,Hauser & Enterprise,,43.86286126,-91.22639327
+390,Hemstock St,Between Cunningham & Hauser,43.85996802,-91.22265547
+391,Hemstock & Cunningham,,43.85718332,-91.22265587
+392,Cunningham & Larson,,43.85694903,-91.22480265
+393,2nd Ave,Near Kwik Trip,43.87615444,-91.23084953
+394,2nd & Fern,,43.8788175,-91.2322267
+395,2nd & Irvin,,43.88165838,-91.23363365
+396,Main & 3rd,,43.88289146,-91.23319035
+397,Onalaska City Hall,,43.88342931,-91.23106289
+398,Main & 9th,,43.88431081,-91.22645285
+399,Center 90,,43.88587136,-91.22084764
+400,Main & 16th,,43.88415686,-91.21562328
+401,Main & Grandview,,43.88268993,-91.20858072
+402,Main & 20th,,43.88040879,-91.20516625
+403,County Road OS & Theater Rd,,43.88046181,-91.20034542
+404,Midwest Dr,Near Midwest Security Insurance,43.87928398,-91.1924888
+405,Midwest & Market,,43.87882985,-91.18819216
+406,Walmart Supercenter,,43.878225,-91.1852555
+407,Market Pl,Near Aldi's,43.87944708,-91.18084433
+408,Kinney Coulee Rd,Near Wisconsin DOT Office,43.87863314,-91.17807776
+409,Woodman's,,43.87889302,-91.17679146
+410,Market Pl,Near Aldi's,43.8795988,-91.18107819
+411,Walmart Supercenter,,43.87832101,-91.18508298
+412,Midwest & Market,,43.87898992,-91.18838403
+413,Midwest Dr,Near Globe University,43.87942121,-91.19250422
+414,County Road OS & Theater Rd,,43.88066996,-91.20047218
+415,Main & 20th,,43.88055341,-91.20487993
+416,Main & Grandview,,43.88243446,-91.20835188
+417,Main & 16th,,43.8842966,-91.21531591
+418,Main & 9th,,43.88445014,-91.22627731
+419,Onalaska City Hall,,43.88364674,-91.23091066
+420,Main & 3rd,,43.88318202,-91.2327389
+421,2nd & Irvin,,43.88184649,-91.2339691
+422,2nd & Fern,,43.87895875,-91.23253176
+423,2nd & Ash,,43.87567849,-91.23092688
+424,Company Store Westbound,,43.81469779,-91.26642533
+425,3rd & Sycamore,,43.83213612,-91.30065332
+426,Crestview Apartments - AM Stop,,43.83128077,-91.30404599
+427,Hill & Main - AM Stop,,43.82919047,-91.31269949
+428,Kistler Park - AM Stop,,43.82230296,-91.31213132
+429,Kistler Park - PM Stop,,43.82236966,-91.31191723
+430,La Crescent High School - AM Stop,,43.81637286,-91.31373927
+431,La Crescent Community Arena - PM Stop,,43.81544774,-91.30872426
+432,7th & Elm - AM Stop,,43.82193655,-91.30802813
+433,Oak & 1st - AM Stop,,43.82855115,-91.30595244
+434,Downtown La Crescent,,43.82893242,-91.30395064
+435,Company Store Eastbound,,43.81467892,-91.26653853
+436,4th & Main,,43.812675,-91.250847
+437,Clinton & Caledonia Transfer Point,,43.8416106,-91.2469052
+438,Clinton & Caledonia Transfer Point,,43.84170969,-91.24667123
+439,Gundersen Lutheran,,43.79391291,-91.24845837
+440,Oak & 1st - PM Stop,,43.828195,-91.305839
+441,Crestview Apartments - PM Stop,,43.83116709,-91.30405138
+442,Hill & Main - PM Stop,,43.82925632,-91.31252352
+443,La Crescent High School - PM Stop,,43.8163696,-91.31398172
+444,La Crescent Community Arena - AM Stop,,43.81528687,-91.30867084
+445,7th & Elm - PM Stop,,43.8219421,-91.30828879
+446,La Crosse & 16th,Near Parking Ramp,43.81838043,-91.23146071
+447,UW La Crosse,Clearly Alumni and Friends Center,43.81779831,-91.22924636
+448,UW La Crosse,Sanford Hall,43.81772172,-91.22894713
+449,Target,,43.87297968,-91.19343881
+450,Hauser & Hemstock,,43.862456,-91.222737
+451,Caledonia & Gillette,,43.846239,-91.246912
+452,21st Pl S & Garden,,43.781395,-91.224386
