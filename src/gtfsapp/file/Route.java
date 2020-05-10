@@ -479,7 +479,13 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getTitle() {
-        return getID().getIDString();
+        if (longName != null && !longName.equals("")) {
+            return getLongName();
+        } else if (shortName != null && !shortName.equals("")) {
+            return getShortName();
+        } else {
+            return "Unnamed Route";
+        }
     }
 
     /**
@@ -488,13 +494,7 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        if (longName != null && !longName.equals("")) {
-            return getLongName();
-        } else if (shortName != null && !shortName.equals("")) {
-            return getShortName();
-        } else {
-            return "Unnamed Route";
-        }
+        return "Route " + getID().getIDString();
     }
 
     /**

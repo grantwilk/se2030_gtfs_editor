@@ -595,7 +595,7 @@ public class GTFSFile {
             // get trip attributes
             String tripID = tokens.get(format.indexOf("trip_id")).trim();
             String routeID = tokens.get(format.indexOf("route_id")).trim();
-            String headSign = tokens.get(format.indexOf("trip_id")).trim();
+            String headSign = tokens.get(format.indexOf("trip_headsign")).trim();
 
             // create a new trip
             Trip trip = new Trip(feed, tripID);
