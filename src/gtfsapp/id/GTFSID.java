@@ -1,5 +1,6 @@
 package gtfsapp.id;
 
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -9,7 +10,15 @@ import java.util.Set;
  */
 public abstract class GTFSID implements Comparable<GTFSID> {
 
+    /**
+     * The ID String of the ID
+     */
     private final String id;
+
+    /**
+     * The random object for generating procedural IDs
+     */
+    private static final Random rand = new Random();
 
     /**
      * Constructor for GTFSID
@@ -32,21 +41,20 @@ public abstract class GTFSID implements Comparable<GTFSID> {
     }
 
     /**
-     * Procedurally generates a unique ID string from a prefix
+     * Randomly generates a unique ID string from a prefix
      *
      * @param prefix            a prefix for the ID
      * @param existingIDStrings a set of existing unique ID strings
-     * @return a unique procedurally generated ID string
+     * @return a unique randomly generated ID string
      */
     public static String generateID(String prefix, Set<String> existingIDStrings) {
 
-        // initialize count and idString
-        int count = 0;
+        // initialize ID string
         String idString;
 
         // create a new ID in the format "<prefix><count>" until it is unique
         do {
-            idString = String.format("%s%02d", prefix, count++);
+            idString = String.format("%s%02d", prefix, rand.nextInt());
         } while (existingIDStrings.contains(idString));
 
         return idString;
