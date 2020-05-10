@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 <?import java.net.URL?>
-<HBox fx:id="mainPanel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.GTFSMainController">
+<HBox fx:id="mainPanel" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.GTFSMainController">
    <children>
       <VBox fx:id="infoPanel" prefWidth="400.0" HBox.hgrow="NEVER">
          <children>

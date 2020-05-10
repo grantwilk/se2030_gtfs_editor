@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<VBox maxHeight="300.0" maxWidth="600.0" styleClass="select-dialog-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.select.GTFSSelectDialogController">
+<VBox maxHeight="300.0" maxWidth="600.0" styleClass="select-dialog-root" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.select.GTFSSelectDialogController">
    <children>
       <HBox styleClass="switch-container">
          <children>
