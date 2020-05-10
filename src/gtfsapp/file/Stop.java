@@ -338,15 +338,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public Color getColor() {
-
-        List<Route> routes = new ArrayList<>(getContainingRoutes());
-
-        if (routes.size() == 1) {
-            return routes.get(0).getColor();
-        } else {
-            return DEFAULT_COLOR;
-        }
-
+        return DEFAULT_COLOR;
     }
 
 }
