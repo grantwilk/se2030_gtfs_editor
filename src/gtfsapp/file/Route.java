@@ -146,11 +146,19 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of all of the trips on the route, then applies the getDistance method and keeps a running
+     * total of all the distances of trips to find the distance the route travels.
+     *
+     * @return the distance the route covers
      */
     public double getDistance() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        // get a list of all stops in order of arrival times
+        List<Trip> trips = new ArrayList<>(getTrips());
+        double distanceTraveled = 0;
+        for(int i =0; i < trips.size()-1; i++){
+            distanceTraveled += trips.get(i).getDistance();
+        }
+        return distanceTraveled;
     }
 
     /**
