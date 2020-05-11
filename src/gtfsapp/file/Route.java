@@ -130,11 +130,12 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @return
+     * Find the average speed by taking the distance of the route over the duration
+     *
+     * @return the average speed of the route
      */
     public double getAvgSpeed() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return (this.getDistance()/this.getDuration());
     }
 
     /**
