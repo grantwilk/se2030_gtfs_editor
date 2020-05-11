@@ -25,6 +25,12 @@ public class Route extends GTFSElement {
      * The trips that occur within this route
      */
     private final HashMap<TripID, Trip> trips = new HashMap<>();
+
+    /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long NEXT_STOP_MAX_TIME = 1000000000;
+
     /**
      * The type of transportation used on the route
      */
@@ -210,7 +216,6 @@ public class Route extends GTFSElement {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
-
     /**
      * @return
      */

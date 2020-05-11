@@ -30,7 +30,7 @@ public class Stop extends GTFSElement {
     private static final long NEXT_STOP_MAX_TIME = 1000000000;
 
     /**
-     * Initial value for the difference in time for the next stop
+     * Initial value for the difference in time for the previous stop
      */
     private static final long PREV_STOP_MAX_TIME = -1000000000;
 
