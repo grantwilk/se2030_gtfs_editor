@@ -122,11 +122,21 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of the trips, then checks to see which trip is active.  This is going on the assumption that only
+     * one trip on a route can be active at a time.  I am not sure if this a right
+     *
+     * @return The currently active trip
      */
     public Trip getActiveTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        //TODO- I do no know if there can be 2 active trips on the same route
+        Trip currentTrip = null;
+        List<Trip> trips = new ArrayList<>(getTrips());
+        for(int i =0; i < trips.size()-1; i++){
+            if(trips.get(i).isActive()){
+                currentTrip = trips.get(i);
+            }
+        }
+        return currentTrip;
     }
 
     /**
