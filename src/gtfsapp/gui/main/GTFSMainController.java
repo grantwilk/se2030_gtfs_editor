@@ -290,7 +290,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             try {
 
                 // set the GTFS file to null (required for deselectElement())
+
                 gtfsFile = null;
+
 
                 // deselect the selected element
                 deselectElement();
@@ -304,8 +306,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 // attempt to parse the files
                 gtfsFile.load();
 
-                // update info panel GUI
-                updateInfoPanel();
+                   // update info panel GUI
+                   updateInfoPanel();
+
 
                 // update the map GUI
                 // mapController.updateMap();
