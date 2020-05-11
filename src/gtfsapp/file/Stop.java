@@ -260,11 +260,12 @@ public class Stop extends GTFSElement {
 
 
     /**
-     * @return
+     * Takes the previous stopTime and finds the trip associated with that stop time
+     *
+     * @return the previous trip to stop at this stop
      */
     public Trip getPreviousTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return getPreviousStopTime().getTrip();
     }
 
     /**
