@@ -162,11 +162,18 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of all of the trips on the route, then applies the getDuration method and keeps a running
+     * total of the total time the route is active
+     *
+     * @return The time that the route is active
      */
     public double getDuration() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        List<Trip> trips = new ArrayList<>(getTrips());
+        double duration = 0;
+        for(int i = 0; i< trips.size()-1; i++){
+            duration += trips.get(i).getDuration();
+        }
+        return duration;
     }
 
     /**
