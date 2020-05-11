@@ -30,6 +30,11 @@ public class Stop extends GTFSElement {
     private static final long NEXT_STOP_MAX_TIME = 1000000000;
 
     /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long PREV_STOP_MAX_TIME = -1000000000;
+
+    /**
      * The feed that the stop belongs to
      */
     private final Feed feed;
@@ -230,12 +235,29 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of the stop times for this stop, and compares them to the current time
+     * It takes the closest value before the current time and returns that value
+     *
+     * @return the StopTime for the last elapsed stopTime
      */
     public StopTime getPreviousStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        Time currentTime = new Time(System.currentTimeMillis());
+        List<StopTime> stopTimeList = getContainingStopTimes();
+        StopTime prevStopTime = null;
+        long timeDiff = 0;
+        long lowDiff = PREV_STOP_MAX_TIME;
+        for(StopTime stopTime: stopTimeList){
+            Time nextArrival = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(nextArrival) < 0){
+                timeDiff = nextArrival.getMillis() - currentTime.getMillis();
+            }
+            if(timeDiff > lowDiff){
+                prevStopTime = stopTime;
+            }
+        }
+        return prevStopTime;
     }
+
 
     /**
      * @return
