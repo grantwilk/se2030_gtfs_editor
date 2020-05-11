@@ -529,10 +529,10 @@ public class GTFSFile {
         List<String> tokens = Arrays.asList(line.split(",", -1));
         ArrayList<String> returnList = new ArrayList<>();
         for(int i = 0; i < tokens.size(); i++) {
-            if(tokens.get(i).indexOf("\"") == 0 && tokens.get(i).lastIndexOf("\"") == 0) {
+            if(tokens.get(i).indexOf('\"') == 0 && tokens.get(i).lastIndexOf('\"') == 0) {
                 String concatenatedString = tokens.get(i);
                 int j = i;
-                while (tokens.get(j).indexOf("\"") != (tokens.get(j).length() - 1)) {
+                while (tokens.get(j).indexOf('\"') != (tokens.get(j).length() - 1)) {
                     j++;
                     concatenatedString = concatenatedString + "," + tokens.get(j);
                 }
