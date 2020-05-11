@@ -102,9 +102,13 @@ public class GTFSFile {
 
         // validate files
         validateStops(stopLines);
+        System.out.println("Stops validated");
         validateTrips(tripLines);
+        System.out.println("Trips validated");
         validateStopTimes(stopTimeLines);
+        System.out.println("Stop Times validated");
         validateRoutes(routeLines);
+        System.out.println("Routes validated");
 
         // parse the files (must be in this order!)
         HashMap<String, Stop> stops = parseStops(stopLines);
