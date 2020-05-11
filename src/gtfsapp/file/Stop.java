@@ -66,11 +66,30 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * @return
+     * Takes the current time in milliseconds, and checks if the first stopTime arrival is less than the current time
+     * and the last stopTime departure is greater than the current time
+     * @return True if the stop is active, false if not
      */
     public boolean isActive() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+
+        long currentTime = System.currentTimeMillis();
+        ArrayList<StopTime> stopTimeList = (ArrayList)this.getContainingStopTimes();
+        long lowTime = stopTimeList.get(0).getArrivalTime().getMillis();
+        long highTime = stopTimeList.get(0).getDepartureTime().getMillis();
+        for(int i = 0; i < stopTimeList.size()-1; i++){
+            if(stopTimeList.get(i).getArrivalTime().getMillis() < lowTime) {
+                lowTime = stopTimeList.get(i).getArrivalTime().getMillis();
+            }
+            if(stopTimeList.get(i).getDepartureTime().getMillis() > highTime){
+                highTime = stopTimeList.get(i).getDepartureTime().getMillis();
+            }
+
+        }
+        if(lowTime < currentTime && currentTime < highTime){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
