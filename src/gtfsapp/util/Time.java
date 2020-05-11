@@ -1,7 +1,5 @@
 package gtfsapp.util;
 
-import java.util.Scanner;
-
 /**
  * Stores a 24-hour time in hours, minutes, and seconds
  * @author Grant Wilk
@@ -41,7 +39,7 @@ public class Time implements Comparable<Time> {
     /**
      * Regular expression for a time stamp in HH:MM:SS form
      */
-    private static final String TIME_STAMP_REGEX = "^([2][0-3]|[0-1]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
+    private static final String TIME_STAMP_REGEX = "^([4][0-7]|[0-3]?[0-9])[:][0-5]?[0-9][:][0-5]?[0-9]";
 
     /**
      * Creates a new time from a hours, minutes, and seconds
@@ -51,8 +49,8 @@ public class Time implements Comparable<Time> {
      */
     public Time(int hours, int minutes, int seconds) {
 
-        // validate that parameters fit 24 hour time
-        if (hours > 23 || hours < 0) {
+        // validate that parameters fit 24 hour time w/ 24 hours of overrun
+        if (hours > 48 || hours < 0) {
             throw new IllegalArgumentException("Invalid number of hours.");
         }
         if (minutes > 59 || minutes < 0) {
@@ -75,19 +73,29 @@ public class Time implements Comparable<Time> {
      */
     public Time(String timeString) {
 
-        // check to make sure the time string is properly formatted
-        if (!timeString.matches(TIME_STAMP_REGEX)) {
-            throw new IllegalArgumentException("Time string is not formatted correctly");
+        try {
+
+            // throw an exception if there are no colons
+            if (timeString.charAt(2) != ':' || timeString.charAt(5) != ':') {
+                throw new IllegalArgumentException("Invalidly formatted time string.");
+            }
+
+            // parse hours minutes and seconds
+            hours = Integer.parseInt(timeString.substring(0, 2));
+            minutes = Integer.parseInt(timeString.substring(3, 5));
+            seconds = Integer.parseInt(timeString.substring(6, 8));
+
+            // throw an exception if there are an invalid number of hours, minutes, or seconds
+            if (hours > 48 || minutes > 59 || seconds > 59) {
+                throw new IllegalArgumentException("Invalidly formatted time string.");
+            }
+
         }
 
-        // create scanner
-        Scanner timeScanner = new Scanner(timeString);
-        timeScanner.useDelimiter(":");
-
-        // set parameters
-        this.hours = timeScanner.nextInt();
-        this.minutes = timeScanner.nextInt();
-        this.seconds = timeScanner.nextInt();
+        // throw illegal argument exception if an exception occurred while parsing hours, minutes, and seconds
+        catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalidly formatted time string.");
+        }
 
     }
 
@@ -98,14 +106,29 @@ public class Time implements Comparable<Time> {
     public Time(long millis) {
 
         // convert millis to hours, minutes, and seconds
-        this.hours = (int) (millis / MILLIS_IN_HOUR);
-        millis -= this.hours * MILLIS_IN_HOUR;
+        int hours = (int) (millis / MILLIS_IN_HOUR);
+        millis -= hours * MILLIS_IN_HOUR;
 
-        this.minutes = (int) (millis / MILLIS_IN_MINUTE);
-        millis -= this.minutes * MILLIS_IN_MINUTE;
+        int minutes = (int) (millis / MILLIS_IN_MINUTE);
+        millis -= minutes * MILLIS_IN_MINUTE;
 
-        this.seconds = (int) (millis / MILLIS_IN_SECOND);
+        int seconds = (int) (millis / MILLIS_IN_SECOND);
 
+        // validate that parameters fit 24 hour time w/ 24 hours of overrun
+        if (hours > 48 || hours < 0) {
+            throw new IllegalArgumentException("Invalid number of hours.");
+        }
+        if (minutes > 59 || minutes < 0) {
+            throw new IllegalArgumentException("Invalid number of minutes.");
+        }
+        if (seconds > 59 || seconds < 0) {
+            throw new IllegalArgumentException("Invalid number of seconds.");
+        }
+
+        // set attributes
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
 
     }
 

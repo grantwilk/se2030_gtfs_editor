@@ -60,7 +60,7 @@ public class Feed extends GTFSElement {
      *
      * @param routes the list of routes to add
      */
-    public void addAllRoutes(List<Route> routes) {
+    public void addAllRoutes(Collection<Route> routes) {
         for (Route route : routes) {
             this.routes.put((RouteID) route.getID(), route);
         }
@@ -80,7 +80,7 @@ public class Feed extends GTFSElement {
      *
      * @param trips the list of trips to add
      */
-    public void addAllTrips(List<Trip> trips) {
+    public void addAllTrips(Collection<Trip> trips) {
         for (Trip trip : trips) {
             this.trips.put((TripID) trip.getID(), trip);
         }
@@ -101,7 +101,7 @@ public class Feed extends GTFSElement {
      *
      * @param stopTimes the list of stop times to add
      */
-    public void addAllStopTimes(List<StopTime> stopTimes) {
+    public void addAllStopTimes(Collection<StopTime> stopTimes) {
         for (StopTime stopTime : stopTimes) {
             this.stopTimes.put((StopTimeID) stopTime.getID(), stopTime);
         }
@@ -121,7 +121,7 @@ public class Feed extends GTFSElement {
      *
      * @param stops the list of stops to add
      */
-    public void addAllStops(List<Stop> stops) {
+    public void addAllStops(Collection<Stop> stops) {
         for (Stop stop : stops) {
             this.stops.put((StopID) stop.getID(), stop);
         }

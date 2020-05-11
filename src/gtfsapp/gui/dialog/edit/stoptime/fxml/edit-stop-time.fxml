@@ -10,7 +10,7 @@
 
 
 <?import gtfsapp.util.LimitedTextField?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="edit-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="edit-root" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.dialog.edit.stoptime.GTFSEditStopTimeDialogController">
    <children>
       <VBox alignment="CENTER" styleClass="settings-container">
          <children>

@@ -307,7 +307,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public String getTitle() {
-        return getID().getIDString();
+        return name;
     }
 
     /**
@@ -316,7 +316,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return name;
+        return "Stop " + getID().getIDString();
     }
 
     /**
@@ -338,15 +338,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public Color getColor() {
-
-        List<Route> routes = new ArrayList<>(getContainingRoutes());
-
-        if (routes.size() == 1) {
-            return routes.get(0).getColor();
-        } else {
-            return DEFAULT_COLOR;
-        }
-
+        return DEFAULT_COLOR;
     }
 
 }
