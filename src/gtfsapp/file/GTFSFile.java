@@ -90,43 +90,27 @@ public class GTFSFile {
 
         // get list of lines for each file
         List<String> stopLines = Files.readAllLines(stopFile.toPath());
-        System.out.println("Read all lines from stops.txt.");
         List<String> stopTimeLines = Files.readAllLines(stopTimesFile.toPath());
-        System.out.println("Read all lines from stop_times.txt.");
         List<String> routeLines = Files.readAllLines(routeFile.toPath());
-        System.out.println("Read all lines from routes.txt.");
         List<String> tripLines = Files.readAllLines(tripFile.toPath());
-        System.out.println("Read all lines from trips.txt.");
 
         // validate files
         validateStops(stopLines);
-        System.out.println("Stops validated.");
         validateTrips(tripLines);
-        System.out.println("Trips validated.");
         validateStopTimes(stopTimeLines);
-        System.out.println("Stop times validated.");
         validateRoutes(routeLines);
-        System.out.println("Routes validated.");
 
         // parse the files (must be in this order!)
         HashMap<String, Stop> stops = parseStops(stopLines);
-        System.out.println("Stops parsed.");
         HashMap<String, Route> routes = parseRoutes(routeLines);
-        System.out.println("Routes parsed.");
         HashMap<String, Trip> trips = parseTrips(routes,tripLines);
-        System.out.println("Trips parsed.");
         HashMap<String, StopTime> stopTimes = parseStopTimes(trips, stops,stopTimeLines);
-        System.out.println("Stop time parsed.");
 
         // add our GTFS elements to our feed
         feed.addAllRoutes(routes.values());
-        System.out.println("Routes added.");
         feed.addAllTrips(trips.values());
-        System.out.println("Trips added.");
         feed.addAllStopTimes(stopTimes.values());
-        System.out.println("Stop times added.");
         feed.addAllStops(stops.values());
-        System.out.println("Stops added.");
 
     }
 
