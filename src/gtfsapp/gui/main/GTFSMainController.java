@@ -294,7 +294,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 testFile.load();
 
                 // set the GTFS file to null (required for deselectElement())
+
                 gtfsFile = null;
+
 
                 // deselect the selected element
                 deselectElement();
@@ -305,8 +307,9 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
               //class variable is equal to the test file if test file loaded correctly.
                 gtfsFile = testFile;
 
-                // update info panel GUI
-                updateInfoPanel();
+                   // update info panel GUI
+                   updateInfoPanel();
+
 
                 // update the map GUI
                 // mapController.updateMap();

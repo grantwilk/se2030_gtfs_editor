@@ -219,6 +219,12 @@ public class GTFSFile {
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
 
+            //skips missing line
+            if(lines.get(i).equals("")){
+                i++;
+                currentLine = tokenizeLine(lines.get(i));
+            }
+
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
                 throw new IOException("Missing one or more required GTFS attributes in \"routes.txt\".");
@@ -288,6 +294,12 @@ public class GTFSFile {
 
             // tokenize current line
             List<String> currentLine = tokenizeLine(lines.get(i));
+
+            //skips missing line
+            if(lines.get(i).equals("")){
+                i++;
+                currentLine = tokenizeLine(lines.get(i));
+            }
 
             // make sure all expected elements are there
             if(currentLine.size() != format.size()) {
@@ -368,6 +380,12 @@ public class GTFSFile {
 
             // tokenize line
             List<String> line = tokenizeLine(lines.get(i));
+
+            //skips missing line
+            if(lines.get(i).equals("")){
+                i++;
+                line = tokenizeLine(lines.get(i));
+            }
 
             // throw an exception if there are more elements in the line than there are format elements
             if (line.size() > format.size()) {
@@ -511,6 +529,12 @@ public class GTFSFile {
             // tokenize current line
             List<String> line = tokenizeLine(lines.get(i));
 
+            //skips missing line
+            if(lines.get(i).equals("")){
+                i++;
+                line = tokenizeLine(lines.get(i));
+            }
+
             // throw an exception if there are more elements in the line than there are format elements
             if (line.size() > format.size()) {
                 throw new IllegalArgumentException("Too many elements in file \"trips.txt\".");
@@ -585,6 +609,12 @@ public class GTFSFile {
             // Get line in file
             List<String> line = tokenizeLine(lines.get(i));
 
+            // skips empty line
+            if(lines.get(i).equals("")){
+                i++;
+                line = tokenizeLine(lines.get(i));
+            }
+
             // Add each attribute in line to hash map
             for(int j = 0; j < line.size(); j++) {
                 tripFields.put(format.get(j),line.get(j));
@@ -642,6 +672,10 @@ public class GTFSFile {
 
             // get next line from file
             List<String> line = tokenizeLine(lines.get(i));
+            if(lines.get(i).equals("")){
+                i++;
+                line = tokenizeLine(lines.get(i));
+            }
 
             // put all route attributes into hash map
             for(int j = 0; j < line.size(); j++) {
@@ -701,6 +735,12 @@ public class GTFSFile {
             // get next line from file
             List<String> line = tokenizeLine(lines.get(i));
 
+            // skips empty line
+            if(lines.get(i).equals("")){
+                i++;
+                line = tokenizeLine(lines.get(i));
+            }
+
             // put all route attributes into hash map
             for(int j = 0; j < line.size(); j++) {
                 stopTimeFields.put(format.get(j),line.get(j));
@@ -753,8 +793,17 @@ public class GTFSFile {
             // create a new hash map for the attributes of the stop for this line
             HashMap<String, String> stopFields = new HashMap<>();
 
+
             // get next line from file
             List<String> line = tokenizeLine(lines.get(i));
+
+            // skips empty line
+            if(lines.get(i).equals("")){
+                i++;
+                line = tokenizeLine(lines.get(i));
+            }
+
+
 
             // put all stop attributes into hash map
             for(int j = 0; j < line.size(); j++) {
