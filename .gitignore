@@ -3,3 +3,4 @@ out/
 .idea/checkstyle-idea.xml/
 .ida/checkstyleidea-libs/
 /.idea/shelf/
+/samples/full-samples/chicago/

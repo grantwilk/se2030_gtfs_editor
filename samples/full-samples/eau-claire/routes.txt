@@ -1,0 +1,22 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+2F52F87E6A,ECT,1,"MargaretndMall","",3,http://www.eauclairewi.gov/index.aspx?page=769,008345,FFFFFF
+D837EE7A8,ECT,2,"Mt. Washington","",3,http://www.eauclairewi.gov/index.aspx?page=770,005BAB,FFFFFF
+A7C1CB80,ECT,3,"North High","",3,http://www.eauclairewi.gov/index.aspx?page=771,74392D,FFFFFF
+EC19586170,ECT,12,"Delong","",3,http://www.eauclairewi.gov/index.aspx?page=784,005BAB,FFFFFF
+C242B87D82,ECT,17,"Altoona","",3,http://www.eauclairewi.gov/index.aspx?page=788,F5821F,000000
+5E81AD26C8,ECT,5,"Rudolph Road","",3,http://www.eauclairewi.gov/index.aspx?page=773,6D2383,FFFFFF
+619748505B,ECT,4,"Locust Lane","",3,http://www.eauclairewi.gov/index.aspx?page=772,61BB46,FFFFFF
+37ABE0740A,ECT,6,"Putnam Heights and Mall","",3,http://www.eauclairewi.gov/index.aspx?page=774,FFDD00,000000
+C417A5C5CA,ECT,7,"West Clairemont","",3,http://www.eauclairewi.gov/index.aspx?page=776,F5821F,000000
+79D128EA50,ECT,8,"Folsom and Vine","",3,http://www.eauclairewi.gov/index.aspx?page=777,D61D24,FFFFFF
+A9F089D021,ECT,15,"West MacArthur  Daytime","Daytime hours",3,http://www.eauclairewi.gov/index.aspx?page=785,6D2383,FFFFFF
+D4381EDEA3,ECT,20,"Westridge Center","",3,http://www.eauclairewi.gov/index.aspx?page=798,00ADEF,FFFFFF
+20A546C35C,ECT,21,"Shopko Plaza","",3,http://www.eauclairewi.gov/index.aspx?page=790,00ADEF,FFFFFF
+2CC3C88B6A,ECT,18,"Memorial","",3,http://www.eauclairewi.gov/index.aspx?page=789,D61D24,FFFFFF
+D1DA1272BB,ECT,15,"West MacArthur Evenings","Evening hours",3,http://www.eauclairewi.gov/index.aspx?page=786,6D2383,FFFFFF
+5F824FB180,ECT,7,"West Clairemont 6:45AM","Route only runs at 6:45AM",3,http://www.eauclairewi.gov/index.aspx?page=775,6D2383,FFFFFF
+E8EF48C4B8,ECT,15,"West MacArthur 7:45AM","Runs Students to CVTC",3,http://www.eauclairewi.gov/index.aspx?page=787,6D2383,FFFFFF
+1116B94971,ECT,E1,"Express 1","This route runs a Delong then goes to CDC",3,http://www.eauclairewi.gov/index.aspx?page=792,000000,FFFFFF
+D1CC80B8A3,ECT,E10,"Express 10","Express Route - CDC & Rush hr regular patrons",3,http://www.eauclairewi.gov/index.aspx?page=793,000000,FFFFFF
+F1170577CE,ECT,E11,"Express 11","Express route for South Middle , Memorial, IC and Rush hour Patrons",3,http://www.eauclairewi.gov/index.aspx?page=794,000000,FFFFFF
+6C3825EB12,ECT,3/4,"North High/Locust Lane Combination","Evenings and Saturdays only",3,http://www.eauclairewi.gov/index.aspx?page=791,FFFFFF,000000

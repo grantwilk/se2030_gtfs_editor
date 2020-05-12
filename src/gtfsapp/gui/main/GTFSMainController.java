@@ -289,8 +289,14 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
         if (!(files == null || files.isEmpty())) {
             try {
 
+                //creates a test GTFS file to see if parsing works correctly
+                GTFSFile testFile = new GTFSFile(files);
+                testFile.load();
+
                 // set the GTFS file to null (required for deselectElement())
+
                 gtfsFile = null;
+
 
                 // deselect the selected element
                 deselectElement();
@@ -298,14 +304,12 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 // clear all existing IDs
                 GTFSID.clear();
 
-                // create the GTFS file from the files
-                gtfsFile = new GTFSFile(files);
+              //class variable is equal to the test file if test file loaded correctly.
+                gtfsFile = testFile;
 
-                // attempt to parse the files
-                gtfsFile.load();
+                   // update info panel GUI
+                   updateInfoPanel();
 
-                // update info panel GUI
-                updateInfoPanel();
 
                 // update the map GUI
                 // mapController.updateMap();

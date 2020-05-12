@@ -1,0 +1,511 @@
+stop_id,stop_name,stop_desc,stop_lat,stop_lon
+3F56F87E65,"Transfer Center","",44.810060,-91.497640
+9F0E64DAB2,"Walmart Supercenter","",44.775970,-91.429180
+5A52D3DAB2,"Gateway and S.Hastings Service Rd","Past the entrances to Target",44.780780,-91.434250
+63FEA496C1,"Festival Foods lot N","North parking Lot",44.789320,-91.459730
+7CCA4EE43B,"Vine and Delong Middle School Driveway","Sign is near Driveway",44.819230,-91.535290
+E31390AC08,"Starr and Connell's 2 entrance","by the Airport Terminal",44.862330,-91.482250
+461589DB2C,"Margaret and Main","Sign is Located on Margaret St",44.812270,-91.478650
+AC729B9CEE,"Margaret and Altoona","Even numbered side of street.",44.809160,-91.478650
+FF5192DA85,"Margaret and Highland","Even numbered side of street.",44.807340,-91.478640
+DAE51C9EA6,"Margaret and Fenwick","Even numbered side of street.",44.803720,-91.478630
+908738A94F,"Rudolph and Benton","Sign is between the Church and Benton Street.",44.796760,-91.478560
+0BD3731D52,"Fairfax and Skeels","At the Stop Sign",44.789498,-91.468369
+548ECD3057,"Festival Foods lot S","At the Island even with the Festival Store South entrance.",44.787510,-91.459750
+942DAC8E65,"Mall Dr and E. Hamilton","Eau Claire Auto Group Parking Lot",44.786860,-91.461250
+65A8CA15C1,"E. Hamilton and Family Dollar","Past the Second Family Dollar driveway from HWY 93",44.785550,-91.458170
+A10ECC4BD2,"E. Hamilton and Miller","At the Crosswalk",44.785520,-91.455020
+45D87ED9BC,"E. Hamilton and Cypress","At the Crosswalk.",44.783940,-91.449030
+F61369EEBB,"Oakwood Mall Dr and Northwoods Pub","Before the driveway",44.780400,-91.441390
+012658BB4C,"Runway and Robin","Odd side of street",44.871330,-91.463770
+60772DDE9B,"Abbe Hill and LaSalle","Even side of street at stop sign",44.840020,-91.468240
+5D6D58DB42,"Barstow and Eau Claire","Odd side of street",44.812180,-91.500540
+BFD4717811,"Barstow and Galloway","Odd side of street",44.814540,-91.501250
+8016DCCB5B,"Barstow and William","Odd side of street",44.817630,-91.502060
+6E2AF39F2C,"Barstow and Oak","Odd side of street",44.818840,-91.502370
+40DBAB86EE,"Oak and Forest","Even side of street at stop sign",44.818680,-91.504970
+A7711EC5BF,"Forest and Elm","Odd side of street",44.819790,-91.505260
+00E1981F20,"Forest and Huyssen","Odd side of street",44.820990,-91.505640
+402E19BCB0,"Forest and Sara","Odd side of street",44.822110,-91.505880
+29FD7711B1,"Addison and Sheridan","Odd side of street",44.829030,-91.506550
+B8EE8F4CE4,"Addison and Pershing","Odd side of street",44.829030,-91.504930
+328ADBFC5B,"Pershing and Dulaney","Even side of street at stop sign",44.827550,-91.504850
+375D301818,"Eddy and Cliff","Odd side of street",44.822110,-91.502140
+265A15DF16,"Birch and Germania","Odd side of street",44.820410,-91.496900
+1C348898E6,"Birch and Putnam","Odd side of street",44.820410,-91.494320
+C1E10648AA,"Birch and Centre","Odd side of street",44.820420,-91.491790
+E15686BB7D,"Birch and Mc Donough","Odd side of street",44.820420,-91.489150
+AC249B1FDE,"Birch and Fall","Odd side of street",44.820430,-91.486570
+05CD13BA24,"Birch and Holm","Odd side of street",44.820430,-91.483930
+4CF4FBD21A,"Starr and Omaha","Odd side of street",44.821850,-91.478580
+5BD87AF65C,"Starr and Somona Pkwy","Odd side of street",44.822390,-91.478580
+0EC9F3F228,"Starr and Seymour","Odd side of street",44.825710,-91.478610
+6B3F48BF31,"Seymour and Western","Odd side of street",44.826170,-91.477020
+2949EA450C,"Western and Peebles","Odd side of street",44.828770,-91.477130
+2980B21C38,"Western and Conrad","Odd side of street",44.832400,-91.477320
+A599E1C67D,"Western and Trailer Court","by mailboxes",44.834590,-91.477460
+58E5C05B1C,"Redwood and Starr","Odd side of street",44.836180,-91.479540
+51784C0A6C,"Starr and La Salle","Odd side of street",44.839610,-91.479720
+60FA052BDC,"Starr and Marquette","Odd side of street",44.843560,-91.479790
+6E7900CCBD,"Piedmont and Mercury","Even side of street at stop sign",44.846660,-91.481170
+A1D37F6087,"Piedmont and Saturn","Even side of street at stop sign",44.847070,-91.485760
+7B7C201535,"Piedmont and Wellington E","Even side of street at stop sign",44.847080,-91.490860
+1EB54F7F38,"Wellington E and Eddy","Odd side of street",44.850500,-91.490830
+FCD8153BE2,"Eddy and Uranus","Odd side of street",44.850550,-91.487250
+C67C3A878E,"Eddy and Moon","Odd side of street",44.850640,-91.479660
+055FEFFCFB,"Starr and Eddy Ln","Odd side of street by Hope Lutheran Church",44.851500,-91.478070
+647AC00859,"Starr and Regional Airport","Odd side of street",44.862320,-91.478240
+4827999EAD,"White and Melby","Odd side of street",44.864950,-91.468270
+0F1888074C,"White and Hogarth","Odd side of street",44.868300,-91.468500
+1AB19D9E4E,"White and Runway","Odd side of street",44.870870,-91.468670
+6B05206FAB,"Runway and Cardinal","Odd side of street",44.871180,-91.463730
+E8FA3C4ACD,"Robin and Hogarth","Even side of street at stop sign",44.868620,-91.458510
+EE11B4A858,"Robin and Melby","Even side of street at stop sign",44.864890,-91.458320
+A43A4E6D6F,"Melby and Anderson","Odd side of street",44.864720,-91.456890
+30105ACCBB,"N Hastings Way Service Road and Presto","Even side of street at stop sign",44.862400,-91.455490
+CEFB041877,"Locust Lane and Dale","Even side of street at stop sign",44.857550,-91.457840
+FC9CAC9EBD,"Locust Lane and Delbert","Even side of street at stop sign",44.855740,-91.459830
+FB35C46754,"Locust Lane and Potter","Even side of street at stop sign",44.854050,-91.461970
+BF1471CA90,"Locust Lane and Pinehurst","Even side of street at stop sign",44.852550,-91.464400
+4B638B5226,"Birch St and Erin St SE","Even side of street at stop sign",44.820530,-91.498150
+834F39C0D5,"Abbe Hill and Solem","Even side of street",44.848170,-91.468100
+BCF3EB40A6,"Abbe Hill and Mandy","Even side of street",44.845770,-91.468130
+7F8BF33B98,"La Salle and N. Hastings Way Frontage Rd","Even side of street",44.839940,-91.473140
+D4179325D0,"Zephyr Hill and Conrad","Even side of street",44.832660,-91.473540
+F38A103DCD,"Zephyr Hill and Peebles","Even side of street",44.829050,-91.473640
+7086292442,"Zephyr Hill and Seymour","Even side of street",44.826560,-91.473620
+079B0703BE,"Seymour and Morningside","Even side of street",44.826000,-91.469180
+FD0C6D95FD,"Morning Side and Somona","Even side of street",44.823230,-91.469130
+B18CA2C906,"Morning Side and Birch","Even side of street",44.821370,-91.469300
+33E013C162,"Birch and Mt Nemo","Even side of street",44.821180,-91.472130
+A22FC921D3,"Birch and Wagner","Even side of street",44.820580,-91.477370
+E9D8454D7E,"Birch and Deyo","Even side of street",44.820570,-91.481050
+72CB889098,"Birch and Holm","Even side of street",44.820570,-91.483720
+94FDA48319,"Birch and Fall","Even side of street",44.820570,-91.486250
+FA3B7E0F8A,"Birch and Mc Donough","Even side of street",44.820570,-91.488860
+969EA01E42,"Birch and Centre","Even side of street",44.820550,-91.491520
+401E490EBF,"Birch and Putnam","Even side of street",44.820540,-91.494050
+9C5A46C7AD,"Birch and Germania","Even side of street",44.820520,-91.496870
+7E0A10EF78,"Birch and Dewey","Even side of street",44.820510,-91.499120
+5F4A536F1B,"Eddy and Cliff","Even side of street",44.822250,-91.501980
+69FF67E654,"Pershing and Gleason","Even side of street",44.826140,-91.504780
+570A43A7E5,"Pershing and Dulaney","Odd side of street",44.827360,-91.504720
+D916D107AA,"Pershing and Gleason","Even side of street",44.826320,-91.504850
+E03FDC39C9,"Pershing and Addison","Even side of street",44.829020,-91.504690
+27F5A0BB3A,"Addison and Sheridan","Even side of street",44.829150,-91.506850
+EB0114DA61,"Forest and Sara","CMF on even side of street",44.822270,-91.506080
+4EE3E5E508,"Forest and Huyssen","Even side of street",44.821160,-91.505880
+04AF4F3C71,"Forest and Elm","Even side of street",44.819780,-91.505520
+2A56FF0C54,"Oak and Barstow","Even side of street",44.818850,-91.502620
+D69D32B88A,"Barstow and William","Even side of street",44.817770,-91.502300
+E73EFF8E19,"Barstow and Madison","Pharmacy on even side of street",44.815900,-91.501830
+B500BFF535,"Barstow and Post Office Parking Lot","Even side of street",44.814220,-91.501400
+AB5DD36CA0,"Barstow and Eau Claire","Even side of street",44.812250,-91.500800
+705C5021D1,"Graham and Grand","Even side of street",44.810580,-91.500290
+3FF40762A6,"Hastings Way Service Road and Jackson","Even side of street",44.837120,-91.474040
+B4EE7804F5,"Barland and Summer","Odd side of street",44.811410,-91.485230
+337263833E,"Chauncey and Hogeboom","Even side of street",44.810070,-91.483750
+246845E7BC,"Chauncey and Belmont","Even side of street",44.808520,-91.483750
+C556E38AE7,"Highland and Roderick","Even side of street",44.807180,-91.482500
+41F9E1DB32,"Highland and Margaret","Odd side of street",44.807210,-91.478690
+DD4120688D,"Margaret and Fenwick","Odd side of street",44.803740,-91.478610
+1078C4D3BF,"Fenwick and Agnes","Odd side of street",44.803610,-91.476140
+7C659836A1,"Fenwick and Birney","Odd side of street",44.803640,-91.472320
+9D4A3BBBDE,"Fenwick and O' Reilly Lot","0dd side of street",44.803640,-91.469480
+41ECAF9721,"Fairfax and Laurel","Near McDonald's entrance on Fairfax Street",44.802690,-91.468470
+829C0459AF,"Hamilton and Harriet","Odd side of street",44.801070,-91.467510
+1541463CEF,"Hamilton and Harlem","Odd side of street",44.801090,-91.465560
+39B33E6EFF,"Kirk and Gloede","Even side of street",44.800050,-91.465510
+EC61C41A23,"Kirk and Esmond","Even side of street",44.798380,-91.467380
+42E5CDEB84,"Clairemont and Fairfax","K-Mart Parking Lot - even side of street",44.795530,-91.466850
+501E51E386,"Keith and Memorial High School","1st door-Odd side of street",44.795050,-91.473190
+8DF66DF0ED,"Margaret and Valmont","Odd side of street",44.801800,-91.478440
+1E05AB19E8,"Margaret and Hoover","Odd side of street",44.804480,-91.478460
+4062EB9A0E,"Margaret and Highland","Odd side of street",44.807170,-91.478480
+42826C2B50,"Highland and Lee","Even side of street",44.807320,-91.480170
+8E3C77876A,"Highland and Chauncey","Even side of street",44.807280,-91.483500
+3FCA9010F5,"Chauncey and Altoona","Odd side of street",44.808940,-91.483590
+E242CCBA43,"Chauncey and Emery","Odd side of street",44.810790,-91.483620
+7A28EF77A4,"Barland and Summer","Even side of street",44.811510,-91.484930
+05DEE5A36C,"Main and McGraw","Even side of street",44.812440,-91.486870
+71401CEA95,"Main and Grove","Even side of street",44.812510,-91.490750
+956365EFB6,"Main and Dodge","Even side of street",44.812230,-91.494420
+B15353940F,"Esmond and Pleasant","Even side of street at stop sign",44.797180,-91.465910
+C3E3724F3D,"Keith and Hopkins","Odd side of street across from 1916 Keith St",44.798690,-91.473350
+ABD3CA7298,"Birch and Wagner","Odd side of street",44.820430,-91.477620
+2BBC20C049,"Gordy's on Birch Southside","",44.821140,-91.471850
+A9935CBDB7,"Seymour and McKinley","Near Trailer Park Entrance",44.825490,-91.460020
+C31E1C623D,"Seymour and Brookline","Even side of street",44.825600,-91.465210
+7E7A337D98,"Seymour and Morningside","Even side of street",44.826100,-91.468930
+AB1B6F1ECE,"Zephyr Hill and Peebles","Odd side of street",44.828940,-91.473440
+9FB2B84112,"Zephyr Hill and Conrad","Odd side of street",44.832540,-91.473380
+B0EDAF40E8,"Hastings Way Service Road and Harrison","Odd side of street",44.838000,-91.473830
+3337555891,"Hastings Way Service Road and La Salle","Odd side of street",44.839790,-91.473260
+19EF526061,"La Salle and Abby Hill","Odd side of street",44.839870,-91.468300
+B1198DB2AC,"Abbe Hill and Mandy","Odd side of street",44.845840,-91.467940
+46C1FD6A3C,"Abbe Hill and Leslie","Odd side of street",44.849710,-91.467910
+6DD940A060,"Eddy and Northland","Sidewalk entrance near bank",44.850800,-91.470640
+8AEE79F612,"Hastings Way Service Road and Delbert","Odd side of street",44.857780,-91.463330
+FF29ED6A27,"Hastings Way Service Road and Presto","at shelter",44.861950,-91.454620
+F45C09DC69,"Farwell and Eau Claire","at stop light",44.812460,-91.499200
+95A8207D91,"Wisconsin and Farwell","Midblock on South Side of Wisconsin",44.815650,-91.499810
+CFF4D79EB8,"Wisconsin and Putnam","Odd side of street",44.815770,-91.495610
+3419B6E131,"Putnam and Summit","Odd side of street",44.818600,-91.494090
+D4BC63871D,"Summit and Centre","Odd side of street",44.818650,-91.491800
+D56B6E11C0,"Summit and McDonough","Odd side of street",44.818670,-91.489150
+CF59D4C260,"McDonough and Bellevue","Odd side of street",44.817020,-91.488910
+6F0863503A,"Bellevue and Spring","Odd side of street",44.816860,-91.487200
+899756B03A,"Spring and Summit","Odd side of street",44.818640,-91.486970
+4FE584700A,"Fall and Birch","Odd side of street",44.820410,-91.486350
+9FEC5D168D,"Western and Harrison","Odd side of street",44.837910,-91.477630
+159F6D6D0E,"Western and Marquette","Odd side of street",44.843360,-91.477960
+F2A3911E6E,"Western and Waller","Odd side of street",44.846930,-91.477110
+5825D092CC,"Western and Eddy","Odd side of street near driveway to Hardee's",44.850030,-91.473970
+06FEFEC4B1,"Seymour and Zepher","Even side of street",44.826520,-91.473390
+6E6AE67501,"Anderson and Mitchell","Odd side of street",44.851020,-91.474210
+669064700E,"Anderson and Edgewood","Odd side of street",44.854190,-91.470110
+32EA96D0CE,"White and Anderson","at speed limit sign",44.856550,-91.467970
+C728258319,"White and McMillen","Odd side of street",44.861010,-91.468180
+67F52557BA,"McIntyre and Melby","Odd side of street",44.864620,-91.465310
+E28B5B4F5E,"Sundet and Anderson","Odd side of street",44.872290,-91.450110
+A008CEA2E4,"Anderson and Hogarth","Even side of street",44.868160,-91.452370
+BC0D65A60A,"Hogarth and Robin","Even side of street",44.868590,-91.458270
+2BFBAF2BA4,"Lark and Louis","Even side of street",44.867380,-91.460970
+9B6BCBC701,"Lark and Melby","Even side of street",44.864860,-91.460850
+CC3A12257C,"Anderson and Lark","Even side of street",44.862460,-91.459670
+5017246A4E,"Anderson and Delbert","Even side of street",44.858740,-91.464500
+0E5DF399E4,"North Lane and Anderson","at speed limit sign",44.855880,-91.469070
+2D1BE19E4A,"North Lane and Monroe","Even side of street",44.855890,-91.472890
+A667F71BFC,"North Lane and Starr","Even side of street",44.855880,-91.478000
+53B5995CF2,"Starr and North Lane","Even side of street",44.855900,-91.478250
+ED2A2FBFC4,"Starr and Sam Davey School","Odd side of street",44.851690,-91.478280
+64C51FAE83,"Eddy and Mercury","Even side of street",44.850760,-91.480650
+F3AA617011,"Eddy and Jupiter","Even side of street",44.850710,-91.484420
+779F40E0DE,"Eddy and Uranus","Even side of street",44.850680,-91.487000
+D96BDEE4A0,"Eddy and Wellington","",44.850660,-91.490780
+DF4148BFA8,"Eddy and Milton","Even side of street",44.850630,-91.494610
+7EB0A4BFAF,"Piedmont and Wellington E","Odd side of street",44.846950,-91.491130
+CFE0FFA827,"Piedmont and Uranus","Odd side of street",44.846930,-91.487300
+6DBF457E4C,"Mercury and Piedmont Rd","North High School by no parking sign",44.846180,-91.481430
+B47A333846,"Marquette and Starr","Odd side of street",44.843390,-91.480140
+194A516FE0,"Starr and Lasalle","Even side of street",44.839800,-91.479930
+674ED60411,"Starr and Redwood","Even side of street",44.836210,-91.479810
+31FC9514B6,"Starr and Dellview","Even side of street",44.831930,-91.479660
+C6035C5599,"Starr and Seymour","Near entrance to Marshfield Clinic",44.825870,-91.478810
+5C6CF13931,"Starr and Omaha","Even side of street",44.822000,-91.478790
+BCA97F2D35,"Putnam and Fay","Even side of street",44.819220,-91.494280
+3EEBA8E46C,"Putnam and Madison","Even side of street at stop sign",44.817880,-91.494280
+24EEA7933A,"Putnam and Wisconsin","At no parking sign",44.816090,-91.495480
+C10208D509,"Galloway and Dewey","Even side of street",44.814950,-91.498760
+4297D6B047,"Farwell and Eau Claire","Even side of street",44.812570,-91.499580
+AAAAFBB162,"Birch and Morningside","Odd side of street",44.821590,-91.468980
+3DE63946FD,"Graham and Emery","Near cross walk at YMCA",44.806800,-91.496800
+DEE2253BEF,"Graham and State","Even side of street",44.804550,-91.494680
+0995B4DB83,"State and Lincoln","Even side of street, near cross walk",44.799800,-91.495030
+1DBA371981,"State and Roosevelt","Even side of street",44.797070,-91.495240
+E699824C55,"State and Polk","Even side of street",44.790240,-91.496230
+DD2A30D14A,"State and Tyler","Even side of street",44.787550,-91.496250
+25C72E67BE,"E. Lexington and Trimble","Odd side of street",44.792290,-91.482340
+F3C9E6259E,"E. Lexington and Rudolph","Odd side of street",44.792300,-91.478510
+0978521F87,"Rudolph and Webster","Even side of street",44.788460,-91.478370
+CD1B80945D,"Mitcher and Livingston","Odd side of street",44.781960,-91.475910
+F5A9B5FE6C,"Mitcher and Hester","Odd side of street",44.781950,-91.473410
+3922D5754C,"Mitcher and Fairfax","Odd side of street",44.782200,-91.468460
+7B86283E26,"Fairfax and Sessions","Even side of street",44.779390,-91.468350
+84432CF95E,"Fairfax and Damon","Even side of street",44.774810,-91.468330
+643BEC6B45,"Fairfax and Tony","Even side of street",44.772240,-91.468290
+C9B32688AC,"Golf and Fairfax","Odd side of street",44.771070,-91.467330
+7A1D4EEC30,"Golf and Royal","Odd side of street",44.771040,-91.460930
+BB309B9B8A,"Golf and Commerce Valley Road","Odd side of street",44.769350,-91.455800
+C63F025D3A,"Golf Road and Woodstock Ct","Odd side of street",44.768620,-91.452350
+142744DB81,"E. Lexington and Grant","Odd side of street",44.792300,-91.486140
+78A0997987,"Golf and Oakwood Hills Pkwy","Odd side of street",44.771620,-91.445450
+7B6B76CEED,"Golf and Keystone","Odd side of street",44.771720,-91.438580
+836C514234,"Commonwealth and Bam Bookstore","Odd side of street",44.774520,-91.435550
+AB54A5D5A4,"Commonwealth and Best Buy","Near last entrance to Best Buy",44.774400,-91.432020
+85D4D5A5C8,"Commonwealth and Michaels Driveway","Near Michaels 2nd entrance",44.772110,-91.429690
+43910AE4A5,"Keystone and Gateway","Odd side of street",44.772340,-91.427140
+CC0A960E4A,"Gateway and Walmart Parking Lot","At bus shelter South side of Walmart",44.775290,-91.428140
+82B0A172EB,"Gateway and Kohls","At first stop sign",44.777580,-91.429890
+F224B8BF05,"Oakwood Dr and Oakwood Mall","Younkers - Even side of street",44.777090,-91.441100
+645E159351,"Oakwood Dr and Oakwood Mall","Theater - Even side of street",44.775080,-91.440200
+150C0588B5,"Oakwood Dr and Oakwood Mall","Scheels - Even side of street",44.774000,-91.439980
+EA7F074847,"Oakwood Dr and Oakwood Mall","Macy's - Even side of street",44.773060,-91.440910
+29F78EEE0D,"Oakwood Hill Pkwy and SSI Office","Odd side of street",44.774020,-91.446610
+FBBC723125,"Oakwood Hills Pkwy andDamon","Odd side of street",44.776270,-91.447330
+A336F7F7AD,"Oakwood Hills Pkwy and Ayres Building","Odd side of street",44.779880,-91.447460
+BA510626CE,"Oakwood Hills Pkwy and Cypress","At light pole",44.783990,-91.448510
+00601CF44B,"Abbe Hill and Eddy","Even side of street",44.850410,-91.468110
+5A99B90490,"Abbe Hill and Abbe Hill Ct","Odd side of street",44.842930,-91.467980
+35BE7585DF,"Abbe Hill and Abbe Hill Ct","Even side of street",44.842810,-91.468150
+38B8B06506,"Miller and E Hamilton","Even side of street",44.785020,-91.454970
+0475BDD3B4,"MIller and Brian","Even side of street",44.782060,-91.454950
+402CE4E57E,"Brian and Lever","Even side of street",44.781930,-91.458600
+45C97EAD99,"Skeels and Fairfax","Even side of street",44.789290,-91.468130
+F5D07D776D,"Skeels and Keith","Even side of street",44.789310,-91.472340
+5357017B73,"Skeels and Rudolph","Even side of street",44.789960,-91.478130
+E955B17C7B,"E. Lexington and Rudolph","Even side of street at stop sign",44.792430,-91.478150
+146F93261E,"E. Lexington and Trimble","Even side of street",44.792420,-91.482060
+4E73E9024D,"E. Lexington and Grant","Even side of street",44.792370,-91.485990
+2E2AEC1681,"E. Lexington and May","Even side of street",44.792400,-91.490100
+4D24B9DA0D,"State and McKinley","Odd side of street",44.797730,-91.494940
+24E16668B3,"State and Lincoln","Odd side of street",44.799660,-91.494790
+A420F6374A,"Barstow and Earl","Odd side of street",44.806330,-91.495010
+5519D2DE1C,"HIghland and Keith","Near driveway across from Omne Clinic",44.807380,-91.473050
+426470435A,"Main and Dodge","Odd side of street",44.812010,-91.494540
+71B1D33A07,"Main and Grove","Odd side of street",44.812390,-91.491030
+1324234E29,"Main and McGraw","Odd side of street",44.812310,-91.486750
+327BACA575,"Main and Our Savior Lutheran Church","Odd side of street",44.812410,-91.481990
+E9D92DC36D,"Bartlett and 7th","Odd side of street at stop sign",44.803580,-91.442910
+CA816DC1AD,"Bartlett and 3rd W","Odd side of street at stop sign",44.803630,-91.437350
+F587A78890,"Bartlett and Division","Odd side of street",44.803620,-91.433970
+95900C466A,"Spooner and 2nd W","Even side of street",44.807370,-91.436270
+DC7B7C6B6A,"Spooner and 5th W","Even side of street",44.807360,-91.440050
+4D307311ED,"Spooner and Sports Center","At pedestrian sign",44.807330,-91.445190
+41CA9D851D,"Spooner and 10th W","At bus shelter",44.807310,-91.448560
+D53EE0692D,"Spooner and Grace Edgewood","At Grace Edgewood Apts",44.807320,-91.451180
+1EB312F463,"Highland and Enterprise","At bus shelter",44.807430,-91.469970
+42DFCDF497,"Chapin and Main","Odd side of street",44.812420,-91.474670
+3FDBEDFBDC,"Main and Our Savior Lutheran Church","Even side of street",44.812540,-91.481960
+A53EAAAE29,"Eddy and Jupiter","Odd Side of Street",44.850570,-91.484690
+632C34A365,"Lake and 2nd","Even side of street",44.807050,-91.503230
+5FA3FD7BBA,"Lake and 4th","Even side of street",44.807050,-91.507510
+04BA9A5BD5,"5th and West Grand","Odd side of street",44.807810,-91.509670
+5EAB82CB5E,"5th and Chestnut","Odd side of street",44.811580,-91.510040
+12FB8AA3DF,"Bellinger and Randall","Odd side of street",44.814600,-91.511220
+3B3F405B57,"Cameron and 6th","Even side of street",44.816340,-91.518070
+E80D270C9B,"Cameron and 9th","Even side of street",44.814660,-91.521430
+31F8CEF062,"9th and James","Odd side of street",44.816940,-91.521970
+F9AB1A6EB0,"9th and Vine","Odd side of street",44.818930,-91.522090
+ABC33109AA,"Vine and 11th","Even side of street",44.819050,-91.524210
+833BC32641,"Vine and 14th","Even side of street",44.818760,-91.528350
+F7815EC4C6,"Vine and Florence","Even side of street",44.819090,-91.532990
+2750FF877C,"Vine and Delong Middle School","Even side of street",44.819240,-91.535330
+AACCF044C0,"Warden and Vine","Even side of street",44.819180,-91.538750
+2E3A1B864A,"Warden and Heimstead","Even side of street",44.817370,-91.538750
+937CE65C72,"Warden and Cameron","Even side of street",44.814400,-91.538740
+ADA82E47E9,"Fairmont and Cameron","By park bench",44.814020,-91.540650
+F18D0652CF,"Crestview and Meridian Heights","Odd side of street",44.810070,-91.538350
+F790CA0436,"Meridian Heights and Crestview","Near apartments and mailboxes",44.811180,-91.538760
+1863614C39,"Sunset and Fairmont","Even side of street",44.812290,-91.540490
+B056A492DE,"Cameron and Clairemont","By fire hydrant",44.814180,-91.538130
+DEF2A8FC5C,"Cameron and Florence","Odd side of street",44.814190,-91.533690
+FE345F68E3,"Cameron and Nicholas","Odd side of street",44.813650,-91.527730
+380D2C6E08,"Cameron and 11th","Odd side of street",44.813550,-91.524000
+E3230E79DC,"Cameron and 7th","Odd side of street",44.815980,-91.519490
+A1D3A690D7,"Cameron and Kendall","Odd side of street",44.816250,-91.515030
+3D2D188F3A,"Cameron and Bellinger","At bus shelter",44.816350,-91.511580
+D8DEA78E10,"Whipple and Randall","At bus shelter",44.814810,-91.513570
+CAF945AFF4,"Randall and Mayo Clinic","In parking lot - Odd side of street",44.814610,-91.512460
+1201E41546,"5th and Chestnut","Even side of street",44.811630,-91.510290
+75A1BD21C9,"5th and Union","Even side of street",44.808880,-91.509940
+ED81440EA1,"Lake and 5th","Odd side of street",44.806900,-91.509210
+0AEDA82A62,"Farwell and Earl","Even side of street",44.806920,-91.494300
+BBF5BC26A5,"Farwell and Marston","Even side of street",44.805400,-91.492890
+D749975C1F,"Washington and S Dewey","Odd side of street",44.805170,-91.490580
+A3FC0F2A1B,"Harding and Lee","Odd side of street",44.801980,-91.480020
+9B0EBBC18C,"Rudolph and Goff","Even side of street",44.799480,-91.477760
+FC191B10C6,"Rudolph and E Lexington","Even side of street",44.792460,-91.478460
+EA91CD20B8,"Rudolph and E Hamilton","Even side of street",44.785820,-91.478310
+2932C55347,"Rudolph and Mitcher","Odd side of street, before stop sign",44.782280,-91.478350
+980D3B7151,"Rudolph and Jensen","Even side of street",44.778950,-91.478390
+87DC1DA395,"Rudolph and Dogwood","Even side of street",44.774400,-91.478450
+A8BE0F95A7,"Rudolph and Golf","Even side of street",44.771400,-91.478460
+034B2BED4B,"Golf and Clover","Odd side of street",44.771050,-91.473440
+94042E4248,"Golf and Kappus","Odd side of street",44.771080,-91.465630
+43ACF9B2DD,"London and Golf","Odd side of street",44.771460,-91.462930
+63C582AB91,"London and Damon","Odd side of street",44.774630,-91.462580
+74ECCCE209,"Damon and Boardwalk","Even side of street",44.774800,-91.466820
+FCC4F9D311,"Fairfax and Sessions","Odd side of street",44.779170,-91.468110
+41B0D715F5,"Fairfax and Ridgeview","Odd side of street",44.780960,-91.468150
+75455ACCF6,"Mitcher and Fairfax","Even side of street",44.782310,-91.468640
+B159C10D93,"Mitcher and Hester","Even side of street",44.782100,-91.473140
+B48EBB3C19,"Mitcher and Fear","Even side of street",44.782120,-91.476450
+4C9C73E92C,"Rudolph and Lehman","Odd side of street",44.784270,-91.478090
+B1637AA53E,"Rudolph and Skeels","Odd side of street",44.789780,-91.478170
+785CCA889F,"Rudolph and E Lexington","Odd side of street",44.792290,-91.478240
+02E9893873,"Rudolph and Benton","Odd side of street",44.796350,-91.478330
+305C1A5E96,"Rudolph and Goff","Odd side of street",44.799340,-91.477650
+C81377480C,"Harding and Ohm","Even side of street",44.800850,-91.478000
+4FDD2F0B1E,"Washington and S Dewey","Even side of street",44.805200,-91.490900
+B60F82AC64,"Farwell and Marston","Odd side of street",44.805320,-91.492520
+56C27A5012,"Farwell and Earl","Odd side of street, at Park Towers bus shelter",44.807060,-91.494140
+AC99025726,"West MacArthur and State","Even side of street",44.789330,-91.496610
+E3FF4B7551,"West MacArthur and Ellis","Even side of street",44.789350,-91.503590
+CFA63A066C,"Stein and Richard","East Side - Odd side of street",44.790510,-91.508730
+A95E38CFEA,"Clairemont and Sacred Heart Hospital","Main entrance - even side of street",44.794150,-91.511030
+4717CC9E9A,"Stein and Kenney","At UWEC bus stop",44.792010,-91.509060
+C077E353E2,"Clairemont frontage and University Dr.","CVTC Parking Lot, Even side of street",44.793790,-91.505390
+17D3AEC698,"Heights and Lasker","At bus shelter",44.795540,-91.515620
+9179F25665,"Oakridge Dr and Clairemont Nursing/Rehab","North side of building - even side of street",44.796720,-91.516130
+177F5CB273,"Craig and Oakridge","Even side of street, at entrace to Marshfield Clinic by bus shelter",44.796440,-91.519200
+AC78C57369,"West MacArthur and Thomas","Even side of street",44.789370,-91.506170
+87A5A0EAF0,"Kenney and Stein","Even side of street near bus shelter",44.791970,-91.508680
+D835466473,"Stein and Richard","Even side of street",44.790690,-91.508960
+0A104674DB,"West MacArthur and Augusta","Even side of street",44.789360,-91.509750
+FBD228EF7C,"West MacArthur and Ruth","Even side of street",44.789310,-91.513780
+D95F564634,"Shopko Lot and Subway","Even side of street, in front of Subway",44.791010,-91.514060
+38A190E4D0,"Clairemont Frontage and Red Lobster","Even side of street across from Red Lobster parking lot",44.792620,-91.514780
+A974492BCB,"Eldorado and West MacArthur","Even side of street",44.787810,-91.516030
+6ECF6C08C5,"Eldorado and Imperial Circle","Even side of street",44.786630,-91.514710
+1C79E266A7,"Westover and Stein","Odd side of street, by Elks Lodge",44.782800,-91.508360
+5CCE661A73,"Westover and Ellis","Odd side of street",44.782790,-91.503680
+B289593826,"Kohlhepp and Preston Rd","Odd side of Street",44.825005,-91.548513
+7CBEAA2D62,"Westover and State","Odd side of street",44.782790,-91.496480
+019882FE7E,"W Hamilton and Stein","Odd side of street",44.785610,-91.508950
+68D508E3BE,"W Hamilton and State","Odd side of street",44.785600,-91.496630
+2CF73CEA40,"E. Lexington and Keith","Even side of the Street",44.792885,-91.473784
+9F709FDB29,"State and Tyler","Odd side of street",44.787350,-91.496060
+4DF419984B,"E. Lexington and Keith","Odd side of street 40 from Stop Sign",44.792778,-91.473778
+9A84DFC5F1,"State and Truman","Odd side of street",44.790840,-91.496020
+F358E52458,"West MacArthur and Kwik Trip","Even side of street between Randys and Kwik Trip",44.788340,-91.517680
+23D39BB2D5,"Craig Road and Fahrman Center Driveway","Even side of street at Fahrman Center",44.786780,-91.519130
+3764D588AB,"Craig Road and International Dr","Craig Road at EC Indoor Sport Center",44.784020,-91.519140
+D63D41607B,"International and Continental","Even side of street",44.782820,-91.521810
+E4BE19DCFC,"International and Sky Park","Even side of street across from GSI",44.781700,-91.525170
+36FC2AAEFB,"W Hamilton and Xcel Energy","Odd side of street",44.784820,-91.526600
+96C4B28B98,"W Hamilton and Hidden Pl","Odd side of street",44.785140,-91.521510
+DD524DD92F,"W Hamilton and Eldorado","Odd side of street",44.785520,-91.514700
+B02B2E7B26,"W Hamilton and Ellis","Odd side of street",44.785590,-91.502990
+51AEE70CCD,"3rd and Lake","Even side of street",44.806780,-91.505760
+0B658E0300,"E. Lexington and Fairfax","40' from stopsign",44.792794,-91.468700
+B10DE928C5,"Fairfax and Skeels","40' from stopsign",44.789480,-91.468220
+77364007D0,"3rd and Water","Even side of street at Stop Sign",44.802290,-91.505750
+AB29F3C82A,"Water and 6th","NE Corner",44.802280,-91.511700
+6BBAD2C248,"Water and 8th","Even side of street at the cross walk",44.802250,-91.515750
+25A46E9B9A,"Menomonie and 10th","Even side of street by driveway of Oxbow Apt",44.801820,-91.520420
+635A3FF3C4,"Menomonie and Carson Park Ave","Even side of street in front of Dairy Queen",44.800419,-91.525810
+04473DEB9B,"Menomonie and Michigan","Even side of street on corner",44.799400,-91.532620
+DFE8F89519,"Ferry and First Reserve","Even side of street across from First REserve St",44.797890,-91.535340
+7A689B8E5F,"Ferry and Short","Even side of street across from Short St",44.794900,-91.537250
+EF0ECBDDB1,"Pitt and Crescent Ave","Odd side of street by driveway",44.792910,-91.539300
+E9BCC9BD72,"Cleveland and Pitt","Mt. Washington residence entrance",44.795230,-91.540920
+71312F9BD6,"Cleveland and LaMans Ln","Even side of street on corner of Clevland and LaMans",44.794890,-91.545390
+69EB37E294,"Cleveland and Christian Ave","Even side of street before the turn on Christian",44.794660,-91.547590
+C4F2F2F5F3,"Christian and Crescent","Even side of street on corner of Christian and Crescent",44.792720,-91.548280
+714D58E6B7,"Crescent and Fisher","Odd side of street middle of the block by fire hydrant",44.793350,-91.540030
+A5EC93BB07,"Plum St and Candall St","Even side of street by apt building before you turn on Candell",44.790530,-91.540720
+66975F6A7E,"Candell and Ferry","Odd side of street on corner of Candell and Ferry",44.790070,-91.539450
+7DA6CBBABE,"Ferry and Short","Odd side of street corner of Ferry St and Short St",44.794650,-91.537210
+3B3353C5E4,"Menomonie and Michigan St","Odd side of street corner of Michigan and Menominie",44.799250,-91.532970
+390692D474,"Menomonie and Carson Park Dr","Odd side of street across from Dairy Queen by cross walk",44.800280,-91.525610
+1963C25918,"Water and 8th","Odd side of street-corner of Menomonie and 8th",44.802090,-91.516050
+8376682ECD,"Water and 5th","Odd side of street before the lights",44.802100,-91.510480
+27002C0E3B,"4th and Water","Odd side of street  after you turn on 4th",44.802380,-91.507630
+C54E1E56D1,"4th and Hudson","Odd side of street corner of 4th and Hudson",44.805920,-91.507610
+FC028FBC0B,"Lake and 2nd","Odd side of street corner of Lake and 2nd",44.806910,-91.503520
+0CBA929411,"Ferry  and Menomonie","Filling Station entrance Rd 30 yds from Menominie",44.798660,-91.534730
+AA7D0ECC1F,"Chapin and Altoona","At the shelter",44.808950,-91.474620
+D0BA3E7527,"Menominie and 10th","Odd side of the street at intersection",44.801670,-91.520290
+22F0067A6B,"Craig and Clairemont","Plaza Hotel - Odd side of street",44.793970,-91.519150
+39B4EEC892,"Stein and Kenny","Even side of street",44.792050,-91.509040
+6B829EECA0,"Gateway and Goodwill Driveway","Same side as Goodwill before the driveway",44.780050,-91.431470
+BA4EDFC79F,"E. Hamilton and Horlacher","Even Side of Street by fire hydrant",44.785620,-91.440450
+F6195B0295,"E. Hamilton and Pine Lodge Rd","Even Side of Street before intersection",44.785620,-91.447430
+1863C38630,"Mall Dr and Festival Foods","Past the Driveway to Festival Foods",44.787820,-91.461130
+EB5D48C562,"E. Lexington and Fairfax","Even Side of Street before the driveway",44.792910,-91.468700
+629BFA887F,"Margaret and Main","Odd Side of the street before the intersection",44.812250,-91.478500
+310D40CCC7,"E. Hamilton and Gateway","Even Side of the street past paved walk path",44.785630,-91.434520
+38D379B367,"E. Hamilton and Miller","Same Side as Gordy's before the driveway",44.785710,-91.454540
+D4FE6A19C3,"E. Hamilton and Big Lots","Same side of the street as Big Lots in between the driveways",44.785730,-91.457970
+19FC826BB7,"Water St. and Fine Arts","Odd side of street",44.802080,-91.502530
+F5E9F59939,"Clairemont and University Dr.","Family Medicine Clinic entrance",44.792030,-91.504080
+FF12EDD463,"Clairemont Service Rd by Pizza Hut West","Even side of street at stop sign",44.794430,-91.522550
+E45942879E,"1st and Chippewa","Odd side of street",44.803060,-91.500990
+78212B4ED6,"1st and Hudson","Odd side of street",44.805940,-91.501000
+FFBBF533EB,"Truax and Jeffers","Even side of the street",44.832977,-91.524233
+F0FCEB5B78,"Truax and 14th","Even side of street across from Food Pantry",44.834279,-91.526902
+19BBA7875A,"14th and Truax","By Dove Healthcare-Even side of street",44.834310,-91.528570
+94DA865866,"14th and Nestle Ave","Even side of street at stop sign",44.831369,-91.528582
+0B797A7225,"14th and Folsom","Even side of street at stop sign",44.828872,-91.528613
+2BCC75D2C1,"Folsom and Amstad","Even side of street",44.828822,-91.530884
+E548EBF08B,"Folsom and Old Orchard","Even side of street",44.828796,-91.538057
+F54D92FF7A,"Robert Rd and Folsom St","Even side of street At Shelter",44.828250,-91.539410
+ADB954091F,"Robert St and Briarwood Ct","Even side of street",44.825500,-91.539394
+028D53E85E,"Robert Rd and W Moholt Dr","Even side of street at stop sign",44.823880,-91.539393
+A7A885D0CA,"Moholt and Delong Driveway","Odd side of street before the Delong driveway",44.823750,-91.535798
+EA8B363152,"Moholt and Haanstad","Odd side of street",44.823756,-91.534808
+8EF5E39EB1,"Moholt and Fourteenth","Odd side of street at the crosswalk",44.823760,-91.528640
+AC5EBCA6A4,"Cedar and 11th","Odd side of street",44.822003,-91.524604
+81A27BCBCE,"11th and Gilbert","Odd side of street",44.824806,-91.524532
+63097332DF,"Bolles and Seventh","Odd side of street",44.825851,-91.519906
+33881E2856,"Seventh and Fountain","Even side of street",44.823268,-91.519792
+C106842CA4,"Vine and Sixth","Odd side of street",44.818959,-91.518119
+7AAF000E91,"Vine and Fourth","Odd side of street",44.819050,-91.515000
+B4598F1A8C,"Platt and Bellinger","Odd side of street (before Bellinger mid-block)",44.818228,-91.511889
+2E9AB0D5CF,"Oxford and Madison","Kwik Trip - Even side of street",44.816230,-91.509500
+87CD117E7B,"Riverfront Terrace and Wisconsin","Near Cross Walk by Farmers Market",44.815240,-91.504400
+3B84503DE2,"Riverfront Terrace and Barstow","Odd side of street at stop sign",44.813740,-91.501360
+C82E6C0EE1,"Madison and Hobart","Even side of street at the cross walk",44.816360,-91.503040
+772D322F78,"Platt and 2nd St","Even Side of the street",44.818360,-91.512100
+9DF4BE4FB7,"Platt and Oxford","In front of BLDG 2 2000 Oxford Ave",44.818390,-91.510160
+F32016DCC5,"Oxford and Madison","Past the Driveway to Family Video",44.816240,-91.509330
+1BF351A8BB,"3rd and Walnut","Odd Side of the Street at crosswalk",44.821360,-91.513790
+2D0894F64B,"Truax and Folsom","Even Side of street at intersection",44.829034,-91.516102
+CC9099F936,"Truax and 7th","Even side of the street at the intersection",44.830757,-91.519655
+A4BDE81919,"3rd and Mead","Odd side of the street at the intersection",44.827293,-91.514231
+7B8FDBE458,"Riverfront Terrace and Barstow","By second Light Pole",44.813820,-91.501670
+E72FFF5BBB,"Riverfront Terrace and Wisconsin","crosswalk",44.815070,-91.504090
+B53E9B7E86,"Madison and Mappa","In front of Kwik Trip",44.815650,-91.510160
+C5B055BDA2,"Madison and Babcock","Even side of street in front of Senior Center",44.815598,-91.512317
+0AF141B808,"Cameron and Nicholas","Even side of street on corner",44.813680,-91.527420
+C1EAC5B9CA,"Florence and Cameron","Odd side of street after intersection",44.814540,-91.533490
+920989A5F1,"Florence and Necessity","Odd side of street at intersection",44.817040,-91.533480
+9AEE0225F2,"Florence and Vine","Odd side of street on corner",44.818950,-91.533500
+D35C28C260,"Vine and Frontage Rd","Odd side of street around the corner",44.819750,-91.542340
+60C14E225F,"N. Clairemont Frontage Rd and Frank St","Odd side of street on corner",44.822720,-91.543580
+71488C79A8,"Jodi Dr and Moholt Dr","Odd side of street in front of RCU",44.824420,-91.543040
+BDD7602515,"Mega West","Odd side of street in front of Family Dollar",44.826100,-91.542330
+65E57DBAD5,"Folsom and Mercantile","Even side of street by Culvers",44.828780,-91.546016
+8EBE3D95DC,"Dorret and W Moholt","Even side of street before the turn on W Moholt Dr",44.823990,-91.547540
+0F4B8DDAD2,"W Moholt Dr and Mercantle Dr","Hope Bargain Center Parking Lot",44.823780,-91.545890
+64366D8312,"Barstow and Marston","Odd side of street UWEC Sign at shelter",44.804780,-91.493580
+40B32C2774,"Lake and 2nd","(UWEC) Even side of street",44.807050,-91.503180
+1DC2A51DCA,"Water St. and Subway","Mid Block inbetween the driveways",44.802093,-91.506653
+CA6FD69034,"E. Hamilton and Patton","Odd side of street",44.785571,-91.493565
+B1DFE3AF9C,"Ball and CDC Parking Lot","Just crosswalk at the curb",44.816000,-91.485850
+1C7753B26A,"14th and Wilson Dr","Even side of the street",44.822520,-91.528590
+DC301BC54C,"Galloway and N Dewey","No Bus Sign - Express 10  only  - Odd side of st",44.814740,-91.499300
+C43B92367A,"Putnam and Wisconsin","No Bus Sign - Express 10 route - Odd side of street",44.815760,-91.495290
+F98DB5D7AC,"Madison and Bellevue","No Bus Sign - Exp 10 rte",44.817630,-91.492670
+455590F2B4,"Madison and McDonough","No bus sign - Express 10 route - Odd side of the street",44.817770,-91.489070
+6B4C2EE2DF,"Hester and South Middle School","Bus Stop Just past entrance to School Parking lot - Odd side of the street",44.780550,-91.473170
+9FCB69C807,"Golf and Cottonwood Dr","No Bus Sign - Express 11  - Even Side of the street",44.771220,-91.483310
+FC70CF8BE7,"Cummings and Lowes Creek Rd","No Bus Sign - Express 11  - Odd Side of the street",44.773130,-91.485910
+9193DC244E,"Cummings and Mitchell","No Bus Sign - Express 11  - Odd Side of the street",44.778370,-91.485830
+9A36CC1286,"Cummings and Mitcher","No Bus Sign - Express 11S  - Odd side of the street",44.781940,-91.485790
+751F52AD24,"Cummings and E. Hamilton","No Bus Sign - Express 11  - Odd Side of the street",44.785540,-91.485740
+C15CC27518,"Patton and Fillmore","No Bus Sign - Express 11  - Odd Side of the street",44.786470,-91.493330
+8E696A2B9E,"Patton and E. Grant","No Bus Sign - Express 11  - Odd Side of the street",44.788240,-91.493310
+A2F4B72A69,"E. MacArthur and Nimitz","No Bus Sign - Express 11  - Odd Side of the street",44.790050,-91.491550
+2B3E233904,"E. MacArthur and May","No Bus Sign - Express 11  - Odd Side of the street",44.791130,-91.489560
+29DAD8DA6A,"Keith and Goff","No Bus Sign - Express 11  - Odd Side of the street",44.799230,-91.473340
+9B81A02921,"14th and Vine","Even side of street at stop sign",44.818800,-91.528580
+323C1FE499,"Patton and E. Lexington","Past Driveway for gas station",44.792120,-91.494220
+D689E5F9E4,"Birch and Morning Side","",44.821360,-91.469520
+7EEFABD4BF,"E. Hamilton and Nimitz","SW Corner",44.785540,-91.488490
+204A55943A,"E. Hamilton and Trimble","SW Croner",44.785600,-91.481970
+88EAC1941C,"E. Hamilton and Rudolph","SW Corner",44.785650,-91.478320
+69C3877B1D,"Skeels and Blakely","NE Corner",44.789280,-91.465670
+EFCB9ED9DB,"Skeels and London Road","North Side between Mall Dr. and London Road",44.789290,-91.462730
+7B7B33DD7B,"Skeels and Blakely","",44.789130,-91.465830
+CA6333D53E,"Gateway and Southridge Ct SE","SE Corner",44.783830,-91.433870
+64E81F2A7E,"Margaret and Altoona","SE Corner",44.809010,-91.478480
+503A0F2AE5,"Starr and Hallie","SE Corner",44.857250,-91.478000
+13595C5437,"North Hastings Way at Dairy Queen","East Side",44.852448,-91.470116
+96F2E15E05,"Eldorado and W. MacArthur","NW Corner",44.788680,-91.517090
+C15131DFA9,"Seventh and Maple NW","",44.820030,-91.519740
+D2FB165951,"3rd and Vine","SE Corner",44.819140,-91.513430
+B9579A641F,"Spooner and Wilson","",44.807390,-91.452830
+62DA2EB921,"Galloway St & Putnam SW","",44.814743,-91.495584
+6A4F61A581,"Galloway at Walk Bridge","",44.814690,-91.485040
+FB40ABA7A1,"Galloway at YMCA Tennis Center","",44.817654,-91.475612
+442A7079EA,"Woodman's","",44.816410,-91.458970
+814FE29882,"Oakleaf at Crosswalk","",44.814491,-91.452116
+4DFF1A8137,"10 ST W at Golden Acres","",44.808140,-91.447867
+DC92C5A145,"10 St W and Spooner NW","",44.807219,-91.447889
+67808FC497,"10 St W and Bartlett NW","",44.803618,-91.447910
+24D44A7407,"Division and Lynn","",44.806330,-91.433730
+47E5ADBA75,"Barstow and Madison SE","",44.816250,-91.501720
+0EAB5580A8,"Germania and Division NE","",44.818530,-91.496590
+BDAE32D2F1,"Seymour Rd and Ravencrest Ave SW","",44.826490,-91.474970
