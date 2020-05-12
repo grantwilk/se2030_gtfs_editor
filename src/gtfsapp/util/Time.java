@@ -50,14 +50,14 @@ public class Time implements Comparable<Time> {
     public Time(int hours, int minutes, int seconds) {
 
         // validate that parameters fit 24 hour time w/ 24 hours of overrun
-        if (hours > 48 || hours < 0) {
-            throw new IllegalArgumentException("Invalid number of hours.");
+        if (hours > 99 || hours < 0) {
+            throw new IllegalArgumentException(String.format("Invalid number of hours \"%d\".", hours));
         }
         if (minutes > 59 || minutes < 0) {
-            throw new IllegalArgumentException("Invalid number of minutes.");
+            throw new IllegalArgumentException(String.format("Invalid number of minutes \"%d\".", minutes));
         }
         if (seconds > 59 || seconds < 0) {
-            throw new IllegalArgumentException("Invalid number of seconds.");
+            throw new IllegalArgumentException(String.format("Invalid number of seconds \"%d\".", seconds));
         }
 
         // set attributes
@@ -75,26 +75,38 @@ public class Time implements Comparable<Time> {
 
         try {
 
+            // the time string is in HH:MM:SS form
+            boolean formatHHMMSS = timeString.charAt(2) == ':' && timeString.charAt(5) == ':';
+
+            // the time string is in H:MM:SS form
+            boolean formatHMMSS = timeString.charAt(1) == ':' && timeString.charAt(4) == ':';
+
             // throw an exception if there are no colons
-            if (timeString.charAt(2) != ':' || timeString.charAt(5) != ':') {
-                throw new IllegalArgumentException("Invalidly formatted time string.");
+            if (!(formatHHMMSS || formatHMMSS)) {
+                throw new IllegalArgumentException(String.format("Invalidly formatted time string \"%s\".", timeString));
             }
 
             // parse hours minutes and seconds
-            hours = Integer.parseInt(timeString.substring(0, 2));
-            minutes = Integer.parseInt(timeString.substring(3, 5));
-            seconds = Integer.parseInt(timeString.substring(6, 8));
+            if (formatHHMMSS) {
+                hours = Integer.parseInt(timeString.substring(0, 2));
+                minutes = Integer.parseInt(timeString.substring(3, 5));
+                seconds = Integer.parseInt(timeString.substring(6, 8));
+            } else {
+                hours = Integer.parseInt(timeString.substring(0, 1));
+                minutes = Integer.parseInt(timeString.substring(2, 4));
+                seconds = Integer.parseInt(timeString.substring(5, 7));
+            }
 
             // throw an exception if there are an invalid number of hours, minutes, or seconds
-            if (hours > 48 || minutes > 59 || seconds > 59) {
-                throw new IllegalArgumentException("Invalidly formatted time string.");
+            if (hours > 99 || minutes > 59 || seconds > 59) {
+                throw new IllegalArgumentException(String.format("Invalidly formatted time string \"%s\".", timeString));
             }
 
         }
 
         // throw illegal argument exception if an exception occurred while parsing hours, minutes, and seconds
         catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalidly formatted time string.");
+            throw new IllegalArgumentException(String.format("Invalidly formatted time string \"%s\".", timeString));
         }
 
     }
@@ -115,14 +127,14 @@ public class Time implements Comparable<Time> {
         int seconds = (int) (millis / MILLIS_IN_SECOND);
 
         // validate that parameters fit 24 hour time w/ 24 hours of overrun
-        if (hours > 48 || hours < 0) {
-            throw new IllegalArgumentException("Invalid number of hours.");
+        if (hours > 99 || hours < 0) {
+            throw new IllegalArgumentException(String.format("Invalid number of hours \"%d\".", hours));
         }
         if (minutes > 59 || minutes < 0) {
-            throw new IllegalArgumentException("Invalid number of minutes.");
+            throw new IllegalArgumentException(String.format("Invalid number of minutes \"%d\".", minutes));
         }
         if (seconds > 59 || seconds < 0) {
-            throw new IllegalArgumentException("Invalid number of seconds.");
+            throw new IllegalArgumentException(String.format("Invalid number of seconds \"%d\".", seconds));
         }
 
         // set attributes
