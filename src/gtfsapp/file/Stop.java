@@ -30,6 +30,11 @@ public class Stop extends GTFSElement {
     private static final long NEXT_STOP_MAX_TIME = 1000000000;
 
     /**
+     * Initial value for the difference in time for the previous stop
+     */
+    private static final long PREV_STOP_MAX_TIME = -1000000000;
+
+    /**
      * The feed that the stop belongs to
      */
     private final Feed feed;
@@ -66,11 +71,30 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * @return
+     * Takes the current time in milliseconds, and checks if the first stopTime arrival is less than the current time
+     * and the last stopTime departure is greater than the current time
+     * @return True if the stop is active, false if not
      */
     public boolean isActive() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+
+        long currentTime = System.currentTimeMillis();
+        List<StopTime> stopTimeList = this.getContainingStopTimes();
+        long lowTime = stopTimeList.get(0).getArrivalTime().getMillis();
+        long highTime = stopTimeList.get(0).getDepartureTime().getMillis();
+        for(int i = 0; i < stopTimeList.size()-1; i++){
+            if(stopTimeList.get(i).getArrivalTime().getMillis() < lowTime) {
+                lowTime = stopTimeList.get(i).getArrivalTime().getMillis();
+            }
+            if(stopTimeList.get(i).getDepartureTime().getMillis() > highTime){
+                highTime = stopTimeList.get(i).getDepartureTime().getMillis();
+            }
+
+        }
+        if(lowTime < currentTime && currentTime < highTime){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -211,19 +235,37 @@ public class Stop extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of the stop times for this stop, and compares them to the current time
+     * It takes the closest value before the current time and returns that value
+     *
+     * @return the StopTime for the last elapsed stopTime
      */
     public StopTime getPreviousStopTime() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        Time currentTime = new Time(System.currentTimeMillis());
+        List<StopTime> stopTimeList = getContainingStopTimes();
+        StopTime prevStopTime = null;
+        long timeDiff = 0;
+        long lowDiff = PREV_STOP_MAX_TIME;
+        for(StopTime stopTime: stopTimeList){
+            Time nextArrival = (stopTime.getArrivalTime());
+            if(currentTime.compareTo(nextArrival) < 0){
+                timeDiff = nextArrival.getMillis() - currentTime.getMillis();
+            }
+            if(timeDiff > lowDiff){
+                prevStopTime = stopTime;
+            }
+        }
+        return prevStopTime;
     }
 
+
     /**
-     * @return
+     * Takes the previous stopTime and finds the trip associated with that stop time
+     *
+     * @return the previous trip to stop at this stop
      */
     public Trip getPreviousTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return getPreviousStopTime().getTrip();
     }
 
     /**

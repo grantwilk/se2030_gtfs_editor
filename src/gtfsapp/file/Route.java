@@ -25,6 +25,12 @@ public class Route extends GTFSElement {
      * The trips that occur within this route
      */
     private final HashMap<TripID, Trip> trips = new HashMap<>();
+
+    /**
+     * Initial value for the difference in time for the next stop
+     */
+    private static final long NEXT_STOP_MAX_TIME = 1000000000;
+
     /**
      * The type of transportation used on the route
      */
@@ -122,19 +128,30 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of the trips, then checks to see which trip is active.  This is going on the assumption that only
+     * one trip on a route can be active at a time.  I am not sure if this a right
+     *
+     * @return The currently active trip
      */
     public Trip getActiveTrip() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        //TODO- I do no know if there can be 2 active trips on the same route
+        Trip currentTrip = null;
+        List<Trip> trips = this.getTrips();
+        for(int i =0; i < trips.size()-1; i++){
+            if(trips.get(i).isActive()){
+                currentTrip = trips.get(i);
+            }
+        }
+        return currentTrip;
     }
 
     /**
-     * @return
+     * Find the average speed by taking the distance of the route over the duration
+     *
+     * @return the average speed of the route
      */
     public double getAvgSpeed() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        return (this.getDistance()/this.getDuration());
     }
 
     /**
@@ -146,19 +163,34 @@ public class Route extends GTFSElement {
     }
 
     /**
-     * @return
+     * Gets a list of all of the trips on the route, then applies the getDistance method and keeps a running
+     * total of all the distances of trips to find the distance the route travels.
+     *
+     * @return the distance the route covers
      */
     public double getDistance() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        // get a list of all stops in order of arrival times
+        List<Trip> trips = this.getTrips();
+        double distanceTraveled = 0;
+        for(int i =0; i < trips.size()-1; i++){
+            distanceTraveled += trips.get(i).getDistance();
+        }
+        return distanceTraveled;
     }
 
     /**
-     * @return
+     * Gets a list of all of the trips on the route, then applies the getDuration method and keeps a running
+     * total of the total time the route is active
+     *
+     * @return The time that the route is active
      */
     public double getDuration() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        List<Trip> trips = this.getTrips();
+        double duration = 0;
+        for(int i = 0; i< trips.size()-1; i++){
+            duration += trips.get(i).getDuration();
+        }
+        return duration;
     }
 
     /**
@@ -184,7 +216,6 @@ public class Route extends GTFSElement {
         // TODO - needs implementation eventually
         throw new UnsupportedOperationException();
     }
-
     /**
      * @return
      */
