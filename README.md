@@ -3,6 +3,13 @@
 An application designed to efficiently view and edit General Transit Feed Specification (GTFS) files.
 
 ## Progress Reports
+
+### Lab 8
+
+* Numerous bugs in parsing and validation were fixed
+* File validation and parsing were majorly optimized
+* A few temporary GUI optimizations were made to handle large files 
+
 ### Lab 7
 
 Our team selected option ALL: We implemented all of the features (option 1, option 2, and option 3) proposed in the lab, and then some after that.
