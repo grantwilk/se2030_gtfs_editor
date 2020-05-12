@@ -78,7 +78,7 @@ public class Stop extends GTFSElement {
     public boolean isActive() {
 
         long currentTime = System.currentTimeMillis();
-        ArrayList<StopTime> stopTimeList = (ArrayList)this.getContainingStopTimes();
+        List<StopTime> stopTimeList = this.getContainingStopTimes();
         long lowTime = stopTimeList.get(0).getArrivalTime().getMillis();
         long highTime = stopTimeList.get(0).getDepartureTime().getMillis();
         for(int i = 0; i < stopTimeList.size()-1; i++){

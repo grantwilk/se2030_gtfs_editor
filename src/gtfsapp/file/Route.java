@@ -136,7 +136,7 @@ public class Route extends GTFSElement {
     public Trip getActiveTrip() {
         //TODO- I do no know if there can be 2 active trips on the same route
         Trip currentTrip = null;
-        List<Trip> trips = new ArrayList<>(getTrips());
+        List<Trip> trips = this.getTrips();
         for(int i =0; i < trips.size()-1; i++){
             if(trips.get(i).isActive()){
                 currentTrip = trips.get(i);
@@ -170,7 +170,7 @@ public class Route extends GTFSElement {
      */
     public double getDistance() {
         // get a list of all stops in order of arrival times
-        List<Trip> trips = new ArrayList<>(getTrips());
+        List<Trip> trips = this.getTrips();
         double distanceTraveled = 0;
         for(int i =0; i < trips.size()-1; i++){
             distanceTraveled += trips.get(i).getDistance();
@@ -185,7 +185,7 @@ public class Route extends GTFSElement {
      * @return The time that the route is active
      */
     public double getDuration() {
-        List<Trip> trips = new ArrayList<>(getTrips());
+        List<Trip> trips = this.getTrips();
         double duration = 0;
         for(int i = 0; i< trips.size()-1; i++){
             duration += trips.get(i).getDuration();
