@@ -24,17 +24,17 @@ public class Time implements Comparable<Time> {
     /**
      * The number of milliseconds in a second
      */
-    private static final int MILLIS_IN_SECOND = 1000;
+    private static final long MILLIS_IN_SECOND = 1000;
 
     /**
      * The number of milliseconds in a minute
      */
-    private static final int MILLIS_IN_MINUTE = 60 * MILLIS_IN_SECOND;
+    private static final long MILLIS_IN_MINUTE = 60 * MILLIS_IN_SECOND;
 
     /**
      * The number of milliseconds in an hour
      */
-    private static final int MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
+    private static final long MILLIS_IN_HOUR = 60 * MILLIS_IN_MINUTE;
 
     /**
      * Regular expression for a time stamp in HH:MM:SS form
@@ -49,8 +49,8 @@ public class Time implements Comparable<Time> {
      */
     public Time(int hours, int minutes, int seconds) {
 
-        // validate that parameters fit 24 hour time w/ 24 hours of overrun
-        if (hours > 99 || hours < 0) {
+        // validate that there are a legal number of hours minutes and seconds
+        if (hours < 0) {
             throw new IllegalArgumentException(String.format("Invalid number of hours \"%d\".", hours));
         }
         if (minutes > 59 || minutes < 0) {
@@ -97,9 +97,15 @@ public class Time implements Comparable<Time> {
                 seconds = Integer.parseInt(timeString.substring(5, 7));
             }
 
-            // throw an exception if there are an invalid number of hours, minutes, or seconds
-            if (hours > 99 || minutes > 59 || seconds > 59) {
-                throw new IllegalArgumentException(String.format("Invalidly formatted time string \"%s\".", timeString));
+            // validate that there are a legal number of hours minutes and seconds
+            if (hours < 0) {
+                throw new IllegalArgumentException(String.format("Invalid number of hours \"%d\".", hours));
+            }
+            if (minutes > 59 || minutes < 0) {
+                throw new IllegalArgumentException(String.format("Invalid number of minutes \"%d\".", minutes));
+            }
+            if (seconds > 59 || seconds < 0) {
+                throw new IllegalArgumentException(String.format("Invalid number of seconds \"%d\".", seconds));
             }
 
         }
@@ -118,16 +124,16 @@ public class Time implements Comparable<Time> {
     public Time(long millis) {
 
         // convert millis to hours, minutes, and seconds
-        int hours = (int) (millis / MILLIS_IN_HOUR);
-        millis -= hours * MILLIS_IN_HOUR;
+        hours = (int) (millis / MILLIS_IN_HOUR);
+        millis -= (long) hours * MILLIS_IN_HOUR;
 
-        int minutes = (int) (millis / MILLIS_IN_MINUTE);
-        millis -= minutes * MILLIS_IN_MINUTE;
+        minutes = (int) (millis / MILLIS_IN_MINUTE);
+        millis -= (long) minutes * MILLIS_IN_MINUTE;
 
-        int seconds = (int) (millis / MILLIS_IN_SECOND);
+        seconds = (int) (millis / MILLIS_IN_SECOND);
 
-        // validate that parameters fit 24 hour time w/ 24 hours of overrun
-        if (hours > 99 || hours < 0) {
+        // validate that there are a legal number of hours minutes and seconds
+        if (hours < 0) {
             throw new IllegalArgumentException(String.format("Invalid number of hours \"%d\".", hours));
         }
         if (minutes > 59 || minutes < 0) {
@@ -136,11 +142,6 @@ public class Time implements Comparable<Time> {
         if (seconds > 59 || seconds < 0) {
             throw new IllegalArgumentException(String.format("Invalid number of seconds \"%d\".", seconds));
         }
-
-        // set attributes
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
 
     }
 
@@ -204,7 +205,7 @@ public class Time implements Comparable<Time> {
      * Gets the number of milliseconds in an hour
      * @return the number of milliseconds in an hour
      */
-    public static int getMillisInHour() {
+    public static long getMillisInHour() {
         return MILLIS_IN_HOUR;
     }
 
@@ -212,7 +213,7 @@ public class Time implements Comparable<Time> {
      * Gets the number of milliseconds in a minute
      * @return the number of milliseconds in a minute
      */
-    public static int getMillisInMinute() {
+    public static long getMillisInMinute() {
         return MILLIS_IN_MINUTE;
     }
 
@@ -220,7 +221,7 @@ public class Time implements Comparable<Time> {
      * Gets the number of milliseconds in a second
      * @return the number of milliseconds in a second
      */
-    public static int getMillisInSecond() {
+    public static long getMillisInSecond() {
         return MILLIS_IN_SECOND;
     }
 
