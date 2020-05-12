@@ -4,6 +4,7 @@ import gtfsapp.id.RouteID;
 import gtfsapp.util.Colors;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
+import jdk.internal.cmm.SystemResourcePressureImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -118,10 +119,14 @@ public class GTFSFile {
         System.out.println("Stop time parsed.");
 
         // add our GTFS elements to our feed
-        feed.addAllRoutes(new ArrayList<>(routes.values()));
-        feed.addAllTrips(new ArrayList<>(trips.values()));
-        feed.addAllStopTimes(new ArrayList<>(stopTimes.values()));
-        feed.addAllStops(new ArrayList<>(stops.values()));
+        feed.addAllRoutes(routes.values());
+        System.out.println("Routes added.");
+        feed.addAllTrips(trips.values());
+        System.out.println("Trips added.");
+        feed.addAllStopTimes(stopTimes.values());
+        System.out.println("Stop times added.");
+        feed.addAllStops(stops.values());
+        System.out.println("Stops added.");
 
     }
 
@@ -585,7 +590,23 @@ public class GTFSFile {
      * @return a list of string tokens
      */
     private static List<String> tokenizeLine(String line) {
-        return Arrays.asList(line.split(",", -1));
+        List<String> tokens = Arrays.asList(line.split(",", -1));
+        ArrayList<String> returnList = new ArrayList<>();
+        for(int i = 0; i < tokens.size(); i++) {
+            if(tokens.get(i).indexOf('\"') == 0 && tokens.get(i).lastIndexOf('\"') == 0) {
+                String concatenatedString = tokens.get(i);
+                int j = i;
+                while (tokens.get(j).indexOf('\"') != (tokens.get(j).length() - 1)) {
+                    j++;
+                    concatenatedString = concatenatedString + "," + tokens.get(j);
+                }
+                returnList.add(concatenatedString);
+                i = j;
+            } else {
+                returnList.add(tokens.get(i));
+            }
+        }
+        return returnList;
     }
 
     /**
@@ -595,58 +616,39 @@ public class GTFSFile {
      * @return the list of trips
      */
     private HashMap<String, Trip> parseTrips(HashMap<String, Route> routes, List<String> lines) {
-        // Get the format of the attributes for the file
+
+        // get the format of the attributes for the file
         List<String> format = tokenizeLine(lines.get(0));
 
-        // Create hash map of trips to be returned
+        // remove the format line
+        lines.remove(0);
+
+        // create hash map of trips to be returned
         HashMap<String, Trip> trips = new HashMap<>();
 
-        for(int i = 1; i < lines.size(); i++) {
+        // iterate through each line in the file
+        for (String line : lines) {
 
-            // Create new hash map to create a trip from this line
-            HashMap<String, String> tripFields = new HashMap<>();
+            // tokenize the line
+            List<String> tokens = tokenizeLine(line);
 
-            // Get line in file
-            List<String> line = tokenizeLine(lines.get(i));
+            // get trip attributes
+            String tripID = tokens.get(format.indexOf("trip_id")).trim();
+            String routeID = tokens.get(format.indexOf("route_id")).trim();
+            String headSign = tokens.get(format.indexOf("trip_headsign")).trim();
 
-            // skips empty line
-            while(lines.get(i).equals("")){
-                i++;
-                line = tokenizeLine(lines.get(i));
-            }
+            // create a new trip
+            Trip trip = new Trip(feed, tripID);
 
-            // Add each attribute in line to hash map
-            for(int j = 0; j < line.size(); j++) {
-                tripFields.put(format.get(j),line.get(j));
-            }
+            // add trip to its route
+            routes.get(routeID).addTrip(trip);
 
-            // Create new trip for this line
-            Trip trip;
-            String tripID;
-            tripID = tripFields.get("trip_id");
-            trip = new Trip(feed, tripID);
+            // set trip headsign
+            trip.setHeadSign(headSign);
 
-
-            // Add trip to its route
-            if(tripFields.containsKey("route_id")) {
-                String routeID = tripFields.get("route_id");
-                Route route;
-                if (!routeID.isEmpty()) {
-                    route = routes.get(routeID);
-                    route.addTrip(trip);
-                }
-            }
-
-            // Set trip headsign
-            if(tripFields.containsKey("trip_headsign")) {
-                String headSign = tripFields.get("trip_headsign");
-                if (!headSign.isEmpty()) {
-                    trip.setHeadSign(headSign);
-                }
-            }
-
-            // Add trip to return hash map
+            // add trip to return hash map
             trips.put(tripID,trip);
+
         }
 
         return trips;
@@ -659,8 +661,11 @@ public class GTFSFile {
      * @return the parsed routes as a list
      */
     private HashMap<String, Route> parseRoutes(List<String> lines) {
+
         // get format of the file
         List<String> format = tokenizeLine(lines.get(0));
+
+        // remove the format line
         lines.remove(0);
 
         // create a new list of routes
@@ -720,48 +725,44 @@ public class GTFSFile {
     }
 
     private HashMap<String, StopTime> parseStopTimes(HashMap<String, Trip> trips, HashMap<String, Stop> stops, List<String> lines) {
+
         // get format of the file
         List<String> format = tokenizeLine(lines.get(0));
+
+        // remove the format line
         lines.remove(0);
 
         // create a new list of stop times
         HashMap<String, StopTime> stopTimes = new HashMap<>();
 
-        for(int i = 0; i < lines.size(); i++) {
+        // iterate through each line in the file
+        for (String line : lines) {
 
-            // create a new hash map for the attributes of the route for this line
-            HashMap<String, String> stopTimeFields = new HashMap<>();
+            // tokenize the line
+            List<String> tokens = tokenizeLine(line);
 
-            // get next line from file
-            List<String> line = tokenizeLine(lines.get(i));
+            // get the attributes of the stop
+            String stopID = tokens.get(format.indexOf("stop_id")).trim();
+            String tripID = tokens.get(format.indexOf("trip_id")).trim();
+            String arrivalTime = tokens.get(format.indexOf("arrival_time")).trim();
+            String departureTime = tokens.get(format.indexOf("departure_time")).trim();
+            String headSign = tokens.get(format.indexOf("stop_headsign")).trim();
 
-            // skips empty line
-            while(lines.get(i).equals("")){
-                i++;
-                line = tokenizeLine(lines.get(i));
-            }
-
-            // put all route attributes into hash map
-            for(int j = 0; j < line.size(); j++) {
-                stopTimeFields.put(format.get(j),line.get(j));
-            }
-
-            // Get required attributes for stop time
-            String stopID = stopTimeFields.get("stop_id");
-            Time arrivalTime = new Time(stopTimeFields.get("arrival_time"));
-            Time departureTime = new Time(stopTimeFields.get("departure_time"));
+            // get the stop time's stop object
             Stop stop = stops.get(stopID);
 
+            // create times from arrival time and departure time
+            Time arrival = new Time(arrivalTime);
+            Time departure = new Time(departureTime);
+
             // create a new stop time
-            StopTime stopTime = new StopTime(feed, stop, arrivalTime, departureTime);
+            StopTime stopTime = new StopTime(feed, stop, arrival, departure);
 
-            // Add stop time to its trip
-            Trip trip = trips.get(stopTimeFields.get("trip_id"));
-            trip.addStopTime(stopTime);
+            // add stop time to its trip
+            trips.get(tripID).addStopTime(stopTime);
 
-            // set headsign
-            String headsign = stopTimeFields.get("stop_headsign");
-            stopTime.setHeadSign(headsign);
+            // set stop time headsign
+            stopTime.setHeadSign(headSign);
 
             // get stop time id
             String stopTimeID = stopTime.getID().getIDString();

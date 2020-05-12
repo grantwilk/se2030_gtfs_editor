@@ -192,11 +192,20 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
     }
 
     /**
-     * @return
+     * Checks if the current time of the system is between the arrival and departure time for the stop
+     * to see if the stopTime is active
+     *
+     * @return true if the stopTime is active, otherwise false
      */
     public boolean isActive() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        long currentTime = System.currentTimeMillis();
+        long arrivalTime = this.getArrivalTime().getMillis();
+        long departTime = this.getDepartureTime().getMillis();
+        if(currentTime > arrivalTime && currentTime < departTime){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -214,9 +223,7 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
      */
     @Override
     public String getTitle() {
-        String tripID = getTrip().getID().getIDString();
-        String stopID = getStop().getID().getIDString();
-        return String.format("%s at %s", tripID, stopID);
+        return stop.getTitle();
     }
 
     /**
@@ -225,7 +232,7 @@ public class StopTime extends GTFSElement implements Comparable<GTFSElement> {
      */
     @Override
     public String getSubtitle() {
-        return String.format("Arrives at %s | Departs at %s", arrivalTime.toString(), departureTime.toString());
+        return String.format("Arrives %s - Departs %s", arrivalTime.toString(), departureTime.toString());
     }
 
     /**

@@ -776,14 +776,14 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      */
     public void updateAssociationsTab(List<? extends GTFSElement> elements, Pane container) throws IOException {
 
-        // get a sorted list of elements
-        List<GTFSElement> sortedElements = elements.stream().sorted().collect(Collectors.toList());
-
         // clear all of the children from the tab
         container.getChildren().clear();
 
+        // initialize tile count
+        int tileCount = 0;
+
         // convert each element to a tile and add it to the tab
-        for (GTFSElement element : sortedElements) {
+        for (GTFSElement element : elements) {
 
             // load associations tile FXML
             FXMLLoader loader = new FXMLLoader(
@@ -802,6 +802,10 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
             // add the tile to the GUI
             container.getChildren().addAll(root);
+
+            // TODO - remove temporary tile limit
+            if (++tileCount > 100) break;
+
         }
 
     }

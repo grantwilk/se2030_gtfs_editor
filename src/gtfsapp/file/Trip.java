@@ -400,7 +400,12 @@ public class Trip extends GTFSElement {
      */
     @Override
     public String getTitle() {
-        return getID().getIDString();
+        if (headSign != null && !headSign.equals("")) {
+            return getHeadSign();
+        } else {
+            return "Unnamed Trip";
+        }
+
     }
 
     /**
@@ -410,12 +415,9 @@ public class Trip extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        if (headSign != null && !headSign.equals("")) {
-            return getHeadSign();
-        } else {
-            return "Unnamed Trip";
-        }
+        return "Trip " + getID().getIDString();
     }
+
 
     /**
      * Gets the trip's attributes to be displayed in the GUI
