@@ -220,7 +220,7 @@ public class GTFSFile {
             List<String> currentLine = tokenizeLine(lines.get(i));
 
             //skips missing line
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 currentLine = tokenizeLine(lines.get(i));
             }
@@ -296,7 +296,7 @@ public class GTFSFile {
             List<String> currentLine = tokenizeLine(lines.get(i));
 
             //skips missing line
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 currentLine = tokenizeLine(lines.get(i));
             }
@@ -382,7 +382,7 @@ public class GTFSFile {
             List<String> line = tokenizeLine(lines.get(i));
 
             //skips missing line
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 line = tokenizeLine(lines.get(i));
             }
@@ -530,7 +530,7 @@ public class GTFSFile {
             List<String> line = tokenizeLine(lines.get(i));
 
             //skips missing line
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 line = tokenizeLine(lines.get(i));
             }
@@ -610,7 +610,7 @@ public class GTFSFile {
             List<String> line = tokenizeLine(lines.get(i));
 
             // skips empty line
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 line = tokenizeLine(lines.get(i));
             }
@@ -672,7 +672,7 @@ public class GTFSFile {
 
             // get next line from file
             List<String> line = tokenizeLine(lines.get(i));
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 line = tokenizeLine(lines.get(i));
             }
@@ -736,7 +736,7 @@ public class GTFSFile {
             List<String> line = tokenizeLine(lines.get(i));
 
             // skips empty line
-            if(lines.get(i).equals("")){
+            while(lines.get(i).equals("")){
                 i++;
                 line = tokenizeLine(lines.get(i));
             }
