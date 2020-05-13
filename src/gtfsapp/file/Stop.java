@@ -358,7 +358,7 @@ public class Stop extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "Stop " + getID().getIDString();
+        return String.format("StopID %s", getID().getIDString());
     }
 
     /**
