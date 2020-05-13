@@ -89,8 +89,8 @@ public class GTFSEditRouteDialogController extends GTFSEditDialogController {
     @Override
     public void applyOne(GTFSElement element) {
 
-        // get the route
-        Route route = (Route) getElement();
+        // convert the element to a route
+        Route route = (Route) element;
 
         // set attributes of the route equal to the edit field's values
         route.setRouteType(routeTypeChoiceBox.getValue());
