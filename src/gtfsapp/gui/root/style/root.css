@@ -249,3 +249,25 @@
     -fx-background-color: #4C8BF5;
     -fx-text-fill: white;
 }
+
+/* Color Picker */
+.color-picker {
+    -fx-text-fill: #404040;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-background-insets: 1;
+    -fx-border-color: #D0D0D0;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-padding: 2 2 0 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 1, 2);
+}
+
+.color-picker .context-menu {
+    -fx-background-color: red;
+}
+
+.color-picker .arrow, .combo-box .arrow-button{
+    -fx-background-color: #909090;
+}
