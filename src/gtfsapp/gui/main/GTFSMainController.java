@@ -180,6 +180,18 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
     private Button selectedElementEditButton;
 
     /**
+     * The container for the deselect button
+     */
+    @FXML
+    private HBox selectedElementDeselectButtonContainer;
+
+    /**
+     * The button for deselecting the currently selected element
+     */
+    @FXML
+    private Button selectedElementDeselectButton;
+
+    /**
      * The root of the associations panel on the info panel
      */
     @FXML
@@ -614,6 +626,11 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
             // hide the edit button
             selectedElementEditButton.setVisible(false);
 
+            // hide the deselect button
+            selectedElementDeselectButton.setVisible(false);
+            selectedElementDeselectButtonContainer.setVisible(false);
+            selectedElementDeselectButtonContainer.setManaged(false);
+
         }
 
         // if there is a selected element
@@ -642,6 +659,11 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
 
             // show the edit button
             selectedElementEditButton.setVisible(true);
+
+            // show the deselect button
+            selectedElementDeselectButton.setVisible(true);
+            selectedElementDeselectButtonContainer.setVisible(true);
+            selectedElementDeselectButtonContainer.setManaged(true);
 
         }
 

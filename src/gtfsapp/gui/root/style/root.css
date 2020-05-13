@@ -46,9 +46,12 @@
 }
 
 .tab-pane .tab-label {
+    -fx-padding: 1 0 0 0;
     -fx-text-fill: #404040;
     -fx-text-align: center;
-    -fx-pref-width: 60;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-pref-width: 65;
     -fx-pref-height: 50;
 }
 

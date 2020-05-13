@@ -10,6 +10,7 @@
     -fx-padding: 20;
     -fx-border-width: 0 0 1 0;
     -fx-border-style: solid;
+    -fx-spacing: 10;
     -fx-border-color: #D0D0D0;
 }
 
