@@ -21,7 +21,7 @@
 
 <HBox fx:id="mainPanel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gtfsapp.gui.main.GTFSMainController">
    <children>
-      <VBox fx:id="infoPanel" prefWidth="400.0" HBox.hgrow="NEVER">
+      <VBox fx:id="infoPanel" prefWidth="450.0" HBox.hgrow="NEVER">
          <children>
             <HBox fx:id="fileHeaderPanel" alignment="CENTER_LEFT" styleClass="file-header" stylesheets="@../style/file-header.css">
                <children>

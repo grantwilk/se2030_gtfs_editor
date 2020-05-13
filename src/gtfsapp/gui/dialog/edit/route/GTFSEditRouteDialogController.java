@@ -1,14 +1,13 @@
 package gtfsapp.gui.dialog.edit.route;
 
 import gtfsapp.file.GTFSElement;
-import gtfsapp.file.GTFSElementType;
 import gtfsapp.file.Route;
 import gtfsapp.file.RouteType;
 import gtfsapp.gui.dialog.edit.GTFSEditDialogController;
-import gtfsapp.util.Colors;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class GTFSEditRouteDialogController extends GTFSEditDialogController {
      * The text field for the route's description
      */
     @FXML
-    TextField descriptionField;
+    TextArea descriptionField;
 
     /**
      * The text field for the route's url
