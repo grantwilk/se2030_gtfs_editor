@@ -57,19 +57,14 @@ public class Stop extends GTFSElement {
     private String url;
 
     /**
-     *
+     * HashMap of associated trips
      */
     private HashMap<GTFSID,Trip> associatedTrips;
 
     /**
-     *
+     * HashMap of associated stop times
      */
     private HashMap<GTFSID,StopTime> associatedStopTimes;
-
-    /**
-     *
-     */
-    private HashMap<GTFSID,Route> associatedRoutes;
 
     /**
      * Constructor for the stop object with an id and feed as parameters
@@ -82,7 +77,6 @@ public class Stop extends GTFSElement {
         this.feed = feed;
         associatedTrips = new HashMap<>();
         associatedStopTimes = new HashMap<>();
-        associatedRoutes = new HashMap<>();
     }
 
     /**
@@ -380,15 +374,5 @@ public class Stop extends GTFSElement {
     public void addAssociatedStopTime(GTFSID stopTimeID,StopTime stopTime) {
         associatedStopTimes.put(stopTimeID,stopTime);
     }
-
-    /**
-     * Add route to HashMap of assoicated routes
-     * @param routeID Key value for HashMap
-     * @param route Route value to add
-     */
-    public void addAssociatedRoute(GTFSID routeID,Route route) {
-        associatedRoutes.put(routeID,route);
-    }
-
 }
 
