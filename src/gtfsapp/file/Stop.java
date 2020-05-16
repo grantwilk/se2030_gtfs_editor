@@ -1,9 +1,6 @@
 package gtfsapp.file;
 
-import gtfsapp.id.RouteID;
-import gtfsapp.id.StopID;
-import gtfsapp.id.StopTimeID;
-import gtfsapp.id.TripID;
+import gtfsapp.id.*;
 import gtfsapp.util.Colors;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
@@ -60,6 +57,21 @@ public class Stop extends GTFSElement {
     private String url;
 
     /**
+     *
+     */
+    private HashMap<GTFSID,Trip> associatedTrips;
+
+    /**
+     *
+     */
+    private HashMap<GTFSID,StopTime> associatedStopTimes;
+
+    /**
+     *
+     */
+    private HashMap<GTFSID,Route> associatedRoutes;
+
+    /**
      * Constructor for the stop object with an id and feed as parameters
      *
      * @param idString for the stop
@@ -68,6 +80,9 @@ public class Stop extends GTFSElement {
     public Stop(Feed feed, String idString) {
         super(new StopID(idString));
         this.feed = feed;
+        associatedTrips = new HashMap<>();
+        associatedStopTimes = new HashMap<>();
+        associatedRoutes = new HashMap<>();
     }
 
     /**
@@ -135,10 +150,8 @@ public class Stop extends GTFSElement {
      * Gets a list of the IDs of all stop times that contain this stop
      * @return a list of the IDs of all stop times that contain this stop
      */
-    public List<StopTimeID> getContainingStopTimeIDs() {
-        return getContainingStopTimes().stream()
-                .map(e -> (StopTimeID) e.getID())
-                .collect(Collectors.toList());
+    public List<GTFSID> getContainingStopTimeIDs() {
+        return new ArrayList<>(associatedStopTimes.keySet());
     }
 
     /**
@@ -146,23 +159,7 @@ public class Stop extends GTFSElement {
      * @return a list of all stop times that contain this stop
      */
     public List<StopTime> getContainingStopTimes() {
-
-        List<StopTime> containingStopTimes = new ArrayList<>();
-
-        // for each stop time
-        for (StopTime stopTime : feed.getStopTimes()) {
-
-            // if the trip contains our stop ID
-            if (stopTime.getStop().getID().equals(getID())) {
-
-                // add the stop time to our set of containing stop times
-                containingStopTimes.add(stopTime);
-
-            }
-
-        }
-
-        return containingStopTimes;
+        return new ArrayList<>(associatedStopTimes.values());
 
     }
 
@@ -171,10 +168,8 @@ public class Stop extends GTFSElement {
      *
      * @return a set of the IDs of all trips that contain this stop
      */
-    public List<TripID> getContainingTripIDs() {
-        return getContainingTrips().stream()
-                .map(e -> (TripID) e.getID())
-                .collect(Collectors.toList());
+    public List<GTFSID> getContainingTripIDs() {
+        return new ArrayList<>(associatedTrips.keySet());
     }
 
     /**
@@ -183,22 +178,7 @@ public class Stop extends GTFSElement {
      * @return a set of all trips that contain this stop
      */
     public List<Trip> getContainingTrips() {
-
-        List<Trip> containingTrips = new ArrayList<>();
-
-        // for each trip in the feed
-        for (Trip trip : feed.getTrips()) {
-
-            // check to see if the trips stop times and our containing stop times have anything in common
-            if (!Collections.disjoint(trip.getStopTimes(), getContainingStopTimes())) {
-
-                // if they do, add the trip to our set of containing trips
-                containingTrips.add(trip);
-
-            }
-        }
-
-        return containingTrips;
+        return new ArrayList<>(associatedTrips.values());
     }
 
     /**
@@ -381,6 +361,33 @@ public class Stop extends GTFSElement {
     @Override
     public Color getColor() {
         return DEFAULT_COLOR;
+    }
+
+    /**
+     * Add trip to HashMap of assoicated trips
+     * @param tripID Key value for HashMap
+     * @param trip Trip value to add
+     */
+    public void addAssociatedTrip(GTFSID tripID, Trip trip) {
+        associatedTrips.put(tripID,trip);
+    }
+
+    /**
+     * Add stop time to HashMap of assoicated stop time
+     * @param stopTimeID Key value for HashMap
+     * @param stopTime Stop time value to add
+     */
+    public void addAssociatedStopTime(GTFSID stopTimeID,StopTime stopTime) {
+        associatedStopTimes.put(stopTimeID,stopTime);
+    }
+
+    /**
+     * Add route to HashMap of assoicated routes
+     * @param routeID Key value for HashMap
+     * @param route Route value to add
+     */
+    public void addAssociatedRoute(GTFSID routeID,Route route) {
+        associatedRoutes.put(routeID,route);
     }
 
 }
