@@ -5,6 +5,11 @@
   * brief:      contains styling for root JavaFX components
  */
 
+/* Font */
+.root {
+    -fx-font-size: 14px;
+}
+
 /* Tab Pane */
 .tab-down-button {
     -fx-padding: 0;

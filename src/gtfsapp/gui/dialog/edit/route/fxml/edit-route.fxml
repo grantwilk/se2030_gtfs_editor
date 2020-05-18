@@ -62,7 +62,6 @@
     <stylesheets>
         <URL value="@../../trip/style/edit-trip.css" />
         <URL value="@../../style/edit-dialog.css" />
-        <URL value="@../../../../root/style/root.css" />
-        <URL value="@../../../../root/style/font.css" />
+        <URL value="@../../../../root/root.css" />
     </stylesheets>
 </VBox>

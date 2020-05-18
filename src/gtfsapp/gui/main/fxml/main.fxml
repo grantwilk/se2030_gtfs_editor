@@ -151,7 +151,6 @@
       <Pane minHeight="500.0" minWidth="500.0" style="-fx-background-color: #404040;" HBox.hgrow="ALWAYS" />
    </children>
    <stylesheets>
-      <URL value="@../../root/style/root.css" />
-      <URL value="@../../root/style/font.css" />
+      <URL value="@../../root/root.css" />
    </stylesheets>
 </HBox>

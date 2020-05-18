@@ -28,6 +28,6 @@
    </children>
    <stylesheets>
       <URL value="@../style/select-dialog.css" />
-      <URL value="@../../../root/style/root.css" />
+      <URL value="@../../../root/root.css" />
    </stylesheets>
 </VBox>
