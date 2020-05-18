@@ -42,6 +42,6 @@
    </children>
    <stylesheets>
       <URL value="@../style/error-dialog.css" />
-      <URL value="@../../../root/style/root.css" />
+      <URL value="@../../../root/root.css" />
    </stylesheets>
 </VBox>

@@ -33,12 +33,39 @@ public abstract class GTFSElement implements Comparable<GTFSElement> {
         return id;
     }
 
+
+
     /**
-     * Converts the GTFS element to a string
+     * Gets the element's title to be displayed in the GUI
+     * @return the element's title
+     */
+    public abstract String getTitle();
+
+    /**
+     * Gets the element's subtitle to be displayed in the GUI
+     * @return the element's subtitle
+     */
+    public abstract String getSubtitle();
+
+    /**
+     * Gets the element's attributes to be displayed in the GUI
+     * @return a Map<Attribute Title, Attribute Value> of the element's attributes
+     */
+    public abstract Map<String, String> getAttributes();
+
+    /**
+     * Gets the element's colors to be displayed in the GUI
+     * @return the element's color
+     */
+    public abstract Color getColor();
+
+    /**
+     * Converts a GTFS element to a string
+     * @return the GTFS element as a string
      */
     @Override
     public String toString() {
-        return getTitle().toUpperCase();
+        return String.format("%s: %s", getID().getIDString(), getTitle());
     }
 
     /**
@@ -65,29 +92,5 @@ public abstract class GTFSElement implements Comparable<GTFSElement> {
     public int compareTo(GTFSElement element) {
         return this.getID().compareTo(element.getID());
     }
-
-    /**
-     * Gets the element's title to be displayed in the GUI
-     * @return the element's title
-     */
-    public abstract String getTitle();
-
-    /**
-     * Gets the element's subtitle to be displayed in the GUI
-     * @return the element's subtitle
-     */
-    public abstract String getSubtitle();
-
-    /**
-     * Gets the element's attributes to be displayed in the GUI
-     * @return a Map<Attribute Title, Attribute Value> of the element's attributes
-     */
-    public abstract Map<String, String> getAttributes();
-
-    /**
-     * Gets the element's colors to be displayed in the GUI
-     * @return the element's color
-     */
-    public abstract Color getColor();
 
 }

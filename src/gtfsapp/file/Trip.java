@@ -415,7 +415,7 @@ public class Trip extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "Trip " + getID().getIDString();
+        return String.format("TripID %s", getID().getIDString());
     }
 
 

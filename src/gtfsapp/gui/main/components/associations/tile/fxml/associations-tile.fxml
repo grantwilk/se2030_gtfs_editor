@@ -27,7 +27,6 @@
    </children>
    <stylesheets>
       <URL value="@../style/associations-tile.css" />
-      <URL value="@../../../../../root/style/font.css" />
-      <URL value="@../../../../../root/style/root.css" />
+      <URL value="@../../../../../root/root.css" />
    </stylesheets>
 </GridPane>

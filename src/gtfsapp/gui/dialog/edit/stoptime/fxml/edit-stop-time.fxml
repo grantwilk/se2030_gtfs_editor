@@ -72,7 +72,6 @@
    <stylesheets>
       <URL value="@../style/edit-stop-time.css" />
       <URL value="@../../style/edit-dialog.css" />
-      <URL value="@../../../../root/style/root.css" />
-      <URL value="@../../../../root/style/font.css" />
+      <URL value="@../../../../root/root.css" />
    </stylesheets>
 </VBox>

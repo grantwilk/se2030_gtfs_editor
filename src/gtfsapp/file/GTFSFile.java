@@ -4,7 +4,6 @@ import gtfsapp.id.RouteID;
 import gtfsapp.util.Colors;
 import gtfsapp.util.Location;
 import gtfsapp.util.Time;
-import jdk.internal.cmm.SystemResourcePressureImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -621,11 +620,14 @@ public class GTFSFile {
             String routeID = tokens.get(format.indexOf("route_id")).trim();
             String headSign = tokens.get(format.indexOf("trip_headsign")).trim();
 
+            // get route from route id
+            Route route = routes.get(routeID);
+
             // create a new trip
             Trip trip = new Trip(feed, tripID);
 
             // add trip to its route
-            routes.get(routeID).addTrip(trip);
+            route.addTrip(trip);
 
             // set trip headsign
             trip.setHeadSign(headSign);
@@ -735,6 +737,9 @@ public class GTFSFile {
             // get the stop time's stop object
             Stop stop = stops.get(stopID);
 
+            // get trip associated with stop time
+            Trip trip = trips.get(tripID);
+
             // create times from arrival time and departure time
             Time arrival = new Time(arrivalTime);
             Time departure = new Time(departureTime);
@@ -743,7 +748,7 @@ public class GTFSFile {
             StopTime stopTime = new StopTime(feed, stop, arrival, departure);
 
             // add stop time to its trip
-            trips.get(tripID).addStopTime(stopTime);
+            trip.addStopTime(stopTime);
 
             // set stop time headsign
             stopTime.setHeadSign(headSign);
@@ -754,6 +759,9 @@ public class GTFSFile {
             // add stop time to return hash map
             stopTimes.put(stopTimeID, stopTime);
 
+            // add associated GTFS elements to stop
+            stop.addAssociatedTrip(trip.getID(),trip);
+            stop.addAssociatedStopTime(stopTime.getID(),stopTime);
         }
 
         return stopTimes;

@@ -525,7 +525,7 @@ public class Route extends GTFSElement {
      */
     @Override
     public String getSubtitle() {
-        return "Route " + getID().getIDString();
+        return String.format("RouteID %s", getID().getIDString());
     }
 
     /**
