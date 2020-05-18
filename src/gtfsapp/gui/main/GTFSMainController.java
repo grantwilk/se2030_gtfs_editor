@@ -337,8 +337,11 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
      * Invokes the systems' file chooser and saves a GTFS file to the computer's file system
      */
     public void saveFile() {
-        // TODO - needs implementation eventually
-        throw new UnsupportedOperationException();
+        invokeErrorDialog(
+                GTFSErrorType.WARNING,
+                "Unsupported Operation",
+                "Exporting GTFS files has not supported yet."
+        );
     }
 
     /**
