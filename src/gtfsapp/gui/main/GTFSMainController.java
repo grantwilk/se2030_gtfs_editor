@@ -564,7 +564,7 @@ public class GTFSMainController extends gtfsapp.gui.GTFSController {
                 String searchID = searchField.getText().toUpperCase();
 
                 // if the ID string contains our search ID, set it as the selected element
-                if (idString.contains(searchID)) {
+                if (idString.equals(searchID)) {
                     setSelectedElement(element);
                     break;
                 }
