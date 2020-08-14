@@ -12,3 +12,4 @@ An application designed to efficiently view and edit General Transit Feed Specif
 
 ## Download
 You can download the final release [here](https://github.com/grantwilk/se2030_gtfs_editor/releases/download/final/se2030_gtfs_editor_final.jar).
+You can find sample GTFS files [here](https://github.com/grantwilk/se2030_gtfs_editor/tree/master/samples/full-samples).
