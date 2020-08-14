@@ -7,6 +7,7 @@ An application designed to efficiently view and edit General Transit Feed Specif
 ## Authors
 - Colton Rivard
 - Grant Wilk
+- Mason Schlax
 - Michael Primeau
 
 ## Download
